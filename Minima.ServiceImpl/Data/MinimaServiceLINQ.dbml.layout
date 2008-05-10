@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.5, 15" name="MinimaServiceLINQ">
+  <DataContextMoniker Name="/MinimaServiceLINQDataContext" />
+  <nestedChildShapes>
+    <classShape Id="70c84d64-92d4-42f6-8b76-912aade4d572" absoluteBounds="0.75, 5, 2, 1.7535424804687505">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/Author" />
+      <nestedChildShapes>
+        <elementListCompartment Id="682fef9d-4d5f-4a70-86a5-0d5002969b43" absoluteBounds="0.765, 5.46, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3aa7f610-aaea-49e1-b9bf-9e3c69f17cf8" absoluteBounds="3.5, 5.125, 2, 1.5891951497395827">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/UserRight" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c17ec005-036d-44d4-a169-32990405baf6" absoluteBounds="3.515, 5.585, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b3fd9070-b29e-487e-a72c-5105c3635c25" absoluteBounds="3.5, 8.375, 2, 1.0961531575520844">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/AuthorBlogAssociation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4391af73-35d1-4504-b3b9-42399d4f8bf3" absoluteBounds="3.515, 8.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="de3c0582-3977-4722-a931-e31b06d40e35" absoluteBounds="0.75, 7.875, 2, 2.0822371419270835">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/Blog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e4d59751-2baf-42f0-ab8d-d4093d1e268d" absoluteBounds="0.765, 8.335, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" absoluteBounds="6.5, 7.375, 2, 2.9039737955729166">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/BlogEntry" />
+      <nestedChildShapes>
+        <elementListCompartment Id="162d1cec-8294-42f5-8c21-55a0d76cc522" absoluteBounds="6.515, 7.835, 1.9700000000000002, 2.3439737955729165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c4324e8d-d267-4707-a4c8-9c81866dc0de" absoluteBounds="9.25, 8.375, 2, 1.0961531575520844">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/BlogEntryAuthor" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eace3cbb-afdd-4d4f-bb26-efb652fe07c0" absoluteBounds="9.265, 8.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fae81f6b-4821-4f47-8c79-a85cfc07ca66" absoluteBounds="3.75, 2.375, 2, 1.0961531575520835">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/BlogEntryCommentAllowStatus" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10f26ff5-8787-4e88-af9d-9bd2eb7c753d" absoluteBounds="3.765, 2.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7827a65a-aa3d-4734-b8d5-63fbd1aacd78" absoluteBounds="3.75, 10.25, 2, 1.0961531575520844">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/BlogEntryStatus" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f0e8e26f-eb5b-4a14-a36a-079d375a2071" absoluteBounds="3.765, 10.71, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c3e0fce1-7042-4020-a991-44322ca61db4" absoluteBounds="9.25, 10.5, 2, 1.2605004882812487">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/BlogEntryUrlMapping" />
+      <nestedChildShapes>
+        <elementListCompartment Id="36a0370d-0865-4195-8518-3800b744cbfb" absoluteBounds="9.265, 10.96, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7085aca9-074c-478a-af6d-867e0c43f9e2" absoluteBounds="9.25, 12.5, 2, 2.2465844726562487">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/Comment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8c6f8c26-41b1-4cc7-ab2f-d3ee0bf701e2" absoluteBounds="9.265, 12.96, 1.9700000000000002, 1.68658447265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd81411e-4510-46af-bc67-f8e270a14347" absoluteBounds="3.5, 12.125, 2, 1.7535424804687487">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/Label" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fdfdae8a-dcdf-4e3c-8011-71f81052ffc0" absoluteBounds="3.515, 12.585, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fc33af73-d817-4a5c-af16-68fb6c1883fe" absoluteBounds="12.25, 10.125, 2, 1.0961531575520844">
+      <DataClassMoniker Name="/MinimaServiceLINQDataContext/LabelBlogEntry" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aba56ffd-6d73-4bbe-9b70-f2d1b0b0fe37" absoluteBounds="12.265, 10.585, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 5.91959757486979); (3.5 : 5.91959757486979)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Author/Author_UserRight" />
+      <nodes>
+        <classShapeMoniker Id="70c84d64-92d4-42f6-8b76-912aade4d572" />
+        <classShapeMoniker Id="3aa7f610-aaea-49e1-b9bf-9e3c69f17cf8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.75219260163762); (3.125 : 7.12719260163762); (3.125 : 8.92307657877604); (3.5 : 8.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Author/Author_AuthorBlogAssociation" />
+      <nodes>
+        <classShapeMoniker Id="70c84d64-92d4-42f6-8b76-912aade4d572" />
+        <classShapeMoniker Id="b3fd9070-b29e-487e-a72c-5105c3635c25" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.93807592307692); (3.3125 : 7.37557592307692); (3.3125 : 6.34814836230469); (3.5 : 6.34814836230469)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Blog/Blog_UserRight" />
+      <nodes>
+        <classShapeMoniker Id="de3c0582-3977-4722-a931-e31b06d40e35" />
+        <classShapeMoniker Id="3aa7f610-aaea-49e1-b9bf-9e3c69f17cf8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 8.58653828938802); (3.04166666666667 : 8.58653828938802 : JumpStart); (3.20833333333333 : 8.58653828938802 : JumpEnd); (3.5 : 8.58653828938802)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Blog/Blog_AuthorBlogAssociation" />
+      <nodes>
+        <classShapeMoniker Id="de3c0582-3977-4722-a931-e31b06d40e35" />
+        <classShapeMoniker Id="b3fd9070-b29e-487e-a72c-5105c3635c25" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 9.74544514973958); (6.5 : 9.74544514973958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Blog/Blog_BlogEntry" />
+      <nodes>
+        <classShapeMoniker Id="de3c0582-3977-4722-a931-e31b06d40e35" />
+        <classShapeMoniker Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.03125); (7.41666666666667 : 5.03125 : JumpStart); (7.58333333333333 : 5.03125 : JumpEnd); (10.25 : 5.03125); (10.25 : 8.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Author/Author_BlogEntryAuthor" />
+      <nodes>
+        <classShapeMoniker Id="70c84d64-92d4-42f6-8b76-912aade4d572" />
+        <classShapeMoniker Id="c4324e8d-d267-4707-a4c8-9c81866dc0de" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 8.92307657877604); (9.25 : 8.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/BlogEntry/BlogEntry_BlogEntryAuthor" />
+      <nodes>
+        <classShapeMoniker Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" />
+        <classShapeMoniker Id="c4324e8d-d267-4707-a4c8-9c81866dc0de" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 2.92307657877604); (7.5 : 2.92307657877604); (7.5 : 7.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/BlogEntryCommentAllowStatus/BlogEntryCommentAllowStatus_BlogEntry" />
+      <nodes>
+        <classShapeMoniker Id="fae81f6b-4821-4f47-8c79-a85cfc07ca66" />
+        <classShapeMoniker Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 10.8125639765625); (7.5 : 10.8125639765625); (7.5 : 10.2789737955729)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/BlogEntryStatus/BlogEntryStatus_BlogEntry" />
+      <nodes>
+        <classShapeMoniker Id="7827a65a-aa3d-4734-b8d5-63fbd1aacd78" />
+        <classShapeMoniker Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.0312525 : 10.2789737955729); (8.0312525 : 11.2865322324219); (9.25 : 11.2865322324219)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/BlogEntry/BlogEntry_BlogEntryUrlMapping" />
+      <nodes>
+        <classShapeMoniker Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" />
+        <classShapeMoniker Id="c3e0fce1-7042-4020-a991-44322ca61db4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.9687475 : 10.2789737955729); (6.9687475 : 13.6232922363281); (9.25 : 13.6232922363281)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/BlogEntry/BlogEntry_Comment" />
+      <nodes>
+        <classShapeMoniker Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" />
+        <classShapeMoniker Id="7085aca9-074c-478a-af6d-867e0c43f9e2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 9.95723714192708); (1.75 : 13.0017712402344); (3.5 : 13.0017712402344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Blog/Blog_Label" />
+      <nodes>
+        <classShapeMoniker Id="de3c0582-3977-4722-a931-e31b06d40e35" />
+        <classShapeMoniker Id="fd81411e-4510-46af-bc67-f8e270a14347" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 7.84375); (13.25 : 7.84375); (13.25 : 10.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/BlogEntry/BlogEntry_LabelBlogEntry" />
+      <nodes>
+        <classShapeMoniker Id="3e82ce15-2d86-4d96-b2b1-dd2c6d2e4938" />
+        <classShapeMoniker Id="fc33af73-d817-4a5c-af16-68fb6c1883fe" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 12.28125); (6.88541416666667 : 12.28125 : JumpStart); (7.05208083333333 : 12.28125 : JumpEnd); (13.25 : 12.28125); (13.25 : 11.2211531575521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MinimaServiceLINQDataContext/Label/Label_LabelBlogEntry" />
+      <nodes>
+        <classShapeMoniker Id="fd81411e-4510-46af-bc67-f8e270a14347" />
+        <classShapeMoniker Id="fc33af73-d817-4a5c-af16-68fb6c1883fe" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
