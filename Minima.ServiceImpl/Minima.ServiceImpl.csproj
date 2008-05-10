@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{429709AD-E4C9-43F5-AF3C-8BFEF16AE01D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Minima.Service</RootNamespace>
+    <AssemblyName>Minima.ServiceImpl</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CookComputing.XmlRpcV2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
+    <Reference Include="General, Version=1.5.0.0, Culture=neutral, PublicKeyToken=dca7aa7b1e2f611b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\General.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.IdentityModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Behavior\MinimaSystemSecurityBehavior.cs" />
+    <Compile Include="Behavior\MinimaSecureOperationInvoker.cs" />
+    <Compile Include="_Security\BlogPermission.cs" />
+    <Compile Include="Behavior\MinimaBlogSecurityBehavior.cs" />
+    <Compile Include="Behavior\ErrorHandler.cs" />
+    <Compile Include="Behavior\FaultHandlingBehavior.cs" />
+    <Compile Include="_Service\BlogService.cs" />
+    <Compile Include="_Service\CommentService.cs" />
+    <Compile Include="_Service\AuthorService.cs" />
+    <Compile Include="BlogGuidFinder.cs" />
+    <Compile Include="Data\MinimaServiceLINQ.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MinimaServiceLINQ.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="_Security\PermissionLevel.cs" />
+    <Compile Include="_Fault\FaultThower.cs" />
+    <Compile Include="Helper\GuidCreator.cs" />
+    <Compile Include="MinimaMessageHeaderHelper.cs" />
+    <Compile Include="_Security\SecurityValidator.cs" />
+    <Compile Include="MinimaUserNamePasswordValidator.cs" />
+    <Compile Include="Technorati\ITechnoratiPing.cs" />
+    <Compile Include="Technorati\TechnoratiCallMessage.cs" />
+    <Compile Include="Technorati\TechnoratiPing.cs" />
+    <Compile Include="Technorati\TechnoratiResponseMessage.cs" />
+    <Compile Include="UriBuilder.cs" />
+    <Compile Include="_Fault\FaultCreator.cs" />
+    <Compile Include="ServiceConfiguration.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="_Service\TechnoratiService.cs" />
+    <Compile Include="_Fault\UnhandledException.cs" />
+    <Compile Include="Activation\MinimaServiceHostFactory.cs" />
+    <Compile Include="_Service\LabelService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\Validator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Minima.Configuration\Minima.Configuration.csproj">
+      <Project>{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}</Project>
+      <Name>Minima.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Minima.Service\Minima.Service.csproj">
+      <Project>{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}</Project>
+      <Name>Minima.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\MinimaServiceLINQ.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MinimaServiceLINQ.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\MinimaServiceLINQ.dbml.layout">
+      <DependentUpon>MinimaServiceLINQ.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
