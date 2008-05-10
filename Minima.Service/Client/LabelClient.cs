@@ -10,6 +10,7 @@ namespace Minima.Service.Client
         public LabelClient(String endpointConfigurationName)
             : base(endpointConfigurationName) { }
 
+        //- @ApplyLabel -//
         public void ApplyLabel(String blogEntryGuid, String labelGuid)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
@@ -20,6 +21,7 @@ namespace Minima.Service.Client
             }
         }
 
+        //- @CreateLabel -//
         public String CreateLabel(String blogGuid, String title)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
@@ -30,26 +32,13 @@ namespace Minima.Service.Client
             }
         }
 
-        public void RemoveLabel(String labelGuid, String blogEntryGuid)
+        //- @GetLabelByTitle -//
+        public Label GetLabelByTitle(String title)
         {
-            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
-            {
-                AddGuidToMessageHeader(MinimaMessageHeaderType.BlogEntryGuid, blogEntryGuid);
-                //+
-                base.Channel.RemoveLabel(labelGuid, blogEntryGuid);
-            }
+            return base.Channel.GetLabelByTitle(title);
         }
 
-        public void UpdateLabel(String labelGuid, String title)
-        {
-            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
-            {
-                AddGuidToMessageHeader(MinimaMessageHeaderType.LabelGuid, labelGuid);
-                //+
-                base.Channel.UpdateLabel(labelGuid, title);
-            }
-        }
-
+        //- @GetBlogEntryLabelList -//
         public List<Label> GetBlogEntryLabelList(String blogEntryGuid)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
@@ -60,6 +49,7 @@ namespace Minima.Service.Client
             }
         }
 
+        //- @GetBlogLabelList -//
         public List<Label> GetBlogLabelList(String blogGuid)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
@@ -70,9 +60,26 @@ namespace Minima.Service.Client
             }
         }
 
-        public Label GetLabelByTitle(String title)
+        //- @RemoveLabel -//
+        public void RemoveLabel(String labelGuid, String blogEntryGuid)
         {
-            return base.Channel.GetLabelByTitle(title);
+            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
+            {
+                AddGuidToMessageHeader(MinimaMessageHeaderType.BlogEntryGuid, blogEntryGuid);
+                //+
+                base.Channel.RemoveLabel(labelGuid, blogEntryGuid);
+            }
+        }
+
+        //- @UpdateLabel -//
+        public void UpdateLabel(String labelGuid, String title)
+        {
+            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
+            {
+                AddGuidToMessageHeader(MinimaMessageHeaderType.LabelGuid, labelGuid);
+                //+
+                base.Channel.UpdateLabel(labelGuid, title);
+            }
         }
     }
 }

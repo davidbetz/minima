@@ -97,11 +97,6 @@
     <Compile Include="UriBuilder.cs" />
     <Compile Include="_Fault\FaultCreator.cs" />
     <Compile Include="ServiceConfiguration.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="_Service\TechnoratiService.cs" />
     <Compile Include="_Fault\UnhandledException.cs" />
     <Compile Include="Activation\MinimaServiceHostFactory.cs" />
@@ -127,10 +122,6 @@
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MinimaServiceLINQ.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
