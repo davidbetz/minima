@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Minima" EntityNamespace="Minima.Web.Data.Entity" ContextNamespace="Minima.Web.Data.Context" Class="MinimaWebLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress01;Initial Catalog=Minima;Persist Security Info=True;User ID=MinimaWebDbUser" SettingsObjectName="Minima.Web.Properties.Settings" SettingsPropertyName="MinimaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="web.Trace" Member="Traces">
+    <Type Name="Trace">
+      <Column Name="TraceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TraceTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TraceAddress" Type="System.String" DbType="Char(15)" CanBeNull="true" />
+      <Column Name="TraceUrl" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="TraceUserAgent" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="TraceMessage" Type="System.String" DbType="VarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="TraceStackTrace" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="TraceExtra" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TraceDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="TraceType_Trace" Member="TraceType" ThisKey="TraceTypeId" Type="TraceType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="web.TraceType" Member="TraceTypes">
+    <Type Name="TraceType">
+      <Column Name="TraceTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TraceTypeName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TraceType_Trace" Member="Traces" OtherKey="TraceTypeId" Type="Trace" />
+    </Type>
+  </Table>
+  <Table Name="web.Access" Member="Accesses">
+    <Type Name="Access">
+      <Column Name="AccessId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogGuid" Storage="_BlogId" Type="System.String" DbType="Char(36) NOT NULL" CanBeNull="false" />
+      <Column Name="AccessType" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="AccessContent" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="AccessOutputMessage" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="AccessHttpForward" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="AccessEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="web.FileMapping" Member="FileMappings">
+    <Type Name="FileMapping">
+      <Column Name="FileMappingId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FileMappingUrl" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="FileMappingName" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="web.BlogEntryActivity" Member="BlogEntryActivities">
+    <Type Name="BlogEntryActivity">
+      <Column Name="BlogEntryActivityId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogEntryActivityTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BlogEntryActivityTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="BlogEntryActivityAddress" Type="System.String" DbType="Char(15)" CanBeNull="true" />
+      <Column Name="BlogEntryActivityBrowser" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="BlogEntryActivityHostName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="BlogEntryActivitySessionId" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="BlogEntryActivityExtra" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Association Name="BlogEntryActivityType_BlogEntryActivity" Member="BlogEntryActivityType" ThisKey="BlogEntryActivityTypeId" Type="BlogEntryActivityType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="web.BlogEntryActivityType" Member="BlogEntryActivityTypes">
+    <Type Name="BlogEntryActivityType">
+      <Column Name="BlogEntryActivityTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogEntryActivityTypeName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="BlogEntryActivityType_BlogEntryActivity" Member="BlogEntryActivities" OtherKey="BlogEntryActivityTypeId" Type="BlogEntryActivity" />
+    </Type>
+  </Table>
+</Database>
