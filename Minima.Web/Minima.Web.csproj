@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1F9C498C-F342-403E-8B30-F1A9E073AA9E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Minima.Web</RootNamespace>
+    <AssemblyName>Minima.Web</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CookComputing.XmlRpcV2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
+    <Reference Include="General, Version=1.5.0.0, Culture=neutral, PublicKeyToken=dca7aa7b1e2f611b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\General.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\MetaWeblog\BlogInfo.cs" />
+    <Compile Include="Api\MetaWeblog\CategoryInfo.cs" />
+    <Compile Include="Api\MetaWeblog\FullPost.cs" />
+    <Compile Include="Api\MetaWeblog\MediaType.cs" />
+    <Compile Include="Api\MetaWeblog\MetaWeblogApi.cs" />
+    <Compile Include="Api\MetaWeblog\Post.cs" />
+    <Compile Include="Api\MetaWeblog\UrlInfo.cs" />
+    <Compile Include="Agent\BlogAgent.cs" />
+    <Compile Include="Agent\BlogEntryActivityAgent.cs" />
+    <Compile Include="Agent\CommentAgent.cs" />
+    <Compile Include="Agent\LabelAgent.cs" />
+    <Compile Include="Configuration\WebConfigurationFacade.cs" />
+    <Compile Include="Configuration\WebConfigurationSection.cs" />
+    <Compile Include="Configuration\_HttpHandler\HttpHandlerCollection.cs" />
+    <Compile Include="Configuration\_HttpHandler\HttpHandlerElement.cs" />
+    <Compile Include="Configuration\_UrlRewrite\UrlRewriteCollection.cs" />
+    <Compile Include="Configuration\_UrlRewrite\UrlRewriteElement.cs" />
+    <Compile Include="Control\ArchivedEntryListBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MinimaBlogPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\DataUserControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\LabelListBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\RecentEntryListBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HttpApplication.cs" />
+    <Compile Include="Data\MinimaWebLINQ.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MinimaWebLINQ.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\MediaHelper.cs" />
+    <Compile Include="Helper\UrlHelper.cs" />
+    <Compile Include="MinimaForm.cs" />
+    <Compile Include="MinimaWebException.cs" />
+    <Compile Include="Module\FilterHttpModule.cs" />
+    <Compile Include="Module\FixDomainHttpModule.cs" />
+    <Compile Include="NonClosingMemoryStream.cs" />
+    <Compile Include="Routing\BlogEntryImageHttpHandler.cs" />
+    <Compile Include="Routing\CommentHttpHandler.cs" />
+    <Compile Include="Routing\FileProcessorHttpHandler.cs" />
+    <Compile Include="Routing\SiteMapHttpHandler.cs" />
+    <Compile Include="Routing\UrlProcessingHttpHandler.cs" />
+    <Compile Include="Service\CommentService.cs" />
+    <Compile Include="Service\Information.cs" />
+    <Compile Include="Service\_DataContract\CaptchMathInformation.cs" />
+    <Compile Include="Service\FeedService.cs" />
+    <Compile Include="Service\_ServiceContract\ICommentService.cs" />
+    <Compile Include="Service\_ServiceContract\IFeedService.cs" />
+    <Compile Include="Tracing\StreamConverter.cs" />
+    <Compile Include="Tracing\TraceManager.cs" />
+    <Compile Include="Tracing\TraceSerializer.cs" />
+    <Compile Include="Tracing\TraceStorage.cs" />
+    <Compile Include="WebConfiguration.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Routing\BaseHttpHandler.cs" />
+    <Compile Include="Routing\RoutingHttpHandlerFactory.cs" />
+    <Compile Include="Routing\HttpHandlerFactoryRouter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UrlRewriteHttpHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\MinimaWebLINQ.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MinimaWebLINQ.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Minima.Configuration\Minima.Configuration.csproj">
+      <Project>{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}</Project>
+      <Name>Minima.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Minima.Service\Minima.Service.csproj">
+      <Project>{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}</Project>
+      <Name>Minima.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\MinimaWebLINQ.dbml.layout">
+      <DependentUpon>MinimaWebLINQ.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
