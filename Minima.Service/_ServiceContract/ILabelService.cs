@@ -17,15 +17,9 @@ namespace Minima.Service
         [FaultContract(typeof(ArgumentException))]
         String CreateLabel(String blogGuid, String title);
 
-        //- RemoveLabel -//
+        //- GetLabelByTitle -//
         [OperationContract]
-        [FaultContract(typeof(ArgumentException))]
-        void RemoveLabel(String labelGuid, String blogEntryGuid);
-
-        //- UpdateLabel -//
-        [FaultContract(typeof(ArgumentException))]
-        [OperationContract]
-        void UpdateLabel(String labelGuid, String title);
+        Label GetLabelByTitle(String title);
 
         //- GetBlogEntryLabelList -//
         [OperationContract]
@@ -37,9 +31,15 @@ namespace Minima.Service
         [OperationContract]
         List<Label> GetBlogLabelList(String blogGuid);
 
-        //- GetLabelByTitle -//
+        //- RemoveLabel -//
         [OperationContract]
-        Label GetLabelByTitle(String title);
+        [FaultContract(typeof(ArgumentException))]
+        void RemoveLabel(String labelGuid, String blogEntryGuid);
+
+        //- UpdateLabel -//
+        [FaultContract(typeof(ArgumentException))]
+        [OperationContract]
+        void UpdateLabel(String labelGuid, String title);
 
     }
 }

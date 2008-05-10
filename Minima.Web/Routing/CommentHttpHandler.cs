@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Web;
+//+
 using Minima.Web.Agent;
 //+
 namespace Minima.Web.HttpExtensions
@@ -13,6 +14,7 @@ namespace Minima.Web.HttpExtensions
             get { return true; }
         }
 
+        //+
         //- @ProcessRequest -//
         public void ProcessRequest(HttpContext context)
         {
