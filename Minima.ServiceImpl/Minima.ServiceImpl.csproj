@@ -94,7 +94,7 @@
     <Compile Include="Helper\GuidCreator.cs" />
     <Compile Include="MinimaMessageHeaderHelper.cs" />
     <Compile Include="_Security\SecurityValidator.cs" />
-    <Compile Include="MinimaUserNamePasswordValidator.cs" />
+    <Compile Include="Validation\MinimaUserNamePasswordValidator.cs" />
     <Compile Include="Technorati\ITechnoratiPing.cs" />
     <Compile Include="Technorati\TechnoratiCallMessage.cs" />
     <Compile Include="Technorati\TechnoratiPing.cs" />
