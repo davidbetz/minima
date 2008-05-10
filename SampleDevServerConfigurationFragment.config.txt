@@ -1,0 +1,20 @@
+<jampad.devServer>
+    <startupProfiles activeProfile="Minima">
+        <profile name="Minima">
+            <server key="MinimaWebsite" />
+            <server key="MinimaService" />
+        </profile>
+    </startupProfiles>
+    <servers>
+        <server key="MinimaWebsite" name="MinimaWS" port="7001"
+                virtualPath="/" physicalPath="C:\SVN\Minima\Website">
+            <binding address="loopback" />
+            <requestTracing enabled="false" enableVerboseTypeTracing="false" enableFaviconTracing="false" />
+        </server>
+        <server key="MinimaService" name="MinimaSVC" port="7003"
+                virtualPath="/" physicalPath="C:\SVN\Minima\Service">
+            <binding address="loopback" />
+            <requestTracing enabled="false" enableVerboseTypeTracing="false" enableFaviconTracing="false" />
+        </server>
+    </servers>
+</jampad.devServer>
