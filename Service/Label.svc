@@ -1,0 +1,1 @@
+<% @ServiceHost Service="Minima.Service.LabelService" Factory="Minima.Service.Activation.MinimaServiceHostFactory" %>
