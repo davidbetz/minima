@@ -137,7 +137,7 @@
     <Compile Include="Routing\RoutingHttpHandlerFactory.cs" />
     <Compile Include="Routing\HttpHandlerFactoryRouter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UrlRewriteHttpHandler.cs" />
+    <Compile Include="Routing\UrlRewriteHttpHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
