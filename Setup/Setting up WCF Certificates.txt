@@ -1,0 +1,2 @@
+Do this:
+  http://notgartner.wordpress.com/2007/09/06/using-certificate-based-authentication-and-protection-with-windows-communication-foundation-wcf/
