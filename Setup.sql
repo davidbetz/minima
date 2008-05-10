@@ -1,0 +1,28 @@
+--+ account setup
+-- create login [MinimaWebDbUser] with password=N'dbwebpassword', default_database=[Minima], default_language=[us_english], check_expiration=off, check_policy=off
+-- create user [MinimaWebDbUser] for login [MinimaWebDbUser] with default_schema=[web]
+-- create login [MinimaSvcDbUser] with password=N'dbsvcpassword', default_database=[Minima], default_language=[us_english], check_expiration=off, check_policy=off
+-- create user [MinimaSvcDbUser] for login [MinimaSvcDbUser] with default_schema=[svc]
+--+ web user
+-- grant select, insert on web.Access to [MinimaWebDbUser]
+-- grant select, insert on web.BlogEntryActivity to [MinimaWebDbUser]
+-- grant select, insert on web.BlogEntryActivityType to [MinimaWebDbUser]
+-- grant select, insert on web.FileMapping to [MinimaWebDbUser]
+-- grant select, insert on web.Trace to [MinimaWebDbUser]
+-- grant select, insert on web.TraceType to [MinimaWebDbUser]
+--+ service user
+-- grant select, insert, update, delete on svc.Author to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.AuthorBlogAssociation to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.Blog to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.BlogEntry to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.BlogEntryAuthor to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.BlogEntryCommentAllowStatus to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.BlogEntryStatus to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.BlogEntryUrlMapping to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.Comment to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.Label to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.LabelBlogEntry to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.UserRight to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.BlogEntryCommentAllowStatus to [MinimaSvcDbUser]
+-- grant exec on svc.[GetArchivedEntryList] to [MinimaSvcDbUser]
+--+
