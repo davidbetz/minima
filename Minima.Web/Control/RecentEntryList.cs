@@ -22,7 +22,9 @@ namespace Minima.Web.Control
                     String url = DataBinder.Eval(item.DataItem, "Url").ToString();
                     String title = DataBinder.Eval(item.DataItem, "Title").ToString();
                     //+
-                    literal.Text = String.Format(@"<li><a href=""{0}"">{1}</a></li>", url, title);
+                    literal.Text = @"<li><a href=""{Url}"">{Title}</a></li>"
+                        .Replace("{Url}", url)
+                        .Replace("{Title}", title);
                 });
                 container.Controls.Add(literal);
             }

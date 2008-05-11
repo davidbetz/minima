@@ -24,7 +24,11 @@ namespace Minima.Web.Control
                     String year = DataBinder.Eval(item.DataItem, "Year").ToString();
                     String count = DataBinder.Eval(item.DataItem, "Count").ToString();
                     //+
-                    literal.Text = String.Format(@"<li><a href=""{0}"">{1} {2} ({3})</a></li>", url, monthText, year, count);
+                    literal.Text = @"<li><a href=""{Url}"">{MonthText} {Year} ({Count})</a></li>"
+                        .Replace("{Url}", url)
+                        .Replace("{MonthText}", monthText)
+                        .Replace("{Year}", year)
+                        .Replace("{Count}", count);
                 });
                 container.Controls.Add(literal);
             }
