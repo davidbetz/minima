@@ -5,7 +5,6 @@ using System.Web;
 using Minima.Web.Data.Context;
 //+
 using TraceLINQ = Minima.Web.Data.Entity.Trace;
-using TraceTypeLINQ = Minima.Web.Data.Entity.TraceType;
 //+
 namespace Minima.Web.Tracing
 {
