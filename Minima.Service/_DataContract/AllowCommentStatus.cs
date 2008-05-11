@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-//+
+﻿//+
 namespace Minima.Service
 {
     public enum AllowCommentStatus
