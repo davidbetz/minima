@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Transactions;
+using System.Xml;
 //+
 using Minima.Service.Behavior;
 using Minima.Service.Helper;
@@ -262,7 +263,7 @@ namespace Minima.Service
                     Content = be.BlogEntryText,
                     Guid = be.BlogEntryGuid,
                     Status = be.BlogEntryStatusId,
-                     AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
+                    AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
                     PostDateTime = be.BlogEntryPostDateTime,
                     ModifyDateTime = be.BlogEntryModifyDateTime,
                     BlogEntryUri = new Uri(UriBuilder.Build(be.BlogEntryPostDateTime, be.BlogEntryUrlMappings.FirstOrDefault().BlogEntryUrlMappingName, blogLinq.BlogPrimaryUrl)),
@@ -370,7 +371,7 @@ namespace Minima.Service
                         Content = be.BlogEntryText,
                         Guid = be.BlogEntryGuid,
                         Status = be.BlogEntryStatusId,
-                         AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
+                        AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
                         PostDateTime = be.BlogEntryPostDateTime,
                         ModifyDateTime = be.BlogEntryModifyDateTime,
                         BlogEntryUri = new Uri(UriBuilder.Build(be.BlogEntryPostDateTime, be.BlogEntryUrlMappings.FirstOrDefault().BlogEntryUrlMappingName, blogLinq.BlogPrimaryUrl)),
@@ -424,7 +425,7 @@ namespace Minima.Service
                                                 .Where(p => p.AuthorId == authorLinq.AuthorId)
                                                 .Select(p => p.BlogId)
                                                 .ToList();
-                List<BlogMetaData> blogMetaDataList = new List<BlogMetaData>( );
+                List<BlogMetaData> blogMetaDataList = new List<BlogMetaData>();
                 foreach (Int32 blogId in blogEntryIdList)
                 {
                     BlogMetaData blogMetaData = new BlogMetaData();
@@ -480,17 +481,27 @@ namespace Minima.Service
                 //+
                 List<BlogEntry> blogEntryList = GetBlogEntryList(blogGuid, 0, true, false);
                 StringBuilder xml = new StringBuilder();
-                xml.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-                xml.AppendLine("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+                XmlWriter xmlWriter = XmlWriter.Create(xml);
+                xmlWriter.WriteProcessingInstruction("xml", @"version=""1.0"" encoding=""UTF-8""");
+                xmlWriter.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
                 foreach (BlogEntry blogEntry in blogEntryList)
                 {
-                    xml.AppendLine("<url>");
-                    xml.AppendLine(String.Format("<loc>{0}</loc>", blogEntry.BlogEntryUri.AbsoluteUri));
-                    xml.AppendLine(String.Format("<lastmod>{0}</lastmod>", blogEntry.PostDateTime.ToString("yyyy-MM-dd")));
-                    xml.AppendLine("<changefreq>never</changefreq>");
-                    xml.AppendLine("</url>");
+                    xmlWriter.WriteStartElement("url");
+                    //+
+                    xmlWriter.WriteStartElement("loc");
+                    xmlWriter.WriteValue(blogEntry.BlogEntryUri.AbsoluteUri);
+                    xmlWriter.WriteEndElement();
+                    xmlWriter.WriteStartElement("lastmod");
+                    xmlWriter.WriteValue(blogEntry.PostDateTime.ToString("yyyy-MM-dd"));
+                    xmlWriter.WriteEndElement();
+                    xmlWriter.WriteStartElement("changefreq");
+                    xmlWriter.WriteValue("never");
+                    xmlWriter.WriteEndElement();
+                    //+
+                    xmlWriter.WriteEndElement();
                 }
-                xml.AppendLine("</urlset>");
+                xmlWriter.WriteEndElement();
+                xmlWriter.Close();
                 //+
                 return xml.ToString();
             }
