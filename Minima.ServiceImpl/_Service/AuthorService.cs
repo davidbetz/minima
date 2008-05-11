@@ -5,10 +5,11 @@ using Minima.Service.Behavior;
 using Minima.Service.Helper;
 using Minima.Service.Validation;
 //+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
 using BlogEntryAuthorLINQ = Minima.Service.Data.Entity.BlogEntryAuthor;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
+//+
+using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {

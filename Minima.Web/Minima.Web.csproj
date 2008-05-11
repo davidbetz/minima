@@ -92,7 +92,7 @@
     <Compile Include="Control\Base\LiteralContentControlBase.cs">
     </Compile>
     <Compile Include="Control\Base\CaptchaBase.cs" />
-    <Compile Include="ObjectCreator.cs" />
+    <Compile Include="Activation\ObjectCreator.cs" />
     <Compile Include="Control\TemplateFactory.cs" />
     <Compile Include="Control\ArchivedEntryList.cs">
       <SubType>ASPXCodeBehind</SubType>

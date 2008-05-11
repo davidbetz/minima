@@ -7,11 +7,12 @@ using Minima.Service.Behavior;
 using Minima.Service.Helper;
 using Minima.Service.Validation;
 //+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using LabelBlogEntryLINQ = Minima.Service.Data.Entity.LabelBlogEntry;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
+//+
+using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {

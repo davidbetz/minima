@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 //+
 using Minima.Configuration;
-using Minima.Web.Agent;
 using Minima.Service;
+using Minima.Web.Agent;
 //+
 namespace Minima.Web.Control
 {

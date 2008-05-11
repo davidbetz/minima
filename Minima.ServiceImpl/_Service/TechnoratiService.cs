@@ -4,8 +4,9 @@ using Minima.Service.Behavior;
 using Minima.Service.Technorati;
 using Minima.Service.Validation;
 //+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
+//+
+using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
