@@ -1,156 +1,82 @@
-<%@ Page Language="C#" MasterPageFile="MasterPage.master" AutoEventWireup="false" CodeFile="Default.aspx.cs" EnableSessionState="true" Inherits="Default" Title="" %>
-<%@ Register Src="~/Control/MathVerification.ascx" TagPrefix="minima" TagName="MathVerification" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <asp:PlaceHolder ID="phNoEntries" runat="server" Visible="false">
-    <asp:Literal ID="litNoEntriesMessage" runat="server"></asp:Literal>
-    </asp:PlaceHolder>
-    <asp:Repeater ID="rptPosts" runat="server">
-        <ItemTemplate>
-            <asp:HiddenField ID="hBlogEntryGuid" runat="server" Value='<%#Bind("Guid")%>'></asp:HiddenField>
-            <div class="post">
-                <a id="htmlPostName" runat="server"></a>
-                <h3><asp:HyperLink ID="hlPostLink2" runat="server" NavigateUrl='<%#Bind("Url")%>'><asp:Literal ID="Literal3" runat="server" Text='<%#Bind("Title")%>'></asp:Literal></asp:HyperLink></h3>
-                <h2 class="date-header"><asp:Literal ID="Literal1" runat="server" Text='<%#Bind("DateTimeString")%>'></asp:Literal></h2>
-                <div class="post-body">
-                    <div>
-                        <asp:Literal ID="litBlogEntryText" runat="server" Text='<%#Bind("Content")%>'></asp:Literal>
-                    </div>
-                </div>
-                <p class="post-footer">
-                    <em>posted by
-                        <asp:Literal ID="litBlogEntryAuthorSeries" runat="server" Text='<%#Bind("AuthorSeries")%>'></asp:Literal>
-                        at
-                        <asp:Literal ID="litBlogEntryDateTimeDisplay" runat="server" Text='<%#Bind("DateTimeDisplay")%>'></asp:Literal>
-                    </em>
-                    <asp:PlaceHolder ID="phLabels" runat="Server" Visible="false">
-                    <p class="post-labels">
-                    <asp:Literal ID="litBlogEntryLabelSeries" runat="server" Text='<%#Bind("LabelSeries")%>'></asp:Literal>
-                    </p>
-                    </asp:PlaceHolder>
-                    
-                    <asp:MultiView ID="mvCommentSummary" runat="server" ActiveViewIndex="0">
-                        <asp:View ID="vCommentCount" runat="server">
-                            <p class="comment-count">
-                                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%#Bind("Url")%>'>
-                                    (<asp:Literal ID="Literal4" runat="server" Text='<%#Bind("ViewableCommentCount")%>'></asp:Literal>
-                                    comments)
-                                </asp:HyperLink>
-                                <asp:HiddenField ID="hfBlogEntryCommentAllowStatusId" runat="server" Value='<%#Bind("AllowCommentStatus") %>' />
-                            </p>
-                        </asp:View>
-                        <asp:View ID="vCommentsDisabled" runat="server">
-                            <p class="comment-count">
-                            <i>
-                                Comments are disabled for this entry.</i>
-                            </p>
-                        </asp:View>
-                    </asp:MultiView>
+<%@ Page Language="C#" CodeFile="Default.aspx.cs" AutoEventWireup="false" Inherits="Default" %>
+<%@ Register Src="~/Control/GoogleAnalytics.ascx" TagPrefix="web" TagName="GoogleAnalytics" %>
+<%@ Register Src="~/Control/GoogleAdsense.ascx" TagPrefix="web" TagName="GoogleAdsense" %>
+<%@ Register Src="~/Control/FirefoxGoogleAdsense.ascx" TagPrefix="web" TagName="FirefoxGoogleAdsense" %>
+<%@ Register Src="~/Control/LicenseInformation.ascx" TagPrefix="web" TagName="LicenseInformation" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head id="Head1" runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Style/MinimaBasicSample/default.css" />
+    <link runat="server" id="rssLink" rel="alternate" type="application/rss+xml" />
+    <link rel="EditURI" type="application/rsd+xml" runat="server" id="rsd" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" runat="server" id="wlwmanifest" />
+    <script src="/Lib/prototype-1.6.0.2.js" type="text/javascript"></script>
+    <script src="/Lib/PrototypeExtension.js" type="text/javascript"></script>
+    <script src="/Lib/Prominax/Trace.js" type="text/javascript"></script>
+    <script src="/Lib/Prominax/AspNet.js" type="text/javascript"></script>
+    <script src="/Lib/Prominax/WCF.js" type="text/javascript"></script>
+    <script src="/Code/Configuration.js" type="text/javascript"></script>
+    <script src="/Code/Initialization.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="header">
+        <h1 id="image" class="title-image" runat="server">
+        </h1>
+        <h1 id="text">
+            <asp:HyperLink ID="hlBlogUrl" runat="server"></asp:HyperLink>
+        </h1>
+        <p id="description">
+            <asp:Literal ID="litBlogDescription" runat="server"></asp:Literal>
+        </p>
+    </div>
+    <div id="separator">
+    </div>
+    <div id="content">
+        <div id="main">
+            <div id="sidebar">
+                <h2>Marketing Resources</h2>
+                <ul id="sidebarBlock1">
+                    <li><a href="#">Marketing Media Group</a></li>
+                    <li><a href="#">Universal Marketing Association</a></li>
+                    <li><a href="#">12 Steps to Great Marketing</a></li>
+                    <li><strong><a href="http://www.netfxharmonics.com/">NetFXHarmonics Blog</a></strong></li>
+                    <li><strong><a href="http://www.linkedin.com/in/davidbetz">David Betz on LinkedIn</a></strong></li>
+                </ul>
+                <h2>Events and Centers</h2>
+                <ul id="sidebarBlock2">
+                    <li><a href="#">Heartland Marketing Center</a></li>
+                    <li><a href="#">Writing Conference</a></li>
+                    <li><a href="#">International Marketing</a></li>
+                    <li><a href="#">International Writing Organization</a></li>
+                </ul>
+                <asp:PlaceHolder id="phLabelList" runat="server" />
+                <asp:PlaceHolder id="phArchivedEntryList" runat="server" />
+                <asp:PlaceHolder id="phRecentEntryList" runat="server" />
+                <p id="firefoxIcon">
+                <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=72158&amp;t=218"><img border="0" alt="Firefox 3" title="Firefox 3" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox2/ff2o80x15.gif"/></a>
                 </p>
+                <p id="feeds">
+                    <asp:HyperLink ID="hlFeedUrl" runat="server">
+                        <img src="http://www.feedburner.com/fb/images/pub/feed-icon32x32.png" alt="" style="border: 0" />
+                    </asp:HyperLink>
+                </p>
+                <div id="googleAdsense">
+                </div>
             </div>
-        </ItemTemplate>
-    </asp:Repeater>
-    <asp:MultiView ID="mvCommentContent" runat="Server" ActiveViewIndex="0">
-        <asp:View id="vNothing" runat="server"></asp:View>
-        <asp:View ID="vShowComments" runat="server">
-        <div id="comments">
-            <h4 id="htmlCommentListHeader" runat="server" visible="false">
-                Comments (<asp:Literal ID="litCommentCount" runat="server"></asp:Literal>)
-            </h4>
-            <asp:Repeater ID="rptComments" runat="server">
-                <ItemTemplate>
-                    <div id="commentBlock">
-                        <p class="comment-person">
-                            <asp:MultiView ID="mvCommentAuthor" runat="server" ActiveViewIndex="0">
-                                <asp:View ID="vAuthorOnly" runat="server">
-                                    <asp:Literal ID="litCommentAuthor2" runat="server" Text='<%#Bind("Name")%>'></asp:Literal>
-                                </asp:View>
-                                <asp:View ID="vWithWebsite" runat="server">
-                                    <asp:HyperLink ID="hlCommentWebsite" runat="server" NavigateUrl='<%#Bind("Website")%>'>
-                                        <asp:Literal ID="litCommentAuthor" runat="server" Text='<%#Bind("Name")%>'></asp:Literal>
-                                    </asp:HyperLink>
-                                </asp:View>
-                            </asp:MultiView>
-                        </p>
-                        <p class="comment-body">
-                            <asp:Literal ID="litCommentBody" runat="server" Text='<%#Bind("Text")%>'></asp:Literal>
-                        </p>
-                        <p class="comment-timestamp">
-                            <asp:Literal ID="litCommentDateTime" runat="server" Text='<%#Bind("DateTime")%>'></asp:Literal>
-                        </p>
-                        <p class="comment-timestamp">
-                            <asp:HyperLink ID="hlCommentPostUrl" runat="server" Text='<%#Bind("Name")%>' Visible="false"></asp:HyperLink>
-                        </p>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-            <asp:MultiView ID="mvCommentInput" runat="server" ActiveViewIndex="0">
-                <asp:View ID="vCommentForm" runat="server">
-                    <div id="commentInput">
-                    <p>
-                        <label for="txtCommentAuthorName">Name *</label>
-                        <asp:RequiredFieldValidator ID="rfvCommentAuthorName" runat="server" Display="Dynamic" Text="(required)" ControlToValidate="txtCommentAuthorName" />
-                    </p>
-                    <asp:TextBox id="txtCommentAuthorName" runat="server" CssClass="comment-input"></asp:TextBox>
-                    
-                    <p>
-                    <label for="txtCommentAuthorEmail">E-mail *</label>
-                    <asp:RequiredFieldValidator ID="rfvCommentAuthorEmail" runat="server" Display="Dynamic" Text="(required)" ControlToValidate="txtCommentAuthorEmail" />
-                    <asp:CustomValidator ID="cvCommentAuthorEmail" runat="server" Display="Dynamic" Text="(e-mail must at least look real)" ControlToValidate="txtCommentAuthorEmail"></asp:CustomValidator>
-                    </p>
-                    <asp:TextBox id="txtCommentAuthorEmail" runat="server" CssClass="comment-input"></asp:TextBox>
-                    
-                    <label for="txtCommentWebsite">Website</label>
-                    <asp:TextBox id="txtCommentWebsite" runat="server" CssClass="comment-input"></asp:TextBox>
-                    
-                    <p>
-                        <label for="txtCommentText">Comment *</label>
-                        <asp:RequiredFieldValidator ID="rfvCommentText" runat="server" Display="Dynamic" Text="(required -- isn't that the entire point?)" ControlToValidate="txtCommentText" />
-                    </p>
-                    <asp:TextBox Rows="10" Columns="50" id="txtCommentText" runat="server" TextMode="MultiLine" CssClass="comment-input"></asp:TextBox>
-                    
-                    <div id="commentPreview">
-                    </div>
-                    
-                    <minima:MathVerification id="math01" runat="server"></minima:MathVerification>
-                    
-                    <input type="button" id="btnSubmitComment" value="Submit" />
-                    <p>Notice: all comments are subject to moderation.</p>
-                    <asp:Label ID="lblStatusMessage" runat="server" CssClass="comment-status"></asp:Label>
-                    <asp:HiddenField ID="hfBlogEntryGuid" runat="server" Visible="true"></asp:HiddenField>
-                    </div>
-                    <div id="commentInputCompleted" style="display: none;">
-                    <p>Comment saved.  All comments are moderated and may not show up for some time.</p>
-                    </div>
-                    <script type="text/javascript">
-                    document.observe('dom:loaded', function( ) {
-                        Prominax.AspNet.registerObject('hfBlogEntryGuid', '<%=hfBlogEntryGuid.ClientID%>');
-                        Prominax.AspNet.registerObject('txtCommentAuthorName', '<%=txtCommentAuthorName.ClientID%>');
-                        Prominax.AspNet.registerObject('txtCommentAuthorEmail', '<%=txtCommentAuthorEmail.ClientID%>');
-                        Prominax.AspNet.registerObject('txtCommentWebsite', '<%=txtCommentWebsite.ClientID%>');
-                        Prominax.AspNet.registerObject('txtCommentText', '<%=txtCommentText.ClientID%>');
-                        Prominax.AspNet.registerObject('rfvCommentAuthorName', '<%=rfvCommentAuthorName.ClientID%>');
-                        Prominax.AspNet.registerObject('rfvCommentAuthorEmail', '<%=rfvCommentAuthorEmail.ClientID%>');
-                        Prominax.AspNet.registerObject('cvCommentAuthorEmail', '<%=cvCommentAuthorEmail.ClientID%>');
-                        Prominax.AspNet.registerObject('rfvCommentText', '<%=rfvCommentText.ClientID%>');
-                        //+
-                        Prominax.AspNet.registerObject('lblStatusMessage', '<%=lblStatusMessage.ClientID%>');
-                    });
-                    </script>
-                </asp:View>
-                <asp:View ID="vCommentClosed" runat="server">
-                    <p class="comment-status">
-                        Comments have been closed for this entry.</p>
-                </asp:View>
-            </asp:MultiView>
+            <minima:MinimaForm runat="server">
+                <asp:PlaceHolder ID="phMinimaBlog" runat="server"></asp:PlaceHolder>
+            </minima:MinimaForm>
         </div>
-        </asp:View>
-        <asp:View ID="vCommentsDisabled" runat="server">
-            <p class="comment-status">Comments have been disabled for this entry.</p>
-        </asp:View>
-    </asp:MultiView>
-    <script type="text/javascript">
-    document.observe('dom:loaded', function( ) {
-        Initialization.init( );
-    });
-    </script>
-</asp:Content>
+    </div>
+    <div id="license">
+        <web:LicenseInformation id="minimaLicenseInformation" runat="server" />
+    </div>
+    <div id="footer">
+        <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=72158&amp;t=202">
+            <img alt="Upgrade to Firefox 3.0!" title="Upgrade to Firefox 3.0!" src="http://sfx-images.mozilla.org/affiliates/products/firefox/upgrade_1_5_468b1.jpg" />
+        </a>
+    </div>
+    <web:GoogleAnalytics id="ga" runat="server" />
+</body>
+</html>
