@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 //+
 namespace Minima.Service.Client
 {
@@ -8,13 +9,14 @@ namespace Minima.Service.Client
         public TechnoratiClient(String endpointConfigurationName)
             : base(endpointConfigurationName) { }
 
-        #region ITechnoratiService Members
-
-        public void PingTechnorati(string blogGuid)
+        public void PingTechnorati(String blogGuid)
         {
-            throw new NotImplementedException();
+            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
+            {
+                AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
+                //+
+                base.Channel.PingTechnorati(blogGuid);
+            }
         }
-
-        #endregion
     }
 }
