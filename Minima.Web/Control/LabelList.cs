@@ -24,7 +24,10 @@ namespace Minima.Web.Control
                     String title = DataBinder.Eval(item.DataItem, "Title").ToString();
                     String entryCount = DataBinder.Eval(item.DataItem, "EntryCount").ToString();
                     //+
-                    literal.Text = String.Format(@"<li><a href=""{0}"">{1} ({2})</a></li>", url, title, entryCount);
+                    literal.Text = @"<li><a href=""{Url}"">{Title} ({EntryCount})</a></li>"
+                        .Replace("{Url}", url)
+                        .Replace("{Title}", title)
+                        .Replace("{EntryCount}", entryCount);
                 });
                 container.Controls.Add(literal);
             }
