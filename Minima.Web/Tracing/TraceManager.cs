@@ -6,6 +6,7 @@ namespace Minima.Web.Tracing
 {
     internal class TraceManager
     {
+        //- ~Record -//
         internal static void Record(params Object[] items)
         {
             if (MinimaConfiguration.EnableTracingViaSerialization)
@@ -14,6 +15,7 @@ namespace Minima.Web.Tracing
             }
         }
 
+        //- ~RecordMethodCall -//
         internal static void RecordMethodCall(String methodName, params Object[] items)
         {
             if (MinimaConfiguration.EnableTracingViaSerialization)
@@ -23,6 +25,7 @@ namespace Minima.Web.Tracing
             }
         }
 
+        //- ~TraceRequest -//
         internal static void TraceRequest(String managedMethod, Stream stream)
         {
             if (MinimaConfiguration.EnableTracingViaSerialization)

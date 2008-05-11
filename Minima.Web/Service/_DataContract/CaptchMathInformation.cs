@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 //+
 namespace Minima.Web.Service
 {
-    //- @CaptchMathInformation -//
     [DataContract]
     public class CaptchMathInformation
     {
