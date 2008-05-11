@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ServiceModel;
-using Minima.Service;
 using System.ServiceModel.Web;
 //+
 namespace Minima.Web.Service
@@ -21,8 +20,8 @@ namespace Minima.Web.Service
 
         //- PostNewComment -//
         [OperationContract]
-        [WebInvoke(BodyStyle=WebMessageBodyStyle.Wrapped,
-            ResponseFormat=WebMessageFormat.Json)]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
+            ResponseFormat = WebMessageFormat.Json)]
         Int32 PostNewComment(Int32 captchaValue, String blogEntryGuid, String author, String email, String website, String text);
     }
 }

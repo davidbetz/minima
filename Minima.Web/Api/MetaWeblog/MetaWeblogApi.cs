@@ -7,7 +7,6 @@ using CookComputing.XmlRpc;
 //+
 using Minima.Configuration;
 using Minima.Service;
-using Minima.Service.Client;
 using Minima.Web.Agent;
 using Minima.Web.Tracing;
 //+
