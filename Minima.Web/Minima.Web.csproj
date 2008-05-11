@@ -101,10 +101,8 @@
     <Compile Include="Control\Literal\FirefoxGoogleAdsense.cs">
     </Compile>
     <Compile Include="Control\Literal\GoogleAdsense.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Control\Literal\GoogleAnalytics.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Control\LabelList.cs">
       <SubType>ASPXCodeBehind</SubType>
