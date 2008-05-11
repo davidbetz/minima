@@ -84,19 +84,51 @@
     <Compile Include="Configuration\_HttpHandler\HttpHandlerElement.cs" />
     <Compile Include="Configuration\_UrlRewrite\UrlRewriteCollection.cs" />
     <Compile Include="Configuration\_UrlRewrite\UrlRewriteElement.cs" />
-    <Compile Include="Control\ArchivedEntryListBase.cs">
+    <Compile Include="Control\Base\ArchivedEntryListBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MinimaBlogPage.cs">
+    <Compile Include="Control\Base\CommentInputBase.cs">
+    </Compile>
+    <Compile Include="Control\Base\LiteralContentControlBase.cs">
+    </Compile>
+    <Compile Include="Control\Base\CaptchaBase.cs" />
+    <Compile Include="ObjectCreator.cs" />
+    <Compile Include="Control\TemplateFactory.cs" />
+    <Compile Include="Control\ArchivedEntryList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\DataUserControlBase.cs">
+    <Compile Include="Control\CommentInput.cs" />
+    <Compile Include="Control\Literal\FirefoxGoogleAdsense.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\LabelListBase.cs">
+    <Compile Include="Control\Literal\GoogleAdsense.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\RecentEntryListBase.cs">
+    <Compile Include="Control\Literal\GoogleAnalytics.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\LabelList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Literal\LicenseInformation.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\MathCaptcha.cs">
+    </Compile>
+    <Compile Include="Control\MinimaBlog.cs">
+    </Compile>
+    <Compile Include="Control\RecentEntryList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Base\MinimaBlogBase.cs">
+    </Compile>
+    <Compile Include="Control\Base\DataUserControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Base\LabelListBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Base\RecentEntryListBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="HttpApplication.cs" />
