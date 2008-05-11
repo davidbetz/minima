@@ -12,7 +12,7 @@ namespace Minima.Web.Configuration
         {
             if (cachedConfiguration == null)
             {
-                cachedConfiguration = (WebConfigurationSection)ConfigurationManager.GetSection("jampad.web");
+                cachedConfiguration = (WebConfigurationSection)ConfigurationManager.GetSection("minima.web");
             }
             return cachedConfiguration;
         }
