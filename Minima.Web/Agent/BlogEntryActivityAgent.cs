@@ -1,6 +1,5 @@
 ﻿using BlogEntryActivityLINQ = Minima.Web.Data.Entity.BlogEntryActivity;
 //+
-//+
 using MinimaWebLINQDataContext = Minima.Web.Data.Context.MinimaWebLINQDataContext;
 //+
 namespace Minima.Web.Agent
