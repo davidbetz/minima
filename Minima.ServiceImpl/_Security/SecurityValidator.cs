@@ -4,10 +4,10 @@ using System.Security;
 using System.ServiceModel;
 //+
 using Minima.Service.Validation;
-//+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
+//+
+using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
