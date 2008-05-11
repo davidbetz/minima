@@ -30,7 +30,7 @@ namespace Minima.Service
                 throw new FormatException("BlogEntryPostURlMapping not set");
             }
             //+
-            return String.Format("{0}{1}/", baseBlogUrl, blogEntryPage.ToString());
+            return String.Format("{0}{1}", baseBlogUrl, blogEntryPage.ToString());
         }
     }
 }
