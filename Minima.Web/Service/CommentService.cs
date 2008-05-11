@@ -61,6 +61,7 @@ namespace Minima.Web.Service
                 String emailSubject = String.Format("{0} ({1})", MinimaConfiguration.CommentNotificationSubject, WebConfiguration.SiteName);
                 //+
                 String commentGuid = String.Empty;
+                returnStatus = 0;
                 try
                 {
                     commentGuid = CommentAgent.PostNewComment(blogEntryGuid, text, author, email, website, DateTime.Now, emailBodyTemplate, emailSubject);
@@ -72,7 +73,6 @@ namespace Minima.Web.Service
                         returnStatus = 1;
                     }
                 }
-                returnStatus = 0;
             }
             else
             {

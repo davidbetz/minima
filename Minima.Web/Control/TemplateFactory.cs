@@ -31,10 +31,10 @@ namespace Minima.Web.Control
                 ph.DataBinding += new EventHandler(delegate(Object sender, EventArgs ea)
                 {
                     IDataItemContainer item = (IDataItemContainer)container;
-                    String name = DataBinder.Eval(item.DataItem, "Name").ToString();
-                    String website = DataBinder.Eval(item.DataItem, "Website").ToString();
-                    String text = DataBinder.Eval(item.DataItem, "Text").ToString();
-                    String dateTime = DataBinder.Eval(item.DataItem, "DateTime").ToString();
+                    String name = DataBinder.Eval(item.DataItem, "Name") as String;
+                    String website = DataBinder.Eval(item.DataItem, "Website") as String;
+                    String text = DataBinder.Eval(item.DataItem, "Text") as String;
+                    String dateTime = DataBinder.Eval(item.DataItem, "DateTime") as String;
                     //+
                     //+ div#commentBlock
                     HtmlGenericControl divCommentBlock = new HtmlGenericControl("div");
@@ -101,16 +101,16 @@ namespace Minima.Web.Control
                 ph.DataBinding += new EventHandler(delegate(Object sender, EventArgs ea)
                 {
                     IDataItemContainer item = (IDataItemContainer)container;
-                    String guid = DataBinder.Eval(item.DataItem, "Guid").ToString();
-                    String url = DataBinder.Eval(item.DataItem, "Url").ToString();
-                    String title = DataBinder.Eval(item.DataItem, "Title").ToString();
-                    String content = DataBinder.Eval(item.DataItem, "Content").ToString();
-                    String authorSeries = DataBinder.Eval(item.DataItem, "AuthorSeries").ToString();
-                    String labelSeries = DataBinder.Eval(item.DataItem, "LabelSeries").ToString();
-                    String dateTimeString = DataBinder.Eval(item.DataItem, "DateTimeString").ToString();
-                    String dateTimeDisplay = DataBinder.Eval(item.DataItem, "DateTimeDisplay").ToString();
-                    String allowCommentStatus = DataBinder.Eval(item.DataItem, "AllowCommentStatus").ToString();
-                    Int32 viewableCommentCount = Convert.ToInt32(DataBinder.Eval(item.DataItem, "ViewableCommentCount"));
+                    String guid = DataBinder.Eval(item.DataItem, "Guid") as String;
+                    String url = DataBinder.Eval(item.DataItem, "Url") as String;
+                    String title = DataBinder.Eval(item.DataItem, "Title") as String;
+                    String content = DataBinder.Eval(item.DataItem, "Content") as String;
+                    String authorSeries = DataBinder.Eval(item.DataItem, "AuthorSeries") as String;
+                    String labelSeries = DataBinder.Eval(item.DataItem, "LabelSeries") as String;
+                    String dateTimeString = DataBinder.Eval(item.DataItem, "DateTimeString") as String;
+                    String dateTimeDisplay = DataBinder.Eval(item.DataItem, "DateTimeDisplay") as String;
+                    String allowCommentStatus = DataBinder.Eval(item.DataItem, "AllowCommentStatus") as String;
+                    Int32 viewableCommentCount = (DataBinder.Eval(item.DataItem, "ViewableCommentCount") as Int32?) ?? 0;
                     //+
                     HiddenField hBlogEntryGuid = new HiddenField
                     {
