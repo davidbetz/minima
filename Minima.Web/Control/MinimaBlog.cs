@@ -35,7 +35,7 @@ namespace Minima.Web.Control
 
         //+
         //- @CustomCommentInputControl -//
-        public Minima.Web.Control.Base.CommentInputBase CustomCommentInputControl { get; set; }
+        public CommentInputBase CustomCommentInputControl { get; set; }
 
         //- @CustomPostTemplateType -//
         public Type CustomPostTemplateType { get; set; }
@@ -48,7 +48,8 @@ namespace Minima.Web.Control
 
         //+
         //- @Ctor -//
-        public MinimaBlog() {
+        public MinimaBlog()
+        {
             //+ default
             this.CaptchaControl = new MathCaptcha();
         }

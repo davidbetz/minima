@@ -5,8 +5,9 @@ using System.Web;
 //+
 using Minima.Configuration;
 //+
-using MinimaWebLINQDataContext = Minima.Web.Data.Context.MinimaWebLINQDataContext;
 using AccessLINQ = Minima.Web.Data.Entity.Access;
+//+
+using MinimaWebLINQDataContext = Minima.Web.Data.Context.MinimaWebLINQDataContext;
 //+
 namespace Minima.Web.Module
 {

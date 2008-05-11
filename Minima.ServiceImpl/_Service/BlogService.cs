@@ -8,7 +8,6 @@ using Minima.Service.Behavior;
 using Minima.Service.Helper;
 using Minima.Service.Validation;
 //+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
 using BlogEntryAuthorLINQ = Minima.Service.Data.Entity.BlogEntryAuthor;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
@@ -16,6 +15,8 @@ using BlogEntryUrlMappingLINQ = Minima.Service.Data.Entity.BlogEntryUrlMapping;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using LabelBlogEntryLINQ = Minima.Service.Data.Entity.LabelBlogEntry;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
+//+
+using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {

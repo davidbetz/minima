@@ -8,9 +8,10 @@ using Minima.Service.Behavior;
 using Minima.Service.Helper;
 using Minima.Service.Validation;
 //+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;
+//+
+using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
