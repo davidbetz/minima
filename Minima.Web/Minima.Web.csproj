@@ -99,7 +99,6 @@
     </Compile>
     <Compile Include="Control\CommentInput.cs" />
     <Compile Include="Control\Literal\FirefoxGoogleAdsense.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Control\Literal\GoogleAdsense.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -111,7 +110,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Control\Literal\LicenseInformation.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Control\MathCaptcha.cs">
     </Compile>
