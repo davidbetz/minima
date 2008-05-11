@@ -32,8 +32,6 @@ namespace Minima.Web.Control
         protected MultiView mvCommentInput;
         protected View vCommentForm;
         protected View vCommentClosed;
-        //+
-        protected HiddenField hfBlogEntryGuid;
 
         //+
         //- @CustomCommentInputControl -//
@@ -93,8 +91,6 @@ namespace Minima.Web.Control
                 });
                 rptPosts.DataBind();
                 //+
-                //hfBlogEntryGuid.Value = this.BlogEntryGuid;
-                //+
                 if (this.IsLinkAccess)
                 {
                     BlogEntry blogEntry = blogEntryList[0];
@@ -114,10 +110,16 @@ namespace Minima.Web.Control
                         rptComments.DataSource = commentList;
                         rptComments.DataBind();
                         //+
-                        hfBlogEntryGuid = new HiddenField
+                        CommentInputBase commentInput = vCommentForm.FindControl("CommentInput") as CommentInputBase;
+                        if (commentInput != null)
                         {
-                            Value = blogEntry.Guid.ToString()
-                        };
+                            HiddenField hfBlogEntryGuid = commentInput.FindControl("hfBlogEntryGuid") as HiddenField;
+                            if (hfBlogEntryGuid != null)
+                            {
+                                hfBlogEntryGuid.Value = this.BlogEntryGuid;
+                            }
+                        }
+                        //+
                         if (blogEntry.AllowCommentStatus == AllowCommentStatus.Closed)
                         {
                             mvCommentInput.SetActiveView(vCommentClosed);
@@ -146,7 +148,7 @@ document.observe('dom:loaded', Initialization.init);
         #region Builder
 
         //- $GetCommentInputControl -//
-        private System.Web.UI.Control GetCommentInputControl()
+        private CommentInputBase GetCommentInputControl()
         {
             if (this.CustomCommentInputControl == null)
             {
@@ -183,7 +185,9 @@ document.observe('dom:loaded', Initialization.init);
         {
             View v = new View();
             //+ comment input
-            v.Controls.Add(GetCommentInputControl());
+            CommentInputBase commentInput = GetCommentInputControl();
+            commentInput.ID = "CommentInput";
+            v.Controls.Add(commentInput);
             return v;
         }
 
