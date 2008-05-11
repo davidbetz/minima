@@ -8,8 +8,9 @@ using General.ExceptionHandling;
 //+
 namespace Minima.Web.Tracing
 {
-    public class TraceSerializer
+    internal class TraceSerializer
     {
+        //- $CombineObjects -//
         private static List<Object> CombineObjects(params Object[] items)
         {
             List<Object> l = new List<Object>();
@@ -20,6 +21,7 @@ namespace Minima.Web.Tracing
             return l;
         }
 
+        //- ~Serialize -//
         internal static String Serialize(params Object[] items)
         {
             List<Object> l = CombineObjects(items);

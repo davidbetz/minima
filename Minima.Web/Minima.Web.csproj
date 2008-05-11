@@ -135,8 +135,7 @@
     </Compile>
     <Compile Include="Helper\MediaHelper.cs" />
     <Compile Include="Helper\UrlHelper.cs" />
-    <Compile Include="MinimaForm.cs" />
-    <Compile Include="MinimaWebException.cs" />
+    <Compile Include="Control\MinimaForm.cs" />
     <Compile Include="Module\FilterHttpModule.cs" />
     <Compile Include="Module\FixDomainHttpModule.cs" />
     <Compile Include="NonClosingMemoryStream.cs" />
