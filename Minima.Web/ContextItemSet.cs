@@ -18,12 +18,7 @@ namespace Minima.Web
         {
             get
             {
-                String webSection = System.Web.HttpContext.Current.Items["WebSection"] as String;
-                if (webSection == "*")
-                {
-                    webSection = String.Empty;
-                }
-                return webSection;
+                return System.Web.HttpContext.Current.Items["WebSection"] as String;
             }
         }
     }

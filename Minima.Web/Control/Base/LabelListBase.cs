@@ -25,15 +25,9 @@ namespace Minima.Web.Control
             return labelList.Select(label => new
             {
                 Title = label.Title,
-                Url = GetLabelUrl(label),
+                Url = LabelHelper.GetLabelUrl(label),
                 EntryCount = label.BlogEntryCount
             });
-        }
-
-        //- $GetLabelUrl -//
-        private String GetLabelUrl(Label label)
-        {
-            return General.Web.UrlHelper.FixWebPathTail(ContextItemSet.WebSection) + "/label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
         }
     }
 }

@@ -316,7 +316,7 @@ namespace Minima.Web.Control
                         labelSeries.Append(", ");
                     }
 
-                    labelSeries.Append(String.Format("<a href=\"{1}\">{0}</a>", label.Title, GetLabelUrl(label)));
+                    labelSeries.Append(String.Format("<a href=\"{1}\">{0}</a>", label.Title, LabelHelper.GetLabelUrl(label)));
                     first = false;
                 }
                 labelSeries.Append("}");
@@ -363,12 +363,6 @@ namespace Minima.Web.Control
             }
             //+
             return authorSeries.ToString();
-        }
-
-        //- $GetLabelUrl -//
-        private String GetLabelUrl(Minima.Service.Label label)
-        {
-            return General.Web.UrlHelper.FixWebPathTail(ContextItemSet.WebSection) + "/label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
         }
 
         #endregion

@@ -3,7 +3,7 @@ using System.Configuration;
 //+
 namespace Minima.Web.Configuration
 {
-    public class InstanceElement : ConfigurationElement
+    public class InstanceElement : ConfigurationElement, General.Web.Configuration.ICommentElement
     {
         //- @WebSection -//
         [ConfigurationProperty("webSection", IsRequired = true, IsKey = true)]
@@ -58,6 +58,20 @@ namespace Minima.Web.Configuration
             set
             {
                 this["priority"] = value;
+            }
+        }
+
+        //- @Comment -//
+        [ConfigurationProperty("comment")]
+        public String Comment
+        {
+            get
+            {
+                return (String)this["comment"];
+            }
+            set
+            {
+                this["comment"] = value;
             }
         }
     }
