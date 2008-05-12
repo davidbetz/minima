@@ -77,6 +77,9 @@
             <img alt="Upgrade to Firefox 3.0!" title="Upgrade to Firefox 3.0!" src="http://sfx-images.mozilla.org/affiliates/products/firefox/upgrade_1_5_468b1.jpg" />
         </a>
     </div>
+    <script type=""text/javascript"">
+    document.observe('dom:loaded', Initialization.init);
+    </script>
     <web:GoogleAnalytics id="ga" runat="server" />
 </body>
 </html>

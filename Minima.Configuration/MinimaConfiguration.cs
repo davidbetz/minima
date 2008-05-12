@@ -32,7 +32,7 @@ namespace Minima.Configuration
                 return ConfigurationFacade.ApplicationSettings("ActiveCommentServiceEndpoint");
             }
         }
-        
+
         //- @ActiveLabelServiceEndpoint -//
         public static String ActiveLabelServiceEndpoint
         {
@@ -51,14 +51,6 @@ namespace Minima.Configuration
             }
         }
 
-        //- @BlogGuid -//
-        public static String BlogGuid
-        {
-            get
-            {
-                return ConfigurationFacade.ApplicationSettings("BlogGuid");
-            }
-        }
         //- @CommentNotificationSubject -//
         public static String CommentNotificationSubject
         {
