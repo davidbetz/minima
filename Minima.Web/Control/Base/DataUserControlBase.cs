@@ -1,23 +1,26 @@
 using System;
 //+
-public abstract class ListUserControlBase : System.Web.UI.UserControl
+namespace Minima.Web.Control
 {
-    protected Object dataSource;
-
-    //- @DataSource -//
-    public Object DataSource
+    public abstract class ListUserControlBase : System.Web.UI.UserControl
     {
-        get
-        {
-            if (dataSource == null)
-            {
-                dataSource = GetDataSource();
-            }
-            //+
-            return dataSource;
-        }
-    }
+        protected Object dataSource;
 
-    //- #GetDataSource -//
-    protected abstract Object GetDataSource();
+        //- @DataSource -//
+        public Object DataSource
+        {
+            get
+            {
+                if (dataSource == null)
+                {
+                    dataSource = GetDataSource();
+                }
+                //+
+                return dataSource;
+            }
+        }
+
+        //- #GetDataSource -//
+        protected abstract Object GetDataSource();
+    }
 }

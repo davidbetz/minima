@@ -2,17 +2,17 @@
 //+
 namespace Minima.Web.Configuration
 {
-    public static class WebConfigurationFacade
+    public static class MinimaConfigurationFacade
     {
-        private static WebConfigurationSection cachedConfiguration;
+        private static MinimaConfigurationSection cachedConfiguration;
 
         //+
         //- @GetWebConfiguration -//
-        public static WebConfigurationSection GetWebConfiguration()
+        public static MinimaConfigurationSection GetWebConfiguration()
         {
             if (cachedConfiguration == null)
             {
-                cachedConfiguration = (WebConfigurationSection)ConfigurationManager.GetSection("minima.web");
+                cachedConfiguration = (MinimaConfigurationSection)ConfigurationManager.GetSection("minima.blog");
             }
             return cachedConfiguration;
         }

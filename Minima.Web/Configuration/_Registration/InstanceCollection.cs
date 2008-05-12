@@ -4,27 +4,27 @@ using System.Configuration;
 //+
 namespace Minima.Web.Configuration
 {
-    public class UrlRewriteCollection : ConfigurationElementCollection, IEnumerable<UrlRewriteElement>
+    public class InstanceCollection : ConfigurationElementCollection, IEnumerable<InstanceElement>
     {
         //- @[Indexer] -//
-        public UrlRewriteElement this[int index]
+        public InstanceElement this[int index]
         {
             get
             {
-                return base.BaseGet(index) as UrlRewriteElement;
+                return base.BaseGet(index) as InstanceElement;
             }
         }
 
         //- #CreateNewElement -//
         protected override ConfigurationElement CreateNewElement()
         {
-            return new UrlRewriteElement();
+            return new InstanceElement();
         }
 
         //- #GetElementKey -//
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((UrlRewriteElement)element).Match;
+            return ((InstanceElement)element).WebSection;
         }
 
         //- #ElementName -//
@@ -32,14 +32,14 @@ namespace Minima.Web.Configuration
         {
             get
             {
-                return "add";
+                return "instance";
             }
         }
 
         //- #IsElementName -//
         protected override Boolean IsElementName(String elementName)
         {
-            return !String.IsNullOrEmpty(elementName) && elementName == "add";
+            return !String.IsNullOrEmpty(elementName) && elementName == "instance";
         }
 
         //- @CollectionType -//
@@ -51,14 +51,14 @@ namespace Minima.Web.Configuration
             }
         }
 
-        #region IEnumerable<UrlRewriteElement> Members
+        #region IEnumerable<InstanceElement> Members
 
         //- @GetEnumerator -//
-        public new IEnumerator<UrlRewriteElement> GetEnumerator()
+        public new IEnumerator<InstanceElement> GetEnumerator()
         {
             for (int i = 0; i < base.Count; i++)
             {
-                yield return (UrlRewriteElement)this[i];
+                yield return (InstanceElement)this[i];
             }
         }
 

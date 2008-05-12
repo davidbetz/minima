@@ -5,8 +5,8 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using General.Activation;
 //+
-using Minima.Activation;
 using Minima.Configuration;
 using Minima.Service;
 using Minima.Web.Agent;
@@ -46,12 +46,16 @@ namespace Minima.Web.Control
         //- @CaptchaControl -//
         public CaptchaBase CaptchaControl { get; set; }
 
+        //- @SupportCommenting -//
+        public Boolean SupportCommenting { get; set; }
+
         //+
         //- @Ctor -//
         public MinimaBlog()
         {
             //+ default
             this.CaptchaControl = new MathCaptcha();
+            this.SupportCommenting = true;
         }
 
         //+
@@ -76,7 +80,7 @@ namespace Minima.Web.Control
             {
                 rptPosts.DataSource = blogEntryList.Select(p => new
                 {
-                    Url = p.BlogEntryUri.AbsoluteUri,
+                    Url = p.BlogEntryUri != null ? p.BlogEntryUri.AbsoluteUri : String.Empty,
                     Content = p.Content,
                     Title = p.Title,
                     AuthorList = p.AuthorList,
@@ -92,7 +96,7 @@ namespace Minima.Web.Control
                 });
                 rptPosts.DataBind();
                 //+
-                if (this.IsLinkAccess)
+                if (this.IsLinkAccess && this.SupportCommenting)
                 {
                     BlogEntry blogEntry = blogEntryList[0];
                     if (blogEntry.AllowCommentStatus == AllowCommentStatus.Disabled)
@@ -134,17 +138,6 @@ namespace Minima.Web.Control
             }
         }
 
-        //- #Render -//
-        protected override void Render(HtmlTextWriter writer)
-        {
-            base.Render(writer);
-            writer.Write(@"
-<script type=""text/javascript"">
-document.observe('dom:loaded', Initialization.init);
-</script>
-");
-        }
-
         //+
         #region Builder
 
@@ -164,10 +157,10 @@ document.observe('dom:loaded', Initialization.init);
         {
             if (this.CustomPostTemplateType == null)
             {
-                return TemplateFactory.CreateTemplate(TemplateFactory.TemplateType.Post, this.IsLinkAccess);
+                return TemplateFactory.CreateTemplate(TemplateFactory.TemplateType.Post, this.IsLinkAccess, this.SupportCommenting);
             }
             //+
-            return ObjectCreator.CreateAs<ITemplate>(this.CustomPostTemplateType, this.IsLinkAccess);
+            return ObjectCreator.CreateAs<ITemplate>(this.CustomPostTemplateType, this.IsLinkAccess, this.SupportCommenting);
         }
 
         //- $GetCommentTemplate -//
@@ -218,18 +211,21 @@ document.observe('dom:loaded', Initialization.init);
             rptComments = new Repeater() { ID = "rptComments" };
             rptComments.ItemTemplate = GetCommentTemplate();
             div.Controls.Add(rptComments);
-            //+ comment input multiview
-            mvCommentInput = new MultiView() { ID = "mvCommentInput", ActiveViewIndex = 0 };
-            vCommentForm = __BuildCommentFormViewControl();
-            vCommentForm.ID = "vCommentForm";
-            vCommentClosed = new View() { ID = "vCommentClosed" };
-            vCommentClosed.Controls.Add(new System.Web.UI.WebControls.Literal
+            if (this.SupportCommenting)
             {
-                Text = @"<p class=""comment-status"">Comments have been closed for this entry.</p>"
-            });
-            mvCommentInput.Controls.Add(vCommentForm);
-            mvCommentInput.Controls.Add(vCommentClosed);
-            div.Controls.Add(mvCommentInput);
+                //+ comment input multiview
+                mvCommentInput = new MultiView() { ID = "mvCommentInput", ActiveViewIndex = 0 };
+                vCommentForm = __BuildCommentFormViewControl();
+                vCommentForm.ID = "vCommentForm";
+                vCommentClosed = new View() { ID = "vCommentClosed" };
+                vCommentClosed.Controls.Add(new System.Web.UI.WebControls.Literal
+                {
+                    Text = @"<p class=""comment-status"">Comments have been closed for this entry.</p>"
+                });
+                mvCommentInput.Controls.Add(vCommentForm);
+                mvCommentInput.Controls.Add(vCommentClosed);
+                div.Controls.Add(mvCommentInput);
+            }
             //+
             return v;
         }
@@ -287,8 +283,11 @@ document.observe('dom:loaded', Initialization.init);
             rptPosts.ID = "rptPosts";
             this.Controls.Add(rptPosts);
             //+
-            mvCommentContent = this.__BuildCommentMultiViewControl();
-            this.Controls.Add(mvCommentContent);
+            if (this.SupportCommenting)
+            {
+                mvCommentContent = this.__BuildCommentMultiViewControl();
+                this.Controls.Add(mvCommentContent);
+            }
             //+
             base.CreateChildControls();
         }
@@ -302,23 +301,26 @@ document.observe('dom:loaded', Initialization.init);
         private String GetBlogEntryLabelSeries(BlogEntry blogEntry)
         {
             StringBuilder labelSeries = new StringBuilder();
-            Boolean first = true;
-            labelSeries.Append("{");
-            if (blogEntry.LabelList.Count < 1)
+            if (blogEntry.LabelList != null)
             {
-                return String.Empty;
-            }
-            foreach (Minima.Service.Label label in blogEntry.LabelList)
-            {
-                if (blogEntry.LabelList.Count > 1 && !first)
+                Boolean first = true;
+                labelSeries.Append("{");
+                if (blogEntry.LabelList.Count < 1)
                 {
-                    labelSeries.Append(", ");
+                    return String.Empty;
                 }
+                foreach (Minima.Service.Label label in blogEntry.LabelList)
+                {
+                    if (blogEntry.LabelList.Count > 1 && !first)
+                    {
+                        labelSeries.Append(", ");
+                    }
 
-                labelSeries.Append(String.Format("<a href=\"{1}\">{0}</a>", label.Title, GetLabelUrl(label)));
-                first = false;
+                    labelSeries.Append(String.Format("<a href=\"{1}\">{0}</a>", label.Title, GetLabelUrl(label)));
+                    first = false;
+                }
+                labelSeries.Append("}");
             }
-            labelSeries.Append("}");
             //+
             return labelSeries.ToString();
         }
@@ -327,34 +329,37 @@ document.observe('dom:loaded', Initialization.init);
         private String GetBlogEntryAuthorSeries(BlogEntry blogEntry)
         {
             StringBuilder authorSeries = new StringBuilder();
-            Boolean first = true;
-            if (blogEntry.AuthorList.Count < 1)
+            if (blogEntry.AuthorList != null)
             {
-                return String.Empty;
-            }
-            else if (blogEntry.AuthorList.Count > 1)
-            {
-                authorSeries.Append("{");
-            }
-            foreach (Author author in blogEntry.AuthorList)
-            {
-                if (blogEntry.AuthorList.Count > 1 && !first)
+                Boolean first = true;
+                if (blogEntry.AuthorList.Count < 1)
                 {
-                    authorSeries.Append(", ");
+                    return String.Empty;
                 }
-                if (MinimaConfiguration.LinkAuthorToEmail)
+                else if (blogEntry.AuthorList.Count > 1)
                 {
-                    authorSeries.Append(String.Format("<a href=\"mailto:{1}\">{0}</a>", author.Name, author.Email));
+                    authorSeries.Append("{");
                 }
-                else
+                foreach (Author author in blogEntry.AuthorList)
                 {
-                    authorSeries.Append(author.Name);
+                    if (blogEntry.AuthorList.Count > 1 && !first)
+                    {
+                        authorSeries.Append(", ");
+                    }
+                    if (MinimaConfiguration.LinkAuthorToEmail)
+                    {
+                        authorSeries.Append(String.Format("<a href=\"mailto:{1}\">{0}</a>", author.Name, author.Email));
+                    }
+                    else
+                    {
+                        authorSeries.Append(author.Name);
+                    }
+                    first = false;
                 }
-                first = false;
-            }
-            if (blogEntry.AuthorList.Count > 1)
-            {
-                authorSeries.Append("}");
+                if (blogEntry.AuthorList.Count > 1)
+                {
+                    authorSeries.Append("}");
+                }
             }
             //+
             return authorSeries.ToString();
@@ -363,7 +368,7 @@ document.observe('dom:loaded', Initialization.init);
         //- $GetLabelUrl -//
         private String GetLabelUrl(Minima.Service.Label label)
         {
-            return WebConfiguration.Domain + "/label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
+            return General.Web.UrlHelper.FixWebPathTail(ContextItemSet.WebSection) + "/label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
         }
 
         #endregion

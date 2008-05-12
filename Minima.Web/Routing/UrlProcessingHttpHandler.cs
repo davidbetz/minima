@@ -1,29 +1,59 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.SessionState;
 using System.Web.UI;
+//+
+using General.Web;
+//+
+using Minima.Web.Configuration;
+using Minima.Web.Control;
 //+
 namespace Minima.Web.Routing
 {
-    /// <summary>
-    /// HttpHandler to detect if a URL is accessing a label, a link or archive.
-    /// </summary>
-    public class UrlProcessingHttpHandler : IHttpHandler, IRequiresSessionState
+    public class UrlProcessingHttpHandler : IHttpHandler, System.Web.SessionState.IRequiresSessionState
     {
+        //- @IsReusable -//
         public Boolean IsReusable
         {
             get { return true; }
         }
 
+        //- @ProcessRequest -//
         public void ProcessRequest(HttpContext context)
         {
             Route(context);
-
-            IHttpHandler h = PageParser.GetCompiledPageInstance("~/default.aspx", null, context);
+            //+
+            String pageLocation = String.Empty;
+            //+
+            String absoluteUrl = context.Request.Url.AbsoluteUri;
+            String absolutePath = context.Request.Url.AbsolutePath;
+            //+
+            List<InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
+            InstanceElement t = instanceElementList.FirstOrDefault(u => absolutePath.ToLower().Contains(u.WebSection.ToLower()));
+            if (t != null)
+            {
+                pageLocation = t.Page;
+            }
+            else
+            {
+                t = instanceElementList.FirstOrDefault(u => u.WebSection == "*");
+                if (t != null)
+                {
+                    pageLocation = t.Page;
+                }
+                else
+                {
+                    pageLocation = "~/default.aspx";
+                }
+            }
+            //+
+            IHttpHandler h = PageParser.GetCompiledPageInstance(pageLocation, null, context);
             h.ProcessRequest(context);
         }
 
+        //- $Route -//
         private static void Route(HttpContext context)
         {
             String finderLabel = "/label/";

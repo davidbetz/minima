@@ -3,47 +3,47 @@ using System.Configuration;
 //+
 namespace Minima.Web.Configuration
 {
-    public class HttpHandlerElement : ConfigurationElement
+    public class InstanceElement : ConfigurationElement
     {
-        //- @MatchType -//
-        [ConfigurationProperty("matchType", IsRequired = true)]
-        public Char MatchType
+        //- @WebSection -//
+        [ConfigurationProperty("webSection", IsRequired = true, IsKey = true)]
+        public String WebSection
         {
             get
             {
-                return (Char)this["matchType"];
+                return (String)this["webSection"];
             }
             set
             {
-                this["matchType"] = value;
+                this["webSection"] = value;
             }
         }
 
-        //- @Name -//
-        [ConfigurationProperty("name", IsRequired = true)]
-        public String Name
+        //- @Page -//
+        [ConfigurationProperty("page", IsRequired = true)]
+        public String Page
         {
             get
             {
-                return (String)this["name"];
+                return (String)this["page"];
             }
             set
             {
-                this["name"] = value;
+                this["page"] = value;
             }
         }
 
-        //- @MatchText -//
-        [ConfigurationProperty("matchText", IsRequired = true, IsKey = true)]
-        public String MatchText
+        //- @BlogGuid -//
+        [ConfigurationProperty("blogGuid", IsRequired = true)]
+        public String BlogGuid
         {
             get
             {
-                return (String)this["matchText"];
+                return (String)this["blogGuid"];
             }
             set
             {
-                this["matchText"] = value;
+                this["blogGuid"] = value;
             }
         }
 

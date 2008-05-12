@@ -25,7 +25,6 @@
   <Table Name="web.Access" Member="Accesses">
     <Type Name="Access">
       <Column Name="AccessId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="BlogGuid" Storage="_BlogId" Type="System.String" DbType="Char(36) NOT NULL" CanBeNull="false" />
       <Column Name="AccessType" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
       <Column Name="AccessContent" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
       <Column Name="AccessOutputMessage" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
