@@ -213,7 +213,7 @@ namespace Minima.Service
                     AllowCommentStatus = (AllowCommentStatus)blogEntryLinq.BlogEntryCommentAllowStatusId,
                     PostDateTime = blogEntryLinq.BlogEntryPostDateTime,
                     ModifyDateTime = blogEntryLinq.BlogEntryModifyDateTime,
-                    BlogEntryUri = new Uri(UriBuilder.Build(blogEntryLinq.BlogEntryPostDateTime, blogEntryLinq.BlogEntryUrlMappings.FirstOrDefault().BlogEntryUrlMappingName, blogEntryLinq.Blog.BlogPrimaryUrl)),
+                    BlogEntryUri = new Uri(UriBuilder.Build(blogEntryLinq, blogEntryLinq.Blog)),
                     LabelList = new List<Label>(
                         blogEntryLinq.LabelBlogEntries.Select(p => new Label
                         {
@@ -266,7 +266,7 @@ namespace Minima.Service
                     AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
                     PostDateTime = be.BlogEntryPostDateTime,
                     ModifyDateTime = be.BlogEntryModifyDateTime,
-                    BlogEntryUri = new Uri(UriBuilder.Build(be.BlogEntryPostDateTime, be.BlogEntryUrlMappings.FirstOrDefault().BlogEntryUrlMappingName, blogLinq.BlogPrimaryUrl)),
+                    BlogEntryUri = new Uri(UriBuilder.Build(be, blogLinq)),
                     LabelList = new List<Label>(
                         be.LabelBlogEntries.Select(p => new Label
                         {
@@ -293,7 +293,7 @@ namespace Minima.Service
                             Email = p.CommentEmail,
                             Name = p.CommentAuthor
                         })
-                    ),
+                    )
                 };
                 //+ label?
                 if (!String.IsNullOrEmpty(label))
@@ -302,7 +302,7 @@ namespace Minima.Service
                     blogEntryLinqList = (from be in db.BlogEntries
                                          join lbe in db.LabelBlogEntries on be.BlogEntryId equals lbe.BlogEntryId
                                          join l in db.Labels on lbe.LabelId equals l.LabelId
-                                         where be.BlogId == blogLinq.BlogId && l.LabelFriendlyTitle.ToLower() == label.ToLower() && be.BlogEntryStatusId == 1
+                                         where be.BlogId == blogLinq.BlogId && l.LabelNetTitle.ToLower() == label.ToLower() && be.BlogEntryStatusId == 1
                                          select be);
                 }
                 //+ archive?
@@ -374,7 +374,7 @@ namespace Minima.Service
                         AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
                         PostDateTime = be.BlogEntryPostDateTime,
                         ModifyDateTime = be.BlogEntryModifyDateTime,
-                        BlogEntryUri = new Uri(UriBuilder.Build(be.BlogEntryPostDateTime, be.BlogEntryUrlMappings.FirstOrDefault().BlogEntryUrlMappingName, blogLinq.BlogPrimaryUrl)),
+                        BlogEntryUri = new Uri(UriBuilder.Build(be, blogLinq)),
                         LabelList = new List<Label>(
                             be.LabelBlogEntries.Select(p => new Label
                             {
@@ -550,7 +550,7 @@ namespace Minima.Service
                Status = be.BlogEntryStatusId,
                PostDateTime = be.BlogEntryPostDateTime,
                ModifyDateTime = be.BlogEntryModifyDateTime,
-               BlogEntryUri = new Uri(UriBuilder.Build(be.BlogEntryPostDateTime, be.BlogEntryUrlMappings.FirstOrDefault().BlogEntryUrlMappingName, blogLinq.BlogPrimaryUrl)),
+               BlogEntryUri = new Uri(UriBuilder.Build(be, blogLinq)),
                LabelList = new List<Label>(
                    be.LabelBlogEntries.Select(p => new Label
                    {
