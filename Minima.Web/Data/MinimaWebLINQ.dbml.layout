@@ -21,10 +21,10 @@
         <classShapeMoniker Id="31eee6a9-4b4a-4796-abfe-4ab653fcc9fb" />
       </nodes>
     </associationConnector>
-    <classShape Id="a306372d-3532-4ced-97db-012a2b08348f" absoluteBounds="6.5, 0.75, 2, 1.9178898111979166">
+    <classShape Id="a306372d-3532-4ced-97db-012a2b08348f" absoluteBounds="6.5, 0.75, 2, 1.75354248046875">
       <DataClassMoniker Name="/MinimaWebLINQDataContext/Access" />
       <nestedChildShapes>
-        <elementListCompartment Id="ed281e69-81c8-43d9-adf3-f2312ff88c78" absoluteBounds="6.515, 1.21, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ed281e69-81c8-43d9-adf3-f2312ff88c78" absoluteBounds="6.515, 1.21, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="4247a720-83b3-4f16-8652-4e8130147a80" absoluteBounds="5.75, 3.875, 2, 1.4248478190104168">

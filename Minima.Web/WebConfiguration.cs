@@ -23,7 +23,7 @@ namespace Minima.Web
         {
             get
             {
-                return UrlHelper.FixWebPath(ConfigurationFacade.ApplicationSettings("Domain"));
+                return General.Web.UrlHelper.FixWebPath(ConfigurationFacade.ApplicationSettings("Domain"));
             }
         }
 

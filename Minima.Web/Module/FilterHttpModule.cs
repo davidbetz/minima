@@ -28,7 +28,7 @@ namespace Minima.Web.Module
                 {
                     using (MinimaWebLINQDataContext db = new MinimaWebLINQDataContext(WebConfiguration.ConnectionString))
                     {
-                        List<AccessLINQ> accessLinqList = db.Accesses.Where(p => p.AccessType == 'I' && p.BlogGuid == MinimaConfiguration.BlogGuid && p.AccessEnabled == true).ToList();
+                        List<AccessLINQ> accessLinqList = db.Accesses.Where(p => p.AccessType == 'I' && p.AccessEnabled == true).ToList();
                         //+ ip address
                         foreach (AccessLINQ access in accessLinqList)
                         {
@@ -39,7 +39,7 @@ namespace Minima.Web.Module
                             }
                         }
                         //+ user agent
-                        accessLinqList = db.Accesses.Where(p => p.AccessType == 'U' && p.BlogGuid == MinimaConfiguration.BlogGuid && p.AccessEnabled == true).ToList();
+                        accessLinqList = db.Accesses.Where(p => p.AccessType == 'U' && p.AccessEnabled == true).ToList();
                         foreach (AccessLINQ access in accessLinqList)
                         {
                             if (context.Request.UserAgent.Contains(access.AccessContent))
@@ -49,7 +49,7 @@ namespace Minima.Web.Module
                             }
                         }
                         //+ http referrer
-                        accessLinqList = db.Accesses.Where(p => p.AccessType == 'H' && p.BlogGuid == MinimaConfiguration.BlogGuid && p.AccessEnabled == true).ToList();
+                        accessLinqList = db.Accesses.Where(p => p.AccessType == 'H' && p.AccessEnabled == true).ToList();
                         foreach (AccessLINQ access in accessLinqList)
                         {
                             if (context.Request.UrlReferrer != null && context.Request.UrlReferrer.AbsoluteUri == access.AccessContent)

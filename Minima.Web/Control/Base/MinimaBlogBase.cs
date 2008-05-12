@@ -19,6 +19,15 @@ namespace Minima.Web.Control
         //- @BlogEntryGuid -//
         public String BlogEntryGuid { get; private set; }
 
+        //- @BlogGuid -//
+        public static String BlogGuid
+        {
+            get
+            {
+                return HttpContext.Current.Items["BlogGuid"] as String;
+            }
+        }
+
         //- @Label -//
         public String Label
         {
@@ -110,7 +119,12 @@ namespace Minima.Web.Control
         //- $GetDataSource -//
         private List<BlogEntry> GetDataSource()
         {
-            List<BlogEntry> blogEntryList = BlogAgent.GetNetBlogEntryList(MinimaConfiguration.BlogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
+            if (String.IsNullOrEmpty(MinimaBlogBase.BlogGuid))
+            {
+                throw new ArgumentNullException("BlogGuid is required.");
+            }
+            //+
+            List<BlogEntry> blogEntryList = BlogAgent.GetNetBlogEntryList(MinimaBlogBase.BlogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
             //+
             BlogEntryActivity blogEntryActivity = new BlogEntryActivity();
             blogEntryActivity.BlogEntryActivityBrowser = HttpContext.Current.Request.UserAgent;

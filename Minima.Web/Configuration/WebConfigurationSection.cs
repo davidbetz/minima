@@ -2,35 +2,20 @@
 //+
 namespace Minima.Web.Configuration
 {
-    public class WebConfigurationSection : ConfigurationSection
+    public class MinimaConfigurationSection : ConfigurationSection
     {
-        //- @HttpHandlers -//
-        [ConfigurationProperty("httpHandlers")]
-        [ConfigurationCollection(typeof(UrlRewriteElement), AddItemName = "add")]
-        public HttpHandlerCollection HttpHandlers
+        //- @Instances -//
+        [ConfigurationProperty("registration")]
+        [ConfigurationCollection(typeof(InstanceElement), AddItemName = "instance")]
+        public InstanceCollection Registration
         {
             get
             {
-                return (HttpHandlerCollection)this["httpHandlers"];
+                return (InstanceCollection)this["registration"];
             }
             set
             {
-                this["httpHandlers"] = value;
-            }
-        }
-
-        //- @UrlRewrites -//
-        [ConfigurationProperty("urlRewrites")]
-        [ConfigurationCollection(typeof(UrlRewriteElement), AddItemName = "add")]
-        public UrlRewriteCollection UrlRewrites
-        {
-            get
-            {
-                return (UrlRewriteCollection)this["urlRewrites"];
-            }
-            set
-            {
-                this["urlRewrites"] = value;
+                this["registration"] = value;
             }
         }
     }

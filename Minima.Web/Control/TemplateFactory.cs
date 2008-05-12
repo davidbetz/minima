@@ -69,7 +69,7 @@ namespace Minima.Web.Control
                         Text = text
                     });
                     //+ p.comment-timestamp
-                    HtmlGenericControl pCommentTimestamp= new HtmlGenericControl("p");
+                    HtmlGenericControl pCommentTimestamp = new HtmlGenericControl("p");
                     pCommentTimestamp.Attributes.Add("class", "comment-timestamp");
                     divCommentBlock.Controls.Add(pCommentTimestamp);
                     pCommentTimestamp.Controls.Add(new System.Web.UI.WebControls.Literal
@@ -88,10 +88,14 @@ namespace Minima.Web.Control
             //- $IsLink -//
             private Boolean IsLink { get; set; }
 
+            //- $SupportCommenting -//
+            private Boolean SupportCommenting { get; set; }
+
             //- @Ctor -//
             public PostTemplate(params Object[] parameterArray)
             {
                 this.IsLink = (parameterArray[0] as Boolean?) ?? false;
+                this.SupportCommenting = (parameterArray[1] as Boolean?) ?? false;
             }
 
             //- @InstantiateIn -//
@@ -143,7 +147,7 @@ namespace Minima.Web.Control
         <p class=""post-labels"">{LabelSeries}</p>".Replace("{LabelSeries}", labelSeries)
                         });
                     }
-                    if (!this.IsLink)
+                    if (!this.IsLink && this.SupportCommenting)
                     {
                         if (allowCommentStatus == "Disabled")
                         {

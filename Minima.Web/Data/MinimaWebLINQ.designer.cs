@@ -552,8 +552,6 @@ namespace Minima.Web.Data.Entity
 		
 		private int _AccessId;
 		
-		private string _BlogId;
-		
 		private char _AccessType;
 		
 		private string _AccessContent;
@@ -570,8 +568,6 @@ namespace Minima.Web.Data.Entity
     partial void OnCreated();
     partial void OnAccessIdChanging(int value);
     partial void OnAccessIdChanged();
-    partial void OnBlogGuidChanging(string value);
-    partial void OnBlogGuidChanged();
     partial void OnAccessTypeChanging(char value);
     partial void OnAccessTypeChanged();
     partial void OnAccessContentChanging(string value);
@@ -605,26 +601,6 @@ namespace Minima.Web.Data.Entity
 					this._AccessId = value;
 					this.SendPropertyChanged("AccessId");
 					this.OnAccessIdChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_BlogId", DbType="Char(36) NOT NULL", CanBeNull=false)]
-		public string BlogGuid
-		{
-			get
-			{
-				return this._BlogId;
-			}
-			set
-			{
-				if ((this._BlogId != value))
-				{
-					this.OnBlogGuidChanging(value);
-					this.SendPropertyChanging();
-					this._BlogId = value;
-					this.SendPropertyChanged("BlogGuid");
-					this.OnBlogGuidChanged();
 				}
 			}
 		}

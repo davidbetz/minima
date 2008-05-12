@@ -190,7 +190,7 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             return new UrlInfo
             {
-                url = Helper.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/" + Helper.UrlHelper.FixWebPath(MinimaConfiguration.SupportImageWebRelativePath) + "/" + fixedName
+                url = General.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/" + General.Web.UrlHelper.FixWebPath(MinimaConfiguration.SupportImageWebRelativePath) + "/" + fixedName
             };
         }
 
