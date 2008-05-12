@@ -49,9 +49,12 @@ namespace Minima.Web
         //- $SetContextItems -//
         private void SetContextItems(HttpContext context, UriTemplateMatch match)
         {
-            foreach (String name in match.BoundVariables)
+            if (match != null)
             {
-                context.Items.Add(name.ToLower(), match.BoundVariables[name]);
+                foreach (String name in match.BoundVariables)
+                {
+                    context.Items.Add(name.ToLower(), match.BoundVariables[name]);
+                }
             }
         }
     }
