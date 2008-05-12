@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.SessionState;
 using System.Web.UI;
 //+
 using Minima.Web.Configuration;
 //+
 namespace Minima.Web
 {
-    class UrlRewriteHttpHandler : IHttpHandler, IRequiresSessionState
+    class UrlRewriteHttpHandler : IHttpHandler, System.Web.SessionState.IRequiresSessionState
     {
         //- @IsReusable -//
         public Boolean IsReusable
@@ -29,7 +28,7 @@ namespace Minima.Web
             String absolutePath = context.Request.Url.AbsolutePath;
             //+
             List<UrlRewriteElement> urlRewriteList = WebConfigurationFacade.GetWebConfiguration().UrlRewrites.OrderBy(p => p.Priority).ToList();
-            UrlRewriteElement t = urlRewriteList.SingleOrDefault(u => absolutePath.ToLower().Contains(u.Match.ToLower()));
+            UrlRewriteElement t = urlRewriteList.FirstOrDefault(u => absolutePath.ToLower().Contains(u.Match.ToLower()));
             if (t != null)
             {
                 String baseAddress = absoluteUrl.Substring(0, absoluteUrl.Length - absolutePath.Length);
