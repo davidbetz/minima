@@ -4,8 +4,22 @@ using System.Configuration;
 //+
 namespace Minima.Web.Configuration
 {
-    public class InstanceCollection : ConfigurationElementCollection, IEnumerable<InstanceElement>
+    public class InstanceCollection : ConfigurationElementCollection, IEnumerable<InstanceElement>, General.Web.Configuration.ICommentElement
     {
+        //- @Comment -//
+        [ConfigurationProperty("comment")]
+        public String Comment
+        {
+            get
+            {
+                return (String)this["comment"];
+            }
+            set
+            {
+                this["comment"] = value;
+            }
+        }
+
         //- @[Indexer] -//
         public InstanceElement this[int index]
         {

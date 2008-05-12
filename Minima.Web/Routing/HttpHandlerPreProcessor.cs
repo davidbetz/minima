@@ -18,7 +18,7 @@ namespace Minima.Web.Routing
             String absolutePath = context.Request.Url.AbsolutePath;
             //+
             List<InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
-            InstanceElement t = instanceElementList.FirstOrDefault(u => absolutePath.ToLower().Contains(u.WebSection.ToLower()));
+            InstanceElement t = instanceElementList.Where(p => p.WebSection != "/").FirstOrDefault(u => absolutePath.ToLower().Contains(u.WebSection.ToLower()));
             if (t != null)
             {
                 blogGuid = t.BlogGuid;
@@ -26,10 +26,11 @@ namespace Minima.Web.Routing
             }
             else
             {
-                t = instanceElementList.FirstOrDefault(u => u.WebSection == "*");
+                t = instanceElementList.FirstOrDefault(u => u.WebSection == "/");
                 if (t != null)
                 {
                     blogGuid = t.BlogGuid;
+                    webSection = t.WebSection;
                 }
             }
             //+

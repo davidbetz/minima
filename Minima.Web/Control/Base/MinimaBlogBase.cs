@@ -119,12 +119,12 @@ namespace Minima.Web.Control
         //- $GetDataSource -//
         private List<BlogEntry> GetDataSource()
         {
-            if (String.IsNullOrEmpty(MinimaBlogBase.BlogGuid))
+            if (String.IsNullOrEmpty(ContextItemSet.BlogGuid))
             {
                 throw new ArgumentNullException("BlogGuid is required.");
             }
             //+
-            List<BlogEntry> blogEntryList = BlogAgent.GetNetBlogEntryList(MinimaBlogBase.BlogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
+            List<BlogEntry> blogEntryList = BlogAgent.GetNetBlogEntryList(ContextItemSet.BlogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
             //+
             BlogEntryActivity blogEntryActivity = new BlogEntryActivity();
             blogEntryActivity.BlogEntryActivityBrowser = HttpContext.Current.Request.UserAgent;
