@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 //+
-using General.ExceptionHandling;
+using General.Web.ExceptionHandling;
 //+
 namespace Minima.Web.Tracing
 {
