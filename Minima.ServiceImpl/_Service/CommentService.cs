@@ -124,7 +124,7 @@ namespace Minima.Service
             //+ email
             String body = String.Format(emailBodyTemplate, blogEntryTitle, commentGuid);
             //+ this could be sent from the person, but those e-mails will more than likely be caught by a spam filter.
-            Notification.WrapAndSend(StaticConfiguration.FromEmailAddress, StaticConfiguration.ToEmailAddress, emailSubject, body);
+            Notification.WrapAndSend(MailConfiguration.FromEmailAddress, MailConfiguration.ToEmailAddress, emailSubject, body);
             //+
             return commentGuid;
         }
