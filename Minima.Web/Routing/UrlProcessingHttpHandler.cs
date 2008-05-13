@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.UI;
 //+
 using General.Web;
 //+
 using Minima.Web.Configuration;
-using Minima.Web.Control;
 //+
 namespace Minima.Web.Routing
 {
@@ -27,18 +25,15 @@ namespace Minima.Web.Routing
             //+
             String pageLocation = String.Empty;
             //+
-            String absoluteUrl = context.Request.Url.AbsoluteUri;
-            String absolutePath = context.Request.Url.AbsolutePath;
-            //+
-            List<InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
-            InstanceElement t = instanceElementList.FirstOrDefault(u => absolutePath.ToLower().Contains(u.WebSection.ToLower()));
+            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
+            InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && Http.Url.AbsolutePath.ToLower().Contains(u.WebSection.ToLower()));
             if (t != null)
             {
                 pageLocation = t.Page;
             }
             else
             {
-                t = instanceElementList.FirstOrDefault(u => u.WebSection == "*");
+                t = instanceElementList.FirstOrDefault(u => u.WebSection != null && u.WebSection.Equals("Root", StringComparison.InvariantCultureIgnoreCase));
                 if (t != null)
                 {
                     pageLocation = t.Page;
@@ -49,7 +44,7 @@ namespace Minima.Web.Routing
                 }
             }
             //+
-            IHttpHandler h = PageParser.GetCompiledPageInstance(pageLocation, null, context);
+            IHttpHandler h = System.Web.UI.PageParser.GetCompiledPageInstance(pageLocation, null, context);
             h.ProcessRequest(context);
         }
 
@@ -57,9 +52,9 @@ namespace Minima.Web.Routing
         private static void Route(HttpContext context)
         {
             String finderLabel = "/label/";
-            String uri = context.Request.Url.ToString().ToLower();
+            String uri = Http.Url.ToString().ToLower();
             //+ label
-            if (context.Request.Url.ToString().ToLower().Contains(finderLabel))
+            if (Http.Url.ToString().ToLower().Contains(finderLabel))
             {
                 String label = uri.Substring(uri.IndexOf(finderLabel) + finderLabel.Length, uri.Length - (uri.IndexOf(finderLabel) + finderLabel.Length));
                 if (!String.IsNullOrEmpty(label))

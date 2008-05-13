@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 //+
-using Minima.Configuration;
-//+
 using AccessLINQ = Minima.Web.Data.Entity.Access;
 //+
 using MinimaWebLINQDataContext = Minima.Web.Data.Context.MinimaWebLINQDataContext;
@@ -14,9 +12,7 @@ namespace Minima.Web.Module
     public class FilterHttpModule : IHttpModule
     {
         //- @Dispose -//
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         //- @Init -//
         public void Init(System.Web.HttpApplication context)
