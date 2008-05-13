@@ -5,6 +5,9 @@ namespace Minima.Web.Control
 {
     public abstract class MinimaListUserControlBase : General.Web.Control.DataUserControlBase
     {
+        protected System.Web.UI.WebControls.Repeater repeater;
+
+        //+
         //- @BlogGuid -//
         public String BlogGuid
         {
@@ -21,5 +24,20 @@ namespace Minima.Web.Control
 
         //- @WebSection -//
         public String WebSection { get; set; }
+
+        //+
+        //- #OnInit -//
+        protected override void OnInit(EventArgs e)
+        {
+            this.Load += new EventHandler(Page_Load);
+            base.OnInit(e);
+        }
+
+        //- #Page_Load -//
+        protected void Page_Load(Object sender, EventArgs e)
+        {
+            repeater.DataSource = this.DataSource;
+            repeater.DataBind();
+        }
     }
 }

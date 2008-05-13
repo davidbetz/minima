@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+//+
+using Minima.Service;
+using Minima.Web.Agent;
 //+
 namespace Minima.Web.Control
 {
     [PartialCachingAttribute(3600, null, null, null, null, false)]
-    public class LabelList : LabelListBase
+    public class LabelList : MinimaListUserControlBase
     {
-        protected Repeater rptLabelList;
-
         //+
         //- $ArchiveEntryTemplate -//
         private class LabelTemplate : ITemplate
@@ -33,29 +35,34 @@ namespace Minima.Web.Control
         }
 
         //+
+        //- @Heading -//
+        public String Heading { get; set; }
+
+        //- @ListCssClass -//
+        public String ListCssClass { get; set; }
+
+        //+
         //- @Ctor -//
         public LabelList() { }
 
         //+
-        //- #OnInit -//
-        protected override void OnInit(EventArgs e)
+        //- #GetDataSource -//
+        protected override Object GetDataSource()
         {
-            this.Load += new EventHandler(Page_Load);
-            base.OnInit(e);
-        }
-
-        //- #Page_Load -//
-        protected void Page_Load(Object sender, EventArgs e)
-        {
-            rptLabelList.DataSource = this.DataSource;
-            rptLabelList.DataBind();
+            List<Label> labelList = LabelAgent.GetBlogLabelList(this.BlogGuid);
+            return labelList.Select(label => new
+            {
+                Title = label.Title,
+                Url = LabelHelper.GetLabelUrl(label),
+                EntryCount = label.BlogEntryCount
+            });
         }
 
         //- $__BuildRepeaterControl -//
-        private Repeater __BuildRepeaterControl()
+        private System.Web.UI.WebControls.Repeater __BuildRepeaterControl()
         {
-            Repeater rpt = new System.Web.UI.WebControls.Repeater();
-            this.rptLabelList = rpt;
+            System.Web.UI.WebControls.Repeater rpt = new System.Web.UI.WebControls.Repeater();
+            this.repeater = rpt;
             rpt.ItemTemplate = new LabelTemplate();
             rpt.ID = "rptLabelList";
             return rpt;
@@ -65,10 +72,20 @@ namespace Minima.Web.Control
         protected override void __BuildControlTree(General.Web.Control.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
-            __parser.AddParsedSubObject(new LiteralControl("<h2>Labels</h2>"));
-            __parser.AddParsedSubObject(new LiteralControl("<ul id=\"labels\">"));
+            String heading = "Labels";
+            if (!String.IsNullOrEmpty(this.Heading))
+            {
+                heading = this.Heading;
+            }
+            String listCssClass = "labels";
+            if (!String.IsNullOrEmpty(this.ListCssClass))
+            {
+                listCssClass = this.ListCssClass;
+            }
+            __parser.AddParsedSubObject(new LiteralControl("<h2>" + heading + "</h2>"));
+            __parser.AddParsedSubObject(new LiteralControl("<ul id=\"" + listCssClass + "\">"));
             //+
-            Repeater repeater = this.__BuildRepeaterControl();
+            System.Web.UI.WebControls.Repeater repeater = this.__BuildRepeaterControl();
             __parser.AddParsedSubObject(repeater);
             //+
             __parser.AddParsedSubObject(new LiteralControl("</ul>"));

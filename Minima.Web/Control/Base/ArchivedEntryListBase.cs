@@ -9,18 +9,5 @@ namespace Minima.Web.Control
 {
     public abstract class ArchivedEntryListBase : MinimaListUserControlBase
     {
-        //- #GetDataSource -//
-        protected override Object GetDataSource()
-        {
-            List<ArchiveCount> archiveList = BlogAgent.GetArchivedEntryList(this.BlogGuid);
-            //+
-            return archiveList.Select(p => new
-            {
-                Url = String.Format("/{0}/{1}", p.ArchiveDate.Year, p.ArchiveDate.ToString("MM")),
-                MonthText = p.ArchiveDate.ToString("MMMM"),
-                Year = p.ArchiveDate.Year,
-                Count = p.Count
-            });
-        }
     }
 }
