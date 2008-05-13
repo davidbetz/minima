@@ -126,7 +126,6 @@
     </Compile>
     <Compile Include="ContextItemSet.cs" />
     <Compile Include="Helper\LabelHelper.cs" />
-    <Compile Include="HttpApplication.cs" />
     <Compile Include="Data\MinimaWebLINQ.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
