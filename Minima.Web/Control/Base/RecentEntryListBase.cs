@@ -8,17 +8,8 @@ using Minima.Web.Agent;
 //+
 namespace Minima.Web.Control
 {
-    public class RecentEntryListBase : ListUserControlBase
+    public abstract class RecentEntryListBase : MinimaListUserControlBase
     {
-        //- @BlogGuid -//
-        public String BlogGuid
-        {
-            get
-            {
-                return ContextItemSet.BlogGuid;
-            }
-        }
-
         //- #GetDataSource -//
         protected override Object GetDataSource()
         {

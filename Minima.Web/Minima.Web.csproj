@@ -115,7 +115,7 @@
     </Compile>
     <Compile Include="Control\Base\MinimaBlogBase.cs">
     </Compile>
-    <Compile Include="Control\Base\DataUserControlBase.cs">
+    <Compile Include="Control\Base\MinimaListUserControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Control\Base\LabelListBase.cs">
@@ -139,6 +139,7 @@
     <Compile Include="Routing\BlogEntryImageHttpHandler.cs" />
     <Compile Include="Routing\CommentHttpHandler.cs" />
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
+    <Compile Include="Routing\WebSection.cs" />
     <Compile Include="Routing\HttpHandlerPreProcessor.cs" />
     <Compile Include="Routing\FileProcessorHttpHandler.cs" />
     <Compile Include="Routing\SiteMapHttpHandler.cs" />
