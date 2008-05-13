@@ -121,9 +121,6 @@
     <Compile Include="Control\Base\LabelListBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Base\RecentEntryListBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ContextItemSet.cs" />
     <Compile Include="Helper\LabelHelper.cs" />
     <Compile Include="Data\MinimaWebLINQ.designer.cs">
