@@ -20,7 +20,7 @@ namespace Minima.Web.Configuration
         }
 
         //- @Page -//
-        [ConfigurationProperty("page", IsRequired = true)]
+        [ConfigurationProperty("page")]
         public String Page
         {
             get
