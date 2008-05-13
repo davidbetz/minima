@@ -2,6 +2,8 @@
 using System.Text.RegularExpressions;
 using System.Web;
 //+
+using General.Web;
+//+
 using Minima.Web.Agent;
 //+
 namespace Minima.Web.HttpExtensions
@@ -19,7 +21,7 @@ namespace Minima.Web.HttpExtensions
         public void ProcessRequest(HttpContext context)
         {
             String pathSignature = "Service/Comment/";
-            String[] parts = Regex.Split(context.Request.Url.AbsoluteUri, pathSignature);
+            String[] parts = Regex.Split(Http.Url.AbsoluteUri, pathSignature);
 
             if (parts.Length > 1 && parts[1].Length > 0)
             {

@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Web;
 //+
+using General.Web;
+//+
 using Minima.Configuration;
 //+
 namespace Minima.Web.Module
 {
     public class FixDomainHttpModule : IHttpModule
     {
-        public void Dispose()
-        {
-        }
+        //- @Dispose -//
+        public void Dispose() { }
 
+        //- @Init -//
         public void Init(System.Web.HttpApplication context)
         {
             context.BeginRequest += delegate(Object sender, EventArgs ea)
             {
                 HttpApplication ha = sender as HttpApplication;
-                String absoluteUrl = ha.Context.Request.Url.ToString().ToLower();
+                String absoluteUrl = Http.Url.ToString().ToLower();
                 if (ha != null)
                 {
                     if (MinimaConfiguration.ForceSpecifiedPath)

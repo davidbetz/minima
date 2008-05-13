@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 //+
+using General.Web;
+//+
 using Minima.Web.Configuration;
 //+
 namespace Minima.Web.Routing
@@ -13,29 +15,23 @@ namespace Minima.Web.Routing
         public override void OnPreHttpHandlerExecute(HttpContext context)
         {
             String blogGuid = String.Empty;
-            String webSection = String.Empty;
-            String absoluteUrl = context.Request.Url.AbsoluteUri;
-            String absolutePath = context.Request.Url.AbsolutePath;
             //+
-            List<InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
-            InstanceElement t = instanceElementList.Where(p => p.WebSection != "/").FirstOrDefault(u => absolutePath.ToLower().Contains(u.WebSection.ToLower()));
+            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
+            InstanceElement t = instanceElementList.Where(p => p.WebSection != "root").FirstOrDefault(u => u.WebSection != null && Http.Url.AbsolutePath.ToLower().Contains(u.WebSection.ToLower()));
             if (t != null)
             {
                 blogGuid = t.BlogGuid;
-                webSection = t.WebSection;
             }
             else
             {
-                t = instanceElementList.FirstOrDefault(u => u.WebSection == "/");
+                t = instanceElementList.FirstOrDefault(u => u.WebSection != null && u.WebSection.Equals("root", StringComparison.InvariantCultureIgnoreCase));
                 if (t != null)
                 {
                     blogGuid = t.BlogGuid;
-                    webSection = t.WebSection;
                 }
             }
             //+
             context.Items.Add("BlogGuid", blogGuid);
-            context.Items.Add("WebSection", webSection);
         }
     }
 }
