@@ -53,6 +53,7 @@
                 <asp:PlaceHolder id="phLabelList" runat="server" />
                 <asp:PlaceHolder id="phArchivedEntryList" runat="server" />
                 <asp:PlaceHolder id="phRecentEntryList" runat="server" />
+                <asp:PlaceHolder id="phRecentEntryListSecondary" runat="server" />
                 <p id="firefoxIcon">
                 <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=72158&amp;t=218"><img border="0" alt="Firefox 3" title="Firefox 3" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox2/ff2o80x15.gif"/></a>
                 </p>

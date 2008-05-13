@@ -64,7 +64,7 @@ namespace Minima.Web.Control
         }
 
         //- $__BuildControlTree -//
-        private void __BuildControlTree(ArchivedEntryList __ctrl)
+        protected override void __BuildControlTree(General.Web.Control.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
             __parser.AddParsedSubObject(new LiteralControl("<h2>Archives</h2>"));
@@ -74,13 +74,6 @@ namespace Minima.Web.Control
             __parser.AddParsedSubObject(repeater);
             //+
             __parser.AddParsedSubObject(new LiteralControl("</ul>"));
-        }
-
-        //- #FrameworkInitialize -//
-        protected override void FrameworkInitialize()
-        {
-            base.FrameworkInitialize();
-            this.__BuildControlTree(this);
         }
     }
 }

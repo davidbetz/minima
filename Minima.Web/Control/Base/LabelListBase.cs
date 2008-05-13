@@ -7,17 +7,8 @@ using Minima.Web.Agent;
 //+
 namespace Minima.Web.Control
 {
-    public class LabelListBase : ListUserControlBase
+    public abstract class LabelListBase : MinimaListUserControlBase
     {
-        //- @BlogGuid -//
-        public String BlogGuid
-        {
-            get
-            {
-                return ContextItemSet.BlogGuid;
-            }
-        }
-
         //- #GetDataSource -//
         protected override Object GetDataSource()
         {

@@ -21,6 +21,7 @@ public partial class Default : System.Web.UI.Page
         phLabelList.Controls.Add(new Minima.Web.Control.LabelList());
         phArchivedEntryList.Controls.Add(new Minima.Web.Control.ArchivedEntryList());
         phRecentEntryList.Controls.Add(new Minima.Web.Control.RecentEntryList());
+        phRecentEntryListSecondary.Controls.Add(new Minima.Web.Control.RecentEntryList { WebSection = "Second" });
         phMinimaBlog.Controls.Add(new Minima.Web.Control.MinimaBlog());
         //+
         base.OnInit(e);
