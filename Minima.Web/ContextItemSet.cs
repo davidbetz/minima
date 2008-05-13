@@ -13,6 +13,15 @@ namespace Minima.Web
             }
         }
 
+        //- @BlogPage -//
+        public static String BlogPage
+        {
+            get
+            {
+                return System.Web.HttpContext.Current.Items["BlogPage"] as String;
+            }
+        }
+
         //- @WebSection -//
         public static String WebSection
         {

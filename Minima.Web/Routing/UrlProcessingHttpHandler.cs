@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 //+
 using General.Web;
 //+
-using Minima.Web.Configuration;
 //+
 namespace Minima.Web.Routing
 {
@@ -23,28 +20,7 @@ namespace Minima.Web.Routing
         {
             Route(context);
             //+
-            String pageLocation = String.Empty;
-            //+
-            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
-            InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && Http.Url.AbsolutePath.ToLower().Contains(u.WebSection.ToLower()));
-            if (t != null)
-            {
-                pageLocation = t.Page;
-            }
-            else
-            {
-                t = instanceElementList.FirstOrDefault(u => u.WebSection != null && u.WebSection.Equals("Root", StringComparison.InvariantCultureIgnoreCase));
-                if (t != null)
-                {
-                    pageLocation = t.Page;
-                }
-                else
-                {
-                    pageLocation = "~/default.aspx";
-                }
-            }
-            //+
-            IHttpHandler h = System.Web.UI.PageParser.GetCompiledPageInstance(pageLocation, null, context);
+            IHttpHandler h = System.Web.UI.PageParser.GetCompiledPageInstance(ContextItemSet.BlogPage, null, context);
             h.ProcessRequest(context);
         }
 

@@ -142,4 +142,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(TargetDir)Minima.* C:\_REFERENCE\$(ConfigurationName)\* /E /C /Q /R /H /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>
