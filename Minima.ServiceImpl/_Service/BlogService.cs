@@ -213,7 +213,9 @@ namespace Minima.Service
                     AllowCommentStatus = (AllowCommentStatus)blogEntryLinq.BlogEntryCommentAllowStatusId,
                     PostDateTime = blogEntryLinq.BlogEntryPostDateTime,
                     ModifyDateTime = blogEntryLinq.BlogEntryModifyDateTime,
-                    BlogEntryUri = new Uri(UriBuilder.Build(blogEntryLinq, blogEntryLinq.Blog)),
+                    MappingNameList = new List<String>(
+                        blogEntryLinq.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
+                    ),
                     LabelList = new List<Label>(
                         blogEntryLinq.LabelBlogEntries.Select(p => new Label
                         {
@@ -266,7 +268,9 @@ namespace Minima.Service
                     AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
                     PostDateTime = be.BlogEntryPostDateTime,
                     ModifyDateTime = be.BlogEntryModifyDateTime,
-                    BlogEntryUri = new Uri(UriBuilder.Build(be, blogLinq)),
+                    MappingNameList = new List<String>(
+                        be.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
+                    ),
                     LabelList = new List<Label>(
                         be.LabelBlogEntries.Select(p => new Label
                         {
@@ -374,7 +378,9 @@ namespace Minima.Service
                         AllowCommentStatus = (AllowCommentStatus)be.BlogEntryCommentAllowStatusId,
                         PostDateTime = be.BlogEntryPostDateTime,
                         ModifyDateTime = be.BlogEntryModifyDateTime,
-                        BlogEntryUri = new Uri(UriBuilder.Build(be, blogLinq)),
+                        MappingNameList = new List<String>(
+                            be.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
+                        ),
                         LabelList = new List<Label>(
                             be.LabelBlogEntries.Select(p => new Label
                             {
@@ -470,43 +476,6 @@ namespace Minima.Service
             }
         }
 
-        //- @CreateGoogleSiteMap -//
-        public String CreateGoogleSiteMap(String blogGuid)
-        {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
-            {
-                //+ ensure blog exists
-                BlogLINQ blogLinq;
-                Validator.EnsureBlogExists(blogGuid, out blogLinq, db);
-                //+
-                List<BlogEntry> blogEntryList = GetBlogEntryList(blogGuid, 0, true, false);
-                StringBuilder xml = new StringBuilder();
-                XmlWriter xmlWriter = XmlWriter.Create(xml);
-                xmlWriter.WriteProcessingInstruction("xml", @"version=""1.0"" encoding=""UTF-8""");
-                xmlWriter.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
-                foreach (BlogEntry blogEntry in blogEntryList)
-                {
-                    xmlWriter.WriteStartElement("url");
-                    //+
-                    xmlWriter.WriteStartElement("loc");
-                    xmlWriter.WriteValue(blogEntry.BlogEntryUri.AbsoluteUri);
-                    xmlWriter.WriteEndElement();
-                    xmlWriter.WriteStartElement("lastmod");
-                    xmlWriter.WriteValue(blogEntry.PostDateTime.ToString("yyyy-MM-dd"));
-                    xmlWriter.WriteEndElement();
-                    xmlWriter.WriteStartElement("changefreq");
-                    xmlWriter.WriteValue("never");
-                    xmlWriter.WriteEndElement();
-                    //+
-                    xmlWriter.WriteEndElement();
-                }
-                xmlWriter.WriteEndElement();
-                xmlWriter.Close();
-                //+
-                return xml.ToString();
-            }
-        }
-
         //- @GetBlogMetaData -//
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public BlogMetaData GetBlogMetaData(String blogGuid)
@@ -550,7 +519,9 @@ namespace Minima.Service
                Status = be.BlogEntryStatusId,
                PostDateTime = be.BlogEntryPostDateTime,
                ModifyDateTime = be.BlogEntryModifyDateTime,
-               BlogEntryUri = new Uri(UriBuilder.Build(be, blogLinq)),
+               MappingNameList = new List<String>(
+                   be.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
+               ),
                LabelList = new List<Label>(
                    be.LabelBlogEntries.Select(p => new Label
                    {

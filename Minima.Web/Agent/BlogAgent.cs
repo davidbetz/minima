@@ -136,17 +136,5 @@ namespace Minima.Web.Agent
                 return blogClient.GetNetBlogEntryList(blogGuid, label, archive, link, maxBlogEntryCount);
             }
         }
-
-        //- @CreateGoogleSiteMap -//
-        public static String CreateGoogleSiteMap(String blogGuid)
-        {
-            using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
-            {
-                blogClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
-                blogClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
-                //+
-                return blogClient.CreateGoogleSiteMap(blogGuid);
-            }
-        }
     }
 }

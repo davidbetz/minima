@@ -39,6 +39,10 @@ namespace Minima.Service
         [DataMember]
         public List<Comment> CommentList { get; set; }
 
+        //- @MappingNameList -//
+        [DataMember]
+        public List<String> MappingNameList { get; set; }
+
         //- @PostDateTime -//
         [DataMember]
         public DateTime PostDateTime { get; set; }
@@ -47,10 +51,8 @@ namespace Minima.Service
         [DataMember]
         public DateTime ModifyDateTime { get; set; }
 
+        //- @LastAction -//
         [DataMember]
         public LastAction LastAction { get; set; }
-
-        [DataMember]
-        public Uri BlogEntryUri { get; set; }
     }
 }

@@ -43,11 +43,6 @@ namespace Minima.Service
         [FaultContract(typeof(ArgumentException))]
         List<ArchiveCount> GetArchivedEntryList(String blogGuid);
 
-        //- CreateGoogleSiteMap -//
-        [OperationContract]
-        [FaultContract(typeof(ArgumentException))]
-        String CreateGoogleSiteMap(String blogGuid);
-
         //- GetBlogMetaData -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]

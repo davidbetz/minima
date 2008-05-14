@@ -82,9 +82,6 @@
     <Compile Include="Configuration\WebConfigurationSection.cs" />
     <Compile Include="Configuration\_Registration\InstanceCollection.cs" />
     <Compile Include="Configuration\_Registration\InstanceElement.cs" />
-    <Compile Include="Control\Base\ArchivedEntryListBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Control\Base\CommentInputBase.cs">
     </Compile>
     <Compile Include="Control\Base\LiteralContentControlBase.cs">
@@ -118,9 +115,6 @@
     <Compile Include="Control\Base\MinimaListUserControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Base\LabelListBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ContextItemSet.cs" />
     <Compile Include="Helper\LabelHelper.cs" />
     <Compile Include="Data\MinimaWebLINQ.designer.cs">
@@ -151,6 +145,7 @@
     <Compile Include="Tracing\TraceManager.cs" />
     <Compile Include="Tracing\TraceSerializer.cs" />
     <Compile Include="Tracing\TraceStorage.cs" />
+    <Compile Include="Helper\BlogEntryHelper.cs" />
     <Compile Include="WebConfiguration.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
