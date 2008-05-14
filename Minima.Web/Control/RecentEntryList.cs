@@ -6,6 +6,7 @@ using System.Web.UI;
 using Minima.Configuration;
 using Minima.Service;
 using Minima.Web.Agent;
+using Minima.Web.Helper;
 //+
 namespace Minima.Web.Control
 {
@@ -63,7 +64,7 @@ namespace Minima.Web.Control
             //+
             return blogEntryList.Select(p => new
             {
-                Url = p.BlogEntryUri.AbsoluteUri,
+                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CleanWebSection(this.WebSection)),
                 Title = p.Title
             });
         }
@@ -89,7 +90,7 @@ namespace Minima.Web.Control
             }
             if (this.HeadingIsLink)
             {
-                heading = String.Format(@"<a href=""{0}"">{1}</a>", General.Web.HttpWebSection.GetUrl(this.WebSection), heading);
+                heading = String.Format(@"<a href=""{0}"">{1}</a>", General.Web.HttpWebSection.GetUrl(General.Web.HttpWebSection.CleanWebSection(this.WebSection)), heading);
             }
             String listCssClass = "recentPosts";
             if (!String.IsNullOrEmpty(this.ListCssClass))

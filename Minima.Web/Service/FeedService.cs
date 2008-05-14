@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
@@ -8,6 +9,7 @@ using System.ServiceModel.Syndication;
 using Minima.Configuration;
 using Minima.Service;
 using Minima.Service.Client;
+using Minima.Web.Helper;
 //+
 namespace Minima.Web.Service
 {
@@ -65,7 +67,7 @@ namespace Minima.Web.Service
                         Summary = new TextSyndicationContent(blogEntry.Content),
                         PublishDate = new DateTimeOffset(blogEntry.PostDateTime),
                     };
-                    syndicationItem.Links.Add(new SyndicationLink(blogEntry.BlogEntryUri));
+                    syndicationItem.Links.Add(new SyndicationLink(new Uri(BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection))));
                     foreach (Author author in blogEntry.AuthorList)
                     {
                         syndicationItem.Authors.Add(new SyndicationPerson(author.Email));

@@ -7,7 +7,7 @@ namespace Minima.Web
         //- @GetLabelUrl -//
         public static String GetLabelUrl(Minima.Service.Label label)
         {
-            String webSection = ContextItemSet.WebSection ?? String.Empty;
+            String webSection = General.Web.HttpWebSection.CurrentWebSection ?? String.Empty;
             if (webSection.ToLower() == "root")
             {
                 webSection = String.Empty;

@@ -12,6 +12,7 @@ using Minima.Configuration;
 using Minima.Service;
 using Minima.Web.Agent;
 using Minima.Web.Control.Base;
+using Minima.Web.Helper;
 //+
 namespace Minima.Web.Control
 {
@@ -81,7 +82,7 @@ namespace Minima.Web.Control
             {
                 rptPosts.DataSource = blogEntryList.Select(p => new
                 {
-                    Url = p.BlogEntryUri != null ? p.BlogEntryUri.AbsoluteUri : String.Empty,
+                    Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
                     Content = p.Content,
                     Title = p.Title,
                     AuthorList = p.AuthorList,

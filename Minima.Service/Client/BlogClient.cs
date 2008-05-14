@@ -10,11 +10,6 @@ namespace Minima.Service.Client
         public BlogClient(String endpointConfigurationName)
             : base(endpointConfigurationName) { }
 
-        public String CreateGoogleSiteMap(String blogGuid)
-        {
-            return base.Channel.CreateGoogleSiteMap(blogGuid);
-        }
-
         public void DisableBlogEntry(String blogEntryGuid)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))

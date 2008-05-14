@@ -6,6 +6,7 @@ namespace Minima.Web.Control
     public abstract class MinimaListUserControlBase : General.Web.Control.DataUserControlBase
     {
         protected System.Web.UI.WebControls.Repeater repeater;
+        private String webSection;
 
         //+
         //- @BlogGuid -//
@@ -13,7 +14,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                if (!String.IsNullOrEmpty(this.WebSection) && this.WebSection != ContextItemSet.WebSection)
+                if (this.WebSection != General.Web.HttpWebSection.CurrentWebSection)
                 {
                     return WebSectionAccessor.GetBlogGuid(this.WebSection);
                 }
@@ -23,7 +24,21 @@ namespace Minima.Web.Control
         }
 
         //- @WebSection -//
-        public String WebSection { get; set; }
+        public String WebSection
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(webSection))
+                {
+                    return webSection;
+                }
+                return General.Web.HttpWebSection.CurrentWebSection;
+            }
+            set
+            {
+                webSection = value;
+            }
+        }
 
         //+
         //- #OnInit -//

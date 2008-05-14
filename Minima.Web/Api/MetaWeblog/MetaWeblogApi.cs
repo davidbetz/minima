@@ -8,6 +8,7 @@ using CookComputing.XmlRpc;
 using Minima.Configuration;
 using Minima.Service;
 using Minima.Web.Agent;
+using Minima.Web.Helper;
 using Minima.Web.Tracing;
 //+
 namespace Minima.Web.Api.MetaWeblog
@@ -82,8 +83,8 @@ namespace Minima.Web.Api.MetaWeblog
                 description = blogEntry.Content,
                 title = blogEntry.Title,
                 categories = blogEntry.LabelList.Select(p => p.Title).ToArray(),
-                link = blogEntry.BlogEntryUri.AbsoluteUri,
-                permalink = blogEntry.BlogEntryUri.AbsoluteUri,
+                link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
+                permalink = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
                 postid = blogEntry.Guid,
                 mt_allow_comments = blogEntry.AllowCommentStatus == AllowCommentStatus.Enabled ? "1" : "0",
                 mt_convert_breaks = String.Empty,
@@ -109,8 +110,8 @@ namespace Minima.Web.Api.MetaWeblog
                     dateCreated = p.PostDateTime,
                     description = p.Content,
                     title = p.Title,
-                    link = p.BlogEntryUri.AbsoluteUri,
-                    permalink = p.BlogEntryUri.AbsoluteUri,
+                    link = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
+                    permalink = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
                     postid = p.Guid,
                     mt_allow_comments = "1",
                     mt_convert_breaks = "0",
