@@ -141,12 +141,18 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
             //+
-            return blogList.Select(p => new BlogInfo
-            {
-                blogid = p.Guid,
-                blogName = p.Title,
-                url = p.Uri.AbsoluteUri
-            }).ToArray();
+            List<Minima.Web.Configuration.InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigurationFacade.GetWebConfiguration().Registration.ToList();
+            //+
+            var netBlogList = (from b in blogList
+                               join e in instanceElementList on b.Guid equals e.BlogGuid
+                               select new BlogInfo
+                               {
+                                   blogid = e.BlogGuid,
+                                   blogName = b.Title,
+                                   url = General.Web.HttpWebSection.GetUrl(e.WebSection).AbsoluteUri
+                               }).ToArray();
+            //+
+            return netBlogList;
         }
 
         //- @MetaWeblogNewPost -//

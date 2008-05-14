@@ -15,6 +15,10 @@ namespace Minima.Web.Routing
             }
             switch (text.ToLower())
             {
+                case "blogdiscovery":
+                    return new BlogDiscoveryHttpHandler();
+                case "windowslivewritermanifest":
+                    return new WindowsLiveWriterManifestHttpHandler();
                 case "blogentryimage":
                     return new BlogEntryImageHttpHandler();
                 case "metaweblogapi":

@@ -130,6 +130,9 @@
     <Compile Include="Routing\BlogEntryImageHttpHandler.cs" />
     <Compile Include="Routing\CommentHttpHandler.cs" />
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
+    <Compile Include="Routing\BlogDiscoveryHttpHandler.cs" />
+    <Compile Include="Routing\WindowsLiveWriterManifestHttpHandler.cs" />
+    <Compile Include="Routing\MinimaHandlerInjector.cs" />
     <Compile Include="Routing\WebSection.cs" />
     <Compile Include="Routing\HttpHandlerPreProcessor.cs" />
     <Compile Include="Routing\FileProcessorHttpHandler.cs" />
