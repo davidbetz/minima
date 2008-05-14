@@ -21,14 +21,5 @@ namespace Minima.Web
                 return System.Web.HttpContext.Current.Items["BlogPage"] as String;
             }
         }
-
-        //- @WebSection -//
-        public static String WebSection
-        {
-            get
-            {
-                return System.Web.HttpContext.Current.Items["WebSection"] as String;
-            }
-        }
     }
 }
