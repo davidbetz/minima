@@ -1,46 +1,60 @@
 using System.Collections.Generic;
+using System.Linq;
 //+
-using General.Web.Configuration;
+using Minima.Web.Configuration;
 //+
 namespace Minima.Web.Routing
 {
     public class MinimaHandlerInjector : General.Web.Routing.HandlerInjectorBase
     {
-        public override void OnAddHttpHandlers(List<HttpHandlerElement> injectedHandlerList)
+        //- @OnAddHttpHandlers -//
+        public override void OnAddHttpHandlers(List<General.Web.Configuration.HttpHandlerElement> injectedHandlerList)
         {
-            injectedHandlerList.Add(new HttpHandlerElement
+            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.Where(p => p.WebSection != "root").ToList();
+            //+ to support root, BlogFallThroughProcessor is required as it handles this
+            foreach (InstanceElement instanceElement in instanceElementList)
             {
-                Name = "BlogDiscovery",
+                SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
+                {
+                    Name = "Minima.Web.Routing.UrlProcessingHttpHandler, Minima.Web",
+                    MatchType = "contains",
+                    Priority = 5,
+                    MatchText = "/" + General.Web.HttpWebSection.CurrentWebSection + "/"
+                });
+            }
+            SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
+            {
+                Name = "Minima.Web.Routing.BlogDiscoveryHttpHandler, Minima.Web",
                 MatchType = "endswith",
-                Priority = 7,
+                Priority = 2,
                 MatchText = "/rsd.xml"
             });
-            injectedHandlerList.Add(new HttpHandlerElement
+            SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
             {
-                Name = "WindowsLiveWriterManifest",
+                Name = "Minima.Web.Routing.WindowsLiveWriterManifestHttpHandler, Minima.Web",
                 MatchType = "endswith",
-                Priority = 7,
+                Priority = 2,
                 MatchText = "/wlwmanifest.xml"
             });
-            injectedHandlerList.Add(new HttpHandlerElement
+            SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
             {
-                Name = "SiteMap",
+                Name = "Minima.Web.Routing.SiteMapHttpHandler, Minima.Web",
                 MatchType = "endswith",
-                Priority = 7,
+                Priority = 2,
                 MatchText = "/blogmap.xml"
             });
-            injectedHandlerList.Add(new HttpHandlerElement
+            SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
             {
-                Name = "MetaWeblogAPI",
+                Name = "Minima.Web.Api.MetaWeblog.MetaWeblogApi, Minima.Web",
                 MatchType = "contains",
-                Priority = 4,
+                Priority = 3,
                 MatchText = "/xml-rpc/"
             });
-            injectedHandlerList.Add(new HttpHandlerElement
+            SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
             {
-                Name = "MetaWeblogAPI",
+                Name = "Minima.Web.Api.MetaWeblog.MetaWeblogApi, Minima.Web",
                 MatchType = "contains",
-                Priority = 4,
+                Priority = 3,
                 MatchText = "/xml-rpc"
             });
         }
