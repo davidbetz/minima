@@ -20,32 +20,37 @@ namespace Minima.Web.Routing
         //- @ProcessRequest -//
         public void ProcessRequest(HttpContext context)
         {
-            List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(ContextItemSet.BlogGuid, 0, false);
-            StringBuilder xml = new StringBuilder();
-            XmlWriter xmlWriter = XmlWriter.Create(xml);
-            xmlWriter.WriteProcessingInstruction("xml", @"version=""1.0"" encoding=""UTF-8""");
-            xmlWriter.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
-            foreach (BlogEntry blogEntry in blogEntryList)
+            String key = "SiteMap_" + ContextItemSet.BlogGuid;
+            if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
             {
-                xmlWriter.WriteStartElement("url");
+                List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(ContextItemSet.BlogGuid, 0, false);
+                StringBuilder xml = new StringBuilder();
+                XmlWriter xmlWriter = XmlWriter.Create(xml);
+                xmlWriter.WriteProcessingInstruction("xml", @"version=""1.0"" encoding=""UTF-8""");
+                xmlWriter.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+                foreach (BlogEntry blogEntry in blogEntryList)
+                {
+                    xmlWriter.WriteStartElement("url");
+                    //+
+                    xmlWriter.WriteStartElement("loc");
+                    //xmlWriter.WriteValue(blogEntry.BlogEntryUri.AbsoluteUri);
+                    xmlWriter.WriteEndElement();
+                    xmlWriter.WriteStartElement("lastmod");
+                    xmlWriter.WriteValue(blogEntry.PostDateTime.ToString("yyyy-MM-dd"));
+                    xmlWriter.WriteEndElement();
+                    xmlWriter.WriteStartElement("changefreq");
+                    xmlWriter.WriteValue("never");
+                    xmlWriter.WriteEndElement();
+                    //+
+                    xmlWriter.WriteEndElement();
+                }
+                xmlWriter.WriteEndElement();
+                xmlWriter.Close();
                 //+
-                xmlWriter.WriteStartElement("loc");
-                //xmlWriter.WriteValue(blogEntry.BlogEntryUri.AbsoluteUri);
-                xmlWriter.WriteEndElement();
-                xmlWriter.WriteStartElement("lastmod");
-                xmlWriter.WriteValue(blogEntry.PostDateTime.ToString("yyyy-MM-dd"));
-                xmlWriter.WriteEndElement();
-                xmlWriter.WriteStartElement("changefreq");
-                xmlWriter.WriteValue("never");
-                xmlWriter.WriteEndElement();
-                //+
-                xmlWriter.WriteEndElement();
+                HttpContext.Current.Cache.Insert(key, xml.ToString());
             }
-            xmlWriter.WriteEndElement();
-            xmlWriter.Close();
-            //+
             context.Response.ContentType = "text/xml";
-            context.Response.Write(xml.ToString());
+            context.Response.Write(HttpContext.Current.Cache[key] as String);
         }
     }
 }
