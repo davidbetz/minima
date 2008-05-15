@@ -2,9 +2,8 @@ using System;
 using System.Configuration;
 using System.Diagnostics;
 //+
-using General;
+using General.Configuration;
 //+
-using Minima.Web.Helper;
 namespace Minima.Web
 {
     public static class WebConfiguration
@@ -14,7 +13,7 @@ namespace Minima.Web
         {
             get
             {
-                return ConfigurationFacade.ConnectionString("Minima.Web.Properties.Settings.MinimaConnectionString");
+                return ConfigAccessor.ConnectionString("Minima.Web.Properties.Settings.MinimaConnectionString");
             }
         }
 
@@ -23,7 +22,7 @@ namespace Minima.Web
         {
             get
             {
-                return General.Web.UrlHelper.FixWebPath(ConfigurationFacade.ApplicationSettings("Domain"));
+                return General.Web.UrlHelper.FixWebPath(ConfigAccessor.ApplicationSettings("Domain"));
             }
         }
 
@@ -32,7 +31,7 @@ namespace Minima.Web
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("SiteName");
+                return ConfigAccessor.ApplicationSettings("SiteName");
             }
         }
 
@@ -41,7 +40,7 @@ namespace Minima.Web
         {
             get
             {
-                String value = ConfigurationFacade.ApplicationSettings("GenericErrorMessage");
+                String value = ConfigAccessor.ApplicationSettings("GenericErrorMessage");
                 if (String.IsNullOrEmpty(value))
                 {
                     throw new ConfigurationErrorsException("GenericErrorMessage is required.");

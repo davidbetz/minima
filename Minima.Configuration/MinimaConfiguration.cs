@@ -1,6 +1,6 @@
 using System;
 //+
-using General;
+using General.Configuration;
 //+
 namespace Minima.Configuration
 {
@@ -11,7 +11,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("ActiveAuthorServiceEndpoint");
+                return ConfigAccessor.ApplicationSettings("ActiveAuthorServiceEndpoint");
             }
         }
 
@@ -20,7 +20,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("ActiveBlogServiceEndpoint");
+                return ConfigAccessor.ApplicationSettings("ActiveBlogServiceEndpoint");
             }
         }
 
@@ -29,7 +29,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("ActiveCommentServiceEndpoint");
+                return ConfigAccessor.ApplicationSettings("ActiveCommentServiceEndpoint");
             }
         }
 
@@ -38,7 +38,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("ActiveLabelServiceEndpoint");
+                return ConfigAccessor.ApplicationSettings("ActiveLabelServiceEndpoint");
             }
         }
 
@@ -47,7 +47,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("BlankLabelMessage");
+                return ConfigAccessor.ApplicationSettings("BlankLabelMessage");
             }
         }
 
@@ -56,7 +56,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("CommentNotificationSubject");
+                return ConfigAccessor.ApplicationSettings("CommentNotificationSubject");
             }
         }
 
@@ -65,7 +65,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings<Boolean>("EnableTracingViaSerialization");
+                return ConfigAccessor.ApplicationSettings<Boolean>("EnableTracingViaSerialization");
             }
         }
 
@@ -74,7 +74,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("DefaultMaterialsPhysicalPath");
+                return ConfigAccessor.ApplicationSettings("DefaultMaterialsPhysicalPath");
             }
         }
 
@@ -83,7 +83,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("MaterialsRelativePath");
+                return ConfigAccessor.ApplicationSettings("MaterialsRelativePath");
             }
         }
 
@@ -92,7 +92,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("SupportImagePhysicalLocation");
+                return ConfigAccessor.ApplicationSettings("SupportImagePhysicalLocation");
             }
         }
 
@@ -101,7 +101,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings<Boolean>("ForceSpecifiedPath");
+                return ConfigAccessor.ApplicationSettings<Boolean>("ForceSpecifiedPath");
             }
         }
 
@@ -110,7 +110,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("SupportImageFullWebPath");
+                return ConfigAccessor.ApplicationSettings("SupportImageFullWebPath");
             }
         }
 
@@ -119,7 +119,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("SupportImageWebRelativePath");
+                return ConfigAccessor.ApplicationSettings("SupportImageWebRelativePath");
             }
         }
 
@@ -128,7 +128,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings<Int32>("RecentEntriesToShow");
+                return ConfigAccessor.ApplicationSettings<Int32>("RecentEntriesToShow");
             }
         }
 
@@ -137,7 +137,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings<Int32>("ViewableBlogEntryCount");
+                return ConfigAccessor.ApplicationSettings<Int32>("ViewableBlogEntryCount");
             }
         }
 
@@ -146,7 +146,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("DefaultServiceUserName");
+                return ConfigAccessor.ApplicationSettings("DefaultServiceUserName");
             }
         }
 
@@ -155,7 +155,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings("DefaultServicePassword");
+                return ConfigAccessor.ApplicationSettings("DefaultServicePassword");
             }
         }
 
@@ -164,7 +164,7 @@ namespace Minima.Configuration
         {
             get
             {
-                return ConfigurationFacade.ApplicationSettings<Boolean>("LinkAuthorToEmail");
+                return ConfigAccessor.ApplicationSettings<Boolean>("LinkAuthorToEmail");
             }
         }
     }

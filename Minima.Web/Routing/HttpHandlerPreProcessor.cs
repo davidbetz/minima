@@ -11,7 +11,7 @@ namespace Minima.Web.Routing
         //- @OnPreHttpHandlerExecute -//
         public override void OnPreHttpHandlerExecute(HttpContext context)
         {
-            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
+            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
             InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && General.Web.HttpWebSection.CurrentWebSection.ToLower().Contains(u.WebSection.ToLower()));
             if (t != null)
             {

@@ -1,6 +1,6 @@
 using System;
 //+
-using General;
+using General.Configuration;
 //+
 namespace Minima.Service
 {
@@ -11,7 +11,7 @@ namespace Minima.Service
         {
             get
             {
-                return ConfigurationFacade.ConnectionString("Minima.Service.Properties.Settings.MinimaConnectionString");
+                return ConfigAccessor.ConnectionString("Minima.Service.Properties.Settings.MinimaConnectionString");
             }
         }
     }

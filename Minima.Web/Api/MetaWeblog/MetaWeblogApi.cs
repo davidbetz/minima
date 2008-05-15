@@ -141,7 +141,7 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
             //+
-            List<Minima.Web.Configuration.InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigurationFacade.GetWebConfiguration().Registration.ToList();
+            List<Minima.Web.Configuration.InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigAccessor.GetWebConfiguration().Registration.ToList();
             //+
             var netBlogList = (from b in blogList
                                join e in instanceElementList on b.Guid equals e.BlogGuid

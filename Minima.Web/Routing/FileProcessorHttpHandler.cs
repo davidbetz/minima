@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Web;
 //+
+using General.ExceptionHandling;
 using General.Web;
-using General.Web.ExceptionHandling;
 //+
 using Minima.Configuration;
 using Minima.Web.Data.Context;
