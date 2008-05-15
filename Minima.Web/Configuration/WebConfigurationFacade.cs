@@ -2,7 +2,7 @@
 //+
 namespace Minima.Web.Configuration
 {
-    public static class MinimaConfigurationFacade
+    public static class MinimaConfigAccessor
     {
         private static MinimaConfigurationSection cachedConfiguration;
 

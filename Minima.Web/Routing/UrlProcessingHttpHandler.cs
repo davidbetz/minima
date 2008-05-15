@@ -23,7 +23,7 @@ namespace Minima.Web.Routing
         {
             Route(context);
             //+
-            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
+            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
             InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && Http.Url.AbsolutePath.ToLower().Contains(u.WebSection.ToLower()));
             if (t != null)
             {

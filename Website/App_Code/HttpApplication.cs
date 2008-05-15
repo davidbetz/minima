@@ -1,7 +1,7 @@
 using System;
 using System.Web;
 //+
-using General.Web.ExceptionHandling;
+using General.ExceptionHandling;
 //+
 namespace Minima.Web
 {

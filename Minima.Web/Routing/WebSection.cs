@@ -16,7 +16,7 @@ namespace Minima.Web.Routing
             }
             webSection = webSection.ToLower();
             //+
-            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
+            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
             InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && u.WebSection == webSection);
             if (t != null)
             {

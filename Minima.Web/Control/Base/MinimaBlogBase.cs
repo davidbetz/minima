@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 //+
-using General.Web.ExceptionHandling;
+using General.ExceptionHandling;
 //+
 using Minima.Configuration;
 using Minima.Service;

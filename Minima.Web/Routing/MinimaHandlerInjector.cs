@@ -10,7 +10,7 @@ namespace Minima.Web.Routing
         //- @OnAddHttpHandlers -//
         public override void OnAddHttpHandlers(List<General.Web.Configuration.HttpHandlerElement> injectedHandlerList)
         {
-            List<InstanceElement> instanceElementList = MinimaConfigurationFacade.GetWebConfiguration().Registration.Where(p => p.WebSection != "root").ToList();
+            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.Where(p => p.WebSection != "root").ToList();
             //+ to support root, BlogFallThroughProcessor is required as it handles this
             foreach (InstanceElement instanceElement in instanceElementList)
             {
