@@ -35,7 +35,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
-    <Reference Include="General, Version=1.5.0.0, Culture=neutral, PublicKeyToken=dca7aa7b1e2f611b, processorArchitecture=MSIL">
+    <Reference Include="General, Version=1.6.0.0, Culture=neutral, PublicKeyToken=6f409fcd5ff1b129, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\General.dll</HintPath>
     </Reference>

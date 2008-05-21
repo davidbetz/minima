@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="General, Version=1.6.0.0, Culture=neutral, PublicKeyToken=1285720c897b7ddc, processorArchitecture=MSIL">
+    <Reference Include="General, Version=1.6.0.0, Culture=neutral, PublicKeyToken=6f409fcd5ff1b129, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\General.dll</HintPath>
     </Reference>

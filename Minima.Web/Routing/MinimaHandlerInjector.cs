@@ -24,6 +24,20 @@ namespace Minima.Web.Routing
             }
             SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
             {
+                Name = "Minima.Web.Routing.BlogEntryImageHttpHandler, Minima.Web",
+                MatchType = "contains",
+                Priority = 4,
+                MatchText = "/Image/"
+            });
+            SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
+            {
+                Name = "Minima.Web.Routing.FileProcessorHttpHandler, Minima.Web",
+                MatchType = "contains",
+                Priority = 5,
+                MatchText = "/Materials/"
+            });
+            SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
+            {
                 Name = "Minima.Web.Routing.BlogDiscoveryHttpHandler, Minima.Web",
                 MatchType = "endswith",
                 Priority = 2,

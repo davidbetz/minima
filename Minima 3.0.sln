@@ -33,7 +33,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly", "Assembly", "{5189A9F4-E62B-44A3-A824-5EB98AA19F09}"
 	ProjectSection(SolutionItems) = preProject
 		Assembly\CookComputing.XmlRpcV2.dll = Assembly\CookComputing.XmlRpcV2.dll
-		Assembly\General.dll = Assembly\General.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minima.Configuration", "Minima.Configuration\Minima.Configuration.csproj", "{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}"
