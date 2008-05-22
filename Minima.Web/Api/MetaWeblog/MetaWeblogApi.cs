@@ -9,6 +9,7 @@ using Minima.Configuration;
 using Minima.Service;
 using Minima.Web.Agent;
 using Minima.Web.Helper;
+using Minima.Web.Routing.Component;
 using Minima.Web.Tracing;
 //+
 namespace Minima.Web.Api.MetaWeblog
@@ -141,10 +142,11 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
             //+
-            List<Minima.Web.Configuration.InstanceElement> instanceElementList = Minima.Web.Configuration.MinimaConfigAccessor.GetWebConfiguration().Registration.ToList();
+            MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)General.Web.Routing.Component.Settings.Components["Minima"];
+            List<MinimaComponentSetting.MinimaInfo> parameterList = minimaComponentSetting.GetParameterList();
             //+
             var netBlogList = (from b in blogList
-                               join e in instanceElementList on b.Guid equals e.BlogGuid
+                               join e in parameterList on b.Guid equals e.BlogGuid
                                select new BlogInfo
                                {
                                    blogid = e.BlogGuid,

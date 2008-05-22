@@ -78,10 +78,6 @@
     <Compile Include="Agent\BlogEntryActivityAgent.cs" />
     <Compile Include="Agent\CommentAgent.cs" />
     <Compile Include="Agent\LabelAgent.cs" />
-    <Compile Include="Configuration\WebConfigurationFacade.cs" />
-    <Compile Include="Configuration\WebConfigurationSection.cs" />
-    <Compile Include="Configuration\_Registration\InstanceCollection.cs" />
-    <Compile Include="Configuration\_Registration\InstanceElement.cs" />
     <Compile Include="Control\Base\CommentInputBase.cs">
     </Compile>
     <Compile Include="Control\Base\LiteralContentControlBase.cs">
@@ -131,6 +127,8 @@
     <Compile Include="Routing\CommentHttpHandler.cs" />
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
     <Compile Include="Routing\BlogDiscoveryHttpHandler.cs" />
+    <Compile Include="Routing\Component\MinimaComponentSetting.cs" />
+    <Compile Include="Routing\Component\MinimaComponent.cs" />
     <Compile Include="Routing\WindowsLiveWriterManifestHttpHandler.cs" />
     <Compile Include="Routing\MinimaHandlerInjector.cs" />
     <Compile Include="Routing\WebSection.cs" />

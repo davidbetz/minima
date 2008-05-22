@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 //+
-using Minima.Web.Configuration;
+using Minima.Web.Routing.Component;
 //+
 namespace Minima.Web.Routing
 {
@@ -16,11 +15,10 @@ namespace Minima.Web.Routing
             }
             webSection = webSection.ToLower();
             //+
-            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
-            InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && u.WebSection == webSection);
-            if (t != null)
+            MinimaComponentSetting.MinimaInfo currentInfo = MinimaComponentSetting.CurrentComponentSetting.GetParameterList().FirstOrDefault(u => u.WebSection != null && u.WebSection == webSection);
+            if (currentInfo != null)
             {
-                return t.BlogGuid;
+                return currentInfo.BlogGuid;
             }
             return String.Empty;
         }
