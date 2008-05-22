@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 //+
-using Minima.Web.Configuration;
+using Minima.Web.Routing.Component;
 //+
 namespace Minima.Web.Routing
 {
@@ -10,9 +11,10 @@ namespace Minima.Web.Routing
         //- @OnAddHttpHandlers -//
         public override void OnAddHttpHandlers(List<General.Web.Configuration.HttpHandlerElement> injectedHandlerList)
         {
-            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.Where(p => p.WebSection != "root").ToList();
+            MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)MinimaComponentSetting.CurrentComponentSetting;
+            List<String> webSectionList = minimaComponentSetting.WebSections.Where(p => p.Key != "root").Select(p => p.Key).ToList();
             //+ to support root, BlogFallThroughProcessor is required as it handles this
-            foreach (InstanceElement instanceElement in instanceElementList)
+            foreach (String webSection in webSectionList)
             {
                 SafelyAddHandler(injectedHandlerList, new General.Web.Configuration.HttpHandlerElement
                 {

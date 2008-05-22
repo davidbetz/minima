@@ -6,7 +6,7 @@ using System.Web;
 //+
 using General.Web;
 //+
-using Minima.Web.Configuration;
+using Minima.Web.Routing.Component;
 //+
 namespace Minima.Web.Routing
 {
@@ -23,18 +23,18 @@ namespace Minima.Web.Routing
         {
             Route(context);
             //+
-            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
-            InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && Http.Url.AbsolutePath.ToLower().Contains(u.WebSection.ToLower()));
-            if (t != null)
+            List<MinimaComponentSetting.MinimaInfo> parameterList = MinimaComponentSetting.CurrentComponentSetting.GetParameterList();
+            MinimaComponentSetting.MinimaInfo currentInfo = parameterList.FirstOrDefault(u => u.WebSection != null && Http.Url.AbsolutePath.ToLower().Contains(u.WebSection.ToLower()));
+            if (currentInfo != null)
             {
-                context.Items.Add("BlogPage", t.Page);
+                context.Items.Add("BlogPage", currentInfo.Page);
             }
             else
             {
-                t = instanceElementList.FirstOrDefault(u => u.WebSection != null && u.WebSection.Equals("Root", StringComparison.InvariantCultureIgnoreCase));
-                if (t != null)
+                currentInfo = parameterList.FirstOrDefault(u => u.WebSection != null && u.WebSection.Equals("Root", StringComparison.InvariantCultureIgnoreCase));
+                if (currentInfo != null)
                 {
-                    context.Items.Add("BlogPage", t.Page);
+                    context.Items.Add("BlogPage", currentInfo.Page);
                 }
                 else
                 {

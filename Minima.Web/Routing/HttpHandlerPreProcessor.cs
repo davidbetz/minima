@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web;
 //+
-using Minima.Web.Configuration;
+using Minima.Web.Routing.Component;
 //+
 namespace Minima.Web.Routing
 {
@@ -11,11 +10,10 @@ namespace Minima.Web.Routing
         //- @OnPreHttpHandlerExecute -//
         public override void OnPreHttpHandlerExecute(HttpContext context)
         {
-            List<InstanceElement> instanceElementList = MinimaConfigAccessor.GetWebConfiguration().Registration.OrderBy(p => p.Priority).ToList();
-            InstanceElement t = instanceElementList.FirstOrDefault(u => u.WebSection != null && General.Web.HttpWebSection.CurrentWebSection.ToLower().Contains(u.WebSection.ToLower()));
-            if (t != null)
+            MinimaComponentSetting.MinimaInfo currentInfo = MinimaComponentSetting.CurrentComponentSetting.GetParameterList().FirstOrDefault(u => u.WebSection != null && General.Web.HttpWebSection.CurrentWebSection.ToLower().Contains(u.WebSection.ToLower()));
+            if (currentInfo != null)
             {
-                context.Items.Add("BlogGuid", t.BlogGuid);
+                context.Items.Add("BlogGuid", currentInfo.BlogGuid);
             }
         }
     }
