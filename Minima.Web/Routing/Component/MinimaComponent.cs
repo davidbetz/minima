@@ -24,10 +24,6 @@ namespace Minima.Web.Routing.Component
             {
                 InjectorType = "Minima.Web.Routing.MinimaHandlerInjector, Minima.Web"
             });
-            fallThroughProcessorList.Add(new ProcessorElement
-            {
-                ProcessorType = "Minima.Web.Routing.BlogFallThroughProcessor, Minima.Web"
-            });
         }
 
         //- @GetSettings -//
