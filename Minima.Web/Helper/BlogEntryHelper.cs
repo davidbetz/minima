@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using General.Web;
+using Themelia.Web;
 //+
 namespace Minima.Web.Helper
 {

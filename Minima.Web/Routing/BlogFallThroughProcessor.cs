@@ -2,12 +2,12 @@ using System;
 //+
 namespace Minima.Web.Routing
 {
-    public class BlogFallThroughProcessor : General.Web.Routing.FallThroughProcessorBase
+    public class BlogFallThroughProcessor : Themelia.Web.Routing.FallThroughProcessorBase
     {
         //- @MatchHttpHandler -//
         public override System.Web.IHttpHandler GetHandler(System.Web.HttpContext context, string requestType, string virtualPath, string path)
         {
-            if (!String.IsNullOrEmpty(General.Web.HttpWebSection.CurrentWebSection))
+            if (!String.IsNullOrEmpty(Themelia.Web.HttpWebSection.CurrentWebSection))
             {
                 return new UrlProcessingHttpHandler();
             }

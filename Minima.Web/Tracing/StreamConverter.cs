@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 //+
-using General.ExceptionHandling;
+using Themelia.ExceptionHandling;
 //+
 namespace Minima.Web.Tracing
 {

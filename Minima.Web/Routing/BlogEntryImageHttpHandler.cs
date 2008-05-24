@@ -1,7 +1,7 @@
 using System;
 using System.Web;
 //+
-using General.Web;
+using Themelia.Web;
 //+
 using Minima.Configuration;
 using Minima.Web.Helper;

@@ -2,7 +2,7 @@ using System;
 using System.Configuration;
 using System.Diagnostics;
 //+
-using General.Configuration;
+using Themelia.Configuration;
 //+
 namespace Minima.Web
 {
@@ -22,7 +22,7 @@ namespace Minima.Web
         {
             get
             {
-                return General.Web.UrlHelper.FixWebPath(ConfigAccessor.ApplicationSettings("Domain"));
+                return Themelia.Web.UrlHelper.FixWebPath(ConfigAccessor.ApplicationSettings("Domain"));
             }
         }
 

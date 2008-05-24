@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
-    <Reference Include="General, Version=1.6.0.0, Culture=neutral, PublicKeyToken=6f409fcd5ff1b129, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Assembly\General.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -67,6 +63,10 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Themelia, Version=1.6.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\Themelia.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behavior\MinimaSystemSecurityBehavior.cs" />
