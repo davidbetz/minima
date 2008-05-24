@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 //+
-using General.Activation;
+using Themelia.Activation;
 //+
 using Minima.Configuration;
 using Minima.Service;
@@ -82,7 +82,7 @@ namespace Minima.Web.Control
             {
                 rptPosts.DataSource = blogEntryList.Select(p => new
                 {
-                    Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
+                    Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
                     Content = p.Content,
                     Title = p.Title,
                     AuthorList = p.AuthorList,

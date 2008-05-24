@@ -3,7 +3,7 @@ using Minima.Web.Routing;
 //+
 namespace Minima.Web.Control
 {
-    public abstract class MinimaListUserControlBase : General.Web.Control.DataUserControlBase
+    public abstract class MinimaListUserControlBase : Themelia.Web.Control.DataUserControlBase
     {
         protected System.Web.UI.WebControls.Repeater repeater;
         private String webSection;
@@ -14,7 +14,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                if (this.WebSection != General.Web.HttpWebSection.CurrentWebSection)
+                if (this.WebSection != Themelia.Web.HttpWebSection.CurrentWebSection)
                 {
                     return WebSectionAccessor.GetBlogGuid(this.WebSection);
                 }
@@ -32,7 +32,7 @@ namespace Minima.Web.Control
                 {
                     return webSection;
                 }
-                return General.Web.HttpWebSection.CurrentWebSection;
+                return Themelia.Web.HttpWebSection.CurrentWebSection;
             }
             set
             {

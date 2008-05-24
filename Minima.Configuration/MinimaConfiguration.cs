@@ -1,6 +1,6 @@
 using System;
 //+
-using General.Configuration;
+using Themelia.Configuration;
 //+
 namespace Minima.Configuration
 {

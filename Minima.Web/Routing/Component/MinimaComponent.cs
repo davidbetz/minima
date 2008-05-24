@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 //+
-using General.Web.Configuration;
-using General.Web.Routing.Component;
+using Themelia.Web.Configuration;
+using Themelia.Web.Routing.Component;
 //+
 namespace Minima.Web.Routing.Component
 {

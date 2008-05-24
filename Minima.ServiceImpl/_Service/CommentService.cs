@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 //+
-using General.Mail;
+using Themelia.Mail;
 //+
 using Minima.Service.Behavior;
 using Minima.Service.Helper;

@@ -69,7 +69,7 @@ namespace Minima.Web.Control
         }
 
         //- $__BuildControlTree -//
-        protected override void __BuildControlTree(General.Web.Control.DataUserControlBase __ctrl)
+        protected override void __BuildControlTree(Themelia.Web.Control.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
             String heading = "Labels";

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //+
 namespace Minima.Web.Routing.Component
 {
-    public class MinimaComponentSetting : General.Web.Routing.Component.ComponentSetting
+    public class MinimaComponentSetting : Themelia.Web.Routing.Component.ComponentSetting
     {
         //- @MinimaParameter -//
         public class MinimaInfo
@@ -24,7 +24,7 @@ namespace Minima.Web.Routing.Component
         {
             get
             {
-                return General.Web.Routing.Component.Settings.Components["Minima"] as MinimaComponentSetting;
+                return Themelia.Web.Routing.Component.Settings.Components["Minima"] as MinimaComponentSetting;
             }
         }
 
@@ -33,7 +33,7 @@ namespace Minima.Web.Routing.Component
         public List<MinimaInfo> GetParameterList()
         {
             List<MinimaInfo> list = new List<MinimaInfo>();
-            General.Web.Routing.Component.WebSectionSettingMap webSectionSettingMap = MinimaComponentSetting.CurrentComponentSetting.WebSections;
+            Themelia.Web.Routing.Component.WebSectionSettingMap webSectionSettingMap = MinimaComponentSetting.CurrentComponentSetting.WebSections;
             foreach (String webSectionName in webSectionSettingMap.Keys)
             {
                 list.Add(new MinimaInfo

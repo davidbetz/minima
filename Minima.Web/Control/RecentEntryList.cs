@@ -64,7 +64,7 @@ namespace Minima.Web.Control
             //+
             return blogEntryList.Select(p => new
             {
-                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CleanWebSection(this.WebSection)),
+                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.HttpWebSection.CleanWebSection(this.WebSection)),
                 Title = p.Title
             });
         }
@@ -80,7 +80,7 @@ namespace Minima.Web.Control
         }
 
         //- $__BuildControlTree -//
-        protected override void __BuildControlTree(General.Web.Control.DataUserControlBase __ctrl)
+        protected override void __BuildControlTree(Themelia.Web.Control.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
             String heading = "Previous Posts";
@@ -90,7 +90,7 @@ namespace Minima.Web.Control
             }
             if (this.HeadingIsLink)
             {
-                heading = String.Format(@"<a href=""{0}"">{1}</a>", General.Web.HttpWebSection.GetUrl(General.Web.HttpWebSection.CleanWebSection(this.WebSection)), heading);
+                heading = String.Format(@"<a href=""{0}"">{1}</a>", Themelia.Web.HttpWebSection.GetUrl(Themelia.Web.HttpWebSection.CleanWebSection(this.WebSection)), heading);
             }
             String listCssClass = "recentPosts";
             if (!String.IsNullOrEmpty(this.ListCssClass))

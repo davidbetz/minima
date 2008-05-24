@@ -10,7 +10,7 @@ namespace Minima.Service
         {
             get
             {
-                return General.Configuration.ConfigAccessor.ConnectionString("Minima.Service.Properties.Settings.MinimaConnectionString");
+                return Themelia.Configuration.ConfigAccessor.ConnectionString("Minima.Service.Properties.Settings.MinimaConnectionString");
             }
         }
     }

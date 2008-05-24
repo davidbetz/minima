@@ -84,8 +84,8 @@ namespace Minima.Web.Api.MetaWeblog
                 description = blogEntry.Content,
                 title = blogEntry.Title,
                 categories = blogEntry.LabelList.Select(p => p.Title).ToArray(),
-                link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
-                permalink = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
+                link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
+                permalink = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
                 postid = blogEntry.Guid,
                 mt_allow_comments = blogEntry.AllowCommentStatus == AllowCommentStatus.Enabled ? "1" : "0",
                 mt_convert_breaks = String.Empty,
@@ -111,8 +111,8 @@ namespace Minima.Web.Api.MetaWeblog
                     dateCreated = p.PostDateTime,
                     description = p.Content,
                     title = p.Title,
-                    link = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
-                    permalink = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), General.Web.HttpWebSection.CurrentWebSection),
+                    link = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
+                    permalink = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
                     postid = p.Guid,
                     mt_allow_comments = "1",
                     mt_convert_breaks = "0",
@@ -142,7 +142,7 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
             //+
-            MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)General.Web.Routing.Component.Settings.Components["Minima"];
+            MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)Themelia.Web.Routing.Component.Settings.Components["Minima"];
             List<MinimaComponentSetting.MinimaInfo> parameterList = minimaComponentSetting.GetParameterList();
             //+
             var netBlogList = (from b in blogList
@@ -151,7 +151,7 @@ namespace Minima.Web.Api.MetaWeblog
                                {
                                    blogid = e.BlogGuid,
                                    blogName = b.Title,
-                                   url = General.Web.HttpWebSection.GetUrl(e.WebSection).AbsoluteUri
+                                   url = Themelia.Web.HttpWebSection.GetUrl(e.WebSection).AbsoluteUri
                                }).ToArray();
             //+
             return netBlogList;
@@ -199,7 +199,7 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             return new UrlInfo
             {
-                url = General.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/" + General.Web.UrlHelper.FixWebPath(MinimaConfiguration.SupportImageWebRelativePath) + "/" + fixedName
+                url = Themelia.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/" + Themelia.Web.UrlHelper.FixWebPath(MinimaConfiguration.SupportImageWebRelativePath) + "/" + fixedName
             };
         }
 

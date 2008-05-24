@@ -1,7 +1,7 @@
 using System;
 using System.Web;
 //+
-using General.ExceptionHandling;
+using Themelia.ExceptionHandling;
 //+
 namespace Minima.Web
 {
