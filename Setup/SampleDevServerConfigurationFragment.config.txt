@@ -1,3 +1,4 @@
+<!-- Download NetFXHarmonics DevServer from http://www.codeplex.com/DevServer -->
 <jampad.devServer>
     <startupProfiles activeProfile="Minima">
         <profile name="Minima">
