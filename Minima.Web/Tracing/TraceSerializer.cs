@@ -36,7 +36,7 @@ namespace Minima.Web.Tracing
             }
             catch (Exception ex)
             {
-                ExceptionManager.Report(ex);
+                Reporter.Send(ex);
             }
             return b.ToString();
         }
