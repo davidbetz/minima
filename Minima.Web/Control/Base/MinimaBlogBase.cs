@@ -139,7 +139,7 @@ namespace Minima.Web.Control
                 if (blogEntryList == null)
                 {
                     blogEntryActivity.BlogEntryActivityExtra = "Invalid label accessed";
-                    ExceptionManager.Report("Invalid label accessed", this.Context);
+                    Reporter.Send("Invalid label accessed", this.Context);
                 }
                 blogEntryActivity.BlogEntryActivityExtra = this.Label;
                 blogEntryActivity.BlogEntryActivityTypeId = 2;
@@ -153,7 +153,7 @@ namespace Minima.Web.Control
                 if (blogEntryList == null)
                 {
                     blogEntryActivity.BlogEntryActivityExtra = "Invalid year/month accessed";
-                    ExceptionManager.Report("Invalid year/month accessed", this.Context);
+                    Reporter.Send("Invalid year/month accessed", this.Context);
                 }
                 blogEntryActivity.BlogEntryActivityExtra = this.Archive;
                 blogEntryActivity.BlogEntryActivityTypeId = 4;
@@ -169,7 +169,7 @@ namespace Minima.Web.Control
                 else
                 {
                     blogEntryActivity.BlogEntryActivityExtra = "Invalid URL accessed";
-                    ExceptionManager.Report("Invalid URL accessed", this.Context);
+                    Reporter.Send("Invalid URL accessed", this.Context);
                     blogEntryActivity.BlogEntryActivityTypeId = 6;
                 }
             }

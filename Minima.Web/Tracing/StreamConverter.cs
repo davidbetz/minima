@@ -21,7 +21,7 @@ namespace Minima.Web.Tracing
         {
             Byte[] buffer = new Byte[stream.Length];
             stream.Read(buffer, 0, buffer.Length);
-            ExceptionManager.Report(buffer.Length.ToString());
+            Reporter.Send(buffer.Length.ToString());
             //+
             return Encoding.UTF8.GetString(buffer);
         }
