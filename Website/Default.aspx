@@ -7,17 +7,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head id="Head1" runat="server">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/Style/MinimaBasicSample/default.css" />
+    <link rel="stylesheet" type="text/css" href="/Resource_/Style/MinimaBasicSample/default.css" />
     <link runat="server" id="rssLink" rel="alternate" type="application/rss+xml" />
     <link rel="EditURI" type="application/rsd+xml" runat="server" id="rsd" />
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" runat="server" id="wlwmanifest" />
-    <script src="/Lib/prototype-1.6.0.2.js" type="text/javascript"></script>
-    <script src="/Lib/PrototypeExtension.js" type="text/javascript"></script>
-    <script src="/Lib/Prominax/Trace.js" type="text/javascript"></script>
-    <script src="/Lib/Prominax/AspNet.js" type="text/javascript"></script>
-    <script src="/Lib/Prominax/WCF.js" type="text/javascript"></script>
-    <script src="/Code/Configuration.js" type="text/javascript"></script>
-    <script src="/Code/Initialization.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/prototype-1.6.0.2.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/PrototypeExtension.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/Prominax/Trace.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/Prominax/AspNet.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/Prominax/WCF.js" type="text/javascript"></script>
+    <script src="/Resource_//Configuration.js" type="text/javascript"></script>
+    <script src="/Resource_/Code/Initialization.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="header">
