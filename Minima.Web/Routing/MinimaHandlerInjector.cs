@@ -9,10 +9,10 @@ namespace Minima.Web.Routing
     public class MinimaHandlerInjector : Themelia.Web.Routing.HandlerInjectorBase
     {
         //- @OnAddHttpHandlers -//
-        public override void OnAddHttpHandlers(List<Themelia.Web.Configuration.HttpHandlerElement> injectedHandlerList)
+        public override void OnAddHttpHandlers(List<Themelia.Web.Configuration.HttpHandlerElement> injectedHandlerList, params Object[] parameterArray)
         {
             MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)MinimaComponentSetting.CurrentComponentSetting;
-            List<String> webSectionList = minimaComponentSetting.WebSections.Where(p => p.Key != "root").Select(p => p.Key).ToList();
+            List<String> webSectionList = minimaComponentSetting.WebSections.Where(p => p.Key != null && p.Key.ToLower() != "root").Select(p => p.Key).ToList();
             //+ to support root, BlogFallThroughProcessor is required as it handles this
             foreach (String webSection in webSectionList)
             {

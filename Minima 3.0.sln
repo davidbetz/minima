@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website\", "{873ADDA2-7363-40C9-AB73-D8C58AFF0A5B}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website", "{873ADDA2-7363-40C9-AB73-D8C58AFF0A5B}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
 		ProjectReferences = "{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}|Minima.Service.dll;{1F9C498C-F342-403E-8B30-F1A9E073AA9E}|Minima.Web.dll;{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}|Minima.Configuration.dll;"
@@ -38,10 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly", "Assembly", "{51
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minima.Configuration", "Minima.Configuration\Minima.Configuration.csproj", "{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Service", "Service\", "{95D6DCD8-BF15-49AE-9DEA-25DCE98E30C9}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Service", "Service", "{95D6DCD8-BF15-49AE-9DEA-25DCE98E30C9}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
-		ProjectReferences = "{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}|Minima.Service.dll;{429709AD-E4C9-43F5-AF3C-8BFEF16AE01D}|Minima.ServiceImpl.dll;{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}|Minima.Configuration.dll;"
+		ProjectReferences = "{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}|Minima.Configuration.dll;{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}|Minima.Service.dll;{429709AD-E4C9-43F5-AF3C-8BFEF16AE01D}|Minima.ServiceImpl.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Service"
 		Debug.AspNetCompiler.PhysicalPath = "Service\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Service\"
