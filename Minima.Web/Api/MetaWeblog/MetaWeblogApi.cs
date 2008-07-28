@@ -84,8 +84,8 @@ namespace Minima.Web.Api.MetaWeblog
                 description = blogEntry.Content,
                 title = blogEntry.Title,
                 categories = blogEntry.LabelList.Select(p => p.Title).ToArray(),
-                link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
-                permalink = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
+                link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                permalink = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebSection.Current),
                 postid = blogEntry.Guid,
                 mt_allow_comments = blogEntry.AllowCommentStatus == AllowCommentStatus.Enabled ? "1" : "0",
                 mt_convert_breaks = String.Empty,
@@ -111,8 +111,8 @@ namespace Minima.Web.Api.MetaWeblog
                     dateCreated = p.PostDateTime,
                     description = p.Content,
                     title = p.Title,
-                    link = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
-                    permalink = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
+                    link = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                    permalink = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
                     postid = p.Guid,
                     mt_allow_comments = "1",
                     mt_convert_breaks = "0",
@@ -151,7 +151,7 @@ namespace Minima.Web.Api.MetaWeblog
                                {
                                    blogid = e.BlogGuid,
                                    blogName = b.Title,
-                                   url = Themelia.Web.HttpWebSection.GetUrl(e.WebSection).AbsoluteUri
+                                   url = Themelia.Web.WebSection.GetUrl(e.WebSection).AbsoluteUri
                                }).ToArray();
             //+
             return netBlogList;

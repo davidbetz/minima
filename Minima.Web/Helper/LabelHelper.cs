@@ -7,7 +7,7 @@ namespace Minima.Web
         //- @GetLabelUrl -//
         public static String GetLabelUrl(Minima.Service.Label label)
         {
-            String webSection = Themelia.Web.HttpWebSection.CurrentWebSection ?? String.Empty;
+            String webSection = Themelia.Web.WebSection.Current ?? String.Empty;
             if (webSection.ToLower() == "root")
             {
                 webSection = String.Empty;

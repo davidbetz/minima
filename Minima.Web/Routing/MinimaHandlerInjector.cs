@@ -21,7 +21,7 @@ namespace Minima.Web.Routing
                     Name = "Minima.Web.Routing.UrlProcessingHttpHandler, Minima.Web",
                     MatchType = "contains",
                     Priority = 5,
-                    MatchText = "/" + Themelia.Web.HttpWebSection.CurrentWebSection + "/"
+                    MatchText = "/" + Themelia.Web.WebSection.Current + "/"
                 });
             }
             SafelyAddHandler(injectedHandlerList, new Themelia.Web.Configuration.HttpHandlerElement

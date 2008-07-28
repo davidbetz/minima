@@ -82,7 +82,7 @@ namespace Minima.Web.Control
             {
                 rptPosts.DataSource = blogEntryList.Select(p => new
                 {
-                    Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection),
+                    Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
                     Content = p.Content,
                     Title = p.Title,
                     AuthorList = p.AuthorList,
