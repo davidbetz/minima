@@ -67,7 +67,7 @@ namespace Minima.Web.Service
                         Summary = new TextSyndicationContent(blogEntry.Content),
                         PublishDate = new DateTimeOffset(blogEntry.PostDateTime),
                     };
-                    syndicationItem.Links.Add(new SyndicationLink(new Uri(BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.HttpWebSection.CurrentWebSection))));
+                    syndicationItem.Links.Add(new SyndicationLink(new Uri(BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebSection.Current))));
                     foreach (Author author in blogEntry.AuthorList)
                     {
                         syndicationItem.Authors.Add(new SyndicationPerson(author.Email));

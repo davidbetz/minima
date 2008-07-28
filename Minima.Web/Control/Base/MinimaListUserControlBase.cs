@@ -14,7 +14,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                if (this.WebSection != Themelia.Web.HttpWebSection.CurrentWebSection)
+                if (this.WebSection != Themelia.Web.WebSection.Current)
                 {
                     return WebSectionAccessor.GetBlogGuid(this.WebSection);
                 }
@@ -32,7 +32,7 @@ namespace Minima.Web.Control
                 {
                     return webSection;
                 }
-                return Themelia.Web.HttpWebSection.CurrentWebSection;
+                return Themelia.Web.WebSection.Current;
             }
             set
             {

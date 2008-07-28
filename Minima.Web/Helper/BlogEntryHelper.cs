@@ -8,7 +8,7 @@ namespace Minima.Web.Helper
     {
         public static String BuildBlogEntry(DateTime postDateTime, String urlMapping, String webSection)
         {
-            Uri baseBlogUri = HttpWebSection.GetUrl(webSection);
+            Uri baseBlogUri = WebSection.GetUrl(webSection);
             String baseBlogUrl = baseBlogUri.AbsoluteUri;
             //+
             StringBuilder blogEntryPage = new StringBuilder();
