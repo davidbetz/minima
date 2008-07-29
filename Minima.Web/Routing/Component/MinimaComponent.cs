@@ -10,11 +10,11 @@ namespace Minima.Web.Routing.Component
     public class MinimaComponent : ComponentBase
     {
         //- @Register -//
-        public override void Register(List<ProcessorElement> preProcessorList, List<MappedHandlerElement> mappedHandlerElementList, List<HandlerInjectorElement> handlerInjectorElementList, List<ProcessorElement> fallThroughProcessorList)
+        public override void Register(List<PreProcessorElement> preProcessorList, List<MappedHandlerElement> mappedHandlerElementList, List<HandlerInjectorElement> handlerInjectorElementList, List<MidProcessorElement> midProcessorList, List<FallThroughProcessorElement> fallThroughProcessorList, List<PostProcessorElement> postProcessorList)
         {
             this.ComponentSettingType = typeof(MinimaComponentSetting);
             //+
-            preProcessorList.Add(new ProcessorElement
+            preProcessorList.Add(new PreProcessorElement
             {
                 ProcessorType = "Minima.Web.Routing.HttpHandlerPreProcessor, Minima.Web"
             });
