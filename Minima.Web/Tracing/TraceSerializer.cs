@@ -36,7 +36,7 @@ namespace Minima.Web.Tracing
             }
             catch (Exception ex)
             {
-                Reporter.Send(ex);
+                EmailReporter.Send(ex);
             }
             return b.ToString();
         }

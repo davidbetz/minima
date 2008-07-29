@@ -21,7 +21,7 @@ namespace Minima.Web.Tracing
         {
             Byte[] buffer = new Byte[stream.Length];
             stream.Read(buffer, 0, buffer.Length);
-            Reporter.Send(buffer.Length.ToString());
+            EmailReporter.Send(buffer.Length.ToString());
             //+
             return Encoding.UTF8.GetString(buffer);
         }
