@@ -19,7 +19,7 @@ namespace Minima.Web
         {
             HttpContext ctx = HttpContext.Current;
             //+
-            Reporter.Send("Uncaught Exception", ctx);
+            EmailReporter.Send("Uncaught Exception", ctx);
         }
     }
 }

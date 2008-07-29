@@ -44,7 +44,7 @@ namespace Minima.Web.Routing
                 }
                 else
                 {
-                    Reporter.Send("File mapping problem: " + path);
+                    EmailReporter.Send("File mapping problem: " + path);
                 }
             }
         }
