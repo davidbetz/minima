@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 //+
-using Themelia.ExceptionHandling;
+using Themelia.Tracing;
 //+
 using Minima.Configuration;
 using Minima.Service;
