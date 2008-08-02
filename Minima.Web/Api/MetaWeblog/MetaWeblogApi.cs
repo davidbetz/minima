@@ -182,24 +182,12 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             TraceManager.RecordMethodCall("XmlRpcApi::NewMediaObject", new Object[] { blogGuid, emailAddress, password, enc.name, enc.type, enc.bits.Length });
             //+
-            String basePath = MinimaConfiguration.SupportImagePhysicalLocation;
-            String fixedName = enc.name.Replace("/", "\\");
-            FileInfo fi = new FileInfo(basePath + "\\" + fixedName);
-            if (!fi.Exists)
-            {
-                if (!fi.Directory.Exists)
-                {
-                    fi.Directory.Create();
-                }
-                using (FileStream fs = fi.Create())
-                {
-                    fs.Write(enc.bits, 0, enc.bits.Length);
-                }
-            }
+            Uri uri = new Uri(Themelia.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/image/blog/" + blogGuid);
+            String blogImageGuid = Themelia.Net.HttpAbstractor.PostHttpRequest(uri, enc.bits, new Themelia.Map("ImageContentType=" + enc.type));
             //+
             return new UrlInfo
             {
-                url = Themelia.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/" + Themelia.Web.UrlHelper.FixWebPath(MinimaConfiguration.SupportImageWebRelativePath) + "/" + fixedName
+                url = Themelia.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/image/blog/" + blogImageGuid
             };
         }
 

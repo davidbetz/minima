@@ -26,13 +26,6 @@ namespace Minima.Web.Routing
             }
             SafelyAddHandler(injectedHandlerList, new Themelia.Web.Configuration.HttpHandlerElement
             {
-                Name = "Minima.Web.Routing.BlogEntryImageHttpHandler, Minima.Web",
-                MatchType = "contains",
-                Priority = 4,
-                MatchText = "/Image/"
-            });
-            SafelyAddHandler(injectedHandlerList, new Themelia.Web.Configuration.HttpHandlerElement
-            {
                 Name = "Minima.Web.Routing.FileProcessorHttpHandler, Minima.Web",
                 MatchType = "contains",
                 Priority = 5,
@@ -72,6 +65,13 @@ namespace Minima.Web.Routing
                 MatchType = "contains",
                 Priority = 3,
                 MatchText = "/xml-rpc"
+            });
+            SafelyAddHandler(injectedHandlerList, new Themelia.Web.Configuration.HttpHandlerElement
+            {
+                Name = "Minima.Web.Routing.ImageHttpHandler, Minima.Web",
+                MatchType = "contains",
+                Priority = 4,
+                MatchText = "/image/blog/"
             });
         }
     }

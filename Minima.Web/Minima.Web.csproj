@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agent\ImageAgent.cs" />
     <Compile Include="Api\MetaWeblog\BlogInfo.cs" />
     <Compile Include="Api\MetaWeblog\CategoryInfo.cs" />
     <Compile Include="Api\MetaWeblog\FullPost.cs" />
@@ -123,12 +124,11 @@
     <Compile Include="Module\FilterHttpModule.cs" />
     <Compile Include="Module\FixDomainHttpModule.cs" />
     <Compile Include="NonClosingMemoryStream.cs" />
-    <Compile Include="Routing\HttpHandler_\BlogEntryImageHttpHandler.cs" />
-    <Compile Include="Routing\HttpHandler_\CommentHttpHandler.cs" />
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
     <Compile Include="Routing\HttpHandler_\BlogDiscoveryHttpHandler.cs" />
     <Compile Include="Routing\Component\MinimaComponentSetting.cs" />
     <Compile Include="Routing\Component\MinimaComponent.cs" />
+    <Compile Include="Routing\HttpHandler_\ImageHttpHandler.cs" />
     <Compile Include="Routing\HttpHandler_\WindowsLiveWriterManifestHttpHandler.cs" />
     <Compile Include="Routing\MinimaHandlerInjector.cs" />
     <Compile Include="Routing\WebSection.cs" />
