@@ -19,12 +19,12 @@ namespace Minima.Web.Routing
                     return new BlogDiscoveryHttpHandler();
                 case "windowslivewritermanifest":
                     return new WindowsLiveWriterManifestHttpHandler();
-                case "blogentryimage":
-                    return new BlogEntryImageHttpHandler();
                 case "metaweblogapi":
                     return new MetaWeblogApi();
                 case "fileprocessor":
                     return new FileProcessorHttpHandler();
+                case "image":
+                    return new ImageHttpHandler();
                 case "sitemap":
                     return new SiteMapHttpHandler();
                 case "urlprocessing":
