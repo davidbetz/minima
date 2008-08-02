@@ -57,6 +57,7 @@
     <Compile Include="Client\BlogClient.cs" />
     <Compile Include="Client\CommentClient.cs" />
     <Compile Include="Client\AuthorClient.cs" />
+    <Compile Include="Client\ImageClient.cs" />
     <Compile Include="Client\MinimaClientBase.cs" />
     <Compile Include="Client\TechnoratiClient.cs" />
     <Compile Include="Client\LabelClient.cs" />
@@ -71,10 +72,12 @@
     <Compile Include="_DataContract\BlogMetaData.cs" />
     <Compile Include="_DataContract\ArchiveCount.cs" />
     <Compile Include="_DataContract\AllowCommentStatus.cs" />
+    <Compile Include="_DataContract\BlogImage.cs" />
     <Compile Include="_DataContract\LabelCount.cs" />
     <Compile Include="_DataContract\LastAction.cs" />
     <Compile Include="_DataContract\IMinimaEntity.cs" />
     <Compile Include="_DataContract\Label.cs" />
+    <Compile Include="_ServiceContract\IImageService.cs" />
     <Compile Include="_ServiceContract\IAuthorService.cs" />
     <Compile Include="_ServiceContract\ICommentService.cs" />
     <Compile Include="_ServiceContract\ILabelService.cs" />
