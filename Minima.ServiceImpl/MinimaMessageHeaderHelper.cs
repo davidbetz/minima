@@ -18,6 +18,8 @@ namespace Minima.Service
                     return BlogGuidFinder.ByCommentGuid(minimaMessageHeader.Content);
                 case MinimaMessageHeaderType.LabelGuid:
                     return BlogGuidFinder.ByLabelGuid(minimaMessageHeader.Content);
+                case MinimaMessageHeaderType.BlogImageGuid:
+                    return BlogGuidFinder.ByBlogImageGuid(minimaMessageHeader.Content);
                 default:
                     return null;
             }

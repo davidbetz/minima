@@ -2,7 +2,9 @@
 using System.Data.Linq;
 //+
 using Minima.Service.Validation;
+//+
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
+using BlogImageLINQ = Minima.Service.Data.Entity.BlogImage;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
 //+
@@ -59,6 +61,22 @@ namespace Minima.Service
                 Validator.EnsureLabelExists(labelGuid, out labelLinq, db);
                 //+
                 return labelLinq.Blog.BlogGuid;
+            }
+        }
+
+        //- ~ByBlogImageGuid -//
+        internal static String ByBlogImageGuid(String blogImageGuid)
+        {
+            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<BlogImageLINQ>(p => p.Blog);
+                db.LoadOptions = options;
+                //+ ensure blog exists
+                BlogImageLINQ blogImageLinq;
+                Validator.EnsureBlogImageExists(blogImageGuid, out blogImageLinq, db);
+                //+
+                return blogImageLinq.Blog.BlogGuid;
             }
         }
     }

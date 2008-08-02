@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="Minima" EntityNamespace="Minima.Service.Data.Entity" ContextNamespace="Minima.Service.Data.Context" Class="MinimaServiceLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=io\sqlexpress01;Initial Catalog=Minima;Persist Security Info=True;User ID=MinimaSvcDbUser" SettingsObjectName="Minima.Service.Properties.Settings" SettingsPropertyName="MinimaConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=IO\SQLEXPRESS01;Initial Catalog=Minima;Persist Security Info=True;User ID=MinimaSvcDbUser" SettingsObjectName="Minima.Service.Properties.Settings" SettingsPropertyName="MinimaConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="svc.Author" Member="Authors">
     <Type Name="Author">
       <Column Name="AuthorId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -47,6 +47,7 @@
       <Association Name="Blog_AuthorBlogAssociation" Member="AuthorBlogAssociations" OtherKey="BlogId" Type="AuthorBlogAssociation" />
       <Association Name="Blog_BlogEntry" Member="BlogEntries" OtherKey="BlogId" Type="BlogEntry" />
       <Association Name="Blog_Label" Member="Labels" OtherKey="BlogId" Type="Label" />
+      <Association Name="Blog_BlogImage" Member="BlogImages" OtherKey="BlogId" Type="BlogImage" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntry" Member="BlogEntries">
@@ -135,6 +136,16 @@
       <Column Name="BlogEntryId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="BlogEntry_LabelBlogEntry" Member="BlogEntry" ThisKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
       <Association Name="Label_LabelBlogEntry" Member="Label" ThisKey="LabelId" Type="Label" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="svc.BlogImage" Member="BlogImages">
+    <Type Name="BlogImage">
+      <Column Name="BlogImageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BlogImageContentType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BlogImageGuid" Type="System.String" DbType="Char(36) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogImageData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Blog_BlogImage" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="svc.GetArchivedEntryList" Method="GetArchivedEntryList">
