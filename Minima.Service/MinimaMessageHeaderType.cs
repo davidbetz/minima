@@ -5,6 +5,7 @@ namespace Minima.Service
         BlogGuid = 0,
         BlogEntryGuid = 1,
         CommentGuid = 2,
-        LabelGuid = 3
+        LabelGuid = 3,
+        BlogImageGuid = 4
     }
 }
