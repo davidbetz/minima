@@ -61,6 +61,9 @@ namespace Minima.Service.Data.Context
     partial void InsertLabelBlogEntry(Minima.Service.Data.Entity.LabelBlogEntry instance);
     partial void UpdateLabelBlogEntry(Minima.Service.Data.Entity.LabelBlogEntry instance);
     partial void DeleteLabelBlogEntry(Minima.Service.Data.Entity.LabelBlogEntry instance);
+    partial void InsertBlogImage(Minima.Service.Data.Entity.BlogImage instance);
+    partial void UpdateBlogImage(Minima.Service.Data.Entity.BlogImage instance);
+    partial void DeleteBlogImage(Minima.Service.Data.Entity.BlogImage instance);
     #endregion
 		
 		public MinimaServiceLINQDataContext() : 
@@ -186,6 +189,14 @@ namespace Minima.Service.Data.Context
 			get
 			{
 				return this.GetTable<Minima.Service.Data.Entity.LabelBlogEntry>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Minima.Service.Data.Entity.BlogImage> BlogImages
+		{
+			get
+			{
+				return this.GetTable<Minima.Service.Data.Entity.BlogImage>();
 			}
 		}
 		
@@ -756,6 +767,8 @@ namespace Minima.Service.Data.Entity
 		
 		private EntitySet<Label> _Labels;
 		
+		private EntitySet<BlogImage> _BlogImages;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -783,6 +796,7 @@ namespace Minima.Service.Data.Entity
 			this._UserRights = new EntitySet<UserRight>(new Action<UserRight>(this.attach_UserRights), new Action<UserRight>(this.detach_UserRights));
 			this._BlogEntries = new EntitySet<BlogEntry>(new Action<BlogEntry>(this.attach_BlogEntries), new Action<BlogEntry>(this.detach_BlogEntries));
 			this._Labels = new EntitySet<Label>(new Action<Label>(this.attach_Labels), new Action<Label>(this.detach_Labels));
+			this._BlogImages = new EntitySet<BlogImage>(new Action<BlogImage>(this.attach_BlogImages), new Action<BlogImage>(this.detach_BlogImages));
 			OnCreated();
 		}
 		
@@ -985,6 +999,19 @@ namespace Minima.Service.Data.Entity
 			}
 		}
 		
+		[Association(Name="Blog_BlogImage", Storage="_BlogImages", OtherKey="BlogId")]
+		public EntitySet<BlogImage> BlogImages
+		{
+			get
+			{
+				return this._BlogImages;
+			}
+			set
+			{
+				this._BlogImages.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1036,6 +1063,18 @@ namespace Minima.Service.Data.Entity
 		}
 		
 		private void detach_Labels(Label entity)
+		{
+			this.SendPropertyChanging();
+			entity.Blog = null;
+		}
+		
+		private void attach_BlogImages(BlogImage entity)
+		{
+			this.SendPropertyChanging();
+			entity.Blog = this;
+		}
+		
+		private void detach_BlogImages(BlogImage entity)
 		{
 			this.SendPropertyChanging();
 			entity.Blog = null;
@@ -2863,6 +2902,205 @@ namespace Minima.Service.Data.Entity
 						this._LabelId = default(int);
 					}
 					this.SendPropertyChanged("Label");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="svc.BlogImage")]
+	public partial class BlogImage : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BlogImageId;
+		
+		private System.Nullable<int> _BlogId;
+		
+		private string _BlogImageContentType;
+		
+		private string _BlogImageGuid;
+		
+		private System.Data.Linq.Binary _BlogImageData;
+		
+		private EntityRef<Blog> _Blog;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBlogImageIdChanging(int value);
+    partial void OnBlogImageIdChanged();
+    partial void OnBlogIdChanging(System.Nullable<int> value);
+    partial void OnBlogIdChanged();
+    partial void OnBlogImageContentTypeChanging(string value);
+    partial void OnBlogImageContentTypeChanged();
+    partial void OnBlogImageGuidChanging(string value);
+    partial void OnBlogImageGuidChanged();
+    partial void OnBlogImageDataChanging(System.Data.Linq.Binary value);
+    partial void OnBlogImageDataChanged();
+    #endregion
+		
+		public BlogImage()
+		{
+			this._Blog = default(EntityRef<Blog>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_BlogImageId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BlogImageId
+		{
+			get
+			{
+				return this._BlogImageId;
+			}
+			set
+			{
+				if ((this._BlogImageId != value))
+				{
+					this.OnBlogImageIdChanging(value);
+					this.SendPropertyChanging();
+					this._BlogImageId = value;
+					this.SendPropertyChanged("BlogImageId");
+					this.OnBlogImageIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogId", DbType="Int")]
+		public System.Nullable<int> BlogId
+		{
+			get
+			{
+				return this._BlogId;
+			}
+			set
+			{
+				if ((this._BlogId != value))
+				{
+					if (this._Blog.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBlogIdChanging(value);
+					this.SendPropertyChanging();
+					this._BlogId = value;
+					this.SendPropertyChanged("BlogId");
+					this.OnBlogIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogImageContentType", DbType="VarChar(50)")]
+		public string BlogImageContentType
+		{
+			get
+			{
+				return this._BlogImageContentType;
+			}
+			set
+			{
+				if ((this._BlogImageContentType != value))
+				{
+					this.OnBlogImageContentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._BlogImageContentType = value;
+					this.SendPropertyChanged("BlogImageContentType");
+					this.OnBlogImageContentTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogImageGuid", DbType="Char(36) NOT NULL", CanBeNull=false)]
+		public string BlogImageGuid
+		{
+			get
+			{
+				return this._BlogImageGuid;
+			}
+			set
+			{
+				if ((this._BlogImageGuid != value))
+				{
+					this.OnBlogImageGuidChanging(value);
+					this.SendPropertyChanging();
+					this._BlogImageGuid = value;
+					this.SendPropertyChanged("BlogImageGuid");
+					this.OnBlogImageGuidChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogImageData", DbType="VarBinary(MAX) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary BlogImageData
+		{
+			get
+			{
+				return this._BlogImageData;
+			}
+			set
+			{
+				if ((this._BlogImageData != value))
+				{
+					this.OnBlogImageDataChanging(value);
+					this.SendPropertyChanging();
+					this._BlogImageData = value;
+					this.SendPropertyChanged("BlogImageData");
+					this.OnBlogImageDataChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Blog_BlogImage", Storage="_Blog", ThisKey="BlogId", IsForeignKey=true)]
+		public Blog Blog
+		{
+			get
+			{
+				return this._Blog.Entity;
+			}
+			set
+			{
+				Blog previousValue = this._Blog.Entity;
+				if (((previousValue != value) 
+							|| (this._Blog.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Blog.Entity = null;
+						previousValue.BlogImages.Remove(this);
+					}
+					this._Blog.Entity = value;
+					if ((value != null))
+					{
+						value.BlogImages.Add(this);
+						this._BlogId = value.BlogId;
+					}
+					else
+					{
+						this._BlogId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Blog");
 				}
 			}
 		}

@@ -102,6 +102,7 @@
     <Compile Include="UriBuilder.cs" />
     <Compile Include="_Fault\FaultCreator.cs" />
     <Compile Include="ServiceConfiguration.cs" />
+    <Compile Include="_Service\ImageService.cs" />
     <Compile Include="_Service\TechnoratiService.cs" />
     <Compile Include="_Fault\UnhandledException.cs" />
     <Compile Include="Activation\MinimaServiceHostFactory.cs" />
@@ -130,8 +131,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Data\MinimaServiceLINQ.dbml.layout">
       <DependentUpon>MinimaServiceLINQ.dbml</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

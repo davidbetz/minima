@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 //+
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
-using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
+using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
+using BlogImageLINQ = Minima.Service.Data.Entity.BlogImage;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
 //+
@@ -19,7 +20,9 @@ namespace Minima.Service.Validation
         {
             public const String InvalidEmail = "Invalid author email.";
             public const String InvalidBlogGuid = "Invalid blog guid.";
+            public const String InvalidBlogEntryGuid = "Invalid blog entry guid.";
             public const String InvalidCommentGuid = "Invalid comment guid.";
+            public const String InvalidImageGuid = "Invalid image guid.";
             public const String InvalidLabelGuid = "Invalid label guid.";
         }
 
@@ -46,7 +49,7 @@ namespace Minima.Service.Validation
         internal static void EnsureBlogExists(String blogGuid, out BlogLINQ blogLinq, String message, MinimaServiceLINQDataContext db)
         {
             Func<BlogLINQ, Boolean> blogExists = x => x.BlogGuid == blogGuid;
-            blogLinq = db.Blogs.SingleOrDefault(blogExists);
+            blogLinq = (from p in db.Blogs where p.BlogGuid == blogGuid select p).FirstOrDefault();
             if (blogLinq == null)
             {
                 throw new ArgumentException(message);
@@ -56,13 +59,28 @@ namespace Minima.Service.Validation
         //- ~EnsureBlogEntryExists -//
         internal static void EnsureBlogEntryExists(String blogEntryGuid, out BlogEntryLINQ blogEntryLinq, MinimaServiceLINQDataContext db)
         {
-            EnsureBlogEntryExists(blogEntryGuid, out blogEntryLinq, Message.InvalidBlogGuid, db);
+            EnsureBlogEntryExists(blogEntryGuid, out blogEntryLinq, Message.InvalidBlogEntryGuid, db);
         }
         internal static void EnsureBlogEntryExists(String blogEntryGuid, out BlogEntryLINQ blogEntryLinq, String message, MinimaServiceLINQDataContext db)
         {
             Func<BlogEntryLINQ, Boolean> blogEntryExists = x => x.BlogEntryGuid == blogEntryGuid;
-            blogEntryLinq = db.BlogEntries.SingleOrDefault(blogEntryExists);
+            blogEntryLinq = (from p in db.BlogEntries where p.BlogEntryGuid == blogEntryGuid select p).FirstOrDefault();
             if (blogEntryLinq == null)
+            {
+                throw new ArgumentException(message);
+            }
+        }
+
+        //- ~EnsureBlogImageExists -//
+        internal static void EnsureBlogImageExists(String blogImageGuid, out BlogImageLINQ blogImageLinq, MinimaServiceLINQDataContext db)
+        {
+            EnsureBlogImageExists(blogImageGuid, out blogImageLinq, Message.InvalidImageGuid, db);
+        }
+        internal static void EnsureBlogImageExists(String blogImageGuid, out BlogImageLINQ blogImageLinq, String message, MinimaServiceLINQDataContext db)
+        {
+            Func<BlogImageLINQ, Boolean> blogImageExists = x => x.BlogImageGuid == blogImageGuid;
+            blogImageLinq = db.BlogImages.SingleOrDefault(blogImageExists);
+            if (blogImageLinq == null)
             {
                 throw new ArgumentException(message);
             }
