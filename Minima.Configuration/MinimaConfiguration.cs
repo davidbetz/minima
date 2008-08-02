@@ -33,6 +33,15 @@ namespace Minima.Configuration
             }
         }
 
+        //- @ActiveImageServiceEndpoint -//
+        public static String ActiveImageServiceEndpoint
+        {
+            get
+            {
+                return ConfigAccessor.ApplicationSettings("ActiveImageServiceEndpoint");
+            }
+        }
+
         //- @ActiveLabelServiceEndpoint -//
         public static String ActiveLabelServiceEndpoint
         {
