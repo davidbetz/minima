@@ -1,0 +1,34 @@
+﻿/* Global CSS */
+@import url(../global.css);
+
+/* CSS Dimension of Size */
+@import url(../Size/1024.css);
+
+body {
+background-color: #ffe;
+}
+
+h2 {
+margin: 10px 0;
+border-bottom: 1px solid #000;
+}
+
+h3 {
+font-style: italic;
+}
+
+h4 {
+margin: 0;
+font-family: verdana, sans-serif;
+}
+
+ul {
+margin: 10px;
+padding: 0 0 0 25px;
+}
+
+ul li {
+font-size: 1em;
+font-family: helvetica, sans-serif;
+list-style-type: circle;
+}
