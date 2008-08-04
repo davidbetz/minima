@@ -97,6 +97,7 @@ namespace Minima.Web.Control
                 Title = p.Title,
                 TypeGuid = p.BlogEntryTypeGuid,
                 PostDateTime = p.PostDateTime,
+                LabelList = p.LabelList,
                 DateTimeString = String.Format("{0}, {1} {2}, {3}", p.PostDateTime.DayOfWeek, p.PostDateTime.ToString("MMMM"), p.PostDateTime.Day, p.PostDateTime.Year),
                 DateTimeDisplay = String.Format("{0}/{1}/{2} {3}", p.PostDateTime.Month, p.PostDateTime.Day, p.PostDateTime.Year, p.PostDateTime.ToShortTimeString())
             };
@@ -109,9 +110,17 @@ namespace Minima.Web.Control
                 DateTime endDateTime = new DateTime(this.Index, 12, 31, 23, 59, 59);
                 //+
                 indexDataSource = BlogAgent.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime, true).Select(indexTransformation).ToList();
-                indexListSeries = new IndexListSeries(indexDataSource)
+                List<Int32> yearDataSource = BlogAgent.GetBlogEntryList(blogGuid, 0, BlogEntryRetreivalType.VeryBasic)
+                    .Where(p => p.PostDateTime.Year != this.Index)
+                    .Select(p => p.PostDateTime.Year)
+                    .Distinct()
+                    .OrderByDescending(p => p)
+                    .ToList();
+                indexListSeries = new IndexListSeries()
                 {
                     HeadingSuffix = MinimaConfiguration.IndexHeadingSuffix,
+                    BlogEntryDataSource = indexDataSource,
+                    YearDataSource = yearDataSource,
                     Year = this.Index
                 };
                 indexListSeries.ID = "indexListSeries";

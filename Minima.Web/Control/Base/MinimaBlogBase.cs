@@ -115,7 +115,7 @@ namespace Minima.Web.Control
                 throw new ArgumentNullException("BlogGuid is required.");
             }
             //+
-            List<BlogEntry> blogEntryList;
+            List<BlogEntry> blogEntryList = new List<BlogEntry>();
             if (this.AccessType != AccessType.Index)
             {
                 blogEntryList = BlogAgent.GetNetBlogEntryList(blogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
@@ -179,10 +179,6 @@ namespace Minima.Web.Control
                 }
                 //+
                 BlogEntryActivityAgent.ReportActivity(blogEntryActivity);
-            }
-            else
-            {
-                blogEntryList = BlogAgent.GetBlogEntryListByDateRange(blogGuid, DateTime.Now, DateTime.Now, false);
             }
             //+
             return blogEntryList;
