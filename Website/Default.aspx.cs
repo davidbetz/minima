@@ -39,7 +39,7 @@ public partial class Default : System.Web.UI.Page
             //+
             hlBlogUrl.NavigateUrl = blogMetaData.Uri.AbsoluteUri;
             hlBlogUrl.Text = blogMetaData.Title;
-            this.Page.Title = blogMetaData.Title;
+            //+
             image.Attributes.Add("onclick", "window.location='" + WebConfiguration.Domain + "'");
             //+
             rssLink.Attributes.Add("title", blogMetaData.FeedTitle);
@@ -52,6 +52,19 @@ public partial class Default : System.Web.UI.Page
             hlFeedUrl.Attributes.Add("type", "application/rss+xml");
             //+
             litBlogDescription.Text = blogMetaData.Description;
+            //+
         }
+    }
+
+    //- #OnPreRender -//
+    protected override void OnPreRender(EventArgs e)
+    {
+        String pageTitle = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "PageTitle");
+        if (!String.IsNullOrEmpty(pageTitle))
+        {
+            this.Page.Title = pageTitle;
+        }
+        //+
+        base.OnPreRender(e);
     }
 }

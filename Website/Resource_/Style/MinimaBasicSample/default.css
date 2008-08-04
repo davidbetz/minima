@@ -1,9 +1,4 @@
 /** Page **/
-* {
-margin: 0;
-padding: 0;
-}
-
 body {
 background:#fff url(Image/YellowWhiteBox.png) repeat-y;
 color:#222;
@@ -20,21 +15,20 @@ margin: 5px 0;
 
 /** Links **/
 a {
-text-decoration: none;
 color: #900;
-border-bottom: 0;
+
 }
 
 a:hover {
 color: #900;
 }
 
-*>a{
-border-bottom: 1px solid transparent;
+.post a{
+font-weight: bold;
+text-decoration: underline;
 }
 
-*>a:hover {
-border-bottom: 1px solid #700;
+.post a:hover {
 }
 
 /** Header **/
@@ -76,6 +70,7 @@ margin: 2px auto 0;
 border: 1px solid #111;
 width: 95%;
 background-color: #fff;
+padding: 0;
 }
 
 #main {
@@ -106,6 +101,7 @@ font-family: verdana, sans-serif;
 h2 {
 font-size: 1em;
 margin-top: 10px;
+margin-bottom: 0;
 font-family: century gothic, sans-serif;
 }
 
@@ -123,6 +119,7 @@ display: none;
 
 #sidebar ul {
 margin-bottom: 10px;
+margin-top: 0;
 font-size: .9em;
 border: 1px solid #293063;
 color: #333;
@@ -168,10 +165,14 @@ border-bottom: 1px solid #111;
 border-bottom: 1px solid #000;
 font-family: verdana, sans-serif;
 line-height: 1.5em;
-font-size: 1.1em;
-margin-bottom: 10px;
+font-size: 100%;
+margin-bottom: 12px;
+text-indent: 5px;
 }
 
+.post p {
+margin-bottom: 10px;
+}
 
 h3 {
 padding-bottom: 5px;
@@ -345,4 +346,82 @@ font-family: Verdana, Sans-Serif;
 
 #validationMessages {
 margin-bottom: 10px;
+}
+
+/** Index **/
+
+.indexContainer h2 {
+font-family: Calibri, Tahoma, Verdana, Arial, sans-serif;
+font-size: 160%;
+display: inline;
+}
+
+.index {
+display: inline;
+margin-bottom: 10px;
+margin-left: 5px;
+margin-top: 2px;
+}
+
+.index li {
+display: inline;
+font-family: Tahoma, Verdana, Arial, sans-serif;
+amargin-right: 10px;
+}
+
+.index-section {
+margin-top: 4px;
+}
+
+.index-section h3 {
+font-size: 120%;
+margin-bottom: 3px;
+border-bottom: 1px solid #aaa;
+padding-bottom: 0;
+margin-left: 0;
+font-family: Verdana, Sans-Serif;
+}
+
+.index-section dl {
+overflow: auto;
+margin-left: 10px;
+}
+
+.index-section dt {
+float: left !important;
+clear: both !important;
+margin-right: 5px;
+width: 20px;
+height: 16px;
+margin-bottom: 3px;
+}
+
+.index-section dd {
+font-family: Tahoma, Verdana, Arial, sans-serif;
+margin-bottom: 3px;
+}
+
+.index-section dd a {
+font-weight: normal;
+}
+
+ul.yir-tag-list {
+font-weight: normal;
+}
+
+ul.yir-tag-list li {
+display: inline;
+}
+
+.yir-labels {
+}
+
+dd .yir-labels a {
+font-weight: bold;
+}
+
+.index-series h2
+{
+font-family:Tahoma,Verdana,Arial,sans-serif;
+font-size:160%;
 }
