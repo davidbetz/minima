@@ -31,7 +31,7 @@ namespace Minima.Web.Service
                 List<BlogEntry> blogEntryList = null;
                 try
                 {
-                    blogEntryList = blogClient.GetBlogEntryList(blogGuid, maxCountInt32, true, true);
+                    blogEntryList = blogClient.GetBlogEntryList(blogGuid, maxCountInt32, true, BlogEntryRetreivalType.MetaDataOnly);
                 }
                 catch (FaultException<ArgumentException>)
                 {
