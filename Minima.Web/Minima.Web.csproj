@@ -84,6 +84,8 @@
     <Compile Include="Control\Base\LiteralContentControlBase.cs">
     </Compile>
     <Compile Include="Control\Base\CaptchaBase.cs" />
+    <Compile Include="Control\_Index\IndexListSeriesYearTemplate.cs" />
+    <Compile Include="Control\_Index\IndexLabelListTemplate.cs" />
     <Compile Include="Control\_Index\IndexEntry.cs">
     </Compile>
     <Compile Include="Control\_Index\EntryTag.cs" />
