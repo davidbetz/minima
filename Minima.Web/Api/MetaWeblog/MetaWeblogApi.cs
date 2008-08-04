@@ -104,7 +104,7 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             TraceManager.RecordMethodCall("XmlRpcApi::GetRecentPosts", new Object[] { blogGuid, emailAddress, password, maxEntryCount });
             //+
-            List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, maxEntryCount, true, emailAddress, password);
+            List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, maxEntryCount, BlogEntryRetreivalType.Full, emailAddress, password);
             //+
             return blogEntryList.Select(p => new FullPost
                 {
