@@ -43,7 +43,7 @@ namespace Minima.Web.Api.MetaWeblog
             {
                 labelList.Add(LabelAgent.GetLabelByTitle(title));
             }
-            BlogAgent.UpdateBlogEntry(blogEntryGuid, post.title, post.description, labelList, new DateTime(0x79d, 1, 1), publish, emailAddress, password);
+            BlogAgent.UpdateBlogEntry(blogEntryGuid, post.title, post.description, null, labelList, new DateTime(0x79d, 1, 1), publish, emailAddress, password);
             //+
             return true;
         }
@@ -171,7 +171,7 @@ namespace Minima.Web.Api.MetaWeblog
                         Email = emailAddress
                     } 
                 }
-            ), post.title, post.description, DateTime.Now, null, publish, emailAddress, password);
+            ), post.title, post.description, DateTime.Now, null, null, publish, emailAddress, password);
         }
 
         //- @NewMediaObject -//
