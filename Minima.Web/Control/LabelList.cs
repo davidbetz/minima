@@ -58,8 +58,8 @@ namespace Minima.Web.Control
             });
         }
 
-        //- $__BuildRepeaterControl -//
-        private System.Web.UI.WebControls.Repeater __BuildRepeaterControl()
+        //- #__BuildRepeaterControl -//
+        protected override System.Web.UI.WebControls.Repeater __BuildRepeaterControl()
         {
             System.Web.UI.WebControls.Repeater rpt = new System.Web.UI.WebControls.Repeater();
             this.repeater = rpt;

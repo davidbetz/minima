@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using Themelia.Activation;
 //+
 using Minima.Configuration;
+using Minima.Parsing;
 using Minima.Service;
 using Minima.Web.Agent;
 using Minima.Web.Control.Base;
@@ -23,6 +24,8 @@ namespace Minima.Web.Control
         //+
         protected Repeater rptPosts;
         //+
+        protected IndexEntryList indexEntryList;
+        protected IndexListSeries indexListSeries;
         protected MultiView mvCommentContent;
         protected View vNothing;
         protected View vShowComments;
@@ -34,6 +37,20 @@ namespace Minima.Web.Control
         protected MultiView mvCommentInput;
         protected View vCommentForm;
         protected View vCommentClosed;
+
+        //- $Info -//
+        private class Info
+        {
+            public const string Minima = "Minima";
+            //+
+            public const string ArchiveMonth = "ArchiveMonth";
+            public const string ArchiveYear = "ArchiveYear";
+            public const string BlogGuid = "BlogGuid";
+            public const string BlogEntryTitle = "BlogEntryTitle";
+            public const string BlogMetaData = "BlogMetaData";
+            public const string LabelTitle = "LabelTitle";
+            public const string PageTitle = "PageTitle";
+        }
 
         //+
         //- @CustomCommentInputControl -//
@@ -51,6 +68,9 @@ namespace Minima.Web.Control
         //- @SupportCommenting -//
         public Boolean SupportCommenting { get; set; }
 
+        //- @CodeParserSeries -//
+        public Themelia.CodeParsing.CodeParserSeries CodeParserSeries { get; set; }
+
         //+
         //- @Ctor -//
         public MinimaBlog()
@@ -58,85 +78,188 @@ namespace Minima.Web.Control
             //+ default
             this.CaptchaControl = new MathCaptcha();
             this.SupportCommenting = true;
+            //+ parser
+            this.CodeParserSeries = new Themelia.CodeParsing.CodeParserSeries()
+            {
+                CodeParserId = Info.Minima
+            };
+            this.CodeParserSeries.Add(new BlogEntryCodeParser());
+            this.CodeParserSeries.Add(new AmazonAffiliateCodeParser());
         }
 
         //+
         //- #OnInit -//
         protected override void OnInit(EventArgs e)
         {
+            Func<BlogEntry, IndexEntry> indexTransformation = p => new IndexEntry
+            {
+                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                Title = p.Title,
+                TypeGuid = p.BlogEntryTypeGuid,
+                PostDateTime = p.PostDateTime,
+                DateTimeString = String.Format("{0}, {1} {2}, {3}", p.PostDateTime.DayOfWeek, p.PostDateTime.ToString("MMMM"), p.PostDateTime.Day, p.PostDateTime.Year),
+                DateTimeDisplay = String.Format("{0}/{1}/{2} {3}", p.PostDateTime.Month, p.PostDateTime.Day, p.PostDateTime.Year, p.PostDateTime.ToShortTimeString())
+            };
+            List<IndexEntry> indexDataSource;
+            //+ index
+            if (this.Index > 0)
+            {
+                String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.BlogGuid);
+                DateTime startDateTime = new DateTime(this.Index, 1, 1, 0, 0, 0);
+                DateTime endDateTime = new DateTime(this.Index, 12, 31, 23, 59, 59);
+                //+
+                indexDataSource = BlogAgent.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime, true).Select(indexTransformation).ToList();
+                indexListSeries = new IndexListSeries(indexDataSource)
+                {
+                    HeadingSuffix = MinimaConfiguration.IndexHeadingSuffix,
+                    Year = this.Index
+                };
+                indexListSeries.ID = "indexListSeries";
+                this.Controls.Add(indexListSeries);
+            }
+            //+ blog
+            else
+            {
+                if (this.AccessType == AccessType.Archive || this.AccessType == AccessType.Label)
+                {
+                    indexDataSource = this.DataSource.Select(indexTransformation).ToList();
+                    indexEntryList = new IndexEntryList(this.AccessType, indexDataSource);
+                    indexEntryList.ID = "indexEntryList";
+                    this.Controls.Add(indexEntryList);
+                }
+                //+
+                phNoEntries = __BuildNoEntryPlaceHolderControl();
+                phNoEntries.ID = "phNoEntries";
+                this.Controls.Add(phNoEntries);
+                //+
+                rptPosts = this.__BuildPostRepeaterControl();
+                rptPosts.ID = "rptPosts";
+                this.Controls.Add(rptPosts);
+                //+
+                if (this.SupportCommenting)
+                {
+                    mvCommentContent = this.__BuildCommentMultiViewControl();
+                    this.Controls.Add(mvCommentContent);
+                }
+            }
+            //+
             base.OnInit(e);
         }
 
-        //- #OnPreRender -//
-        protected override void OnPreRender(EventArgs e)
+        //- #OnLoad -//
+        protected override void OnLoad(EventArgs e)
         {
             List<BlogEntry> blogEntryList = this.DataSource;
-            //+ were there any entries at all?
-            if (blogEntryList == null || blogEntryList.Count < 1)
+            if (this.AccessType != AccessType.Index)
             {
-                rptPosts.Visible = false;
-                phNoEntries.Visible = true;
-                litNoEntriesMessage.Text = MinimaConfiguration.BlankLabelMessage;
-            }
-            else
-            {
-                rptPosts.DataSource = blogEntryList.Select(p => new
+                //+ were there any entries at all?
+                if (blogEntryList == null || blogEntryList.Count < 1)
                 {
-                    Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
-                    Content = p.Content,
-                    Title = p.Title,
-                    AuthorList = p.AuthorList,
-                    AllowCommentStatus = p.AllowCommentStatus,
-                    CommentList = p.CommentList,
-                    Guid = p.Guid,
-                    LabelList = p.LabelList,
-                    AuthorSeries = GetBlogEntryAuthorSeries(p),
-                    LabelSeries = GetBlogEntryLabelSeries(p),
-                    ViewableCommentCount = p.CommentList != null ? p.CommentList.Count : 0,
-                    DateTimeString = String.Format("{0}, {1} {2}, {3}", p.PostDateTime.DayOfWeek, p.PostDateTime.ToString("MMMM"), p.PostDateTime.Day, p.PostDateTime.Year),
-                    DateTimeDisplay = String.Format("{0}/{1}/{2} {3}", p.PostDateTime.Month, p.PostDateTime.Day, p.PostDateTime.Year, p.PostDateTime.ToShortTimeString())
-                });
-                rptPosts.DataBind();
-                //+
-                if (this.IsLinkAccess && this.SupportCommenting)
+                    rptPosts.Visible = false;
+                    phNoEntries.Visible = true;
+                    litNoEntriesMessage.Text = MinimaConfiguration.BlankLabelMessage;
+                }
+                else
                 {
-                    BlogEntry blogEntry = blogEntryList[0];
-                    if (blogEntry.AllowCommentStatus == AllowCommentStatus.Disabled)
+                    rptPosts.DataSource = blogEntryList.Select(p => new
                     {
-                        mvCommentContent.SetActiveView(vCommentsDisabled);
-                    }
-                    else
+                        Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                        Content = this.CodeParserSeries.ParseCode(p.Content),
+                        Title = p.Title,
+                        AuthorList = p.AuthorList,
+                        AllowCommentStatus = p.AllowCommentStatus,
+                        CommentList = p.CommentList,
+                        Guid = p.Guid,
+                        LabelList = p.LabelList,
+                        AuthorSeries = GetBlogEntryAuthorSeries(p),
+                        LabelSeries = GetBlogEntryLabelSeries(p),
+                        ViewableCommentCount = p.CommentList != null ? p.CommentList.Count : 0,
+                        DateTimeString = String.Format("{0}, {1} {2}, {3}", p.PostDateTime.DayOfWeek, p.PostDateTime.ToString("MMMM"), p.PostDateTime.Day, p.PostDateTime.Year),
+                        DateTimeDisplay = String.Format("{0}/{1}/{2} {3}", p.PostDateTime.Month, p.PostDateTime.Day, p.PostDateTime.Year, p.PostDateTime.ToShortTimeString())
+                    });
+                    rptPosts.DataBind();
+                    //+
+                    if (this.AccessType == AccessType.Link && this.SupportCommenting)
                     {
-                        mvCommentContent.SetActiveView(vShowComments);
-                        List<Comment> commentList = CommentAgent.GetCommentList(this.BlogEntryGuid, false);
-                        if (commentList.Count > 0)
+                        BlogEntry blogEntry = blogEntryList[0];
+                        if (blogEntry.AllowCommentStatus == AllowCommentStatus.Disabled)
                         {
-                            htmlCommentListHeader.Visible = true;
-                            litCommentCount.Text = commentList.Count.ToString();
-                        }
-                        rptComments.DataSource = commentList;
-                        rptComments.DataBind();
-                        //+
-                        CommentInputBase commentInput = vCommentForm.FindControl("CommentInput") as CommentInputBase;
-                        if (commentInput != null)
-                        {
-                            HiddenField hfBlogEntryGuid = commentInput.FindControl("hfBlogEntryGuid") as HiddenField;
-                            if (hfBlogEntryGuid != null)
-                            {
-                                hfBlogEntryGuid.Value = this.BlogEntryGuid;
-                            }
-                        }
-                        //+
-                        if (blogEntry.AllowCommentStatus == AllowCommentStatus.Closed)
-                        {
-                            mvCommentInput.SetActiveView(vCommentClosed);
+                            mvCommentContent.SetActiveView(vCommentsDisabled);
                         }
                         else
                         {
-                            mvCommentInput.SetActiveView(vCommentForm);
+                            mvCommentContent.SetActiveView(vShowComments);
+                            List<Comment> commentList = CommentAgent.GetCommentList(this.BlogEntryGuid, false);
+                            if (commentList.Count > 0)
+                            {
+                                htmlCommentListHeader.Visible = true;
+                                litCommentCount.Text = commentList.Count.ToString();
+                            }
+                            rptComments.DataSource = commentList;
+                            rptComments.DataBind();
+                            //+
+                            CommentInputBase commentInput = vCommentForm.FindControl("CommentInput") as CommentInputBase;
+                            if (commentInput != null)
+                            {
+                                HiddenField hfBlogEntryGuid = commentInput.FindControl("hfBlogEntryGuid") as HiddenField;
+                                if (hfBlogEntryGuid != null)
+                                {
+                                    hfBlogEntryGuid.Value = this.BlogEntryGuid;
+                                }
+                            }
+                            //+
+                            if (blogEntry.AllowCommentStatus == AllowCommentStatus.Closed)
+                            {
+                                mvCommentInput.SetActiveView(vCommentClosed);
+                            }
+                            else
+                            {
+                                mvCommentInput.SetActiveView(vCommentForm);
+                            }
                         }
                     }
                 }
+            }
+            //+
+            SetPageTitle();
+            //+
+            base.OnLoad(e);
+        }
+
+        //- $SetPageTitle -//
+        private void SetPageTitle( )
+        {
+            //+ title
+            String pageTitle = String.Empty;
+            switch (this.AccessType)
+            {
+                case AccessType.Index:
+                    pageTitle = String.Format("{0} {1}", this.Index, MinimaConfiguration.IndexHeadingSuffix);
+                    break;
+                case AccessType.Link:
+                    String blogEntryTitle = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.BlogEntryTitle);
+                    pageTitle = blogEntryTitle;
+                    break;
+                case AccessType.Label:
+                    String labelName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.LabelTitle);
+                    pageTitle = String.Format("{0} {1}", labelName, MinimaConfiguration.LabelHeadingSuffix);
+                    break;
+                case AccessType.Archive:
+                    String monthName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.ArchiveMonth);
+                    Int32 year = Themelia.Web.HttpData.GetScopedItem<Int32>(Info.Minima, Info.ArchiveYear);
+                    pageTitle = String.Format("{0} {1} {2}", monthName, year, MinimaConfiguration.ArchiveHeadingSuffix);
+                    break;
+                default:
+                    BlogMetaData blogMetaData = Themelia.Web.HttpData.GetScopedCacheItem<BlogMetaData>(Info.Minima, Info.BlogMetaData);
+                    if (blogMetaData != null)
+                    {
+                        pageTitle = blogMetaData.Title;
+                    }
+                    break;
+            }
+            if (!String.IsNullOrEmpty(pageTitle))
+            {
+                Themelia.Web.HttpData.SetScopedItem<String>(Info.Minima, Info.PageTitle, pageTitle);
             }
         }
 
@@ -159,10 +282,10 @@ namespace Minima.Web.Control
         {
             if (this.CustomPostTemplateType == null)
             {
-                return TemplateFactory.CreateTemplate(TemplateFactory.TemplateType.Post, this.IsLinkAccess, this.SupportCommenting);
+                return TemplateFactory.CreateTemplate(TemplateFactory.TemplateType.Post, this.AccessType == AccessType.Link, this.SupportCommenting);
             }
             //+
-            return ObjectCreator.CreateAs<ITemplate>(this.CustomPostTemplateType, this.IsLinkAccess, this.SupportCommenting);
+            return ObjectCreator.CreateAs<ITemplate>(this.CustomPostTemplateType, this.AccessType == AccessType.Link, this.SupportCommenting);
         }
 
         //- $GetCommentTemplate -//
@@ -272,26 +395,6 @@ namespace Minima.Web.Control
             ph.Controls.Add(litNoEntriesMessage);
             //+
             return ph;
-        }
-
-        //- #CreateChildControls -//
-        protected override void CreateChildControls()
-        {
-            phNoEntries = __BuildNoEntryPlaceHolderControl();
-            phNoEntries.ID = "phNoEntries";
-            this.Controls.Add(phNoEntries);
-            //+
-            rptPosts = this.__BuildPostRepeaterControl();
-            rptPosts.ID = "rptPosts";
-            this.Controls.Add(rptPosts);
-            //+
-            if (this.SupportCommenting)
-            {
-                mvCommentContent = this.__BuildCommentMultiViewControl();
-                this.Controls.Add(mvCommentContent);
-            }
-            //+
-            base.CreateChildControls();
         }
 
         #endregion

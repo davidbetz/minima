@@ -1,4 +1,5 @@
 using System;
+//+
 using Minima.Web.Routing;
 //+
 namespace Minima.Web.Control
@@ -19,7 +20,7 @@ namespace Minima.Web.Control
                     return WebSectionAccessor.GetBlogGuid(this.WebSection);
                 }
                 //+
-                return ContextItemSet.BlogGuid;
+                return Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
             }
         }
 
@@ -54,5 +55,8 @@ namespace Minima.Web.Control
             repeater.DataSource = this.DataSource;
             repeater.DataBind();
         }
+
+        //- #__BuildRepeaterControl -//
+        protected abstract System.Web.UI.WebControls.Repeater __BuildRepeaterControl();
     }
 }
