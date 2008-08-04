@@ -5,6 +5,7 @@ using System.Linq;
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
+using BlogEntryTypeLINQ = Minima.Service.Data.Entity.BlogEntryType;
 using BlogImageLINQ = Minima.Service.Data.Entity.BlogImage;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
@@ -21,6 +22,7 @@ namespace Minima.Service.Validation
             public const String InvalidEmail = "Invalid author email.";
             public const String InvalidBlogGuid = "Invalid blog guid.";
             public const String InvalidBlogEntryGuid = "Invalid blog entry guid.";
+            public const String InvalidBlogEntryTypeGuid = "Invalid blog entry type guid.";
             public const String InvalidCommentGuid = "Invalid comment guid.";
             public const String InvalidImageGuid = "Invalid image guid.";
             public const String InvalidLabelGuid = "Invalid label guid.";
@@ -81,6 +83,21 @@ namespace Minima.Service.Validation
             Func<BlogImageLINQ, Boolean> blogImageExists = x => x.BlogImageGuid == blogImageGuid;
             blogImageLinq = db.BlogImages.SingleOrDefault(blogImageExists);
             if (blogImageLinq == null)
+            {
+                throw new ArgumentException(message);
+            }
+        }
+
+        //- ~EnsureBlogEntryTypeExists -//
+        internal static void EnsureBlogEntryTypeExists(String blogEntryTypeGuid, out BlogEntryTypeLINQ blogEntryTypeLinq, MinimaServiceLINQDataContext db)
+        {
+            EnsureBlogEntryTypeExists(blogEntryTypeGuid, out blogEntryTypeLinq, Message.InvalidBlogEntryTypeGuid, db);
+        }
+        internal static void EnsureBlogEntryTypeExists(String blogEntryTypeGuid, out BlogEntryTypeLINQ blogEntryTypeLinq, String message, MinimaServiceLINQDataContext db)
+        {
+            Func<BlogEntryTypeLINQ, Boolean> blogEntryTypeExists = x => x.BlogEntryTypeGuid == blogEntryTypeGuid;
+            blogEntryTypeLinq = (from p in db.BlogEntryTypes where p.BlogEntryTypeGuid == blogEntryTypeGuid select p).FirstOrDefault();
+            if (blogEntryTypeLinq == null)
             {
                 throw new ArgumentException(message);
             }

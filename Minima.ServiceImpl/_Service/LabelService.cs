@@ -180,6 +180,30 @@ namespace Minima.Service
             }
         }
 
+        //- @GetLabelByFriendlyTitle-//
+        public Label GetLabelByFriendlyTitle(String friendlyTitle)
+        {
+            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<LabelLINQ>(p => p.Blog);
+                LabelLINQ labelLinq = db.Labels.SingleOrDefault(p => p.LabelFriendlyTitle == friendlyTitle);
+                if (labelLinq == null)
+                {
+                    return null;
+                }
+                //+
+                return new Label
+                {
+                    BlogGuid = labelLinq.Blog.BlogGuid,
+                    FriendlyTitle = labelLinq.LabelFriendlyTitle,
+                    Guid = labelLinq.LabelGuid,
+                    Title = labelLinq.LabelTitle,
+                    BlogEntryCount = GetEntryCount(labelLinq, db)
+                };
+            }
+        }
+
         //+
         //- $GetEntryCount -//
         private Int32 GetEntryCount(LabelLINQ labelLinq, MinimaServiceLINQDataContext db)

@@ -65,6 +65,7 @@
       <Column Name="BlogEntryPostTime" Type="System.String" DbType="VarChar(7)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="BlogEntryModifyDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="BlogEntryPostDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="BlogEntryTypeId" Type="System.Int32" DbType="Int" CanBeNull="false" />
       <Association Name="BlogEntry_BlogEntryAuthor" Member="BlogEntryAuthors" OtherKey="BlogEntryId" Type="BlogEntryAuthor" />
       <Association Name="BlogEntry_BlogEntryUrlMapping" Member="BlogEntryUrlMappings" OtherKey="BlogEntryId" Type="BlogEntryUrlMapping" />
       <Association Name="BlogEntry_Comment" Member="Comments" OtherKey="BlogEntryId" Type="Comment" />
@@ -72,6 +73,7 @@
       <Association Name="Blog_BlogEntry" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
       <Association Name="BlogEntryCommentAllowStatus_BlogEntry" Member="BlogEntryCommentAllowStatus" ThisKey="BlogEntryCommentAllowStatusId" Type="BlogEntryCommentAllowStatus" IsForeignKey="true" />
       <Association Name="BlogEntryStatus_BlogEntry" Member="BlogEntryStatus" ThisKey="BlogEntryStatusId" Type="BlogEntryStatus" IsForeignKey="true" />
+      <Association Name="BlogEntryType_BlogEntry" Member="BlogEntryType" ThisKey="BlogEntryTypeId" Type="BlogEntryType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntryAuthor" Member="BlogEntryAuthors">
@@ -146,6 +148,15 @@
       <Column Name="BlogImageGuid" Type="System.String" DbType="Char(36) NOT NULL" CanBeNull="false" />
       <Column Name="BlogImageData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="Blog_BlogImage" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="svc.BlogEntryType" Member="BlogEntryTypes">
+    <Type Name="BlogEntryType">
+      <Column Name="BlogEntryTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogEntryTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogEntryTypeExtra" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="BlogEntryTypeGuid" Type="System.String" DbType="Char(36)" CanBeNull="false" />
+      <Association Name="BlogEntryType_BlogEntry" Member="BlogEntries" OtherKey="BlogEntryTypeId" Type="BlogEntry" />
     </Type>
   </Table>
   <Function Name="svc.GetArchivedEntryList" Method="GetArchivedEntryList">
