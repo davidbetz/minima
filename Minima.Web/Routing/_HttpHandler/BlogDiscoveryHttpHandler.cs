@@ -17,7 +17,8 @@ namespace Minima.Web.Routing
         //- @ProcessRequest -//
         public void ProcessRequest(HttpContext context)
         {
-            String key = "BlogDiscovery_" + ContextItemSet.BlogGuid;
+            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            String key = "BlogDiscovery_" + blogGuid;
             if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
             {
                 StringBuilder xml = new StringBuilder();
@@ -38,13 +39,13 @@ namespace Minima.Web.Routing
                 xmlWriter.WriteAttributeString("name", "MetaWeblog");
                 xmlWriter.WriteAttributeString("preferred", "true");
                 xmlWriter.WriteAttributeString("apiLink", Themelia.Web.WebSection.CurrentUrl + "xml-rpc/");
-                xmlWriter.WriteAttributeString("blogID", ContextItemSet.BlogGuid);
+                xmlWriter.WriteAttributeString("blogID", blogGuid);
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteStartElement("api");
                 xmlWriter.WriteAttributeString("name", "Blogger");
                 xmlWriter.WriteAttributeString("preferred", "false");
                 xmlWriter.WriteAttributeString("apiLink", Themelia.Web.WebSection.CurrentUrl + "xml-rpc/");
-                xmlWriter.WriteAttributeString("blogID", ContextItemSet.BlogGuid);
+                xmlWriter.WriteAttributeString("blogID", blogGuid);
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndElement();

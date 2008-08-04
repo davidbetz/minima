@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 //+
 using Themelia.Web.Configuration;
 using Themelia.Web.Routing.Component;
@@ -16,7 +14,7 @@ namespace Minima.Web.Routing.Component
             //+
             preProcessorList.Add(new PreProcessorElement
             {
-                ProcessorType = "Minima.Web.Routing.HttpHandlerPreProcessor, Minima.Web"
+                ProcessorType = "Minima.Web.Routing.MinimaPreProcessor, Minima.Web"
             });
             mappedHandlerElementList.Add(new MappedHandlerElement
             {
@@ -25,6 +23,10 @@ namespace Minima.Web.Routing.Component
             handlerInjectorElementList.Add(new HandlerInjectorElement
             {
                 InjectorType = "Minima.Web.Routing.MinimaHandlerInjector, Minima.Web"
+            });
+            postProcessorList.Add(new PostProcessorElement
+            {
+                ProcessorType = "Minima.Web.Routing.MinimaPostProcessor, Minima.Web"
             });
         }
     }
