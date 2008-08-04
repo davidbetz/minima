@@ -20,10 +20,11 @@ namespace Minima.Web.Routing
         //- @ProcessRequest -//
         public void ProcessRequest(HttpContext context)
         {
-            String key = "SiteMap_" + ContextItemSet.BlogGuid;
+            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            String key = "SiteMap_" + blogGuid;
             if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
             {
-                List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(ContextItemSet.BlogGuid, 0, false);
+                List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, 0, false);
                 StringBuilder xml = new StringBuilder();
                 XmlWriter xmlWriter = XmlWriter.Create(xml);
                 xmlWriter.WriteProcessingInstruction("xml", @"version=""1.0"" encoding=""UTF-8""");
