@@ -65,33 +65,53 @@ namespace Minima.Service.Client
             }
         }
 
-        public BlogEntry GetSingleBlogEntry(String blogEntryGuid)
+        public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogEntryGuid, blogEntryGuid);
                 //+
-                return base.Channel.GetSingleBlogEntry(blogEntryGuid);
+                return base.Channel.GetSingleBlogEntry(blogEntryGuid, metaDataOnly);
             }
         }
 
-        public String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, List<Label> labelList, bool publish)
+        public String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, String blogEntryTypeGuid, List<Label> labelList, bool publish)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
                 //+
-                return base.Channel.PostBlogEntry(blogGuid, authorList, title, content, dateTime, labelList, publish);
+                return base.Channel.PostBlogEntry(blogGuid, authorList, title, content, dateTime, blogEntryTypeGuid, labelList, publish);
             }
         }
 
-        public void UpdateBlogEntry(String blogEntryGuid, String title, String content, List<Label> labelList, DateTime dateTime, bool publish)
+        public void UpdateBlogEntry(String blogEntryGuid, String title, String content, String blogEntryTypeGuid, List<Label> labelList, DateTime dateTime, bool publish)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogEntryGuid, blogEntryGuid);
                 //+
-                base.Channel.UpdateBlogEntry(blogEntryGuid, title, content, labelList, dateTime, publish);
+                base.Channel.UpdateBlogEntry(blogEntryGuid, title, content, blogEntryTypeGuid, labelList, dateTime, publish);
+            }
+        }
+
+        public List<BlogEntryType> GetBlogEntryTypeList(String blogGuid, List<String> guidList)
+        {
+            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
+            {
+                AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
+                //+
+                return base.Channel.GetBlogEntryTypeList(blogGuid, guidList);
+            }
+        }
+
+        public List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean metaDataOnly)
+        {
+            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
+            {
+                AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
+                //+
+                return base.Channel.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime, metaDataOnly);
             }
         }
     }
