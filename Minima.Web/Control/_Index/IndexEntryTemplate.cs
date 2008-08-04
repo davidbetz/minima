@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //+
 using Minima.Web.Helper;
-using System.Collections.Generic;
 using Minima.Service;
 //+
 namespace Minima.Web.Control
@@ -13,6 +14,8 @@ namespace Minima.Web.Control
         ListItemType type = new ListItemType();
         System.Web.HttpContext httpContext;
 
+        //+
+        //- @Ctor -//
         public IndexEntryTemplate(ListItemType type)
         {
             this.type = type;
@@ -20,6 +23,8 @@ namespace Minima.Web.Control
             httpContext = System.Web.HttpContext.Current;
         }
 
+        //+
+        //- @InstantiateIn -//
         public void InstantiateIn(System.Web.UI.Control container)
         {
             System.Web.UI.WebControls.PlaceHolder pane = new System.Web.UI.WebControls.PlaceHolder();
@@ -57,6 +62,21 @@ namespace Minima.Web.Control
                         map.Add("Text", (String)DataBinder.Eval(item.DataItem, "Title"));
                         link.Text = template.Interpolate(map);
                         pane.Controls.Add(link);
+                        //+
+                        List<Minima.Service.Label> labelList = (List<Minima.Service.Label>)DataBinder.Eval(item.DataItem, "LabelList");
+                        if (labelList != null && labelList.Count > 0)
+                        {
+                            Repeater rptLabel = new Repeater();
+                            rptLabel.DataSource = labelList.Select(label => new
+                            {
+                                Title = label.Title,
+                                Url = LabelHelper.GetLabelUrl(label)
+                            });
+                            rptLabel.HeaderTemplate = new IndexLabelListTemplate(ListItemType.Header);
+                            rptLabel.ItemTemplate = new IndexLabelListTemplate(ListItemType.Item);
+                            rptLabel.FooterTemplate = new IndexLabelListTemplate(ListItemType.Footer);
+                            pane.Controls.Add(rptLabel);
+                        }
                         //+
                         System.Web.UI.WebControls.Literal ddFooter = new System.Web.UI.WebControls.Literal();
                         ddFooter.Text = "</dd></dl>";
