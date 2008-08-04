@@ -176,5 +176,32 @@ namespace Minima.Configuration
                 return ConfigAccessor.ApplicationSettings<Boolean>("LinkAuthorToEmail");
             }
         }
+
+        //- @IndexHeadingSuffix -//
+        public static String IndexHeadingSuffix
+        {
+            get
+            {
+                return ConfigAccessor.ApplicationSettings("IndexHeadingSuffix", "Index");
+            }
+        }
+
+        //- @ArchiveHeadingSuffix -//
+        public static String ArchiveHeadingSuffix
+        {
+            get
+            {
+                return ConfigAccessor.ApplicationSettings("ArchiveHeadingSuffix", "Contents");
+            }
+        }
+
+        //- @LabelHeadingSuffix -//
+        public static String LabelHeadingSuffix
+        {
+            get
+            {
+                return ConfigAccessor.ApplicationSettings("LabelHeadingSuffix", "Label Contents");
+            }
+        }
     }
 }
