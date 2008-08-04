@@ -30,13 +30,13 @@ namespace Minima.Service.Client
             }
         }
 
-        public List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, Boolean includeContent)
+        public List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, BlogEntryRetreivalType blogEntryRetreivalType)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
                 //+
-                return base.Channel.GetBlogEntryList(blogGuid, count, activeOnly, includeContent);
+                return base.Channel.GetBlogEntryList(blogGuid, count, activeOnly, blogEntryRetreivalType);
             }
         }
 
