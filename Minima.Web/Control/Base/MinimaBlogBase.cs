@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 //+
 using Themelia.Tracing;
+using Themelia.Web;
 //+
 using Minima.Configuration;
 using Minima.Service;
@@ -24,7 +25,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                return HttpContext.Current.Items["BlogGuid"] as String;
+                return HttpData.GetScopedItem<String>("Minima", "BlogGuid");
             }
         }
 
@@ -33,13 +34,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                String label = String.Empty;
-                if (Context.Items["label"] != null)
-                {
-                    label = (String)Context.Items["label"];
-                }
-                //+
-                return label;
+                return HttpData.GetScopedItem<String>("Minima", "Label");
             }
         }
 
@@ -48,13 +43,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                String archive = String.Empty;
-                if (Context.Items["archive"] != null)
-                {
-                    archive = (String)Context.Items["archive"];
-                }
-                //+
-                return archive;
+                return HttpData.GetScopedItem<String>("Minima", "Archive");
             }
         }
 
@@ -63,41 +52,42 @@ namespace Minima.Web.Control
         {
             get
             {
-                String link = String.Empty;
-                if (Context.Items["link"] != null)
+                return HttpData.GetScopedItem<String>("Minima", "Link");
+            }
+        }
+
+        //- @Index -//
+        public Int32 Index
+        {
+            get
+            {
+                return HttpData.GetScopedItem<Int32>("Minima", "Index");
+            }
+        }
+
+        //- #AccessType -//
+        public AccessType AccessType
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(this.Link))
                 {
-                    link = (String)Context.Items["link"];
+                    return AccessType.Link;
+                }
+                if (!String.IsNullOrEmpty(this.Archive))
+                {
+                    return AccessType.Archive;
+                }
+                if (!String.IsNullOrEmpty(this.Label))
+                {
+                    return AccessType.Label;
+                }
+                if (this.Index > 0)
+                {
+                    return AccessType.Index;
                 }
                 //+
-                return link;
-            }
-        }
-
-        //- @IsLinkAccess -//
-        public Boolean IsLinkAccess
-        {
-            get
-            {
-                return !String.IsNullOrEmpty(this.Link);
-            }
-        }
-
-        //- @IsArchiveAccess -//
-        public Boolean IsArchiveAccess
-        {
-            get
-            {
-                return !String.IsNullOrEmpty(this.Archive);
-            }
-        }
-
-        //- @IsLabelAccess -//
-        public Boolean IsLabelAccess
-        {
-            get
-            {
-
-                return !String.IsNullOrEmpty(this.Label);
+                return AccessType.Default;
             }
         }
 
@@ -119,74 +109,80 @@ namespace Minima.Web.Control
         //- $GetDataSource -//
         private List<BlogEntry> GetDataSource()
         {
-            if (String.IsNullOrEmpty(ContextItemSet.BlogGuid))
+            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            if (String.IsNullOrEmpty(blogGuid))
             {
                 throw new ArgumentNullException("BlogGuid is required.");
             }
             //+
-            List<BlogEntry> blogEntryList = BlogAgent.GetNetBlogEntryList(ContextItemSet.BlogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
-            //+
-            BlogEntryActivity blogEntryActivity = new BlogEntryActivity();
-            blogEntryActivity.BlogEntryActivityBrowser = HttpContext.Current.Request.UserAgent;
-            blogEntryActivity.BlogEntryActivityTime = DateTime.Now;
-            blogEntryActivity.BlogEntryActivityAddress = HttpContext.Current.Request.ServerVariables["REMOTE_HOST"];
-            blogEntryActivity.BlogEntryActivitySessionId = (String)HttpContext.Current.Session["SessionId"];
-            blogEntryActivity.BlogEntryActivityTypeId = 0;
-            //+
-            if (this.IsLabelAccess)
+            List<BlogEntry> blogEntryList;
+            if (this.AccessType != AccessType.Index)
             {
-                blogEntryActivity.BlogEntryActivityTypeId = 6;
-                if (blogEntryList == null)
+                blogEntryList = BlogAgent.GetNetBlogEntryList(blogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
+                //+
+                HttpContext context = HttpContext.Current;
+                HttpRequest request = context.Request;
+                BlogEntryActivity blogEntryActivity = new BlogEntryActivity();
+                blogEntryActivity.BlogEntryActivityBrowser = request.UserAgent;
+                blogEntryActivity.BlogEntryActivityTime = DateTime.Now;
+                blogEntryActivity.BlogEntryActivityAddress = request.ServerVariables["REMOTE_HOST"];
+                blogEntryActivity.BlogEntryActivitySessionId = (String)context.Session["SessionId"];
+                blogEntryActivity.BlogEntryActivityTypeId = 0;
+                //+
+                if (this.AccessType == AccessType.Label)
                 {
-                    blogEntryActivity.BlogEntryActivityExtra = "Invalid label accessed";
-                    EmailReporter.Send("Invalid label accessed", this.Context);
-                }
-                blogEntryActivity.BlogEntryActivityExtra = this.Label;
-                blogEntryActivity.BlogEntryActivityTypeId = 2;
-            }
-            if (this.IsArchiveAccess)
-            {
-                String[] parts = this.Archive.Split("/".ToCharArray());
-                Int32 year = Int32.Parse(parts[0]);
-                Int32 month = Int32.Parse(parts[1]);
-                blogEntryActivity.BlogEntryActivityTypeId = 6;
-                if (blogEntryList == null)
-                {
-                    blogEntryActivity.BlogEntryActivityExtra = "Invalid year/month accessed";
-                    EmailReporter.Send("Invalid year/month accessed", this.Context);
-                }
-                blogEntryActivity.BlogEntryActivityExtra = this.Archive;
-                blogEntryActivity.BlogEntryActivityTypeId = 4;
-            }
-            if (this.IsLinkAccess)
-            {
-                if (blogEntryList != null)
-                {
-                    this.BlogEntryGuid = blogEntryList[0].Guid;
-                    blogEntryActivity.BlogEntryActivityTypeId = 3;
-                    blogEntryActivity.BlogEntryActivityExtra = this.Link;
-                }
-                else
-                {
-                    blogEntryActivity.BlogEntryActivityExtra = "Invalid URL accessed";
-                    EmailReporter.Send("Invalid URL accessed", this.Context);
                     blogEntryActivity.BlogEntryActivityTypeId = 6;
+                    if (blogEntryList == null)
+                    {
+                        blogEntryActivity.BlogEntryActivityExtra = "Invalid label accessed";
+                        EmailReporter.Send("Invalid label accessed", this.Context);
+                    }
+                    blogEntryActivity.BlogEntryActivityExtra = this.Label;
+                    blogEntryActivity.BlogEntryActivityTypeId = 2;
                 }
-            }
-            //+
-            if (blogEntryActivity.BlogEntryActivityTypeId == 0)
-            {
-                blogEntryActivity.BlogEntryActivityTypeId = 1;
-            }
-            //+
-            BlogEntryActivityAgent.ReportActivity(blogEntryActivity);
-            // it's none of the above.
-            if (blogEntryList == null || blogEntryList.Count < 1)
-            {
-                if (String.IsNullOrEmpty(this.Link) && String.IsNullOrEmpty(this.Archive) && String.IsNullOrEmpty(this.Label))
+                if (this.AccessType == AccessType.Archive)
                 {
-                    //blogEntryList = EntityDecorator.DecorateBlogEntryList(BlogAgent.GetBlogEntryList(MinimaConfiguration.BlogGuid, MinimaConfiguration.ViewableBlogEntryCount));
+                    String[] parts = this.Archive.Split("/".ToCharArray());
+                    Int32 year = Int32.Parse(parts[0]);
+                    Int32 month = Int32.Parse(parts[1]);
+                    blogEntryActivity.BlogEntryActivityTypeId = 6;
+                    if (blogEntryList == null)
+                    {
+                        blogEntryActivity.BlogEntryActivityExtra = "Invalid year/month accessed";
+                        EmailReporter.Send("Invalid year/month accessed", this.Context);
+                    }
+                    blogEntryActivity.BlogEntryActivityExtra = this.Archive;
+                    blogEntryActivity.BlogEntryActivityTypeId = 4;
                 }
+                if (this.AccessType == AccessType.Link)
+                {
+                    if (blogEntryList != null)
+                    {
+                        HttpData.SetScopedItem<String>("Minima", "BlogEntryTitle", blogEntryList[0].Title);
+                        //+
+                        this.BlogEntryGuid = blogEntryList[0].Guid;
+                        //+
+                        blogEntryActivity.BlogEntryActivityTypeId = 3;
+                        blogEntryActivity.BlogEntryActivityExtra = this.Link;
+                    }
+                    else
+                    {
+                        blogEntryActivity.BlogEntryActivityExtra = "Invalid URL accessed";
+                        EmailReporter.Send("Invalid URL accessed", this.Context);
+                        blogEntryActivity.BlogEntryActivityTypeId = 6;
+                    }
+                }
+                //+
+                if (blogEntryActivity.BlogEntryActivityTypeId == 0)
+                {
+                    blogEntryActivity.BlogEntryActivityTypeId = 1;
+                }
+                //+
+                BlogEntryActivityAgent.ReportActivity(blogEntryActivity);
+            }
+            else
+            {
+                blogEntryList = BlogAgent.GetBlogEntryListByDateRange(blogGuid, DateTime.Now, DateTime.Now, false);
             }
             //+
             return blogEntryList;
