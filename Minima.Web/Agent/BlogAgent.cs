@@ -22,18 +22,18 @@ namespace Minima.Web.Agent
         }
 
         //- @UpdateBlogEntry -//
-        public static void UpdateBlogEntry(String blogEntryGuid, String title, String content, List<Label> labelList, DateTime dateTime, Boolean publish)
+        public static void UpdateBlogEntry(String blogEntryGuid, String title, String content, String blogEntryTypeGuid, List<Label> labelList, DateTime dateTime, Boolean publish)
         {
-            UpdateBlogEntry(blogEntryGuid, title, content, labelList, dateTime, publish, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            UpdateBlogEntry(blogEntryGuid, title, content, blogEntryTypeGuid, labelList, dateTime, publish, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
         }
-        public static void UpdateBlogEntry(String blogEntryGuid, String title, String content, List<Label> labelList, DateTime dateTime, Boolean publish, String username, String password)
+        public static void UpdateBlogEntry(String blogEntryGuid, String title, String content, String blogEntryTypeGuid, List<Label> labelList, DateTime dateTime, Boolean publish, String username, String password)
         {
             using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
             {
                 blogClient.ClientCredentials.UserName.UserName = username;
                 blogClient.ClientCredentials.UserName.Password = password;
                 //+
-                blogClient.UpdateBlogEntry(blogEntryGuid, title, content, labelList, dateTime, publish);
+                blogClient.UpdateBlogEntry(blogEntryGuid, title, content, blogEntryTypeGuid, labelList, dateTime, publish);
             }
         }
 
@@ -68,16 +68,24 @@ namespace Minima.Web.Agent
         //- @GetSingleBlogEntry -//
         public static BlogEntry GetSingleBlogEntry(String blogEntryGuid)
         {
-            return GetSingleBlogEntry(blogEntryGuid, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            return GetSingleBlogEntry(blogEntryGuid, false, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
         }
         public static BlogEntry GetSingleBlogEntry(String blogEntryGuid, String username, String password)
+        {
+            return GetSingleBlogEntry(blogEntryGuid, false, username, password);
+        }
+        public static BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly)
+        {
+            return GetSingleBlogEntry(blogEntryGuid, metaDataOnly, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+        }
+        public static BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly, String username, String password)
         {
             using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
             {
                 blogClient.ClientCredentials.UserName.UserName = username;
                 blogClient.ClientCredentials.UserName.Password = password;
                 //+
-                return blogClient.GetSingleBlogEntry(blogEntryGuid);
+                return blogClient.GetSingleBlogEntry(blogEntryGuid, metaDataOnly);
             }
         }
 
@@ -98,18 +106,18 @@ namespace Minima.Web.Agent
         }
 
         //- @PostBlogEntry -//
-        public static String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, List<Label> labelList, Boolean publish)
+        public static String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, String blogEntryTypeGuid, List<Label> labelList, Boolean publish)
         {
-            return PostBlogEntry(blogGuid, authorList, title, content, dateTime, labelList, publish, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            return PostBlogEntry(blogGuid, authorList, title, content, dateTime, blogEntryTypeGuid, labelList, publish, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
         }
-        public static String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, List<Label> labelList, Boolean publish, String username, String password)
+        public static String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, String blogEntryTypeGuid, List<Label> labelList, Boolean publish, String username, String password)
         {
             using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
             {
                 blogClient.ClientCredentials.UserName.UserName = username;
                 blogClient.ClientCredentials.UserName.Password = password;
                 //+
-                return blogClient.PostBlogEntry(blogGuid, authorList, title, content, dateTime, labelList, publish);
+                return blogClient.PostBlogEntry(blogGuid, authorList, title, content, dateTime, blogEntryTypeGuid, labelList, publish);
             }
         }
 
@@ -134,6 +142,29 @@ namespace Minima.Web.Agent
                 blogClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
                 //+
                 return blogClient.GetNetBlogEntryList(blogGuid, label, archive, link, maxBlogEntryCount);
+            }
+        }
+
+        //- @GetBlogEntryTypeList -//
+        internal static List<BlogEntryType> GetBlogEntryTypeList(String blogGuid, List<String> guidList)
+        {
+            using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
+            {
+                blogClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
+                blogClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                //+
+                return blogClient.GetBlogEntryTypeList(blogGuid, guidList);
+            }
+        }
+
+        internal static List<BlogEntry> GetBlogEntryListByDateRange(string blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean metaDataOnly)
+        {
+            using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
+            {
+                blogClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
+                blogClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                //+
+                return blogClient.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime, metaDataOnly);
             }
         }
     }

@@ -56,5 +56,21 @@ namespace Minima.Web.Agent
                 return labelClient.GetLabelByTitle(title);
             }
         }
+
+        //- @GetLabelByFriendlyTitle -//
+        public static Label GetLabelByFriendlyTitle(String friendlyTitle)
+        {
+            return GetLabelByFriendlyTitle(friendlyTitle, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+        }
+        public static Label GetLabelByFriendlyTitle(String friendlyTitle, String username, String password)
+        {
+            using (LabelClient labelClient = new LabelClient(MinimaConfiguration.ActiveLabelServiceEndpoint))
+            {
+                labelClient.ClientCredentials.UserName.UserName = username;
+                labelClient.ClientCredentials.UserName.Password = password;
+                //+
+                return labelClient.GetLabelByFriendlyTitle(friendlyTitle);
+            }
+        }
     }
 }
