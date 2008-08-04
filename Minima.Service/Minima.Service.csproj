@@ -74,6 +74,7 @@
     <Compile Include="_DataContract\AllowCommentStatus.cs" />
     <Compile Include="_DataContract\BlogImage.cs" />
     <Compile Include="_DataContract\BlogEntryType.cs" />
+    <Compile Include="_DataContract\BlogEntryRetreivalType.cs" />
     <Compile Include="_DataContract\Tag.cs" />
     <Compile Include="_DataContract\LabelCount.cs" />
     <Compile Include="_DataContract\LastAction.cs" />

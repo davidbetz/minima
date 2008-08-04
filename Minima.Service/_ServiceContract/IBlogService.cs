@@ -36,7 +36,7 @@ namespace Minima.Service
         //- GetBlogEntryList -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, Boolean includeContent);
+        List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, BlogEntryRetreivalType blogEntryRetreivalType);
 
         //- GetArchivedEntryList -//
         [OperationContract]
