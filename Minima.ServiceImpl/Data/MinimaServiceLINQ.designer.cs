@@ -64,6 +64,9 @@ namespace Minima.Service.Data.Context
     partial void InsertBlogImage(Minima.Service.Data.Entity.BlogImage instance);
     partial void UpdateBlogImage(Minima.Service.Data.Entity.BlogImage instance);
     partial void DeleteBlogImage(Minima.Service.Data.Entity.BlogImage instance);
+    partial void InsertBlogEntryType(Minima.Service.Data.Entity.BlogEntryType instance);
+    partial void UpdateBlogEntryType(Minima.Service.Data.Entity.BlogEntryType instance);
+    partial void DeleteBlogEntryType(Minima.Service.Data.Entity.BlogEntryType instance);
     #endregion
 		
 		public MinimaServiceLINQDataContext() : 
@@ -197,6 +200,14 @@ namespace Minima.Service.Data.Context
 			get
 			{
 				return this.GetTable<Minima.Service.Data.Entity.BlogImage>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Minima.Service.Data.Entity.BlogEntryType> BlogEntryTypes
+		{
+			get
+			{
+				return this.GetTable<Minima.Service.Data.Entity.BlogEntryType>();
 			}
 		}
 		
@@ -1113,6 +1124,8 @@ namespace Minima.Service.Data.Entity
 		
 		private System.DateTime _BlogEntryPostDateTime;
 		
+		private int _BlogEntryTypeId;
+		
 		private EntitySet<BlogEntryAuthor> _BlogEntryAuthors;
 		
 		private EntitySet<BlogEntryUrlMapping> _BlogEntryUrlMappings;
@@ -1126,6 +1139,8 @@ namespace Minima.Service.Data.Entity
 		private EntityRef<BlogEntryCommentAllowStatus> _BlogEntryCommentAllowStatus;
 		
 		private EntityRef<BlogEntryStatus> _BlogEntryStatus;
+		
+		private EntityRef<BlogEntryType> _BlogEntryType;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1157,6 +1172,8 @@ namespace Minima.Service.Data.Entity
     partial void OnBlogEntryModifyDateTimeChanged();
     partial void OnBlogEntryPostDateTimeChanging(System.DateTime value);
     partial void OnBlogEntryPostDateTimeChanged();
+    partial void OnBlogEntryTypeIdChanging(int value);
+    partial void OnBlogEntryTypeIdChanged();
     #endregion
 		
 		public BlogEntry()
@@ -1168,6 +1185,7 @@ namespace Minima.Service.Data.Entity
 			this._Blog = default(EntityRef<Blog>);
 			this._BlogEntryCommentAllowStatus = default(EntityRef<BlogEntryCommentAllowStatus>);
 			this._BlogEntryStatus = default(EntityRef<BlogEntryStatus>);
+			this._BlogEntryType = default(EntityRef<BlogEntryType>);
 			OnCreated();
 		}
 		
@@ -1443,6 +1461,30 @@ namespace Minima.Service.Data.Entity
 			}
 		}
 		
+		[Column(Storage="_BlogEntryTypeId", DbType="Int")]
+		public int BlogEntryTypeId
+		{
+			get
+			{
+				return this._BlogEntryTypeId;
+			}
+			set
+			{
+				if ((this._BlogEntryTypeId != value))
+				{
+					if (this._BlogEntryType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBlogEntryTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._BlogEntryTypeId = value;
+					this.SendPropertyChanged("BlogEntryTypeId");
+					this.OnBlogEntryTypeIdChanged();
+				}
+			}
+		}
+		
 		[Association(Name="BlogEntry_BlogEntryAuthor", Storage="_BlogEntryAuthors", OtherKey="BlogEntryId")]
 		public EntitySet<BlogEntryAuthor> BlogEntryAuthors
 		{
@@ -1593,6 +1635,40 @@ namespace Minima.Service.Data.Entity
 						this._BlogEntryStatusId = default(int);
 					}
 					this.SendPropertyChanged("BlogEntryStatus");
+				}
+			}
+		}
+		
+		[Association(Name="BlogEntryType_BlogEntry", Storage="_BlogEntryType", ThisKey="BlogEntryTypeId", IsForeignKey=true)]
+		public BlogEntryType BlogEntryType
+		{
+			get
+			{
+				return this._BlogEntryType.Entity;
+			}
+			set
+			{
+				BlogEntryType previousValue = this._BlogEntryType.Entity;
+				if (((previousValue != value) 
+							|| (this._BlogEntryType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BlogEntryType.Entity = null;
+						previousValue.BlogEntries.Remove(this);
+					}
+					this._BlogEntryType.Entity = value;
+					if ((value != null))
+					{
+						value.BlogEntries.Add(this);
+						this._BlogEntryTypeId = value.BlogEntryTypeId;
+					}
+					else
+					{
+						this._BlogEntryTypeId = default(int);
+					}
+					this.SendPropertyChanged("BlogEntryType");
 				}
 			}
 		}
@@ -3123,6 +3199,168 @@ namespace Minima.Service.Data.Entity
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[Table(Name="svc.BlogEntryType")]
+	public partial class BlogEntryType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BlogEntryTypeId;
+		
+		private string _BlogEntryTypeName;
+		
+		private string _BlogEntryTypeExtra;
+		
+		private string _BlogEntryTypeGuid;
+		
+		private EntitySet<BlogEntry> _BlogEntries;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBlogEntryTypeIdChanging(int value);
+    partial void OnBlogEntryTypeIdChanged();
+    partial void OnBlogEntryTypeNameChanging(string value);
+    partial void OnBlogEntryTypeNameChanged();
+    partial void OnBlogEntryTypeExtraChanging(string value);
+    partial void OnBlogEntryTypeExtraChanged();
+    partial void OnBlogEntryTypeGuidChanging(string value);
+    partial void OnBlogEntryTypeGuidChanged();
+    #endregion
+		
+		public BlogEntryType()
+		{
+			this._BlogEntries = new EntitySet<BlogEntry>(new Action<BlogEntry>(this.attach_BlogEntries), new Action<BlogEntry>(this.detach_BlogEntries));
+			OnCreated();
+		}
+		
+		[Column(Storage="_BlogEntryTypeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BlogEntryTypeId
+		{
+			get
+			{
+				return this._BlogEntryTypeId;
+			}
+			set
+			{
+				if ((this._BlogEntryTypeId != value))
+				{
+					this.OnBlogEntryTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._BlogEntryTypeId = value;
+					this.SendPropertyChanged("BlogEntryTypeId");
+					this.OnBlogEntryTypeIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogEntryTypeName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string BlogEntryTypeName
+		{
+			get
+			{
+				return this._BlogEntryTypeName;
+			}
+			set
+			{
+				if ((this._BlogEntryTypeName != value))
+				{
+					this.OnBlogEntryTypeNameChanging(value);
+					this.SendPropertyChanging();
+					this._BlogEntryTypeName = value;
+					this.SendPropertyChanged("BlogEntryTypeName");
+					this.OnBlogEntryTypeNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogEntryTypeExtra", DbType="NVarChar(1000)")]
+		public string BlogEntryTypeExtra
+		{
+			get
+			{
+				return this._BlogEntryTypeExtra;
+			}
+			set
+			{
+				if ((this._BlogEntryTypeExtra != value))
+				{
+					this.OnBlogEntryTypeExtraChanging(value);
+					this.SendPropertyChanging();
+					this._BlogEntryTypeExtra = value;
+					this.SendPropertyChanged("BlogEntryTypeExtra");
+					this.OnBlogEntryTypeExtraChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogEntryTypeGuid", DbType="Char(36)", CanBeNull=false)]
+		public string BlogEntryTypeGuid
+		{
+			get
+			{
+				return this._BlogEntryTypeGuid;
+			}
+			set
+			{
+				if ((this._BlogEntryTypeGuid != value))
+				{
+					this.OnBlogEntryTypeGuidChanging(value);
+					this.SendPropertyChanging();
+					this._BlogEntryTypeGuid = value;
+					this.SendPropertyChanged("BlogEntryTypeGuid");
+					this.OnBlogEntryTypeGuidChanged();
+				}
+			}
+		}
+		
+		[Association(Name="BlogEntryType_BlogEntry", Storage="_BlogEntries", OtherKey="BlogEntryTypeId")]
+		public EntitySet<BlogEntry> BlogEntries
+		{
+			get
+			{
+				return this._BlogEntries;
+			}
+			set
+			{
+				this._BlogEntries.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_BlogEntries(BlogEntry entity)
+		{
+			this.SendPropertyChanging();
+			entity.BlogEntryType = this;
+		}
+		
+		private void detach_BlogEntries(BlogEntry entity)
+		{
+			this.SendPropertyChanging();
+			entity.BlogEntryType = null;
 		}
 	}
 	
