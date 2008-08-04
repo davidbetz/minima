@@ -73,6 +73,8 @@
     <Compile Include="_DataContract\ArchiveCount.cs" />
     <Compile Include="_DataContract\AllowCommentStatus.cs" />
     <Compile Include="_DataContract\BlogImage.cs" />
+    <Compile Include="_DataContract\BlogEntryType.cs" />
+    <Compile Include="_DataContract\Tag.cs" />
     <Compile Include="_DataContract\LabelCount.cs" />
     <Compile Include="_DataContract\LastAction.cs" />
     <Compile Include="_DataContract\IMinimaEntity.cs" />

@@ -38,6 +38,11 @@ namespace Minima.Service.Client
             return base.Channel.GetLabelByTitle(title);
         }
 
+        public Label GetLabelByFriendlyTitle(String friendlyTitle)
+        {
+            return base.Channel.GetLabelByFriendlyTitle(friendlyTitle);
+        }
+
         //- @GetBlogEntryLabelList -//
         public List<Label> GetBlogEntryLabelList(String blogEntryGuid)
         {

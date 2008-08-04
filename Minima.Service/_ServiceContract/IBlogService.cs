@@ -11,7 +11,7 @@ namespace Minima.Service
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
         [FaultContract(typeof(ArgumentNullException))]
-        String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, List<Label> labelList, Boolean publish);
+        String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, String blogEntryTypeGuid, List<Label> labelList, Boolean publish);
 
         //- DisableBlogEntry -//
         [OperationContract]
@@ -21,12 +21,12 @@ namespace Minima.Service
         //- UpdateBlogEntry -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        void UpdateBlogEntry(String blogEntryGuid, String title, String content, List<Label> labelList, DateTime dateTime, Boolean publish);
+        void UpdateBlogEntry(String blogEntryGuid, String title, String content, String blogEntryTypeGuid, List<Label> labelList, DateTime dateTime, Boolean publish);
 
         //- GetSingleBlogEntry -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        BlogEntry GetSingleBlogEntry(String blogEntryGuid);
+        BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly);
 
         //- GetNetBlogEntryList -//
         [OperationContract]
@@ -52,5 +52,16 @@ namespace Minima.Service
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
         List<BlogMetaData> GetBlogListForAssociatedAuthor(String authorEmail);
+
+        //- GetBlogListForAssociatedAuthor -//
+        [OperationContract]
+        [FaultContract(typeof(ArgumentException))]
+        List<BlogEntryType> GetBlogEntryTypeList(String blogGuid, List<String> guidList);
+
+        //- GetBlogEntryListByDateRange -//
+        [OperationContract]
+        [FaultContract(typeof(ArgumentException))]
+        List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean metaDataOnly);
+
     }
 }

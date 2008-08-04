@@ -35,6 +35,10 @@ namespace Minima.Service
         [DataMember]
         public List<Label> LabelList { get; set; }
 
+        //- @BlogEntryTypeGuid -//
+        [DataMember]
+        public String BlogEntryTypeGuid { get; set; }
+
         //- @CommentList -//
         [DataMember]
         public List<Comment> CommentList { get; set; }
