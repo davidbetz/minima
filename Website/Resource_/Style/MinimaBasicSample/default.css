@@ -422,6 +422,22 @@ font-weight: bold;
 
 .index-series h2
 {
+display: inline;
 font-family:Tahoma,Verdana,Arial,sans-serif;
 font-size:160%;
+}
+
+.index-year-list 
+{
+display: inline;
+margin-bottom: 10px;
+margin-left: 5px;
+margin-top: 2px;
+padding: 0;
+}
+
+.index-year-list li
+{
+display: inline;
+font-family:Tahoma,Verdana,Arial,sans-serif;
 }
