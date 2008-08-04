@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+//+
+using Minima.Service;
+//+
 namespace Minima.Web.Control
 {
     public class IndexEntry
@@ -20,5 +24,8 @@ namespace Minima.Web.Control
 
         //- @DateTimeDisplay -//
         public String DateTimeDisplay { get; set; }
+
+        //- @LabelList -//
+        public List<Label> LabelList { get; set; }
     }
 }

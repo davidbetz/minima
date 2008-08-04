@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+//+
 using Minima.Service;
 //+
 namespace Minima.Web.Control
@@ -10,11 +12,12 @@ namespace Minima.Web.Control
     [ToolboxData("<{0}:IndexListSeries runat=\"server\"></{0}:IndexListSeries>")]
     public class IndexListSeries : MinimaListUserControlBase
     {
+        private Repeater yearRepeater;
+
         //+
         //- @Ctor -//
-        public IndexListSeries(List<IndexEntry> blogEntryDataSource)
+        public IndexListSeries( )
         {
-            this.BlogEntryDataSource = blogEntryDataSource;
         }
 
         //+
@@ -29,6 +32,9 @@ namespace Minima.Web.Control
 
         //- @BlogEntryDataSource -//
         public List<IndexEntry> BlogEntryDataSource { get; set; }
+
+        //- @YearDataSource -//
+        public List<Int32> YearDataSource { get; set; }
 
         //+
         //- #GetDataSource -//
@@ -62,6 +68,23 @@ namespace Minima.Web.Control
             return rpt;
         }
 
+        //- #__BuildYearRepeaterControl -//
+        protected System.Web.UI.WebControls.Repeater __BuildYearRepeaterControl()
+        {
+            System.Web.UI.WebControls.Repeater rpt = new System.Web.UI.WebControls.Repeater();
+            this.yearRepeater = rpt;
+            rpt.HeaderTemplate = new IndexListSeriesYearTemplate(ListItemType.Header);
+            rpt.ItemTemplate = new IndexListSeriesYearTemplate(ListItemType.Item);
+            rpt.FooterTemplate = new IndexListSeriesYearTemplate(ListItemType.Footer);
+            rpt.DataSource = this.YearDataSource;
+            this.Load += delegate
+            {
+                rpt.DataBind();
+            };
+            rpt.ID = "rptIndexListYearSeries";
+            return rpt;
+        }
+
         //- #__BuildControlTree -//
         protected override void __BuildControlTree(Themelia.Web.Control.DataUserControlBase __ctrl)
         {
@@ -74,8 +97,12 @@ namespace Minima.Web.Control
             __parser.AddParsedSubObject(new LiteralControl(String.Format("<div class=\"{0}\">", listCssClass)));
             __parser.AddParsedSubObject(new LiteralControl(String.Format("<h2>{0} {1}</h2>", this.Year, this.HeadingSuffix)));
             //+
+            System.Web.UI.WebControls.Repeater yearRepeater = this.__BuildYearRepeaterControl();
+            __parser.AddParsedSubObject(yearRepeater);
+            //+
             System.Web.UI.WebControls.Repeater repeater = this.__BuildRepeaterControl();
             __parser.AddParsedSubObject(repeater);
+            //+
             __parser.AddParsedSubObject(new LiteralControl("</div>"));
         }
     }
