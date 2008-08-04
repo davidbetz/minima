@@ -90,18 +90,18 @@ namespace Minima.Web.Agent
         }
 
         //- @GetBlogEntryList -//
-        public static List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 maxEntryCount, Boolean includeContent)
+        public static List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 maxEntryCount, BlogEntryRetreivalType blogEntryRetreivalType)
         {
-            return GetBlogEntryList(blogGuid, maxEntryCount, includeContent, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            return GetBlogEntryList(blogGuid, maxEntryCount, blogEntryRetreivalType, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
         }
-        public static List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 maxEntryCount, Boolean includeContent, String username, String password)
+        public static List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 maxEntryCount, BlogEntryRetreivalType blogEntryRetreivalType, String username, String password)
         {
             using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
             {
                 blogClient.ClientCredentials.UserName.UserName = username;
                 blogClient.ClientCredentials.UserName.Password = password;
                 //+
-                return blogClient.GetBlogEntryList(blogGuid, maxEntryCount, true, includeContent);
+                return blogClient.GetBlogEntryList(blogGuid, maxEntryCount, true, blogEntryRetreivalType);
             }
         }
 
