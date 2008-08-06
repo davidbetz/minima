@@ -52,7 +52,7 @@ namespace Minima.Web.Control
                             if (month > 0)
                             {
                                 Func<IndexEntry, Boolean> blogEntryListForMonth = be => be.PostDateTime.Month == month;
-                                List<IndexEntry> blogEntryList = indexListSeries.BlogEntryDataSource.Where(blogEntryListForMonth).ToList();
+                                List<IndexEntry> blogEntryList = indexListSeries.BlogEntryDataSource.Where(blogEntryListForMonth).OrderBy(p=>p.PostDateTime).ToList();
                                 if (blogEntryList.Count > 0)
                                 {
                                     literal.Controls.Add(new IndexEntryList(AccessType.Index, blogEntryList)

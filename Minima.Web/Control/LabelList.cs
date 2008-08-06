@@ -11,28 +11,7 @@ namespace Minima.Web.Control
     [PartialCachingAttribute(3600, null, null, null, null, false)]
     public class LabelList : MinimaListUserControlBase
     {
-        //+
-        //- $ArchiveEntryTemplate -//
-        private class LabelTemplate : ITemplate
-        {
-            public void InstantiateIn(System.Web.UI.Control container)
-            {
-                System.Web.UI.WebControls.Literal literal = new System.Web.UI.WebControls.Literal();
-                literal.DataBinding += new EventHandler(delegate(Object sender, EventArgs ea)
-                {
-                    IDataItemContainer item = (IDataItemContainer)container;
-                    String url = DataBinder.Eval(item.DataItem, "Url").ToString();
-                    String title = DataBinder.Eval(item.DataItem, "Title").ToString();
-                    String entryCount = DataBinder.Eval(item.DataItem, "EntryCount").ToString();
-                    //+
-                    literal.Text = @"<li><a href=""{Url}"">{Title} ({EntryCount})</a></li>"
-                        .Replace("{Url}", url)
-                        .Replace("{Title}", title)
-                        .Replace("{EntryCount}", entryCount);
-                });
-                container.Controls.Add(literal);
-            }
-        }
+        List<Label> rawDataSource;
 
         //+
         //- @Heading -//
@@ -40,6 +19,23 @@ namespace Minima.Web.Control
 
         //- @ListCssClass -//
         public String ListCssClass { get; set; }
+
+        //- @TemplateType -//
+        public Type TemplateType { get; set; }
+
+        //- @RawDataSource -//
+        public List<Label> RawDataSource
+        {
+            get
+            {
+                if (rawDataSource == null)
+                {
+                    this.rawDataSource = LabelAgent.GetBlogLabelList(this.BlogGuid);
+                }
+                //+
+                return rawDataSource;
+            }
+        }
 
         //+
         //- @Ctor -//
@@ -49,8 +45,7 @@ namespace Minima.Web.Control
         //- #GetDataSource -//
         protected override Object GetDataSource()
         {
-            List<Label> labelList = LabelAgent.GetBlogLabelList(this.BlogGuid);
-            return labelList.Select(label => new
+            return rawDataSource.OrderBy(p => p.Title).Select(label => new
             {
                 Title = label.Title,
                 Url = LabelHelper.GetLabelUrl(label),
@@ -58,12 +53,30 @@ namespace Minima.Web.Control
             });
         }
 
+        //- $GetTemplate -//
+        private ITemplate GetTemplate(System.Web.UI.WebControls.ListItemType type)
+        {
+            String listCssClass = "labels";
+            if (!String.IsNullOrEmpty(this.ListCssClass))
+            {
+                listCssClass = this.ListCssClass;
+            }
+            if (this.TemplateType == null)
+            {
+                return LabelListTemplateFactory.CreateTemplate(LabelListTemplateFactory.TemplateType.Linear, type, listCssClass, this.RawDataSource);
+            }
+            //+
+            return (ITemplate)Themelia.Activation.ObjectCreator.Create(this.TemplateType, type, listCssClass, this.RawDataSource);
+        }
+
         //- #__BuildRepeaterControl -//
         protected override System.Web.UI.WebControls.Repeater __BuildRepeaterControl()
         {
             System.Web.UI.WebControls.Repeater rpt = new System.Web.UI.WebControls.Repeater();
             this.repeater = rpt;
-            rpt.ItemTemplate = new LabelTemplate();
+            rpt.HeaderTemplate = GetTemplate(System.Web.UI.WebControls.ListItemType.Header);
+            rpt.ItemTemplate = GetTemplate(System.Web.UI.WebControls.ListItemType.Item);
+            rpt.FooterTemplate = GetTemplate(System.Web.UI.WebControls.ListItemType.Footer);
             rpt.ID = "rptLabelList";
             return rpt;
         }
@@ -77,18 +90,10 @@ namespace Minima.Web.Control
             {
                 heading = this.Heading;
             }
-            String listCssClass = "labels";
-            if (!String.IsNullOrEmpty(this.ListCssClass))
-            {
-                listCssClass = this.ListCssClass;
-            }
             __parser.AddParsedSubObject(new LiteralControl("<h2>" + heading + "</h2>"));
-            __parser.AddParsedSubObject(new LiteralControl("<ul id=\"" + listCssClass + "\">"));
             //+
             System.Web.UI.WebControls.Repeater repeater = this.__BuildRepeaterControl();
             __parser.AddParsedSubObject(repeater);
-            //+
-            __parser.AddParsedSubObject(new LiteralControl("</ul>"));
         }
     }
 }
