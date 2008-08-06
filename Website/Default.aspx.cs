@@ -7,12 +7,6 @@ using Minima.Web.Agent;
 //+
 public partial class Default : System.Web.UI.Page
 {
-    //- $Information -//
-    private class Information
-    {
-        public const String PrimaryBlogGuid = "19277C41-7E4D-4AE0-A196-25F45AC48762";
-    }
-
     //- #OnInit -//
     protected override void OnInit(EventArgs e)
     {
@@ -32,7 +26,8 @@ public partial class Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            BlogMetaData blogMetaData = BlogAgent.GetBlogMetaData(Information.PrimaryBlogGuid);
+            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            BlogMetaData blogMetaData = BlogAgent.GetBlogMetaData(blogGuid);
             //+
             rsd.Attributes.Add("href", WebConfiguration.Domain + "rsd.xml");
             wlwmanifest.Attributes.Add("href", WebConfiguration.Domain + "wlwmanifest.xml");

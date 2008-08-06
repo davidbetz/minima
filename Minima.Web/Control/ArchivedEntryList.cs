@@ -11,10 +11,21 @@ namespace Minima.Web.Control
     [PartialCachingAttribute(3600, null, null, null, null, false)]
     public class ArchivedEntryList : MinimaListUserControlBase
     {
+        public Boolean ShowEntryCount { get; set; }
+
         //+
         //- $ArchiveEntryTemplate -//
         private class ArchiveEntryTemplate : ITemplate
         {
+            Boolean showEntryCount;
+
+            //- @Ctor -//
+            public ArchiveEntryTemplate(params Object[] parameterArray)
+            {
+                showEntryCount = ((Boolean)parameterArray[0]);
+            }
+
+            //- @InstantiateIn -//
             public void InstantiateIn(System.Web.UI.Control container)
             {
                 System.Web.UI.WebControls.Literal literal = new System.Web.UI.WebControls.Literal();
@@ -26,7 +37,17 @@ namespace Minima.Web.Control
                     String year = DataBinder.Eval(item.DataItem, "Year").ToString();
                     String count = DataBinder.Eval(item.DataItem, "Count").ToString();
                     //+
-                    literal.Text = @"<li><a href=""{Url}"">{MonthText} {Year} ({Count})</a></li>"
+                    String template;
+                    if (showEntryCount)
+                    {
+                        template = @"<li><a href=""{Url}"">{MonthText} {Year} ({Count})</a></li>";
+                    }
+                    else
+                    {
+                        template = @"<li><a href=""{Url}"">{MonthText} {Year}</a></li>";
+                    }
+                    //+
+                    literal.Text = template
                         .Replace("{Url}", url)
                         .Replace("{MonthText}", monthText)
                         .Replace("{Year}", year)
@@ -67,7 +88,7 @@ namespace Minima.Web.Control
         {
             System.Web.UI.WebControls.Repeater rpt = new System.Web.UI.WebControls.Repeater();
             this.repeater = rpt;
-            rpt.ItemTemplate = new ArchiveEntryTemplate();
+            rpt.ItemTemplate = new ArchiveEntryTemplate(this.ShowEntryCount);
             rpt.ID = "rptArchivedEntryList";
             return rpt;
         }

@@ -291,10 +291,10 @@ namespace Minima.Web.Control
         {
             if (this.CustomPostTemplateType == null)
             {
-                return TemplateFactory.CreateTemplate(TemplateFactory.TemplateType.Post, this.AccessType == AccessType.Link, this.SupportCommenting);
+                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.AccessType, this.SupportCommenting);
             }
             //+
-            return ObjectCreator.CreateAs<ITemplate>(this.CustomPostTemplateType, this.AccessType == AccessType.Link, this.SupportCommenting);
+            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.AccessType, this.SupportCommenting);
         }
 
         //- $GetCommentTemplate -//
@@ -302,10 +302,10 @@ namespace Minima.Web.Control
         {
             if (this.CustomCommentTemplateType == null)
             {
-                return TemplateFactory.CreateTemplate(TemplateFactory.TemplateType.Comment);
+                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Comment);
             }
             //+
-            return ObjectCreator.CreateAs<ITemplate>(this.CustomCommentTemplateType);
+            return (ITemplate)ObjectCreator.CreateAs<ITemplate>(this.CustomCommentTemplateType);
         }
 
         //- $__BuildCommentFormViewControl -//
