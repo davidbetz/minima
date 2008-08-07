@@ -93,7 +93,7 @@ namespace Minima.Web.Control
         {
             Func<BlogEntry, IndexEntry> indexTransformation = p => new IndexEntry
             {
-                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.FirstOrDefault(), Themelia.Web.WebSection.Current),
                 Title = p.Title,
                 TypeGuid = p.BlogEntryTypeGuid,
                 PostDateTime = p.PostDateTime,
@@ -131,10 +131,13 @@ namespace Minima.Web.Control
             {
                 if (this.AccessType == AccessType.Archive || this.AccessType == AccessType.Label)
                 {
-                    indexDataSource = this.DataSource.Select(indexTransformation).ToList();
-                    indexEntryList = new IndexEntryList(this.AccessType, indexDataSource);
-                    indexEntryList.ID = "indexEntryList";
-                    this.Controls.Add(indexEntryList);
+                    if (this.DataSource != null && this.DataSource.Count > 0)
+                    {
+                        indexDataSource = this.DataSource.Select(indexTransformation).ToList();
+                        indexEntryList = new IndexEntryList(this.AccessType, indexDataSource);
+                        indexEntryList.ID = "indexEntryList";
+                        this.Controls.Add(indexEntryList);
+                    }
                 }
                 //+
                 phNoEntries = __BuildNoEntryPlaceHolderControl();
