@@ -67,7 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agent\ImageAgent.cs" />
+    <Compile Include="Agent\BlogEntryActivityAgent.cs" />
     <Compile Include="Api\MetaWeblog\BlogInfo.cs" />
     <Compile Include="Api\MetaWeblog\CategoryInfo.cs" />
     <Compile Include="Api\MetaWeblog\FullPost.cs" />
@@ -75,10 +75,6 @@
     <Compile Include="Api\MetaWeblog\MetaWeblogApi.cs" />
     <Compile Include="Api\MetaWeblog\Post.cs" />
     <Compile Include="Api\MetaWeblog\UrlInfo.cs" />
-    <Compile Include="Agent\BlogAgent.cs" />
-    <Compile Include="Agent\BlogEntryActivityAgent.cs" />
-    <Compile Include="Agent\CommentAgent.cs" />
-    <Compile Include="Agent\LabelAgent.cs" />
     <Compile Include="Control\Base\CommentInputBase.cs">
     </Compile>
     <Compile Include="Control\Base\LiteralContentControlBase.cs">

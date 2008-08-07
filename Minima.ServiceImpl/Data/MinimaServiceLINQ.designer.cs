@@ -3019,6 +3019,12 @@ namespace Minima.Service.Data.Entity
 		
 		private System.Data.Linq.Binary _BlogImageData;
 		
+		private System.DateTime _BlogImageCreateDateTime;
+		
+		private System.DateTime _BlogImageModifyDateTime;
+		
+		private string _BlogImageName;
+		
 		private EntityRef<Blog> _Blog;
 		
     #region Extensibility Method Definitions
@@ -3035,6 +3041,12 @@ namespace Minima.Service.Data.Entity
     partial void OnBlogImageGuidChanged();
     partial void OnBlogImageDataChanging(System.Data.Linq.Binary value);
     partial void OnBlogImageDataChanged();
+    partial void OnBlogImageCreateDateTimeChanging(System.DateTime value);
+    partial void OnBlogImageCreateDateTimeChanged();
+    partial void OnBlogImageModifyDateTimeChanging(System.DateTime value);
+    partial void OnBlogImageModifyDateTimeChanged();
+    partial void OnBlogImageNameChanging(string value);
+    partial void OnBlogImageNameChanged();
     #endregion
 		
 		public BlogImage()
@@ -3087,7 +3099,7 @@ namespace Minima.Service.Data.Entity
 			}
 		}
 		
-		[Column(Storage="_BlogImageContentType", DbType="VarChar(50)")]
+		[Column(Storage="_BlogImageContentType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string BlogImageContentType
 		{
 			get
@@ -3143,6 +3155,66 @@ namespace Minima.Service.Data.Entity
 					this._BlogImageData = value;
 					this.SendPropertyChanged("BlogImageData");
 					this.OnBlogImageDataChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogImageCreateDateTime", DbType="datetime NOT NULL", IsDbGenerated=true)]
+		public System.DateTime BlogImageCreateDateTime
+		{
+			get
+			{
+				return this._BlogImageCreateDateTime;
+			}
+			set
+			{
+				if ((this._BlogImageCreateDateTime != value))
+				{
+					this.OnBlogImageCreateDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._BlogImageCreateDateTime = value;
+					this.SendPropertyChanged("BlogImageCreateDateTime");
+					this.OnBlogImageCreateDateTimeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogImageModifyDateTime", DbType="datetime NOT NULL", IsDbGenerated=true)]
+		public System.DateTime BlogImageModifyDateTime
+		{
+			get
+			{
+				return this._BlogImageModifyDateTime;
+			}
+			set
+			{
+				if ((this._BlogImageModifyDateTime != value))
+				{
+					this.OnBlogImageModifyDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._BlogImageModifyDateTime = value;
+					this.SendPropertyChanged("BlogImageModifyDateTime");
+					this.OnBlogImageModifyDateTimeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BlogImageName", DbType="nvarchar(2000) NLL")]
+		public string BlogImageName
+		{
+			get
+			{
+				return this._BlogImageName;
+			}
+			set
+			{
+				if ((this._BlogImageName != value))
+				{
+					this.OnBlogImageNameChanging(value);
+					this.SendPropertyChanging();
+					this._BlogImageName = value;
+					this.SendPropertyChanged("BlogImageName");
+					this.OnBlogImageNameChanged();
 				}
 			}
 		}

@@ -30,11 +30,6 @@ namespace Minima.Web.Control
                 case ListItemType.Header:
                     lit.DataBinding += new EventHandler(delegate(Object sender, System.EventArgs ea)
                     {
-                        //PlaceHolder literal = (PlaceHolder)sender;
-                        //literal.Controls.Add(new Literal()
-                        //{
-                        //    Text = "<dl class=\"yir-entry-list\">"
-                        //});
                     });
                     break;
 

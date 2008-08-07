@@ -3,7 +3,7 @@ using System.ServiceModel.Activation;
 using System.Web;
 //+
 using Minima.Configuration;
-using Minima.Web.Agent;
+using Minima.Service.Agent;
 //+
 namespace Minima.Web.Service
 {

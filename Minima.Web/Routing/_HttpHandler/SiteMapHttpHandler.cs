@@ -5,7 +5,7 @@ using System.Web;
 using System.Xml;
 //+
 using Minima.Service;
-using Minima.Web.Agent;
+using Minima.Service.Agent;
 //+
 namespace Minima.Web.Routing
 {

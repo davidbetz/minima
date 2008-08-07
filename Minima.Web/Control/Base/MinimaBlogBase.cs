@@ -7,6 +7,7 @@ using Themelia.Web;
 //+
 using Minima.Configuration;
 using Minima.Service;
+using Minima.Service.Agent;
 using Minima.Web.Agent;
 using Minima.Web.Data.Entity;
 //+

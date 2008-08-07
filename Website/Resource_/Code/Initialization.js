@@ -38,12 +38,16 @@ var Initialization = {
                     valid = false;
                 }
                 
+                if($F('txtMath').length == 0){
+                    valid = false;
+                }
+                
                 if(valid==true) {
                     WCFClient.ICommentService.postNewComment($F('txtMath'), hfBlogEntryGuid.value, txtCommentAuthorName.value, txtCommentAuthorEmail.value, txtCommentWebsite.value, txtCommentText.value, function(r) {
                         switch(parseInt(r.PostNewCommentResult)) {
                             case 0:
                                 $('commentInput').hide( );
-                                $('commentInputCompleted').show( );
+                                $('commentInputCompleted').style.display = 'block';
                                 //+
                                 lblStatusMessage.update('<p>Comment saved.  All comments are moderated and may not show up for some time.</p>');
                                 break;
