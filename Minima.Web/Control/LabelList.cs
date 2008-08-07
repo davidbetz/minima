@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.UI;
 //+
 using Minima.Service;
-using Minima.Web.Agent;
+using Minima.Service.Agent;
 //+
 namespace Minima.Web.Control
 {

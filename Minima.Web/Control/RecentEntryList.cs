@@ -5,7 +5,7 @@ using System.Web.UI;
 //+
 using Minima.Configuration;
 using Minima.Service;
-using Minima.Web.Agent;
+using Minima.Service.Agent;
 using Minima.Web.Helper;
 //+
 namespace Minima.Web.Control

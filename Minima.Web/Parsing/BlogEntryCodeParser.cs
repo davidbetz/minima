@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Themelia;
 //+
 using Minima.Service;
-using Minima.Web.Agent;
+using Minima.Service.Agent;
 using Minima.Web.Helper;
 //+
 namespace Minima.Parsing

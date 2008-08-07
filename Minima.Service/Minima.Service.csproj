@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agent\BlogAgent.cs" />
+    <Compile Include="Agent\CommentAgent.cs" />
+    <Compile Include="Agent\ImageAgent.cs" />
+    <Compile Include="Agent\LabelAgent.cs" />
     <Compile Include="Client\BlogClient.cs" />
     <Compile Include="Client\CommentClient.cs" />
     <Compile Include="Client\AuthorClient.cs" />
@@ -86,6 +90,12 @@
     <Compile Include="_ServiceContract\ILabelService.cs" />
     <Compile Include="_ServiceContract\ITechnoratiService.cs" />
     <Compile Include="_ServiceContract\IBlogService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Minima.Configuration\Minima.Configuration.csproj">
+      <Project>{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}</Project>
+      <Name>Minima.Configuration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

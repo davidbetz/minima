@@ -2,8 +2,8 @@ using System;
 //+
 using Minima.Configuration;
 using Minima.Service;
+using Minima.Service.Agent;
 using Minima.Web;
-using Minima.Web.Agent;
 //+
 public partial class SecondBlogPage : System.Web.UI.Page
 {

@@ -49,8 +49,19 @@ namespace Minima.Web.Control
                         }
                         RepeaterItem item = (RepeaterItem)literal.NamingContainer;
                         Int32 year = Themelia.Parser.ParseInt32(item.DataItem);
+                        String yearPath = String.Empty;
+                        String webSection = Themelia.Web.WebSection.Current ?? String.Empty;
+                        if (webSection.ToLower() == "root")
+                        {
+                            webSection = String.Empty;
+                        }
+                        else
+                        {
+                            webSection = "/" + webSection;
+                        }
+                        yearPath = webSection + "/index/" + year.ToString();
                         //+
-                        literal.Text += String.Format("<li>{2}<a href=\"{0}\">{1}</a></li>", year, year, comma);
+                        literal.Text += String.Format("<li>{2}<a href=\"{0}\">{1}</a></li>", yearPath, year, comma);
                         this.first = false;
                     });
                     break;

@@ -7,6 +7,7 @@ using System.Web;
 using Themelia;
 using Themelia.Web;
 //+
+using Minima.Service.Agent;
 using Minima.Web.Routing.Component;
 //+
 namespace Minima.Web.Routing
@@ -65,7 +66,7 @@ namespace Minima.Web.Routing
                     labelTitle = labelMap.Pull(label);
                     if (String.IsNullOrEmpty(labelTitle))
                     {
-                        Minima.Service.Label labelEntity = Agent.LabelAgent.GetLabelByFriendlyTitle(label);
+                        Minima.Service.Label labelEntity = LabelAgent.GetLabelByFriendlyTitle(label);
                         if (labelEntity != null)
                         {
                             labelTitle = labelEntity.Title;

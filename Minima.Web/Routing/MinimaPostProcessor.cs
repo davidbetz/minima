@@ -24,7 +24,7 @@ namespace Minima.Web.Routing
             BlogMetaData blogMetaData = HttpData.GetScopedCacheItem<BlogMetaData>(Info.Minima, Info.BlogMetaData);
             if (blogMetaData == null)
             {
-                blogMetaData = Minima.Web.Agent.BlogAgent.GetBlogMetaData(blogGuid);
+                blogMetaData = Minima.Service.Agent.BlogAgent.GetBlogMetaData(blogGuid);
                 HttpData.SetScopedCacheItem<BlogMetaData>(Info.Minima, Info.BlogMetaData, blogMetaData);
             }
             //+

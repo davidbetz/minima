@@ -6,7 +6,7 @@ using System.Web;
 //+
 using Themelia.Web;
 //+
-using Minima.Web.Agent;
+using Minima.Service.Agent;
 using Minima.Service.Client;
 using Minima.Service;
 //+
