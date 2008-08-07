@@ -6,9 +6,9 @@ namespace Minima.Web.Helper
 {
     public static class BlogEntryHelper
     {
-        public static String BuildBlogEntry(DateTime postDateTime, String urlMapping, String webSection)
+        //- @BuildBlogEntry -//
+        public static String BuildBlogEntry(DateTime postDateTime, String urlMapping, Uri baseBlogUri)
         {
-            Uri baseBlogUri = WebSection.GetUrl(webSection);
             String baseBlogUrl = baseBlogUri.AbsoluteUri;
             //+
             StringBuilder blogEntryPage = new StringBuilder();
@@ -35,6 +35,12 @@ namespace Minima.Web.Helper
             }
             //+
             return String.Format("{0}{1}", baseBlogUrl, blogEntryPage.ToString());
+        }
+        public static String BuildBlogEntry(DateTime postDateTime, String urlMapping, String webSection)
+        {
+            Uri baseBlogUri = WebSection.GetUrl(webSection);
+            //+
+            return BuildBlogEntry(postDateTime, urlMapping, baseBlogUri);
         }
     }
 }
