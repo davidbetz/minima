@@ -323,7 +323,6 @@ namespace Minima.Service
                 //+ label?
                 if (!String.IsNullOrEmpty(label))
                 {
-
                     blogEntryLinqList = (from be in db.BlogEntries
                                          join lbe in db.LabelBlogEntries on be.BlogEntryId equals lbe.BlogEntryId
                                          join l in db.Labels on lbe.LabelId equals l.LabelId
@@ -336,7 +335,7 @@ namespace Minima.Service
                     String[] parts = archive.Split("/".ToCharArray());
                     Int32 year = Int32.Parse(parts[0]);
                     Int32 month = Int32.Parse(parts[1]);
-                    blogEntryLinqList = db.BlogEntries.Where(p => p.BlogEntryPostDateTime.Month == month && p.BlogEntryPostDateTime.Year == year && p.BlogEntryStatusId == 1);
+                    blogEntryLinqList = db.BlogEntries.Where(p => p.BlogId == blogLinq.BlogId && p.BlogEntryPostDateTime.Month == month && p.BlogEntryPostDateTime.Year == year && p.BlogEntryStatusId == 1);
                 }
                 //+ link?
                 if ((blogEntryLinqList == null || blogEntryLinqList.Count() == 0) && !String.IsNullOrEmpty(link))
