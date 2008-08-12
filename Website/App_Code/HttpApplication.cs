@@ -19,7 +19,7 @@ namespace Minima.Web
         {
             HttpContext ctx = HttpContext.Current;
             //+
-            EmailReporter.Send("Uncaught Exception", ctx);
+            EmailReporter.SendAsHtml(typeof(Themelia.Web.Tracing.HttpContextReportCreator), "Uncaught Exception", ctx);
         }
     }
 }

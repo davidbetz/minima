@@ -12,22 +12,16 @@ using Minima.Service;
 //+
 namespace Minima.Web.Routing
 {
-    public class ImageHttpHandler : IHttpHandler
+    public class ImageHttpHandler : Themelia.Web.Routing.ReusableNonSessionHttpHandler
     {
         public class Data
         {
             public const string HeaderName = "ImageContentType";
         }
 
-        //- @IsReusable -//
-        public Boolean IsReusable
-        {
-            get { return true; }
-        }
-
         //+
         //- @ProcessRequest -//
-        public void ProcessRequest(HttpContext context)
+        public override void ProcessRequest(HttpContext context)
         {
             if (Themelia.Web.Http.GetHttpPart(Http.Position.Penultima) == "blog"
                  && Themelia.Web.Http.GetHttpPart(Http.Position.Antepenultima) == "image")

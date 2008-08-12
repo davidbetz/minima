@@ -5,17 +5,10 @@ using System.Xml;
 //+
 namespace Minima.Web.Routing
 {
-    public class WindowsLiveWriterManifestHttpHandler : IHttpHandler
+    public class WindowsLiveWriterManifestHttpHandler : Themelia.Web.Routing.ReusableNonSessionHttpHandler
     {
-        //- @IsReusable -//
-        public Boolean IsReusable
-        {
-            get { return true; }
-        }
-
-        //+
         //- @ProcessRequest -//
-        public void ProcessRequest(HttpContext context)
+        public override void ProcessRequest(HttpContext context)
         {
             String key = "WindowsLiveWriterManifest_" + Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
             if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))

@@ -5,17 +5,10 @@ using System.Xml;
 //+
 namespace Minima.Web.Routing
 {
-    public class BlogDiscoveryHttpHandler : IHttpHandler
+    public class BlogDiscoveryHttpHandler : Themelia.Web.Routing.ReusableNonSessionHttpHandler
     {
-        //- @IsReusable -//
-        public Boolean IsReusable
-        {
-            get { return true; }
-        }
-
-        //+
         //- @ProcessRequest -//
-        public void ProcessRequest(HttpContext context)
+        public override void ProcessRequest(HttpContext context)
         {
             String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
             String key = "BlogDiscovery_" + blogGuid;

@@ -69,6 +69,15 @@ namespace Minima.Configuration
             }
         }
 
+        //- @EnableActivityLogging -//
+        public static Boolean EnableActivityLogging
+        {
+            get
+            {
+                return ConfigAccessor.ApplicationSettings<Boolean>("EnableActivityLogging", false);
+            }
+        }
+
         //- @EnableTracingViaSerialization -//
         public static Boolean EnableTracingViaSerialization
         {
