@@ -249,8 +249,15 @@ namespace Minima.Web.Control
                     pageTitle = String.Format("{0} {1}", this.Index, MinimaConfiguration.IndexHeadingSuffix);
                     break;
                 case AccessType.Link:
-                    String blogEntryTitle = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.BlogEntryTitle);
-                    pageTitle = blogEntryTitle;
+                    if (this.DataSource != null && this.DataSource.Count == 1)
+                    {
+                        String blogEntryTitle = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.BlogEntryTitle);
+                        pageTitle = blogEntryTitle;
+                    }
+                    else
+                    {
+                        pageTitle = GetDefaultHeader();
+                    }
                     break;
                 case AccessType.Label:
                     String labelName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.LabelTitle);
@@ -262,17 +269,26 @@ namespace Minima.Web.Control
                     pageTitle = String.Format("{0} {1} {2}", monthName, year, MinimaConfiguration.ArchiveHeadingSuffix);
                     break;
                 default:
-                    BlogMetaData blogMetaData = Themelia.Web.HttpData.GetScopedCacheItem<BlogMetaData>(Info.Minima, Info.BlogMetaData);
-                    if (blogMetaData != null)
-                    {
-                        pageTitle = blogMetaData.Title;
-                    }
+                    pageTitle = GetDefaultHeader();
                     break;
             }
             if (!String.IsNullOrEmpty(pageTitle))
             {
                 Themelia.Web.HttpData.SetScopedItem<String>(Info.Minima, Info.PageTitle, pageTitle);
             }
+        }
+
+        //- $SetDefaultHeader -//
+        private String GetDefaultHeader()
+        {
+            String pageTitle = String.Empty;
+            BlogMetaData blogMetaData = Themelia.Web.HttpData.GetScopedCacheItem<BlogMetaData>(Info.Minima, Info.BlogMetaData);
+            if (blogMetaData != null)
+            {
+                pageTitle = blogMetaData.Title;
+            }
+            //+
+            return pageTitle;
         }
 
         //+

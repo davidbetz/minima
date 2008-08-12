@@ -16,7 +16,7 @@
     <script src="/Resource_/Lib/Prominax/Trace.js" type="text/javascript"></script>
     <script src="/Resource_/Lib/Prominax/AspNet.js" type="text/javascript"></script>
     <script src="/Resource_/Lib/Prominax/WCF.js" type="text/javascript"></script>
-    <script src="/Resource_//Configuration.js" type="text/javascript"></script>
+    <script src="/Resource_/Code/Configuration.js" type="text/javascript"></script>
     <script src="/Resource_/Code/Initialization.js" type="text/javascript"></script>
 </head>
 <body>

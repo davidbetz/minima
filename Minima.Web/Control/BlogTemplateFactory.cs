@@ -45,16 +45,16 @@ namespace Minima.Web.Control
                     pCommentPerson.Attributes.Add("class", "comment-person");
                     divCommentBlock.Controls.Add(pCommentPerson);
                     //+
-                    String authorName;
+                    String authorName = name;
+                    if (String.IsNullOrEmpty(authorName))
+                    {
+                        authorName = "{ Anonymous }";
+                    }
                     if (!String.IsNullOrEmpty(website))
                     {
                         authorName = @"<a href=""{Website}"">{Name}</a>"
                             .Replace("{Website}", website)
-                            .Replace("{Name}", name);
-                    }
-                    else
-                    {
-                        authorName = name;
+                            .Replace("{Name}", authorName);
                     }
                     pCommentPerson.Controls.Add(new System.Web.UI.WebControls.Literal
                     {

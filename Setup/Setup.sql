@@ -18,7 +18,7 @@
 -- grant select, insert, update, delete on svc.BlogEntryAuthor to [MinimaSvcDbUser]
 -- grant select, insert, update, delete on svc.BlogEntryCommentAllowStatus to [MinimaSvcDbUser]
 -- grant select, insert, update, delete on svc.BlogEntryType to [MinimaSvcDbUser]
--- grant select, insert, update, delete on svc.BlogEntryImage to [MinimaSvcDbUser]
+-- grant select, insert, update, delete on svc.BlogImage to [MinimaSvcDbUser]
 -- grant select, insert, update, delete on svc.BlogEntryStatus to [MinimaSvcDbUser]
 -- grant select, insert, update, delete on svc.BlogEntryUrlMapping to [MinimaSvcDbUser]
 -- grant select, insert, update, delete on svc.Comment to [MinimaSvcDbUser]

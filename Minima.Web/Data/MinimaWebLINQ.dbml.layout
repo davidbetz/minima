@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.25" name="MinimaWebLINQ">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MinimaWebLINQ">
   <DataContextMoniker Name="/MinimaWebLINQDataContext" />
   <nestedChildShapes>
     <classShape Id="31eee6a9-4b4a-4796-abfe-4ab653fcc9fb" absoluteBounds="3.5, 0.875, 2, 2.2465844726562496">
@@ -33,19 +33,19 @@
         <elementListCompartment Id="1057403e-3f0b-46ee-936e-5b4e8bf73eab" absoluteBounds="5.765, 4.335, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ae734117-b0a1-4247-802e-5e5ef6caf212" absoluteBounds="3.5, 6.875, 2, 2.0822371419270835">
+    <classShape Id="ae734117-b0a1-4247-802e-5e5ef6caf212" absoluteBounds="3.25, 3.5, 2, 2.0822371419270835">
       <DataClassMoniker Name="/MinimaWebLINQDataContext/BlogEntryActivity" />
       <nestedChildShapes>
-        <elementListCompartment Id="09840f2e-6ead-4153-a368-f47f117c9e4b" absoluteBounds="3.515, 7.335, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="09840f2e-6ead-4153-a368-f47f117c9e4b" absoluteBounds="3.265, 3.96, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5b072e3e-699c-4d3b-842a-c8a28b2e54cc" absoluteBounds="0.75, 7.375, 2, 1.0961531575520844">
+    <classShape Id="5b072e3e-699c-4d3b-842a-c8a28b2e54cc" absoluteBounds="0.5, 4, 2, 1.0961531575520844">
       <DataClassMoniker Name="/MinimaWebLINQDataContext/BlogEntryActivityType" />
       <nestedChildShapes>
-        <elementListCompartment Id="e2721ab4-949b-4fd4-ba6b-58cca1aa6b02" absoluteBounds="0.765, 7.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e2721ab4-949b-4fd4-ba6b-58cca1aa6b02" absoluteBounds="0.515, 4.46, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 7.92307657877604); (3.5 : 7.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 4.54807657877604); (3.25 : 4.54807657877604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MinimaWebLINQDataContext/BlogEntryActivityType/BlogEntryActivityType_BlogEntryActivity" />
       <nodes>
         <classShapeMoniker Id="5b072e3e-699c-4d3b-842a-c8a28b2e54cc" />

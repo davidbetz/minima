@@ -11,7 +11,14 @@ namespace Minima.Web.Agent
             using (MinimaWebLINQDataContext db = new MinimaWebLINQDataContext(WebConfiguration.ConnectionString))
             {
                 db.BlogEntryActivities.InsertOnSubmit(blogEntryActivityLinq);
-                db.SubmitChanges();
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch(System.Exception ex)
+                {
+                    throw new System.ApplicationException("Unable to access BlogEntryActivity tables.  Either set EnableActivityLogging to false in web.config or check your web database settings.", ex);
+                }
             }
         }
     }

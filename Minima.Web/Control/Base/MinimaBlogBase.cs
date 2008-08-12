@@ -179,7 +179,10 @@ namespace Minima.Web.Control
                     blogEntryActivity.BlogEntryActivityTypeId = 1;
                 }
                 //+
-                BlogEntryActivityAgent.ReportActivity(blogEntryActivity);
+                if (MinimaConfiguration.EnableActivityLogging)
+                {
+                    BlogEntryActivityAgent.ReportActivity(blogEntryActivity);
+                }
             }
             //+
             return blogEntryList;

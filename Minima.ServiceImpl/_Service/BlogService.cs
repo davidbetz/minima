@@ -271,7 +271,6 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, Int32 maxBlogEntryCount)
         {
-            List<BlogEntry> blogEntryList = new List<BlogEntry>();
             IQueryable<BlogEntryLINQ> blogEntryLinqList = null;
             using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
             {
@@ -347,12 +346,9 @@ namespace Minima.Service
                     }
                 }
                 //+ other?
-                if (blogEntryLinqList == null || blogEntryLinqList.Count() == 0 || blogEntryList.Count < 1)
+                if (blogEntryLinqList == null || blogEntryLinqList.Count() == 0)
                 {
-                    if (String.IsNullOrEmpty(link) && String.IsNullOrEmpty(archive) && String.IsNullOrEmpty(label))
-                    {
-                        blogEntryLinqList = db.BlogEntries.Where(p => p.BlogId == blogLinq.BlogId && p.BlogEntryStatusId == 1);
-                    }
+                    blogEntryLinqList = db.BlogEntries.Where(p => p.BlogId == blogLinq.BlogId && p.BlogEntryStatusId == 1);
                 }
                 //+
                 return blogEntryLinqList
