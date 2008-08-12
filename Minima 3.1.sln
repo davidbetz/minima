@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website", "{873ADDA2-7363-40C9-AB73-D8C58AFF0A5B}"
 	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
 		TargetFramework = "3.5"
 		ProjectReferences = "{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}|Minima.Service.dll;{1F9C498C-F342-403E-8B30-F1A9E073AA9E}|Minima.Web.dll;{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}|Minima.Configuration.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Website"
@@ -19,6 +23,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website", "{873A
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2287"
 		StartServerOnDebug = "false"
 	EndProjectSection
 EndProject
@@ -40,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minima.Configuration", "Min
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Service", "Service", "{95D6DCD8-BF15-49AE-9DEA-25DCE98E30C9}"
 	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
 		TargetFramework = "3.5"
 		ProjectReferences = "{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}|Minima.Configuration.dll;{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}|Minima.Service.dll;{429709AD-E4C9-43F5-AF3C-8BFEF16AE01D}|Minima.ServiceImpl.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Service"
@@ -56,9 +65,38 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Service", "Service", "{95D6
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2288"
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs07.codeplex.com/
+		SccLocalPath0 = .
+		SccWebProject1 = true
+		SccProjectUniqueName1 = Website
+		SccProjectName1 = Website
+		SccLocalPath1 = Website
+		SccProjectEnlistmentChoice1 = 2
+		SccWebProject2 = true
+		SccProjectUniqueName2 = Service
+		SccProjectName2 = Service
+		SccLocalPath2 = Service
+		SccProjectEnlistmentChoice2 = 2
+		SccProjectUniqueName3 = Minima.Web\\Minima.Web.csproj
+		SccProjectName3 = Minima.Web
+		SccLocalPath3 = Minima.Web
+		SccProjectUniqueName4 = Minima.Configuration\\Minima.Configuration.csproj
+		SccProjectName4 = Minima.Configuration
+		SccLocalPath4 = Minima.Configuration
+		SccProjectUniqueName5 = Minima.ServiceImpl\\Minima.ServiceImpl.csproj
+		SccProjectName5 = Minima.ServiceImpl
+		SccLocalPath5 = Minima.ServiceImpl
+		SccProjectUniqueName6 = Minima.Service\\Minima.Service.csproj
+		SccProjectName6 = Minima.Service
+		SccLocalPath6 = Minima.Service
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
 		Debug|Any CPU = Debug|Any CPU
