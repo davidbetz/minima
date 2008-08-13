@@ -71,7 +71,7 @@ namespace Minima.Web.Routing
                     labelTitle = labelMap.Pull(label);
                     if (String.IsNullOrEmpty(labelTitle))
                     {
-                        Minima.Service.Label labelEntity = LabelAgent.GetLabelByFriendlyTitle(label);
+                        Minima.Service.Label labelEntity = LabelAgent.GetLabelByNetTitle(label);
                         if (labelEntity != null)
                         {
                             labelTitle = labelEntity.Title;

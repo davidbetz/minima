@@ -57,19 +57,19 @@ namespace Minima.Service.Agent
             }
         }
 
-        //- @GetLabelByFriendlyTitle -//
-        public static Label GetLabelByFriendlyTitle(String friendlyTitle)
+        //- @GetLabelByNetTitle -//
+        public static Label GetLabelByNetTitle(String friendlyTitle)
         {
-            return GetLabelByFriendlyTitle(friendlyTitle, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            return GetLabelByNetTitle(friendlyTitle, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
         }
-        public static Label GetLabelByFriendlyTitle(String friendlyTitle, String username, String password)
+        public static Label GetLabelByNetTitle(String friendlyTitle, String username, String password)
         {
             using (LabelClient labelClient = new LabelClient(MinimaConfiguration.ActiveLabelServiceEndpoint))
             {
                 labelClient.ClientCredentials.UserName.UserName = username;
                 labelClient.ClientCredentials.UserName.Password = password;
                 //+
-                return labelClient.GetLabelByFriendlyTitle(friendlyTitle);
+                return labelClient.GetLabelByNetTitle(friendlyTitle);
             }
         }
     }
