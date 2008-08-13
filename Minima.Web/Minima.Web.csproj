@@ -141,7 +141,6 @@
     </Compile>
     <Compile Include="Helper\MediaHelper.cs" />
     <Compile Include="Control\MinimaForm.cs" />
-    <Compile Include="Module\FilterHttpModule.cs" />
     <Compile Include="Module\FixDomainHttpModule.cs" />
     <Compile Include="NonClosingMemoryStream.cs" />
     <Compile Include="Parsing\BlogEntryCodeParser.cs" />
