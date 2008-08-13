@@ -2,6 +2,8 @@
 using System.IdentityModel.Selectors;
 using System.Security;
 //+
+using Themelia.Service;
+//+
 namespace Minima.Service.Validation
 {
     public class MinimaUserNamePasswordValidator : UserNamePasswordValidator

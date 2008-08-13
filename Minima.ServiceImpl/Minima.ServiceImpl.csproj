@@ -71,14 +71,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\Themelia.dll</HintPath>
     </Reference>
+    <Reference Include="Themelia.Service, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\Themelia.Service.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behavior\MinimaSystemSecurityBehavior.cs" />
     <Compile Include="Behavior\MinimaSecureOperationInvoker.cs" />
     <Compile Include="_Security\BlogPermission.cs" />
     <Compile Include="Behavior\MinimaBlogSecurityBehavior.cs" />
-    <Compile Include="Behavior\ErrorHandler.cs" />
-    <Compile Include="Behavior\FaultHandlingBehavior.cs" />
     <Compile Include="_Service\BlogService.cs" />
     <Compile Include="_Service\CommentService.cs" />
     <Compile Include="_Service\AuthorService.cs" />
@@ -94,7 +96,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="_Security\PermissionLevel.cs" />
-    <Compile Include="_Fault\FaultThower.cs" />
     <Compile Include="Helper\GuidCreator.cs" />
     <Compile Include="MinimaMessageHeaderHelper.cs" />
     <Compile Include="_Security\SecurityValidator.cs" />
@@ -104,11 +105,9 @@
     <Compile Include="Technorati\TechnoratiPing.cs" />
     <Compile Include="Technorati\TechnoratiResponseMessage.cs" />
     <Compile Include="UriBuilder.cs" />
-    <Compile Include="_Fault\FaultCreator.cs" />
     <Compile Include="ServiceConfiguration.cs" />
     <Compile Include="_Service\ImageService.cs" />
     <Compile Include="_Service\TechnoratiService.cs" />
-    <Compile Include="_Fault\UnhandledException.cs" />
     <Compile Include="Activation\MinimaServiceHostFactory.cs" />
     <Compile Include="_Service\LabelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
