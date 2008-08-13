@@ -57,6 +57,11 @@ namespace Minima.Web.Routing
                 String label = uri.Substring(uri.IndexOf(finderLabel) + finderLabel.Length, uri.Length - (uri.IndexOf(finderLabel) + finderLabel.Length));
                 if (!String.IsNullOrEmpty(label))
                 {
+                    Int32 extraSlash = label.IndexOf("/");
+                    if (extraSlash > -1)
+                    {
+                        label = label.Substring(0, extraSlash);
+                    }
                     String labelTitle = String.Empty;
                     Map labelMap = HttpData.GetScopedCacheItem<Map>("Minima", "LabelMap");
                     if (labelMap == null)
