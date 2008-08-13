@@ -2,6 +2,8 @@
 using System.Security;
 using System.ServiceModel.Dispatcher;
 //+
+using Themelia.Service;
+//+
 namespace Minima.Service.Behavior
 {
     public class MinimaSecureOperationInvoker : IOperationInvoker
