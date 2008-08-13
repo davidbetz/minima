@@ -180,14 +180,14 @@ namespace Minima.Service
             }
         }
 
-        //- @GetLabelByFriendlyTitle-//
-        public Label GetLabelByFriendlyTitle(String friendlyTitle)
+        //- @GetLabelByNetTitle-//
+        public Label GetLabelByNetTitle(String netTitle)
         {
             using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
             {
                 DataLoadOptions options = new DataLoadOptions();
                 options.LoadWith<LabelLINQ>(p => p.Blog);
-                LabelLINQ labelLinq = db.Labels.SingleOrDefault(p => p.LabelFriendlyTitle == friendlyTitle);
+                LabelLINQ labelLinq = db.Labels.SingleOrDefault(p => p.LabelNetTitle == netTitle);
                 if (labelLinq == null)
                 {
                     return null;

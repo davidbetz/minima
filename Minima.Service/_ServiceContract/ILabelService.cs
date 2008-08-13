@@ -21,9 +21,9 @@ namespace Minima.Service
         [OperationContract]
         Label GetLabelByTitle(String title);
 
-        //- GetLabelByFriendlyTitle -//
+        //- GetLabelByNetTitle -//
         [OperationContract]
-        Label GetLabelByFriendlyTitle(String friendlyTitle);
+        Label GetLabelByNetTitle(String friendlyTitle);
 
         //- GetBlogEntryLabelList -//
         [OperationContract]

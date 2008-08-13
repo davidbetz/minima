@@ -38,9 +38,9 @@ namespace Minima.Service.Client
             return base.Channel.GetLabelByTitle(title);
         }
 
-        public Label GetLabelByFriendlyTitle(String friendlyTitle)
+        public Label GetLabelByNetTitle(String friendlyTitle)
         {
-            return base.Channel.GetLabelByFriendlyTitle(friendlyTitle);
+            return base.Channel.GetLabelByNetTitle(friendlyTitle);
         }
 
         //- @GetBlogEntryLabelList -//
