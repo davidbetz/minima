@@ -11,6 +11,7 @@ using Minima.Service.Agent;
 using Minima.Web.Helper;
 using Minima.Web.Routing.Component;
 using Minima.Web.Tracing;
+using Themelia.Web.Routing.Data;
 //+
 namespace Minima.Web.Api.MetaWeblog
 {
@@ -138,24 +139,28 @@ namespace Minima.Web.Api.MetaWeblog
         [XmlRpcMethod("blogger.getUsersBlogs")]
         public BlogInfo[] GetUsersBlogs(String key, String emailAddress, String password)
         {
-            //TraceManager.RecordMethodCall("XmlRpcApi::GetUsersBlogs", new Object[] { key, emailAddress, password });
-            ////+
-            //List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
-            ////+
-            //MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)Themelia.Web.Routing.Component.Settings.Components["Minima"];
-            //List<MinimaComponentSetting.MinimaInfo> parameterList = minimaComponentSetting.GetParameterList();
-            ////+
-            //var netBlogList = (from b in blogList
-            //                   join e in parameterList on b.Guid equals e.BlogGuid
-            //                   select new BlogInfo
-            //                   {
-            //                       blogid = e.BlogGuid,
-            //                       blogName = b.Title,
-            //                       url = Themelia.Web.WebSection.GetUrl(e.WebSection).AbsoluteUri
-            //                   }).ToArray();
-            ////+
-            //return netBlogList;
-            return null;
+            TraceManager.RecordMethodCall("XmlRpcApi::GetUsersBlogs", new Object[] { key, emailAddress, password });
+            //+
+            List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
+            //+
+            Themelia.Map webSectionPathMap = new Themelia.Map();
+            foreach (WebSectionData webSectionData in WebSectionDataList.AllWebSectionData)
+            {
+                String blogGuid = webSectionData.ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
+                webSectionPathMap.Add(blogGuid, webSectionData.Path);
+            }
+            List<String> registeredBlogGuidList = webSectionPathMap.GetKeyList();
+            //+
+            var netBlogList = (from b in blogList
+                               where registeredBlogGuidList.Contains(b.Guid)
+                               select new BlogInfo
+                               {
+                                   blogid = b.Guid,
+                                   blogName = b.Title,
+                                   url = Themelia.Web.WebSection.GetUrl(webSectionPathMap[b.Guid]).AbsoluteUri
+                               }).ToArray();
+            //+
+            return netBlogList;
         }
 
         //- @MetaWeblogNewPost -//
