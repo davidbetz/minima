@@ -2,29 +2,30 @@
 //+
 using Themelia.Web.Configuration;
 using Themelia.Web.Routing.Component;
+using Themelia.Web.Routing.Data;
 //+
 namespace Minima.Web.Routing.Component
 {
     public class MinimaComponent : ComponentBase
     {
         //- @Register -//
-        public override void Register(List<PreProcessorElement> preProcessorList, List<MappedHandlerElement> mappedHandlerElementList, List<HandlerInjectorElement> handlerInjectorElementList, List<MidProcessorElement> midProcessorList, List<FallThroughProcessorElement> fallThroughProcessorList, List<PostProcessorElement> postProcessorList)
+        public override void Register(PreProcessorDataList preProcessorDataList, MappedHandlerFactoryDataList mappedHandlerDataList, HandlerInjectorDataList handlerInjectorDataList, MidProcessorDataList midProcessorList, FallThroughProcessorDataList fallThroughProcessorList, PostProcessorDataList postProcessorList, PostStateProcessorDataList postStateProcessorDataList)
         {
-            this.ComponentSettingType = typeof(MinimaComponentSetting);
+            //this.ComponentSettingType = typeof(MinimaComponentSetting);
             //+
-            preProcessorList.Add(new PreProcessorElement
+            preProcessorDataList.Add(new PreProcessorData
             {
                 ProcessorType = "Minima.Web.Routing.MinimaPreProcessor, Minima.Web"
             });
-            mappedHandlerElementList.Add(new MappedHandlerElement
+            mappedHandlerDataList.Add(new MappedHandlerFactoryData
             {
-                MappedHandlerType = "Minima.Web.Routing.MappedHttpHandlerFactory, Minima.Web"
+                FactoryType = "Minima.Web.Routing.MappedHttpHandlerFactory, Minima.Web"
             });
-            handlerInjectorElementList.Add(new HandlerInjectorElement
+            handlerInjectorDataList.Add(new HandlerInjectorData
             {
                 InjectorType = "Minima.Web.Routing.MinimaHandlerInjector, Minima.Web"
             });
-            postProcessorList.Add(new PostProcessorElement
+            postProcessorList.Add(new PostProcessorData
             {
                 ProcessorType = "Minima.Web.Routing.MinimaPostProcessor, Minima.Web"
             });

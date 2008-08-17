@@ -8,7 +8,7 @@ namespace Minima.Web.Routing
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)
         {
-            String blogPage = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogPage");
+            String blogPage = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogPage);
             context.Response.ContentType = "text/html";
             System.Web.UI.PageParser.GetCompiledPageInstance(blogPage, null, context).ProcessRequest(context);
         }

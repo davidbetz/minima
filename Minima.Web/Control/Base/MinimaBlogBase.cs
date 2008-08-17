@@ -26,7 +26,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                return HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+                return HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             }
         }
 
@@ -35,7 +35,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                return HttpData.GetScopedItem<String>("Minima", "Label");
+                return HttpData.GetScopedItem<String>(Info.Scope, "Label");
             }
         }
 
@@ -44,7 +44,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                return HttpData.GetScopedItem<String>("Minima", "Archive");
+                return HttpData.GetScopedItem<String>(Info.Scope, "Archive");
             }
         }
 
@@ -53,7 +53,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                return HttpData.GetScopedItem<String>("Minima", "Link");
+                return HttpData.GetScopedItem<String>(Info.Scope, "Link");
             }
         }
 
@@ -62,7 +62,7 @@ namespace Minima.Web.Control
         {
             get
             {
-                return HttpData.GetScopedItem<Int32>("Minima", "Index");
+                return HttpData.GetScopedItem<Int32>(Info.Scope, "Index");
             }
         }
 
@@ -110,7 +110,7 @@ namespace Minima.Web.Control
         //- $GetDataSource -//
         private List<BlogEntry> GetDataSource()
         {
-            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             if (String.IsNullOrEmpty(blogGuid))
             {
                 throw new ArgumentNullException("BlogGuid is required.");
