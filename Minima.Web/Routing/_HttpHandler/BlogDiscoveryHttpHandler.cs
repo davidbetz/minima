@@ -10,7 +10,7 @@ namespace Minima.Web.Routing
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)
         {
-            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             String key = "BlogDiscovery_" + blogGuid;
             if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
             {

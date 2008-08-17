@@ -76,11 +76,14 @@ namespace Minima.Web.Control
             rpt.HeaderTemplate = new IndexListSeriesYearTemplate(ListItemType.Header);
             rpt.ItemTemplate = new IndexListSeriesYearTemplate(ListItemType.Item);
             rpt.FooterTemplate = new IndexListSeriesYearTemplate(ListItemType.Footer);
-            rpt.DataSource = this.YearDataSource;
-            this.Load += delegate
+            if (this.YearDataSource.Count > 0)
             {
-                rpt.DataBind();
-            };
+                rpt.DataSource = this.YearDataSource;
+                this.Load += delegate
+                {
+                    rpt.DataBind();
+                };
+            }
             rpt.ID = "rptIndexListYearSeries";
             return rpt;
         }

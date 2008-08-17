@@ -47,9 +47,9 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Themelia, Version=1.6.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
+    <Reference Include="Themelia, Version=0.8.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Assembly\Themelia.dll</HintPath>
+      <HintPath>..\..\..\_REFERENCE\Debug\Themelia.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

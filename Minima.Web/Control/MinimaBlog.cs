@@ -38,20 +38,6 @@ namespace Minima.Web.Control
         protected View vCommentForm;
         protected View vCommentClosed;
 
-        //- $Info -//
-        private class Info
-        {
-            public const string Minima = "Minima";
-            //+
-            public const string ArchiveMonth = "ArchiveMonth";
-            public const string ArchiveYear = "ArchiveYear";
-            public const string BlogGuid = "BlogGuid";
-            public const string BlogEntryTitle = "BlogEntryTitle";
-            public const string BlogMetaData = "BlogMetaData";
-            public const string LabelTitle = "LabelTitle";
-            public const string PageTitle = "PageTitle";
-        }
-
         //+
         //- @CustomCommentInputControl -//
         public CommentInputBase CustomCommentInputControl { get; set; }
@@ -81,7 +67,7 @@ namespace Minima.Web.Control
             //+ parser
             this.CodeParserSeries = new Themelia.CodeParsing.CodeParserSeries()
             {
-                CodeParserId = Info.Minima
+                CodeParserId = Info.Scope
             };
             this.CodeParserSeries.Add(new BlogEntryCodeParser());
             this.CodeParserSeries.Add(new AmazonAffiliateCodeParser());
@@ -105,7 +91,7 @@ namespace Minima.Web.Control
             //+ index
             if (this.Index > 0)
             {
-                String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.BlogGuid);
+                String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
                 DateTime startDateTime = new DateTime(this.Index, 1, 1, 0, 0, 0);
                 DateTime endDateTime = new DateTime(this.Index, 12, 31, 23, 59, 59);
                 //+
@@ -251,7 +237,7 @@ namespace Minima.Web.Control
                 case AccessType.Link:
                     if (this.DataSource != null && this.DataSource.Count == 1)
                     {
-                        String blogEntryTitle = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.BlogEntryTitle);
+                        String blogEntryTitle = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogEntryTitle);
                         pageTitle = blogEntryTitle;
                     }
                     else
@@ -260,12 +246,12 @@ namespace Minima.Web.Control
                     }
                     break;
                 case AccessType.Label:
-                    String labelName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.LabelTitle);
+                    String labelName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.LabelTitle);
                     pageTitle = String.Format("{0} {1}", labelName, MinimaConfiguration.LabelHeadingSuffix);
                     break;
                 case AccessType.Archive:
-                    String monthName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Minima, Info.ArchiveMonth);
-                    Int32 year = Themelia.Web.HttpData.GetScopedItem<Int32>(Info.Minima, Info.ArchiveYear);
+                    String monthName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.ArchiveMonth);
+                    Int32 year = Themelia.Web.HttpData.GetScopedItem<Int32>(Info.Scope, Info.ArchiveYear);
                     pageTitle = String.Format("{0} {1} {2}", monthName, year, MinimaConfiguration.ArchiveHeadingSuffix);
                     break;
                 default:
@@ -274,7 +260,7 @@ namespace Minima.Web.Control
             }
             if (!String.IsNullOrEmpty(pageTitle))
             {
-                Themelia.Web.HttpData.SetScopedItem<String>(Info.Minima, Info.PageTitle, pageTitle);
+                Themelia.Web.HttpData.SetScopedItem<String>(Info.Scope, Info.PageTitle, pageTitle);
             }
         }
 
@@ -282,7 +268,7 @@ namespace Minima.Web.Control
         private String GetDefaultHeader()
         {
             String pageTitle = String.Empty;
-            BlogMetaData blogMetaData = Themelia.Web.HttpData.GetScopedCacheItem<BlogMetaData>(Info.Minima, Info.BlogMetaData);
+            BlogMetaData blogMetaData = Themelia.Web.HttpData.GetScopedCacheItem<BlogMetaData>(Info.Scope, Info.BlogMetaData);
             if (blogMetaData != null)
             {
                 pageTitle = blogMetaData.Title;

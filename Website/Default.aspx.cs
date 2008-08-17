@@ -15,7 +15,7 @@ public partial class Default : System.Web.UI.Page
         phLabelList.Controls.Add(new Minima.Web.Control.LabelList());
         phArchivedEntryList.Controls.Add(new Minima.Web.Control.ArchivedEntryList());
         phRecentEntryList.Controls.Add(new Minima.Web.Control.RecentEntryList());
-        phRecentEntryListSecondary.Controls.Add(new Minima.Web.Control.RecentEntryList { WebSection = "second", Heading = "Second Blog", HeadingIsLink = true });
+        phRecentEntryListSecondary.Controls.Add(new Minima.Web.Control.RecentEntryList { WebSectionName = "second", Heading = "Second Blog", HeadingIsLink = true });
         phMinimaBlog.Controls.Add(new Minima.Web.Control.MinimaBlog());
         //+
         base.OnInit(e);
@@ -26,7 +26,7 @@ public partial class Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             BlogMetaData blogMetaData = BlogAgent.GetBlogMetaData(blogGuid);
             //+
             rsd.Attributes.Add("href", WebConfiguration.Domain + "rsd.xml");
@@ -54,7 +54,7 @@ public partial class Default : System.Web.UI.Page
     //- #OnPreRender -//
     protected override void OnPreRender(EventArgs e)
     {
-        String pageTitle = Themelia.Web.HttpData.GetScopedItem<String>("Minima", "PageTitle");
+        String pageTitle = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, "PageTitle");
         if (!String.IsNullOrEmpty(pageTitle))
         {
             this.Page.Title = pageTitle;

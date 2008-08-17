@@ -1,6 +1,8 @@
 using System;
 //+
 using Minima.Web.Routing;
+using Themelia.Web;
+using Themelia.Web.Routing.Data;
 //+
 namespace Minima.Web.Control
 {
@@ -15,17 +17,18 @@ namespace Minima.Web.Control
         {
             get
             {
-                if (this.WebSection != Themelia.Web.WebSection.Current)
+                WebSectionData webSection = WebSection.CurrentData;
+                if (this.WebSectionName != webSection.Name)
                 {
-                    return WebSectionAccessor.GetBlogGuid(this.WebSection);
+                    return WebSectionDataList.AllWebSectionData[this.WebSectionName].ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
                 }
                 //+
-                return Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+                return HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             }
         }
 
         //- @WebSection -//
-        public String WebSection
+        public String WebSectionName
         {
             get
             {
@@ -33,7 +36,7 @@ namespace Minima.Web.Control
                 {
                     return webSection;
                 }
-                return Themelia.Web.WebSection.Current;
+                return Themelia.Web.WebSection.CurrentData.Name;
             }
             set
             {

@@ -6,6 +6,7 @@ using System.Web;
 //+
 using Themelia;
 using Themelia.Web;
+using Themelia.Web.Routing.Data;
 //+
 using Minima.Service.Agent;
 using Minima.Web.Routing.Component;
@@ -17,32 +18,30 @@ namespace Minima.Web.Routing
         //- @OnPreHttpHandlerExecute -//
         public override void OnPreHttpHandlerExecute(HttpContext context, params Object[] parameterArray)
         {
-            List<MinimaComponentSetting.MinimaInfo> parameterList = MinimaComponentSetting.CurrentComponentSetting.GetParameterList();
-            MinimaComponentSetting.MinimaInfo currentInfo = parameterList.FirstOrDefault(u => u.WebSection != null && Themelia.Web.WebSection.Current.ToLower().Contains(u.WebSection.ToLower()));
-            if (currentInfo != null)
+            WebSectionData webSectionData = WebSection.CurrentData;
+            ComponentData componentData = webSectionData.ComponentDataList[Info.Key];
+            if (componentData != null)
             {
-                HttpData.SetScopedItem<String>("Minima", "BlogGuid", currentInfo.BlogGuid);
+                ParameterData blogGuidParameter = componentData.ParameterDataList[Info.BlogGuid];
+                if (blogGuidParameter != null)
+                {
+                    HttpData.SetScopedItem<String>(Info.Scope, Info.BlogGuid, blogGuidParameter.Value);
+                }
             }
             //+ url
             DetectDestination();
             //+ blog page
-            currentInfo = parameterList.FirstOrDefault(u => u.WebSection != null && Http.Url.AbsolutePath.ToLower().Contains(u.WebSection.ToLower()));
-            if (currentInfo != null)
+            if (componentData != null)
             {
-                HttpData.SetScopedItem<String>("Minima", "BlogPage", currentInfo.Page);
-            }
-            else
-            {
-                currentInfo = parameterList.FirstOrDefault(u => u.WebSection != null && u.WebSection.ToLower().Equals("Root", StringComparison.InvariantCultureIgnoreCase));
-                if (currentInfo != null)
+                ParameterData blogPageParameter = componentData.ParameterDataList[Info.BlogPage];
+                if (blogPageParameter != null)
                 {
-                    HttpData.SetScopedItem<String>("Minima", "BlogPage", currentInfo.Page);
-                }
-                else
-                {
-                    HttpData.SetScopedItem<String>("Minima", "BlogPage", "~/default.aspx");
+                    HttpData.SetScopedItem<String>(Info.Scope, Info.BlogPage, blogPageParameter.Value);
+                    return;
                 }
             }
+            //+ blog page fallback
+            HttpData.SetScopedItem<String>(Info.Scope, Info.BlogPage, "~/default.aspx");
         }
 
         //- $DetectDestination -//
@@ -63,7 +62,7 @@ namespace Minima.Web.Routing
                         label = label.Substring(0, extraSlash);
                     }
                     String labelTitle = String.Empty;
-                    Map labelMap = HttpData.GetScopedCacheItem<Map>("Minima", "LabelMap");
+                    Map labelMap = HttpData.GetScopedCacheItem<Map>(Info.Scope, "LabelMap");
                     if (labelMap == null)
                     {
                         labelMap = new Map();
@@ -76,11 +75,11 @@ namespace Minima.Web.Routing
                         {
                             labelTitle = labelEntity.Title;
                             labelMap.Add(label, labelTitle);
-                            HttpData.SetScopedCacheItem<Map>("Minima", "LabelMap", labelMap);
+                            HttpData.SetScopedCacheItem<Map>(Info.Scope, "LabelMap", labelMap);
                         }
                     }
-                    HttpData.SetScopedItem<String>("Minima", "Label", label);
-                    HttpData.SetScopedItem<String>("Minima", "LabelTitle", labelTitle);
+                    HttpData.SetScopedItem<String>(Info.Scope, "Label", label);
+                    HttpData.SetScopedItem<String>(Info.Scope, "LabelTitle", labelTitle);
                     return;
                 }
             }
@@ -101,10 +100,9 @@ namespace Minima.Web.Routing
                 Regex a = new Regex(linkCapturePattern);
                 Match m = a.Match(linkMatchUri);
                 String link = m.Captures[0].Value;
-                // link = link.Substring(0, link.Length - 5);
                 if (!String.IsNullOrEmpty(link))
                 {
-                    HttpData.SetScopedItem<String>("Minima", "Link", link);
+                    HttpData.SetScopedItem<String>(Info.Scope, "Link", link);
                     return;
                 }
             }
@@ -118,7 +116,7 @@ namespace Minima.Web.Routing
                 link = link.Substring(0, link.Length - 5);
                 if (!String.IsNullOrEmpty(link))
                 {
-                    HttpData.SetScopedItem<String>("Minima", "Link", link);
+                    HttpData.SetScopedItem<String>(Info.Scope, "Link", link);
                     return;
                 }
             }
@@ -132,11 +130,11 @@ namespace Minima.Web.Routing
                 String archive = m.Captures[0].Value;
                 if (!String.IsNullOrEmpty(archive))
                 {
-                    HttpData.SetScopedItem<String>("Minima", "Archive", archive);
+                    HttpData.SetScopedItem<String>(Info.Scope, "Archive", archive);
                     //+
                     String[] parts = archive.Split('/');
-                    HttpData.SetScopedItem<Int32>("Minima", "ArchiveYear", Parser.ParseInt32(parts[0], 0));
-                    HttpData.SetScopedItem<Int32>("Minima", "ArchiveMonth", Parser.ParseInt32(parts[1], 0));
+                    HttpData.SetScopedItem<Int32>(Info.Scope, "ArchiveYear", Parser.ParseInt32(parts[0], 0));
+                    HttpData.SetScopedItem<Int32>(Info.Scope, "ArchiveMonth", Parser.ParseInt32(parts[1], 0));
                     return;
                 }
             }
@@ -150,7 +148,7 @@ namespace Minima.Web.Routing
                 String index = m.Groups["year"].Value;
                 if (!String.IsNullOrEmpty(index))
                 {
-                    HttpData.SetScopedItem<Int32>("Minima", "Index", Parser.ParseInt32(index, 0));
+                    HttpData.SetScopedItem<Int32>(Info.Scope, "Index", Parser.ParseInt32(index, 0));
                     return;
                 }
             }

@@ -138,23 +138,24 @@ namespace Minima.Web.Api.MetaWeblog
         [XmlRpcMethod("blogger.getUsersBlogs")]
         public BlogInfo[] GetUsersBlogs(String key, String emailAddress, String password)
         {
-            TraceManager.RecordMethodCall("XmlRpcApi::GetUsersBlogs", new Object[] { key, emailAddress, password });
-            //+
-            List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
-            //+
-            MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)Themelia.Web.Routing.Component.Settings.Components["Minima"];
-            List<MinimaComponentSetting.MinimaInfo> parameterList = minimaComponentSetting.GetParameterList();
-            //+
-            var netBlogList = (from b in blogList
-                               join e in parameterList on b.Guid equals e.BlogGuid
-                               select new BlogInfo
-                               {
-                                   blogid = e.BlogGuid,
-                                   blogName = b.Title,
-                                   url = Themelia.Web.WebSection.GetUrl(e.WebSection).AbsoluteUri
-                               }).ToArray();
-            //+
-            return netBlogList;
+            //TraceManager.RecordMethodCall("XmlRpcApi::GetUsersBlogs", new Object[] { key, emailAddress, password });
+            ////+
+            //List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
+            ////+
+            //MinimaComponentSetting minimaComponentSetting = (MinimaComponentSetting)Themelia.Web.Routing.Component.Settings.Components["Minima"];
+            //List<MinimaComponentSetting.MinimaInfo> parameterList = minimaComponentSetting.GetParameterList();
+            ////+
+            //var netBlogList = (from b in blogList
+            //                   join e in parameterList on b.Guid equals e.BlogGuid
+            //                   select new BlogInfo
+            //                   {
+            //                       blogid = e.BlogGuid,
+            //                       blogName = b.Title,
+            //                       url = Themelia.Web.WebSection.GetUrl(e.WebSection).AbsoluteUri
+            //                   }).ToArray();
+            ////+
+            //return netBlogList;
+            return null;
         }
 
         //- @MetaWeblogNewPost -//

@@ -98,7 +98,7 @@ namespace Minima.Web.Control
             if (blogEntryType == null)
             {
                 List<String> guidList = new List<String>(new String[] { blogEntryTypeGuid });
-                String blogGuid = Themelia.Web.HttpData.GetScopedCacheItem<String>("Minima", "BlogGuid");
+                String blogGuid = Themelia.Web.HttpData.GetScopedCacheItem<String>(Info.Scope, Info.BlogGuid);
                 List<BlogEntryType> blogEntryTypeList = Minima.Service.Agent.BlogAgent.GetBlogEntryTypeList(blogGuid, guidList);
                 if (blogEntryTypeList != null && blogEntryTypeList.Count > 0)
                 {

@@ -65,13 +65,13 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Themelia, Version=1.6.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
+    <Reference Include="Themelia, Version=0.8.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Assembly\Themelia.dll</HintPath>
+      <HintPath>..\..\..\_REFERENCE\Debug\Themelia.dll</HintPath>
     </Reference>
     <Reference Include="Themelia.Web, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Assembly\Themelia.Web.dll</HintPath>
+      <HintPath>..\..\..\_REFERENCE\Debug\Themelia.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +107,8 @@
     <Compile Include="Control\_Index\IndexEntryTemplate.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Control\AccessType.cs" />
+    <Compile Include="AccessType.cs" />
+    <Compile Include="Routing\MinimaInfo.cs" />
     <Compile Include="Parsing\AmazonAffiliateCodeParser.cs" />
     <Compile Include="Control\BlogTemplateFactory.cs" />
     <Compile Include="Control\ArchivedEntryList.cs">
@@ -151,12 +152,10 @@
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
     <Compile Include="Routing\MinimaPostProcessor.cs" />
     <Compile Include="Routing\_HttpHandler\BlogDiscoveryHttpHandler.cs" />
-    <Compile Include="Routing\Component\MinimaComponentSetting.cs" />
     <Compile Include="Routing\Component\MinimaComponent.cs" />
     <Compile Include="Routing\_HttpHandler\ImageHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\WindowsLiveWriterManifestHttpHandler.cs" />
     <Compile Include="Routing\MinimaHandlerInjector.cs" />
-    <Compile Include="Routing\WebSection.cs" />
     <Compile Include="Routing\MinimaPreProcessor.cs" />
     <Compile Include="Routing\_HttpHandler\FileProcessorHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\SiteMapHttpHandler.cs" />

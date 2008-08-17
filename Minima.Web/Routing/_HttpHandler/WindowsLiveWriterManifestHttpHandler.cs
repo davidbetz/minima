@@ -10,7 +10,7 @@ namespace Minima.Web.Routing
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)
         {
-            String key = "WindowsLiveWriterManifest_" + Themelia.Web.HttpData.GetScopedItem<String>("Minima", "BlogGuid");
+            String key = "WindowsLiveWriterManifest_" + Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
             {
                 StringBuilder xml = new StringBuilder();
