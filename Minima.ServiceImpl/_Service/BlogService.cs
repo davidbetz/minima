@@ -58,6 +58,7 @@ namespace Minima.Service
                     BlogEntryLINQ blogEntryLinq = new BlogEntryLINQ();
                     blogEntryLinq.BlogId = blogLinq.BlogId;
                     blogEntryLinq.BlogEntryTitle = title;
+                    blogEntryLinq.BlogEntryTypeId = 1;
                     blogEntryLinq.BlogEntryText = content;
                     if (!String.IsNullOrEmpty(blogEntryTypeGuid))
                     {
