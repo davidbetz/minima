@@ -11,8 +11,6 @@ namespace Minima.Web.Routing.Component
         //- @Register -//
         public override void Register(PreProcessorDataList preProcessorDataList, MappedHandlerFactoryDataList mappedHandlerDataList, HandlerInjectorDataList handlerInjectorDataList, MidProcessorDataList midProcessorList, FallThroughProcessorDataList fallThroughProcessorList, PostProcessorDataList postProcessorList, PostStateProcessorDataList postStateProcessorDataList)
         {
-            //this.ComponentSettingType = typeof(MinimaComponentSetting);
-            //+
             preProcessorDataList.Add(new PreProcessorData
             {
                 ProcessorType = "Minima.Web.Routing.MinimaPreProcessor, Minima.Web"
@@ -28,6 +26,11 @@ namespace Minima.Web.Routing.Component
             postProcessorList.Add(new PostProcessorData
             {
                 ProcessorType = "Minima.Web.Routing.MinimaPostProcessor, Minima.Web"
+            });
+            fallThroughProcessorList.Add(new FallThroughProcessorData
+            {
+                Priority = 1,
+                ProcessorType = "Minima.Web.Routing.BlogFallThroughProcessor, Minima.Web"
             });
         }
     }
