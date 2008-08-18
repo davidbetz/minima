@@ -7,16 +7,16 @@ namespace Minima.Web
         //- @GetLabelUrl -//
         public static String GetLabelUrl(Minima.Service.Label label)
         {
-            String webSection = Themelia.Web.WebSection.Current ?? String.Empty;
-            if (webSection.ToLower() == "root")
+            String webDomain = Themelia.Web.WebDomain.Current ?? String.Empty;
+            if (webDomain.ToLower() == "root")
             {
-                webSection = String.Empty;
+                webDomain = String.Empty;
             }
             else
             {
-                webSection = "/" + webSection;
+                webDomain = "/" + webDomain;
             }
-            return webSection + "/label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
+            return webDomain + "/label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
         }
     }
 }

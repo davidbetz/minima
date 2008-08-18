@@ -18,8 +18,8 @@ namespace Minima.Web.Routing
         //- @OnPreHttpHandlerExecute -//
         public override void OnPreHttpHandlerExecute(HttpContext context, params Object[] parameterArray)
         {
-            WebSectionData webSectionData = WebSection.CurrentData;
-            ComponentData componentData = webSectionData.ComponentDataList[Info.Key];
+            WebDomainData webDomainData = WebDomain.CurrentData;
+            ComponentData componentData = webDomainData.ComponentDataList[Info.Key];
             if (componentData != null)
             {
                 ParameterData blogGuidParameter = componentData.ParameterDataList[Info.BlogGuid];

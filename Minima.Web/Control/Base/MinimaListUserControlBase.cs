@@ -9,7 +9,7 @@ namespace Minima.Web.Control
     public abstract class MinimaListUserControlBase : Themelia.Web.Control.DataUserControlBase
     {
         protected System.Web.UI.WebControls.Repeater repeater;
-        private String webSection;
+        private String webDomain;
 
         //+
         //- @BlogGuid -//
@@ -17,30 +17,30 @@ namespace Minima.Web.Control
         {
             get
             {
-                WebSectionData webSection = WebSection.CurrentData;
-                if (this.WebSectionName != webSection.Name)
+                WebDomainData webDomain = WebDomain.CurrentData;
+                if (this.WebDomainName != webDomain.Name)
                 {
-                    return WebSectionDataList.AllWebSectionData[this.WebSectionName].ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
+                    return WebDomainDataList.AllWebDomainData[this.WebDomainName].ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
                 }
                 //+
                 return HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             }
         }
 
-        //- @WebSection -//
-        public String WebSectionName
+        //- @WebDomain -//
+        public String WebDomainName
         {
             get
             {
-                if (!String.IsNullOrEmpty(webSection))
+                if (!String.IsNullOrEmpty(webDomain))
                 {
-                    return webSection;
+                    return webDomain;
                 }
-                return Themelia.Web.WebSection.CurrentData.Name;
+                return Themelia.Web.WebDomain.CurrentData.Name;
             }
             set
             {
-                webSection = value;
+                webDomain = value;
             }
         }
 
