@@ -85,8 +85,8 @@ namespace Minima.Web.Api.MetaWeblog
                 description = blogEntry.Content,
                 title = blogEntry.Title,
                 categories = blogEntry.LabelList.Select(p => p.Title).ToArray(),
-                link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebSection.Current),
-                permalink = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebDomain.Current),
+                permalink = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebDomain.Current),
                 postid = blogEntry.Guid,
                 mt_allow_comments = blogEntry.AllowCommentStatus == AllowCommentStatus.Enabled ? "1" : "0",
                 mt_convert_breaks = String.Empty,
@@ -112,8 +112,8 @@ namespace Minima.Web.Api.MetaWeblog
                     dateCreated = p.PostDateTime,
                     description = p.Content,
                     title = p.Title,
-                    link = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
-                    permalink = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                    link = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebDomain.Current),
+                    permalink = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebDomain.Current),
                     postid = p.Guid,
                     mt_allow_comments = "1",
                     mt_convert_breaks = "0",
@@ -143,13 +143,13 @@ namespace Minima.Web.Api.MetaWeblog
             //+
             List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
             //+
-            Themelia.Map webSectionPathMap = new Themelia.Map();
-            foreach (WebSectionData webSectionData in WebSectionDataList.AllWebSectionData)
+            Themelia.Map webDomainPathMap = new Themelia.Map();
+            foreach (WebDomainData webDomainData in WebDomainDataList.AllWebDomainData)
             {
-                String blogGuid = webSectionData.ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
-                webSectionPathMap.Add(blogGuid, webSectionData.Path);
+                String blogGuid = webDomainData.ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
+                webDomainPathMap.Add(blogGuid, webDomainData.Path);
             }
-            List<String> registeredBlogGuidList = webSectionPathMap.GetKeyList();
+            List<String> registeredBlogGuidList = webDomainPathMap.GetKeyList();
             //+
             var netBlogList = (from b in blogList
                                where registeredBlogGuidList.Contains(b.Guid)
@@ -157,7 +157,7 @@ namespace Minima.Web.Api.MetaWeblog
                                {
                                    blogid = b.Guid,
                                    blogName = b.Title,
-                                   url = Themelia.Web.WebSection.GetUrl(webSectionPathMap[b.Guid]).AbsoluteUri
+                                   url = Themelia.Web.WebDomain.GetUrl(webDomainPathMap[b.Guid]).AbsoluteUri
                                }).ToArray();
             //+
             return netBlogList;

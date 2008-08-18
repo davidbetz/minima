@@ -36,9 +36,9 @@ namespace Minima.Web.Helper
             //+
             return String.Format("{0}{1}", baseBlogUrl, blogEntryPage.ToString());
         }
-        public static String BuildBlogEntry(DateTime postDateTime, String urlMapping, String webSection)
+        public static String BuildBlogEntry(DateTime postDateTime, String urlMapping, String webDomain)
         {
-            Uri baseBlogUri = WebSection.GetUrl(webSection);
+            Uri baseBlogUri = WebDomain.GetUrl(webDomain);
             //+
             return BuildBlogEntry(postDateTime, urlMapping, baseBlogUri);
         }

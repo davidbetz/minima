@@ -79,7 +79,7 @@ namespace Minima.Web.Control
         {
             Func<BlogEntry, IndexEntry> indexTransformation = p => new IndexEntry
             {
-                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.FirstOrDefault(), Themelia.Web.WebSection.Current),
+                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.FirstOrDefault(), Themelia.Web.WebDomain.Current),
                 Title = p.Title,
                 TypeGuid = p.BlogEntryTypeGuid,
                 PostDateTime = p.PostDateTime,
@@ -161,7 +161,7 @@ namespace Minima.Web.Control
                 {
                     rptPosts.DataSource = blogEntryList.Select(p => new
                     {
-                        Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebSection.Current),
+                        Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebDomain.Current),
                         Content = this.CodeParserSeries.ParseCode(p.Content),
                         Title = p.Title,
                         AuthorList = p.AuthorList,

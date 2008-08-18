@@ -7,7 +7,7 @@ namespace Minima.Web.Routing
         //- @MatchHttpHandler -//
         public override System.Web.IHttpHandler GetHandler(System.Web.HttpContext context, string requestType, string virtualPath, string path)
         {
-            if (!String.IsNullOrEmpty(Themelia.Web.WebSection.Current))
+            if (!String.IsNullOrEmpty(Themelia.Web.WebDomain.Current))
             {
                 return new UrlProcessingHttpHandler();
             }

@@ -45,16 +45,16 @@ namespace Minima.Web.Control
                         RepeaterItem item = (RepeaterItem)literal.NamingContainer;
                         Int32 year = Themelia.Parser.ParseInt32(item.DataItem);
                         String yearPath = String.Empty;
-                        String webSection = Themelia.Web.WebSection.Current ?? String.Empty;
-                        if (webSection.ToLower() == "root")
+                        String webDomain = Themelia.Web.WebDomain.Current ?? String.Empty;
+                        if (webDomain.ToLower() == "root")
                         {
-                            webSection = String.Empty;
+                            webDomain = String.Empty;
                         }
                         else
                         {
-                            webSection = "/" + webSection;
+                            webDomain = "/" + webDomain;
                         }
-                        yearPath = webSection + "/index/" + year.ToString();
+                        yearPath = webDomain + "/index/" + year.ToString();
                         //+
                         literal.Text += String.Format("<li>{2}<a href=\"{0}\">{1}</a></li>", yearPath, year, comma);
                         this.first = false;
