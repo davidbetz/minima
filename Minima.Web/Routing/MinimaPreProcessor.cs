@@ -15,8 +15,8 @@ namespace Minima.Web.Routing
 {
     public class MinimaPreProcessor : Themelia.Web.Routing.PreProcessorBase
     {
-        //- @OnPreHttpHandlerExecute -//
-        public override void OnPreHttpHandlerExecute(HttpContext context, params Object[] parameterArray)
+        //- @OnPreProcessorExecute -//
+        public override void OnPreProcessorExecute(HttpContext context, params Object[] parameterArray)
         {
             WebDomainData webDomainData = WebDomain.CurrentData;
             ComponentData componentData = webDomainData.ComponentDataList[Info.Key];
