@@ -61,6 +61,11 @@ namespace Minima.Web.Routing
                     {
                         label = label.Substring(0, extraSlash);
                     }
+                    Int32 questionMark = label.IndexOf("?");
+                    if (questionMark > -1)
+                    {
+                        label = label.Substring(0, questionMark);
+                    }
                     String labelTitle = String.Empty;
                     Map labelMap = HttpData.GetScopedCacheItem<Map>(Info.Scope, "LabelMap");
                     if (labelMap == null)
