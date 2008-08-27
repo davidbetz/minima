@@ -54,6 +54,9 @@ namespace Minima.Web.Control
         //- @SupportCommenting -//
         public Boolean SupportCommenting { get; set; }
 
+        //- @ShowAuthorSeries -//
+        public Boolean ShowAuthorSeries { get; set; }
+
         //- @CodeParserSeries -//
         public Themelia.CodeParsing.CodeParserSeries CodeParserSeries { get; set; }
 
@@ -64,6 +67,7 @@ namespace Minima.Web.Control
             //+ default
             this.CaptchaControl = new MathCaptcha();
             this.SupportCommenting = true;
+            this.ShowAuthorSeries = true;
             //+ parser
             this.CodeParserSeries = new Themelia.CodeParsing.CodeParserSeries()
             {
@@ -296,10 +300,10 @@ namespace Minima.Web.Control
         {
             if (this.CustomPostTemplateType == null)
             {
-                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.AccessType, this.SupportCommenting);
+                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
             }
             //+
-            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.AccessType, this.SupportCommenting);
+            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
         }
 
         //- $GetCommentTemplate -//
