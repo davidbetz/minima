@@ -3,6 +3,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 //+
+using Themelia;
+//+
 namespace Minima.Web.Control
 {
     public static class BlogTemplateFactory
@@ -91,11 +93,15 @@ namespace Minima.Web.Control
             //- $SupportCommenting -//
             private Boolean SupportCommenting { get; set; }
 
+            //- $ShowAuthorSeries -//
+            private Boolean ShowAuthorSeries { get; set; }
+
             //- @Ctor -//
             public PostTemplate(params Object[] parameterArray)
             {
                 this.IsLink = ((AccessType)parameterArray[0]) == AccessType.Link;
                 this.SupportCommenting = (Boolean)parameterArray[1];
+                this.ShowAuthorSeries = (Boolean)parameterArray[2];
             }
 
             //- @InstantiateIn -//
@@ -122,29 +128,42 @@ namespace Minima.Web.Control
                         Value = guid
                     };
                     ph.Controls.Add(hBlogEntryGuid);
-                    ph.Controls.Add(new System.Web.UI.WebControls.Literal
-                    {
-                        Text = @"
+                    //+
+                    Themelia.Template template = new Themelia.Template(@"
 <div class=""post"">
     <h3><a href=""{Url}"">{Title}</a></h3>
     <h2 class=""date-header"">{DateTimeString}</h2>
     <div class=""post-body"">
         <div>{Content}</div>
     </div>
-    <p class=""post-footer"">
-        <em>posted by {AuthorSeries} at {DateTimeDisplay}</em>".Replace("{Url}", url)
-                                                               .Replace("{Title}", title)
-                                                               .Replace("{DateTimeString}", dateTimeString)
-                                                               .Replace("{Content}", content)
-                                                               .Replace("{AuthorSeries}", authorSeries)
-                                                               .Replace("{DateTimeDisplay}", dateTimeDisplay)
+    <p class=""post-footer"">");
+                    if (ShowAuthorSeries)
+                    {
+                        template.AppendText("<em>posted by {AuthorSeries} at {DateTimeDisplay}</em>");
+                    }
+                    //+
+                    ph.Controls.Add(new System.Web.UI.WebControls.Literal
+                    {
+                        Text = template.Interpolate(new Map(
+                                new MapEntry("Url", url),
+                                new MapEntry("Title", title),
+                                new MapEntry("DateTimeString", dateTimeString),
+                                new MapEntry("Content", content),
+                                new MapEntry("AuthorSeries", authorSeries),
+                                new MapEntry("DateTimeDisplay", dateTimeDisplay)
+                            )
+                        )
                     });
                     if (!String.IsNullOrEmpty(labelSeries))
                     {
                         ph.Controls.Add(new System.Web.UI.WebControls.Literal
                         {
-                            Text = @"
-        <p class=""post-labels"">{LabelSeries}</p>".Replace("{LabelSeries}", labelSeries)
+                            Text = new Template(@"
+    <p class=""post-labels"">{LabelSeries}</p>").Interpolate(
+                                                new Map(
+                                                    new MapEntry("LabelSeries", labelSeries))
+                                                )
+
                         });
                     }
                     if (!this.IsLink && this.SupportCommenting)
@@ -153,20 +172,21 @@ namespace Minima.Web.Control
                         {
                             ph.Controls.Add(new System.Web.UI.WebControls.Literal
                             {
-                                Text = @"
-        <p class=""comment-count""><i>Comments are disabled for this entry.</i> </p>"
+                                Text = @"<p class=""comment-count""><i>Comments are disabled for this entry.</i> </p>"
                             });
                         }
                         else
                         {
                             ph.Controls.Add(new System.Web.UI.WebControls.Literal
                             {
-                                Text = @"
+                                Text = new Template(@"
         <p class=""comment-count"">
             <a href=""{Url}"">({ViewableCommentCount} Comment{Plural})</a>
-".Replace("{Url}", url)
-         .Replace("{ViewableCommentCount}", viewableCommentCount.ToString())
-         .Replace("{Plural}", viewableCommentCount != 1 ? "s" : String.Empty)
+").Interpolate(new Map(
+                  new MapEntry("Url", url),
+                  new MapEntry("ViewableCommentCount", viewableCommentCount.ToString()),
+                  new MapEntry("Plural", viewableCommentCount != 1 ? "s" : String.Empty))
+               )
                             });
                             ph.Controls.Add(new System.Web.UI.WebControls.Literal
                             {
