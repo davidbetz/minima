@@ -1,4 +1,5 @@
 <%@ Page Language="C#" CodeFile="Default.aspx.cs" AutoEventWireup="false" Inherits="Default" %>
+<%@ OutputCache Duration="30" VaryByParam="None" VaryByCustom="url" %>
 <%@ Register Src="~/Control/GoogleAnalytics.ascx" TagPrefix="web" TagName="GoogleAnalytics" %>
 <%@ Register Src="~/Control/GoogleAdsense.ascx" TagPrefix="web" TagName="GoogleAdsense" %>
 <%@ Register Src="~/Control/FirefoxGoogleAdsense.ascx" TagPrefix="web" TagName="FirefoxGoogleAdsense" %>
