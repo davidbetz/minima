@@ -16,6 +16,16 @@ namespace Minima.Web.Routing
 {
     public class MinimaPreProcessor : Themelia.Web.Routing.PreProcessorBase
     {
+        //- @LabelMap -//
+        public static Map LabelMap { get; set; }
+
+        //- @Ctor -//
+        static MinimaPreProcessor()
+        {
+            LabelMap = new Map();
+        }
+
+        //+
         //- @OnPreProcessorExecute -//
         public override void OnPreProcessorExecute(HttpContext context, params Object[] parameterArray)
         {
@@ -48,11 +58,6 @@ namespace Minima.Web.Routing
         //- $DetectDestination -//
         private void DetectDestination()
         {
-            ReaderWriterLock readerWriterLock = new ReaderWriterLock();
-            try
-            {
-                readerWriterLock.AcquireReaderLock(Timeout.Infinite);
-                //+
                 String finderLabel = "/label/";
                 String uri = Http.Url.ToString().ToLower();
                 //+ label
@@ -72,29 +77,36 @@ namespace Minima.Web.Routing
                             label = label.Substring(0, questionMark);
                         }
                         String labelTitle = String.Empty;
-                        Map labelMap = HttpData.GetScopedCacheItem<Map>(Info.Scope, "LabelMap");
-                        if (labelMap == null)
+                        ReaderWriterLock readerWriterLock = new ReaderWriterLock();
+                        try
                         {
-                            labelMap = new Map();
-                        }
-                        labelTitle = labelMap.Pull(label);
-                        if (String.IsNullOrEmpty(labelTitle))
-                        {
-                            Minima.Service.Label labelEntity = LabelAgent.GetLabelByNetTitle(label);
-                            if (labelEntity != null)
+                            readerWriterLock.AcquireReaderLock(Timeout.Infinite);
+                            //+
+                            labelTitle = LabelMap.Pull(label);
+                            if (String.IsNullOrEmpty(labelTitle))
                             {
-                                labelTitle = labelEntity.Title;
-                                LockCookie lockCookie = readerWriterLock.UpgradeToWriterLock(Timeout.Infinite);
-                                try
+                                Minima.Service.Label labelEntity = LabelAgent.GetLabelByNetTitle(label);
+                                if (labelEntity != null)
                                 {
-                                    labelMap.Add(label, labelTitle);
+                                    labelTitle = labelEntity.Title;
+                                    LockCookie lockCookie = readerWriterLock.UpgradeToWriterLock(Timeout.Infinite);
+                                    try
+                                    {
+                                        if (!LabelMap.ContainsKey(label))
+                                        {
+                                            LabelMap.Add(label, labelTitle);
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        readerWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                                    }
                                 }
-                                finally
-                                {
-                                    readerWriterLock.DowngradeFromWriterLock(ref lockCookie);
-                                }
-                                HttpData.SetScopedCacheItem<Map>(Info.Scope, "LabelMap", labelMap);
                             }
+                        }
+                        finally
+                        {
+                            readerWriterLock.ReleaseReaderLock();
                         }
                         HttpData.SetScopedItem<String>(Info.Scope, "Label", label);
                         HttpData.SetScopedItem<String>(Info.Scope, "LabelTitle", labelTitle);
@@ -170,11 +182,7 @@ namespace Minima.Web.Routing
                         return;
                     }
                 }
-            }
-            finally
-            {
-                readerWriterLock.ReleaseReaderLock();
-            }
+            
         }
     }
 }

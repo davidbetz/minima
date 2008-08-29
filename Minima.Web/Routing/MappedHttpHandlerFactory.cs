@@ -4,7 +4,7 @@ using Minima.Web.Api.MetaWeblog;
 //+
 namespace Minima.Web.Routing
 {
-    public class MappedHttpHandlerFactory : Themelia.Web.Routing.MappedHandlerFactoryBase
+    public class MappedHttpHandlerFactory : Themelia.Web.Routing.AliasedHandlerFactoryBase
     {
         //- @GetHttpHandler -//
         public override System.Web.IHttpHandler CreateHttpHandler(String text)
