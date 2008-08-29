@@ -9,25 +9,25 @@ namespace Minima.Web.Routing.Component
     public class MinimaComponent : ComponentBase
     {
         //- @Register -//
-        public override void Register(PreProcessorDataList preProcessorDataList, MappedHandlerFactoryDataList mappedHandlerDataList, HandlerInjectorDataList handlerInjectorDataList, MidProcessorDataList midProcessorList, FallThroughProcessorDataList fallThroughProcessorList, PostProcessorDataList postProcessorList, PostStateProcessorDataList postStateProcessorDataList)
+        public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, AliasedHandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList)
         {
             preProcessorDataList.Add(new PreProcessorData
             {
                 ProcessorType = "Minima.Web.Routing.MinimaPreProcessor, Minima.Web"
             });
-            mappedHandlerDataList.Add(new MappedHandlerFactoryData
+            aliasedHandlerDataList.Add(new AliasedHandlerFactoryData
             {
                 FactoryType = "Minima.Web.Routing.MappedHttpHandlerFactory, Minima.Web"
             });
-            handlerInjectorDataList.Add(new HandlerInjectorData
+            injectionProcessorDataList.Add(new InjectionProcessorData
             {
-                InjectorType = "Minima.Web.Routing.MinimaHandlerInjector, Minima.Web"
+                ProcessorType = "Minima.Web.Routing.MinimaInjectionProcessor, Minima.Web"
             });
-            postProcessorList.Add(new PostProcessorData
+            postProcessorDataList.Add(new PostProcessorData
             {
                 ProcessorType = "Minima.Web.Routing.MinimaPostProcessor, Minima.Web"
             });
-            fallThroughProcessorList.Add(new FallThroughProcessorData
+            fallThroughProcessorDataList.Add(new FallThroughProcessorData
             {
                 Priority = 1,
                 ProcessorType = "Minima.Web.Routing.BlogFallThroughProcessor, Minima.Web"
