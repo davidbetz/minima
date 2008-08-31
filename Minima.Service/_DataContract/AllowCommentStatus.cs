@@ -1,5 +1,4 @@
-﻿//+
-namespace Minima.Service
+﻿namespace Minima.Service
 {
     public enum AllowCommentStatus
     {
