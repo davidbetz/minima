@@ -12,7 +12,7 @@ namespace Minima.Service
         public class Minima
         {
             //- @Namespace -//
-            public const String Namespace = Information.NamespaceRoot + "blog/2008/08/";
+            public const String Namespace = Information.NamespaceRoot + "2008/08/";
         }
     }
 }
