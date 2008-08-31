@@ -18,7 +18,7 @@ namespace Minima.Web.Control
             get
             {
                 WebDomainData webDomain = WebDomain.CurrentData;
-                if (this.WebDomainName != webDomain.Name)
+                if (webDomain != null && this.WebDomainName != webDomain.Name)
                 {
                     return WebDomainDataList.AllWebDomainData[this.WebDomainName].ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
                 }
@@ -36,7 +36,12 @@ namespace Minima.Web.Control
                 {
                     return webDomain;
                 }
-                return Themelia.Web.WebDomain.CurrentData.Name;
+                if (Themelia.Web.WebDomain.CurrentData != null)
+                {
+                    return Themelia.Web.WebDomain.CurrentData.Name;
+                }
+                //+
+                return String.Empty;
             }
             set
             {
