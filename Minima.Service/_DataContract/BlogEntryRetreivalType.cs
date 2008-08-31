@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-//+
-namespace Minima.Service
+﻿namespace Minima.Service
 {
     public enum BlogEntryRetreivalType
     {
