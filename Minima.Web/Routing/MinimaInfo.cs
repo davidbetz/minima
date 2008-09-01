@@ -1,21 +1,22 @@
+using System;
 using System.IO;
 //+
 namespace Minima.Web
 {
     public class Info
     {
-        public const string Scope = "Minima";
+        public const String Scope = "Minima";
         //+
-        public const string Key = "Minima";
+        public const String Key = "Minima";
         //+
-        public const string BlogPage = "page";
-        public const string BlogGuid = "blogGuid";
+        public const String BlogPage = "page";
+        public const String BlogGuid = "blogGuid";
         //+
-        public const string ArchiveMonth = "ArchiveMonth";
-        public const string ArchiveYear = "ArchiveYear";
-        public const string BlogEntryTitle = "BlogEntryTitle";
-        public const string BlogMetaData = "BlogMetaData";
-        public const string LabelTitle = "LabelTitle";
-        public const string PageTitle = "PageTitle";
+        public const String ArchiveMonth = "ArchiveMonth";
+        public const String ArchiveYear = "ArchiveYear";
+        public const String BlogEntryTitle = "BlogEntryTitle";
+        public const String BlogMetaData = "BlogMetaData";
+        public const String LabelTitle = "LabelTitle";
+        public const String PageTitle = "PageTitle";
     }
 }

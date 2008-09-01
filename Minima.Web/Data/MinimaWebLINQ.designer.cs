@@ -11,16 +11,10 @@
 
 namespace Minima.Web.Data.Context
 {
-	using System.Data.Linq;
-	using System.Data.Linq.Mapping;
-	using System.Data;
-	using System.Collections.Generic;
-	using System.Reflection;
-	using System.Linq;
-	using System.Linq.Expressions;
-	
-	
-	[System.Data.Linq.Mapping.DatabaseAttribute(Name="Minima")]
+    using System.Data.Linq.Mapping;
+
+
+    [System.Data.Linq.Mapping.DatabaseAttribute(Name = "Minima")]
 	public partial class MinimaWebLINQDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -129,10 +123,10 @@ namespace Minima.Web.Data.Context
 }
 namespace Minima.Web.Data.Entity
 {
-	using System.Data.Linq;
-	using System.Data.Linq.Mapping;
-	using System.ComponentModel;
-	using System;
+    using System;
+    using System.ComponentModel;
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
 	
 	
 	[Table(Name="web.Trace")]
@@ -145,17 +139,17 @@ namespace Minima.Web.Data.Entity
 		
 		private int _TraceTypeId;
 		
-		private string _TraceAddress;
+		private String _TraceAddress;
 		
-		private string _TraceUrl;
+		private String _TraceUrl;
 		
-		private string _TraceUserAgent;
+		private String _TraceUserAgent;
 		
-		private string _TraceMessage;
+		private String _TraceMessage;
 		
-		private string _TraceStackTrace;
+		private String _TraceStackTrace;
 		
-		private string _TraceExtra;
+		private String _TraceExtra;
 		
 		private System.Nullable<System.DateTime> _TraceDateTime;
 		
@@ -165,9 +159,9 @@ namespace Minima.Web.Data.Entity
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnTraceIdChanging(int value);
+    partial void OnTraceIdChanging(Int32 value);
     partial void OnTraceIdChanged();
-    partial void OnTraceTypeIdChanging(int value);
+    partial void OnTraceTypeIdChanging(Int32 value);
     partial void OnTraceTypeIdChanged();
     partial void OnTraceAddressChanging(string value);
     partial void OnTraceAddressChanged();
@@ -236,7 +230,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_TraceAddress", DbType="Char(15)")]
-		public string TraceAddress
+		public String TraceAddress
 		{
 			get
 			{
@@ -256,7 +250,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_TraceUrl", DbType="VarChar(1000)")]
-		public string TraceUrl
+		public String TraceUrl
 		{
 			get
 			{
@@ -276,7 +270,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_TraceUserAgent", DbType="VarChar(300)")]
-		public string TraceUserAgent
+		public String TraceUserAgent
 		{
 			get
 			{
@@ -296,7 +290,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_TraceMessage", DbType="VarChar(2000) NOT NULL", CanBeNull=false)]
-		public string TraceMessage
+		public String TraceMessage
 		{
 			get
 			{
@@ -316,7 +310,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_TraceStackTrace", DbType="VarChar(2000)")]
-		public string TraceStackTrace
+		public String TraceStackTrace
 		{
 			get
 			{
@@ -336,7 +330,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_TraceExtra", DbType="VarChar(MAX)")]
-		public string TraceExtra
+		public String TraceExtra
 		{
 			get
 			{
@@ -402,7 +396,7 @@ namespace Minima.Web.Data.Entity
 					}
 					else
 					{
-						this._TraceTypeId = default(int);
+						this._TraceTypeId = default(Int32);
 					}
 					this.SendPropertyChanged("TraceType");
 				}
@@ -438,7 +432,7 @@ namespace Minima.Web.Data.Entity
 		
 		private int _TraceTypeId;
 		
-		private string _TraceTypeName;
+		private String _TraceTypeName;
 		
 		private EntitySet<Trace> _Traces;
 		
@@ -446,7 +440,7 @@ namespace Minima.Web.Data.Entity
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnTraceTypeIdChanging(int value);
+    partial void OnTraceTypeIdChanging(Int32 value);
     partial void OnTraceTypeIdChanged();
     partial void OnTraceTypeNameChanging(string value);
     partial void OnTraceTypeNameChanged();
@@ -479,7 +473,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_TraceTypeName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string TraceTypeName
+		public String TraceTypeName
 		{
 			get
 			{
@@ -554,11 +548,11 @@ namespace Minima.Web.Data.Entity
 		
 		private char _AccessType;
 		
-		private string _AccessContent;
+		private String _AccessContent;
 		
-		private string _AccessOutputMessage;
+		private String _AccessOutputMessage;
 		
-		private string _AccessHttpForward;
+		private String _AccessHttpForward;
 		
 		private bool _AccessEnabled;
 		
@@ -566,7 +560,7 @@ namespace Minima.Web.Data.Entity
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnAccessIdChanging(int value);
+    partial void OnAccessIdChanging(Int32 value);
     partial void OnAccessIdChanged();
     partial void OnAccessTypeChanging(char value);
     partial void OnAccessTypeChanged();
@@ -626,7 +620,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_AccessContent", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string AccessContent
+		public String AccessContent
 		{
 			get
 			{
@@ -646,7 +640,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_AccessOutputMessage", DbType="NVarChar(1000)")]
-		public string AccessOutputMessage
+		public String AccessOutputMessage
 		{
 			get
 			{
@@ -666,7 +660,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_AccessHttpForward", DbType="VarChar(400)")]
-		public string AccessHttpForward
+		public String AccessHttpForward
 		{
 			get
 			{
@@ -736,17 +730,17 @@ namespace Minima.Web.Data.Entity
 		
 		private int _BlogId;
 		
-		private string _FileMappingUrl;
+		private String _FileMappingUrl;
 		
-		private string _FileMappingName;
+		private String _FileMappingName;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnFileMappingIdChanging(int value);
+    partial void OnFileMappingIdChanging(Int32 value);
     partial void OnFileMappingIdChanged();
-    partial void OnBlogIdChanging(int value);
+    partial void OnBlogIdChanging(Int32 value);
     partial void OnBlogIdChanged();
     partial void OnFileMappingUrlChanging(string value);
     partial void OnFileMappingUrlChanged();
@@ -800,7 +794,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_FileMappingUrl", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
-		public string FileMappingUrl
+		public String FileMappingUrl
 		{
 			get
 			{
@@ -820,7 +814,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_FileMappingName", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
-		public string FileMappingName
+		public String FileMappingName
 		{
 			get
 			{
@@ -872,15 +866,15 @@ namespace Minima.Web.Data.Entity
 		
 		private System.DateTime _BlogEntryActivityTime;
 		
-		private string _BlogEntryActivityAddress;
+		private String _BlogEntryActivityAddress;
 		
-		private string _BlogEntryActivityBrowser;
+		private String _BlogEntryActivityBrowser;
 		
-		private string _BlogEntryActivityHostName;
+		private String _BlogEntryActivityHostName;
 		
-		private string _BlogEntryActivitySessionId;
+		private String _BlogEntryActivitySessionId;
 		
-		private string _BlogEntryActivityExtra;
+		private String _BlogEntryActivityExtra;
 		
 		private EntityRef<BlogEntryActivityType> _BlogEntryActivityType;
 		
@@ -888,9 +882,9 @@ namespace Minima.Web.Data.Entity
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnBlogEntryActivityIdChanging(int value);
+    partial void OnBlogEntryActivityIdChanging(Int32 value);
     partial void OnBlogEntryActivityIdChanged();
-    partial void OnBlogEntryActivityTypeIdChanging(int value);
+    partial void OnBlogEntryActivityTypeIdChanging(Int32 value);
     partial void OnBlogEntryActivityTypeIdChanged();
     partial void OnBlogEntryActivityTimeChanging(System.DateTime value);
     partial void OnBlogEntryActivityTimeChanged();
@@ -977,7 +971,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_BlogEntryActivityAddress", DbType="Char(15)")]
-		public string BlogEntryActivityAddress
+		public String BlogEntryActivityAddress
 		{
 			get
 			{
@@ -997,7 +991,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_BlogEntryActivityBrowser", DbType="VarChar(1000)")]
-		public string BlogEntryActivityBrowser
+		public String BlogEntryActivityBrowser
 		{
 			get
 			{
@@ -1017,7 +1011,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_BlogEntryActivityHostName", DbType="VarChar(500)")]
-		public string BlogEntryActivityHostName
+		public String BlogEntryActivityHostName
 		{
 			get
 			{
@@ -1037,7 +1031,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_BlogEntryActivitySessionId", DbType="VarChar(500)")]
-		public string BlogEntryActivitySessionId
+		public String BlogEntryActivitySessionId
 		{
 			get
 			{
@@ -1057,7 +1051,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_BlogEntryActivityExtra", DbType="VarChar(1000)")]
-		public string BlogEntryActivityExtra
+		public String BlogEntryActivityExtra
 		{
 			get
 			{
@@ -1103,7 +1097,7 @@ namespace Minima.Web.Data.Entity
 					}
 					else
 					{
-						this._BlogEntryActivityTypeId = default(int);
+						this._BlogEntryActivityTypeId = default(Int32);
 					}
 					this.SendPropertyChanged("BlogEntryActivityType");
 				}
@@ -1139,7 +1133,7 @@ namespace Minima.Web.Data.Entity
 		
 		private int _BlogEntryActivityTypeId;
 		
-		private string _BlogEntryActivityTypeName;
+		private String _BlogEntryActivityTypeName;
 		
 		private EntitySet<BlogEntryActivity> _BlogEntryActivities;
 		
@@ -1147,7 +1141,7 @@ namespace Minima.Web.Data.Entity
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnBlogEntryActivityTypeIdChanging(int value);
+    partial void OnBlogEntryActivityTypeIdChanging(Int32 value);
     partial void OnBlogEntryActivityTypeIdChanged();
     partial void OnBlogEntryActivityTypeNameChanging(string value);
     partial void OnBlogEntryActivityTypeNameChanged();
@@ -1180,7 +1174,7 @@ namespace Minima.Web.Data.Entity
 		}
 		
 		[Column(Storage="_BlogEntryActivityTypeName", DbType="VarChar(100)")]
-		public string BlogEntryActivityTypeName
+		public String BlogEntryActivityTypeName
 		{
 			get
 			{

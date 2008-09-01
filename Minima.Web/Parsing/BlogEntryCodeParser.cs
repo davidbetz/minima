@@ -1,19 +1,18 @@
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
-//+
-using Themelia;
 //+
 using Minima.Service;
 using Minima.Service.Agent;
 using Minima.Web.Helper;
+//+
+using Themelia;
 //+
 namespace Minima.Parsing
 {
     public class BlogEntryCodeParser : Themelia.CodeParsing.CodeParserBase
     {
         //- @Id -//
-        public override string Id
+        public override String Id
         {
             get { return "BlogEntry"; }
         }

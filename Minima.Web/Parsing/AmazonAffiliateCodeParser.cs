@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 //+
 using Themelia;
 //+
@@ -9,11 +8,11 @@ namespace Minima.Parsing
     {
         public class Info
         {
-            public const string AmazonAffiliate = "AmazonAffiliate";
+            public const String AmazonAffiliate = "AmazonAffiliate";
         }
 
         //- @Id -//
-        public override string Id
+        public override String Id
         {
             get { return "AmazonAffiliate"; }
         }

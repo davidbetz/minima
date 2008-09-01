@@ -1,14 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
-//+
-using Themelia.Web;
+using Minima.Service;
 //+
 using Minima.Service.Agent;
-using Minima.Service.Client;
-using Minima.Service;
+//+
+using Themelia.Web;
 //+
 namespace Minima.Web.Routing
 {
@@ -16,7 +13,7 @@ namespace Minima.Web.Routing
     {
         public class Data
         {
-            public const string HeaderName = "ImageContentType";
+            public const String HeaderName = "ImageContentType";
         }
 
         //+

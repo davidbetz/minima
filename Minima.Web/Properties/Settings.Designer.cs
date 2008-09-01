@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
 namespace Minima.Web.Properties {
     
     
@@ -28,7 +29,7 @@ namespace Minima.Web.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\sqlexpress01;Initial Catalog=Minima;Persist Security Info=True;User" +
             " ID=MinimaWebDbUser;Password=dbwebpassword")]
-        public string MinimaConnectionString {
+        public String MinimaConnectionString {
             get {
                 return ((string)(this["MinimaConnectionString"]));
             }
@@ -39,7 +40,7 @@ namespace Minima.Web.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IO\\SQLEXPRESS01;Initial Catalog=Minima;Persist Security Info=True;Use" +
             "r ID=MinimaDbUser;Password=dbpassword")]
-        public string MinimaConnectionString1 {
+        public String MinimaConnectionString1 {
             get {
                 return ((string)(this["MinimaConnectionString1"]));
             }
@@ -50,7 +51,7 @@ namespace Minima.Web.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=io\\sqlexpress01;Initial Catalog=Minima;Persist Security Info=True;Use" +
             "r ID=MinimaWebDbUser;Password=dbwebpassword")]
-        public string MinimaConnectionString2 {
+        public String MinimaConnectionString2 {
             get {
                 return ((string)(this["MinimaConnectionString2"]));
             }
