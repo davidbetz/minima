@@ -2,7 +2,7 @@
 using System.Security;
 using System.ServiceModel.Dispatcher;
 //+
-using Themelia.Service;
+using Minima.Service;
 //+
 namespace Minima.Service.Behavior
 {

@@ -2,7 +2,7 @@
 using System.IdentityModel.Selectors;
 using System.Security;
 //+
-using Themelia.Service;
+using Minima.Service;
 //+
 namespace Minima.Service.Validation
 {

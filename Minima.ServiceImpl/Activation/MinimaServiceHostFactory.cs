@@ -3,7 +3,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Description;
 //+
-using Themelia.Service.Behavior;
+using Minima.Service.Behavior;
 //+
 namespace Minima.Service.Activation
 {
