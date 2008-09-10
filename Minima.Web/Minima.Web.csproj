@@ -65,6 +65,14 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Themelia, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\_REFERENCE\Debug\Themelia.dll</HintPath>
+    </Reference>
+    <Reference Include="Themelia.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\_REFERENCE\Debug\Themelia.Web.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agent\BlogEntryActivityAgent.cs" />
@@ -187,14 +195,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Themelia\Themelia.Web\Themelia.Web.csproj">
-      <Project>{A0CABB6C-23E0-442E-8DD7-8CC6E01BA288}</Project>
-      <Name>Themelia.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Themelia\Themelia\Themelia.csproj">
-      <Project>{CECBDBAF-879E-4432-9F8D-969E0E69545B}</Project>
-      <Name>Themelia</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Minima.Configuration\Minima.Configuration.csproj">
       <Project>{DC635C00-A5D5-4D10-96A1-E2DBEAAA14F9}</Project>
       <Name>Minima.Configuration</Name>
