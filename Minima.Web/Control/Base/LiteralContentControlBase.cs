@@ -1,7 +1,7 @@
 using System;
 using System.Web.UI;
 //+
-namespace Minima.Web.Control.Base
+namespace Minima.Web.Control
 {
     public abstract class LiteralContentControlBase : System.Web.UI.Control
     {

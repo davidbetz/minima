@@ -12,7 +12,6 @@ using Minima.Configuration;
 using Minima.Parsing;
 using Minima.Service;
 using Minima.Service.Agent;
-using Minima.Web.Control.Base;
 using Minima.Web.Helper;
 //+
 namespace Minima.Web.Control
