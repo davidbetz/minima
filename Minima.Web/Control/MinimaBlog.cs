@@ -48,6 +48,9 @@ namespace Minima.Web.Control
         //- @CustomCommentTemplateType -//
         public Type CustomCommentTemplateType { get; set; }
 
+        //- @PostFooterTypeInfo -//
+        public TypeInfo PostFooterTypeInfo { get; set; }
+
         //- @CaptchaControl -//
         public CaptchaBase CaptchaControl { get; set; }
 
@@ -300,10 +303,10 @@ namespace Minima.Web.Control
         {
             if (this.CustomPostTemplateType == null)
             {
-                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
+                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
             }
             //+
-            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
+            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
         }
 
         //- $GetCommentTemplate -//

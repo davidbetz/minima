@@ -97,6 +97,10 @@ namespace Minima.Web.Routing
                                             LabelMap.Add(label, labelTitle);
                                         }
                                     }
+                                    catch
+                                    {
+                                        //+ doesn't matter
+                                    }
                                     finally
                                     {
                                         readerWriterLock.DowngradeFromWriterLock(ref lockCookie);

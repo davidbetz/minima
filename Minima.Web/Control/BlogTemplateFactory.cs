@@ -4,6 +4,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 //+
 using Themelia;
+using Themelia.Activation;
 //+
 namespace Minima.Web.Control
 {
@@ -96,12 +97,20 @@ namespace Minima.Web.Control
             //- $ShowAuthorSeries -//
             private Boolean ShowAuthorSeries { get; set; }
 
+            //- $PostFooter -//
+            private PostFooterBase PostFooter { get; set; }
+
             //- @Ctor -//
             public PostTemplate(params Object[] parameterArray)
             {
-                this.IsLink = ((AccessType)parameterArray[0]) == AccessType.Link;
-                this.SupportCommenting = (Boolean)parameterArray[1];
-                this.ShowAuthorSeries = (Boolean)parameterArray[2];
+                TypeInfo postFooterTypeInfo = (TypeInfo)parameterArray[0];
+                if (postFooterTypeInfo != null)
+                {
+                    PostFooter = ObjectCreator.CreateAs<PostFooterBase>(postFooterTypeInfo);
+                }
+                this.IsLink = ((AccessType)parameterArray[1]) == AccessType.Link;
+                this.SupportCommenting = (Boolean)parameterArray[2];
+                this.ShowAuthorSeries = (Boolean)parameterArray[3];
             }
 
             //- @InstantiateIn -//
@@ -194,6 +203,11 @@ namespace Minima.Web.Control
         </p>"
                             });
                         }
+                    }
+                    if (this.PostFooter != null)
+                    {
+                        this.PostFooter.Data = item.DataItem;
+                        ph.Controls.Add(this.PostFooter);
                     }
                     ph.Controls.Add(new System.Web.UI.WebControls.Literal()
                     {
