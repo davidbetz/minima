@@ -1,8 +1,6 @@
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 //+
-using Minima.Web.Control.Base;
-//+
 namespace Minima.Web.Control
 {
     public class CommentInput : CommentInputBase
