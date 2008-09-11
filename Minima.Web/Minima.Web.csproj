@@ -85,9 +85,11 @@
     <Compile Include="Api\MetaWeblog\UrlInfo.cs" />
     <Compile Include="Control\Base\CommentInputBase.cs">
     </Compile>
+    <Compile Include="Control\Base\PostFooterBase.cs" />
     <Compile Include="Control\Base\LiteralContentControlBase.cs">
     </Compile>
     <Compile Include="Control\Base\CaptchaBase.cs" />
+    <Compile Include="Control\FeedBurnerPostFooter.cs" />
     <Compile Include="Control\LabelListTemplateFactory.cs" />
     <Compile Include="Control\_Index\IndexListSeriesYearTemplate.cs" />
     <Compile Include="Control\_Index\IndexLabelListTemplate.cs" />
