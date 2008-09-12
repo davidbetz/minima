@@ -97,17 +97,13 @@ namespace Minima.Web.Control
             //- $ShowAuthorSeries -//
             private Boolean ShowAuthorSeries { get; set; }
 
-            //- $PostFooter -//
-            private PostFooterBase PostFooter { get; set; }
+            //- $PostFooterTypeInfo -//
+            private TypeInfo PostFooterTypeInfo { get; set; }
 
             //- @Ctor -//
             public PostTemplate(params Object[] parameterArray)
             {
-                TypeInfo postFooterTypeInfo = (TypeInfo)parameterArray[0];
-                if (postFooterTypeInfo != null)
-                {
-                    PostFooter = ObjectCreator.CreateAs<PostFooterBase>(postFooterTypeInfo);
-                }
+                this.PostFooterTypeInfo = (TypeInfo)parameterArray[0];
                 this.IsLink = ((AccessType)parameterArray[1]) == AccessType.Link;
                 this.SupportCommenting = (Boolean)parameterArray[2];
                 this.ShowAuthorSeries = (Boolean)parameterArray[3];
@@ -204,10 +200,11 @@ namespace Minima.Web.Control
                             });
                         }
                     }
-                    if (this.PostFooter != null)
+                    if (this.PostFooterTypeInfo != null)
                     {
-                        this.PostFooter.Data = item.DataItem;
-                        ph.Controls.Add(this.PostFooter);
+                        PostFooterBase postFooter = ObjectCreator.CreateAs<PostFooterBase>(this.PostFooterTypeInfo);
+                        postFooter.Data = item.DataItem;
+                        ph.Controls.Add(postFooter);
                     }
                     ph.Controls.Add(new System.Web.UI.WebControls.Literal()
                     {
