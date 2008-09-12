@@ -40,7 +40,10 @@ namespace Minima.Web.Routing
                 }
             }
             //+ url
-            DetectDestination();
+            if (!Themelia.Web.Routing.PassThroughHttpHandler.ForceUse)
+            {
+                DetectDestination();
+            }
             //+ blog page
             if (componentData != null)
             {
