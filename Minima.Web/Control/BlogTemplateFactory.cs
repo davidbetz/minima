@@ -156,7 +156,7 @@ namespace Minima.Web.Control
 
                         template.AppendText("<em>posted by {AuthorSeries}");
                         //+
-                        if (!this.HidePostDateTime == false)
+                        if (this.HidePostDateTime == false)
                         {
                             template.AppendText(" at {DateTimeDisplay}</em>");
                         }
