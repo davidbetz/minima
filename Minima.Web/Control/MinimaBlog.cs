@@ -59,6 +59,9 @@ namespace Minima.Web.Control
         //- @ShowAuthorSeries -//
         public Boolean ShowAuthorSeries { get; set; }
 
+        //- @HidePostDateTime -//
+        public Boolean HidePostDateTime { get; set; }
+
         //- @CodeParserSeries -//
         public Themelia.CodeParsing.CodeParserSeries CodeParserSeries { get; set; }
 
@@ -70,6 +73,7 @@ namespace Minima.Web.Control
             this.CaptchaControl = new MathCaptcha();
             this.SupportCommenting = true;
             this.ShowAuthorSeries = true;
+            this.HidePostDateTime = false;
             //+ parser
             this.CodeParserSeries = new Themelia.CodeParsing.CodeParserSeries()
             {
@@ -302,10 +306,10 @@ namespace Minima.Web.Control
         {
             if (this.CustomPostTemplateType == null)
             {
-                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
+                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries, this.HidePostDateTime);
             }
             //+
-            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries);
+            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries, this.HidePostDateTime);
         }
 
         //- $GetCommentTemplate -//
