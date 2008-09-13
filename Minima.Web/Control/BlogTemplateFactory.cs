@@ -97,6 +97,9 @@ namespace Minima.Web.Control
             //- $ShowAuthorSeries -//
             private Boolean ShowAuthorSeries { get; set; }
 
+            //- $HidePostTime -//
+            private Boolean HidePostDateTime { get; set; }
+
             //- $PostFooterTypeInfo -//
             private TypeInfo PostFooterTypeInfo { get; set; }
 
@@ -107,6 +110,7 @@ namespace Minima.Web.Control
                 this.IsLink = ((AccessType)parameterArray[1]) == AccessType.Link;
                 this.SupportCommenting = (Boolean)parameterArray[2];
                 this.ShowAuthorSeries = (Boolean)parameterArray[3];
+                this.HidePostDateTime = (Boolean)parameterArray[4];
             }
 
             //- @InstantiateIn -//
@@ -136,15 +140,26 @@ namespace Minima.Web.Control
                     //+
                     Themelia.Template template = new Themelia.Template(@"
 <div class=""post"">
-    <h3><a href=""{Url}"">{Title}</a></h3>
-    <h2 class=""date-header"">{DateTimeString}</h2>
+    <h3><a href=""{Url}"">{Title}</a></h3>");
+                    if (this.HidePostDateTime == false)
+                    {
+                        template.AppendText(@"
+    <h2 class=""date-header"">{DateTimeString}</h2>");
+                    }
+                        template.AppendText(@"
     <div class=""post-body"">
         <div>{Content}</div>
     </div>
     <p class=""post-footer"">");
                     if (ShowAuthorSeries)
                     {
-                        template.AppendText("<em>posted by {AuthorSeries} at {DateTimeDisplay}</em>");
+
+                        template.AppendText("<em>posted by {AuthorSeries}");
+                        //+
+                        if (!this.HidePostDateTime == false)
+                        {
+                            template.AppendText(" at {DateTimeDisplay}</em>");
+                        }
                     }
                     //+
                     ph.Controls.Add(new System.Web.UI.WebControls.Literal
