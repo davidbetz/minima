@@ -151,9 +151,8 @@ namespace Minima.Web.Control
         <div>{Content}</div>
     </div>
     <p class=""post-footer"">");
-                    if (ShowAuthorSeries)
+                    if (this.ShowAuthorSeries)
                     {
-
                         template.AppendText("<em>posted by {AuthorSeries}");
                         //+
                         if (this.HidePostDateTime == false)
