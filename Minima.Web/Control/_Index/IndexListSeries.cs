@@ -1,11 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
 //+
-using Minima.Service;
 //+
 namespace Minima.Web.Control
 {

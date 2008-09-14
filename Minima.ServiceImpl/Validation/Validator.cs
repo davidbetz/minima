@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 //+
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
-using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using BlogEntryTypeLINQ = Minima.Service.Data.Entity.BlogEntryType;
 using BlogImageLINQ = Minima.Service.Data.Entity.BlogImage;
+using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
 //+

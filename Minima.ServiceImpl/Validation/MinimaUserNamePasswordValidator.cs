@@ -2,7 +2,6 @@
 using System.IdentityModel.Selectors;
 using System.Security;
 //+
-using Minima.Service;
 //+
 namespace Minima.Service.Validation
 {

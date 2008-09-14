@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 //+
-using Themelia.Mail;
-//+
 using Minima.Service.Behavior;
 using Minima.Service.Helper;
 using Minima.Service.Validation;
+//+
+using Themelia.Mail;
 //+
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;

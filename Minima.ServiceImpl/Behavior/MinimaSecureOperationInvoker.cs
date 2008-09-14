@@ -2,7 +2,6 @@
 using System.Security;
 using System.ServiceModel.Dispatcher;
 //+
-using Minima.Service;
 //+
 namespace Minima.Service.Behavior
 {
