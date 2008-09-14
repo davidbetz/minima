@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //+
-using Minima.Service;
-using Minima.Web.Agent;
-using Minima.Web.Helper;
 using Themelia.Web;
 //+
 namespace Minima.Web.Control

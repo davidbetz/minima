@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Transactions;
-using System.Xml;
 //+
 using Minima.Service.Behavior;
 using Minima.Service.Helper;
@@ -12,9 +10,9 @@ using Minima.Service.Validation;
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
 using BlogEntryAuthorLINQ = Minima.Service.Data.Entity.BlogEntryAuthor;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
+using BlogEntryTypeLINQ = Minima.Service.Data.Entity.BlogEntryType;
 using BlogEntryUrlMappingLINQ = Minima.Service.Data.Entity.BlogEntryUrlMapping;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
-using BlogEntryTypeLINQ = Minima.Service.Data.Entity.BlogEntryType;
 using LabelBlogEntryLINQ = Minima.Service.Data.Entity.LabelBlogEntry;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
 //+

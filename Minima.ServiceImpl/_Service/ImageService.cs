@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Data.Linq;
-using System.IO;
-using System.Linq;
 //+
 using Minima.Service.Behavior;
-using Minima.Service.Helper;
 using Minima.Service.Validation;
+using BlogImageLINQ = Minima.Service.Data.Entity.BlogImage;
 //+
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
-using BlogImageLINQ = Minima.Service.Data.Entity.BlogImage;
 //+
 using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+

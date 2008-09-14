@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web;
 //+
-using Themelia.Web;
-//+
 using Minima.Configuration;
+//+
+using Themelia.Web;
 //+
 namespace Minima.Web.Module
 {
