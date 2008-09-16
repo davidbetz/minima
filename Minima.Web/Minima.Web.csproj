@@ -83,61 +83,61 @@
     <Compile Include="Api\MetaWeblog\MetaWeblogApi.cs" />
     <Compile Include="Api\MetaWeblog\Post.cs" />
     <Compile Include="Api\MetaWeblog\UrlInfo.cs" />
-    <Compile Include="Control\Base\CommentInputBase.cs">
+    <Compile Include="Controls\_Base\CommentInputBase.cs">
     </Compile>
-    <Compile Include="Control\Base\PostFooterBase.cs" />
-    <Compile Include="Control\Base\LiteralContentControlBase.cs">
+    <Compile Include="Controls\_Base\PostFooterBase.cs" />
+    <Compile Include="Controls\_Base\LiteralContentControlBase.cs">
     </Compile>
-    <Compile Include="Control\Base\CaptchaBase.cs" />
-    <Compile Include="Control\FeedBurnerPostFooter.cs" />
-    <Compile Include="Control\LabelListTemplateFactory.cs" />
-    <Compile Include="Control\_Index\IndexListSeriesYearTemplate.cs" />
-    <Compile Include="Control\_Index\IndexLabelListTemplate.cs" />
-    <Compile Include="Control\_Index\IndexEntry.cs">
+    <Compile Include="Controls\_Base\CaptchaBase.cs" />
+    <Compile Include="Controls\FeedBurnerPostFooter.cs" />
+    <Compile Include="Controls\LabelListTemplateFactory.cs" />
+    <Compile Include="Controls\_Index\IndexListSeriesYearTemplate.cs" />
+    <Compile Include="Controls\_Index\IndexLabelListTemplate.cs" />
+    <Compile Include="Controls\_Index\IndexEntry.cs">
     </Compile>
-    <Compile Include="Control\_Index\EntryTag.cs" />
-    <Compile Include="Control\_Index\IndexEntryList.cs">
+    <Compile Include="Controls\_Index\EntryTag.cs" />
+    <Compile Include="Controls\_Index\IndexEntryList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\_Index\IndexListSeries.cs">
+    <Compile Include="Controls\_Index\IndexListSeries.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\_Index\IndexListSeriesTemplate.cs" />
-    <Compile Include="Control\_Index\IndexType.cs">
+    <Compile Include="Controls\_Index\IndexListSeriesTemplate.cs" />
+    <Compile Include="Controls\_Index\IndexType.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Control\_Index\IndexEntryTemplate.cs">
+    <Compile Include="Controls\_Index\IndexEntryTemplate.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccessType.cs" />
     <Compile Include="Routing\MinimaInfo.cs" />
     <Compile Include="Parsing\AmazonAffiliateCodeParser.cs" />
-    <Compile Include="Control\BlogTemplateFactory.cs" />
-    <Compile Include="Control\ArchivedEntryList.cs">
+    <Compile Include="Controls\BlogTemplateFactory.cs" />
+    <Compile Include="Controls\ArchivedEntryList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\CommentInput.cs" />
-    <Compile Include="Control\Literal\FirefoxGoogleAdsense.cs">
+    <Compile Include="Controls\CommentInput.cs" />
+    <Compile Include="Controls\Literal\FirefoxGoogleAdsense.cs">
     </Compile>
-    <Compile Include="Control\Literal\GoogleAdsense.cs">
+    <Compile Include="Controls\Literal\GoogleAdsense.cs">
     </Compile>
-    <Compile Include="Control\Literal\GoogleAnalytics.cs">
+    <Compile Include="Controls\Literal\GoogleAnalytics.cs">
     </Compile>
-    <Compile Include="Control\LabelList.cs">
+    <Compile Include="Controls\LabelList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Literal\LicenseInformation.cs">
+    <Compile Include="Controls\Literal\LicenseInformation.cs">
     </Compile>
-    <Compile Include="Control\MathCaptcha.cs">
+    <Compile Include="Controls\MathCaptcha.cs">
     </Compile>
-    <Compile Include="Control\MinimaBlog.cs">
+    <Compile Include="Controls\MinimaBlog.cs">
     </Compile>
-    <Compile Include="Control\RecentEntryList.cs">
+    <Compile Include="Controls\RecentEntryList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Base\MinimaBlogBase.cs">
+    <Compile Include="Controls\_Base\MinimaBlogBase.cs">
     </Compile>
-    <Compile Include="Control\Base\MinimaListUserControlBase.cs">
+    <Compile Include="Controls\_Base\MinimaListUserControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Helper\LabelHelper.cs" />
@@ -147,7 +147,7 @@
       <DependentUpon>MinimaWebLINQ.dbml</DependentUpon>
     </Compile>
     <Compile Include="Helper\MediaHelper.cs" />
-    <Compile Include="Control\MinimaForm.cs" />
+    <Compile Include="Controls\MinimaForm.cs" />
     <Compile Include="Module\FixDomainHttpModule.cs" />
     <Compile Include="NonClosingMemoryStream.cs" />
     <Compile Include="Parsing\BlogEntryCodeParser.cs" />
