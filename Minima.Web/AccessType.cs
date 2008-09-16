@@ -1,5 +1,5 @@
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public enum AccessType
     {

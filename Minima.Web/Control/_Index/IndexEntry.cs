@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //+
 using Minima.Service;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public class IndexEntry
     {

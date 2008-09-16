@@ -14,7 +14,7 @@ using Minima.Web.Helper;
 //+
 using Themelia.Activation;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public class MinimaBlog : MinimaBlogBase
     {

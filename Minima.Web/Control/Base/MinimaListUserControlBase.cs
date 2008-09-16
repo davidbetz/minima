@@ -3,9 +3,9 @@ using System;
 using Themelia.Web;
 using Themelia.Web.Routing.Data;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
-    public abstract class MinimaListUserControlBase : Themelia.Web.Control.DataUserControlBase
+    public abstract class MinimaListUserControlBase : Themelia.Web.Controls.DataUserControlBase
     {
         protected System.Web.UI.WebControls.Repeater repeater;
         private String webDomain;

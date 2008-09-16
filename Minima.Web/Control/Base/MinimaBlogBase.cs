@@ -11,7 +11,7 @@ using Minima.Web.Data.Entity;
 using Themelia.Tracing;
 using Themelia.Web;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public abstract class MinimaBlogBase : System.Web.UI.Control
     {

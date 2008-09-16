@@ -4,7 +4,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 //+
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     [ToolboxData("<{0}:IndexListSeries runat=\"server\"></{0}:IndexListSeries>")]
     public class IndexListSeries : MinimaListUserControlBase
@@ -13,9 +13,7 @@ namespace Minima.Web.Control
 
         //+
         //- @Ctor -//
-        public IndexListSeries( )
-        {
-        }
+        public IndexListSeries( ) { }
 
         //+
         //- @Year -//
@@ -86,7 +84,7 @@ namespace Minima.Web.Control
         }
 
         //- #__BuildControlTree -//
-        protected override void __BuildControlTree(Themelia.Web.Control.DataUserControlBase __ctrl)
+        protected override void __BuildControlTree(Themelia.Web.Controls.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
             String listCssClass = "index-series";
