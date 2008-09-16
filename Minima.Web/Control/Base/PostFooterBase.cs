@@ -1,6 +1,6 @@
 using System;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public abstract class PostFooterBase : System.Web.UI.Control
     {

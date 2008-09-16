@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public static class LabelListTemplateFactory
     {

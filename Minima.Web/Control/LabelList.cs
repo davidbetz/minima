@@ -6,7 +6,7 @@ using System.Web.UI;
 using Minima.Service;
 using Minima.Service.Agent;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     [PartialCachingAttribute(3600, null, null, null, null, false)]
     public class LabelList : MinimaListUserControlBase
@@ -16,6 +16,9 @@ namespace Minima.Web.Control
         //+
         //- @Heading -//
         public String Heading { get; set; }
+
+        //- @ShowHeader -//
+        public Boolean ShowHeading { get; set; }
 
         //- @ListCssClass -//
         public String ListCssClass { get; set; }
@@ -39,7 +42,10 @@ namespace Minima.Web.Control
 
         //+
         //- @Ctor -//
-        public LabelList() { }
+        public LabelList()
+        {
+            ShowHeading = true;
+        }
 
         //+
         //- #GetDataSource -//
@@ -82,15 +88,18 @@ namespace Minima.Web.Control
         }
 
         //- $__BuildControlTree -//
-        protected override void __BuildControlTree(Themelia.Web.Control.DataUserControlBase __ctrl)
+        protected override void __BuildControlTree(Themelia.Web.Controls.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
-            String heading = "Labels";
-            if (!String.IsNullOrEmpty(this.Heading))
+            if (this.ShowHeading)
             {
-                heading = this.Heading;
+                String heading = "Labels";
+                if (!String.IsNullOrEmpty(this.Heading))
+                {
+                    heading = this.Heading;
+                }
+                __parser.AddParsedSubObject(new LiteralControl("<h2>" + heading + "</h2>"));
             }
-            __parser.AddParsedSubObject(new LiteralControl("<h2>" + heading + "</h2>"));
             //+
             System.Web.UI.WebControls.Repeater repeater = this.__BuildRepeaterControl();
             __parser.AddParsedSubObject(repeater);

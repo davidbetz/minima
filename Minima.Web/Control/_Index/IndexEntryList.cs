@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 //+
 using Themelia.Web;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     //[PartialCachingAttribute(3600, null, null, null, null, false)]
     public class IndexEntryList : MinimaListUserControlBase
@@ -102,7 +102,7 @@ namespace Minima.Web.Control
         }
 
         //- $__BuildControlTree -//
-        protected override void __BuildControlTree(Themelia.Web.Control.DataUserControlBase __ctrl)
+        protected override void __BuildControlTree(Themelia.Web.Controls.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
             if (String.IsNullOrEmpty(this.Heading))

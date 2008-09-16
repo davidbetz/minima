@@ -1,7 +1,7 @@
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     /// <summary>
     /// Used to allow postbacks when rewriting URLs

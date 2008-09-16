@@ -1,6 +1,6 @@
 using System.Web.UI;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public class MathCaptcha : CaptchaBase
     {

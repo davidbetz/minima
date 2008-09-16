@@ -8,7 +8,7 @@ using Minima.Service;
 using Minima.Service.Agent;
 using Minima.Web.Helper;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     [PartialCachingAttribute(3600, null, null, null, null, false)]
     public class RecentEntryList : MinimaListUserControlBase
@@ -38,6 +38,9 @@ namespace Minima.Web.Control
         //- @Heading -//
         public String Heading { get; set; }
 
+        //- @ShowHeader -//
+        public Boolean ShowHeading { get; set; }
+
         //- @MaxEntryCount -//
         public Int32 MaxEntryCount { get; set; }
 
@@ -49,7 +52,10 @@ namespace Minima.Web.Control
 
         //+
         //- @Ctor -//
-        public RecentEntryList() { }
+        public RecentEntryList()
+        {
+            ShowHeading = true;
+        }
 
         //+
         //- #GetDataSource -//
@@ -80,24 +86,27 @@ namespace Minima.Web.Control
         }
 
         //- $__BuildControlTree -//
-        protected override void __BuildControlTree(Themelia.Web.Control.DataUserControlBase __ctrl)
+        protected override void __BuildControlTree(Themelia.Web.Controls.DataUserControlBase __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
-            String heading = "Previous Posts";
-            if (!String.IsNullOrEmpty(this.Heading))
+            if (this.ShowHeading)
             {
-                heading = this.Heading;
-            }
-            if (this.HeadingIsLink)
-            {
-                heading = String.Format(@"<a href=""{0}"">{1}</a>", Themelia.Web.WebDomain.GetUrl(Themelia.Web.WebDomain.CleanWebDomain(this.WebDomainName)), heading);
+                String heading = "Previous Posts";
+                if (!String.IsNullOrEmpty(this.Heading))
+                {
+                    heading = this.Heading;
+                }
+                if (this.HeadingIsLink)
+                {
+                    heading = String.Format(@"<a href=""{0}"">{1}</a>", Themelia.Web.WebDomain.GetUrl(Themelia.Web.WebDomain.CleanWebDomain(this.WebDomainName)), heading);
+                }
+                __parser.AddParsedSubObject(new LiteralControl("<h2>" + heading + "</h2>"));
             }
             String listCssClass = "recentPosts";
             if (!String.IsNullOrEmpty(this.ListCssClass))
             {
                 listCssClass = this.ListCssClass;
             }
-            __parser.AddParsedSubObject(new LiteralControl("<h2>" + heading + "</h2>"));
             __parser.AddParsedSubObject(new LiteralControl("<ul id=\"" + listCssClass + "\">"));
             //+
             System.Web.UI.WebControls.Repeater repeater = this.__BuildRepeaterControl();

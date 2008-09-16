@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 using Themelia;
 using Themelia.Activation;
 //+
-namespace Minima.Web.Control
+namespace Minima.Web.Controls
 {
     public static class BlogTemplateFactory
     {
