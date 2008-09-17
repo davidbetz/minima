@@ -30,7 +30,7 @@ namespace Minima.Web.Tracing
         {
             if (MinimaConfiguration.EnableTracingViaSerialization)
             {
-                TraceStorage.RecordInformationMessage(managedMethod, StreamConverter.GetString(stream));
+                TraceStorage.RecordInformationMessage(managedMethod, Themelia.IO.StreamConverter.GetStreamText(stream));
             }
         }
     }
