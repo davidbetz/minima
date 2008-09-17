@@ -13,6 +13,7 @@ namespace Minima.Web.Tracing
         {
             Byte[] buffer = new Byte[stream.Length];
             stream.Read(buffer, 0, buffer.Length);
+            //+
             return buffer;
         }
 
@@ -21,7 +22,7 @@ namespace Minima.Web.Tracing
         {
             Byte[] buffer = new Byte[stream.Length];
             stream.Read(buffer, 0, buffer.Length);
-            EmailReporter.Send(buffer.Length.ToString());
+            ReportFacade.Send(buffer.Length.ToString());
             //+
             return Encoding.UTF8.GetString(buffer);
         }

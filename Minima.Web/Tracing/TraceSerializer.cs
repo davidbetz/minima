@@ -25,7 +25,7 @@ namespace Minima.Web.Tracing
             }
             catch (Exception ex)
             {
-                EmailReporter.Send(ex);
+                ReportFacade.Send(ex);
             }
             return b.ToString();
         }
