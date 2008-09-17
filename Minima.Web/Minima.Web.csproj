@@ -168,7 +168,6 @@
     <Compile Include="Service\FeedService.cs" />
     <Compile Include="Service\_ServiceContract\ICommentService.cs" />
     <Compile Include="Service\_ServiceContract\IFeedService.cs" />
-    <Compile Include="Tracing\StreamConverter.cs" />
     <Compile Include="Tracing\TraceManager.cs" />
     <Compile Include="Tracing\TraceSerializer.cs" />
     <Compile Include="Tracing\TraceStorage.cs" />

@@ -12,11 +12,11 @@ public partial class Default : System.Web.UI.Page
     {
         this.Load += new EventHandler(Page_Load);
         //+
-        phLabelList.Controls.Add(new Minima.Web.Control.LabelList());
-        phArchivedEntryList.Controls.Add(new Minima.Web.Control.ArchivedEntryList());
-        phRecentEntryList.Controls.Add(new Minima.Web.Control.RecentEntryList());
-        phRecentEntryListSecondary.Controls.Add(new Minima.Web.Control.RecentEntryList { WebDomainName = "second", Heading = "Second Blog", HeadingIsLink = true });
-        phMinimaBlog.Controls.Add(new Minima.Web.Control.MinimaBlog());
+        phLabelList.Controls.Add(new Minima.Web.Controls.LabelList());
+        phArchivedEntryList.Controls.Add(new Minima.Web.Controls.ArchivedEntryList());
+        phRecentEntryList.Controls.Add(new Minima.Web.Controls.RecentEntryList());
+        phRecentEntryListSecondary.Controls.Add(new Minima.Web.Controls.RecentEntryList { WebDomainName = "second", Heading = "Second Blog", HeadingIsLink = true });
+        phMinimaBlog.Controls.Add(new Minima.Web.Controls.MinimaBlog());
         //+
         base.OnInit(e);
     }

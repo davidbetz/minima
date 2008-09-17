@@ -12,7 +12,7 @@ public partial class SecondBlogPage : System.Web.UI.Page
     {
         this.Load += new EventHandler(Page_Load);
         //+
-        phMinimaBlog.Controls.Add(new Minima.Web.Control.MinimaBlog
+        phMinimaBlog.Controls.Add(new Minima.Web.Controls.MinimaBlog
         {
             SupportCommenting = false
         });
@@ -25,7 +25,7 @@ public partial class SecondBlogPage : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            BlogMetaData blogMetaData = BlogAgent.GetBlogMetaData(Minima.Web.Control.MinimaBlog.BlogGuid);
+            BlogMetaData blogMetaData = BlogAgent.GetBlogMetaData(Minima.Web.Controls.MinimaBlog.BlogGuid);
             //+
             hlBlogUrl.NavigateUrl = blogMetaData.Uri.AbsoluteUri;
             hlBlogUrl.Text = blogMetaData.Title;
