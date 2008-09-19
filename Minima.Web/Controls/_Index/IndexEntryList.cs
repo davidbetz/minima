@@ -57,7 +57,7 @@ namespace Minima.Web.Controls
             else
             {
                 this.AccessType = accessType;
-                this.dataSource = dataSource;
+                this._dataSource = dataSource;
             }
             this.Heading = GetHeading(accessType);
         }
