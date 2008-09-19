@@ -148,13 +148,13 @@ namespace Minima.Web.Api.MetaWeblog
             }
             List<String> registeredBlogGuidList = webDomainPathMap.GetKeyList();
             //+
-            var netBlogList = (from b in blogList
+            BlogInfo[] netBlogList = (from b in blogList
                                where registeredBlogGuidList.Contains(b.Guid)
                                select new BlogInfo
                                {
                                    blogid = b.Guid,
                                    blogName = b.Title,
-                                   url = Themelia.Web.WebDomain.GetUrl(webDomainPathMap[b.Guid]).AbsoluteUri
+                                   url = Themelia.Web.WebDomain.GetUrl(webDomainPathMap[b.Guid])
                                }).ToArray();
             //+
             return netBlogList;
