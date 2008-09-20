@@ -157,6 +157,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetDir)Minima.* %25HOMEDRIVE%25\$(ConfigurationName)\* /E /C /Q /R /H /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)Minima.* %25HOMEDRIVE%25\_REFERENCE\$(ConfigurationName)\* /E /C /Q /R /H /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
