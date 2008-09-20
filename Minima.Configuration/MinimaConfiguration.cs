@@ -150,15 +150,6 @@ namespace Minima.Configuration
             }
         }
 
-        //- @ViewableBlogEntryCount -//
-        public static Int32 ViewableBlogEntryCount
-        {
-            get
-            {
-                return ConfigAccessor.ApplicationSettings<Int32>("ViewableBlogEntryCount");
-            }
-        }
-
         //- @DefaultServiceUserName -//
         public static String DefaultServiceUserName
         {

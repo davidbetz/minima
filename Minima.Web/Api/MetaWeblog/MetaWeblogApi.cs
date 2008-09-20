@@ -143,8 +143,12 @@ namespace Minima.Web.Api.MetaWeblog
             Themelia.Map webDomainPathMap = new Themelia.Map();
             foreach (WebDomainData webDomainData in WebDomainDataList.AllWebDomainData)
             {
-                String blogGuid = webDomainData.ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
-                webDomainPathMap.Add(blogGuid, webDomainData.Path);
+                ComponentData data = webDomainData.ComponentDataList[Info.Scope];
+                if (data != null)
+                {
+                    String blogGuid = data.ParameterDataList[Info.BlogGuid].Value;
+                    webDomainPathMap.Add(blogGuid, webDomainData.Path);
+                }
             }
             List<String> registeredBlogGuidList = webDomainPathMap.GetKeyList();
             //+
