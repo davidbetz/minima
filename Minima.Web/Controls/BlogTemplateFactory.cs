@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 //+
 using Themelia;
 using Themelia.Activation;
+using Minima.Service;
 //+
 namespace Minima.Web.Controls
 {
@@ -94,6 +95,9 @@ namespace Minima.Web.Controls
             //- $SupportCommenting -//
             private Boolean SupportCommenting { get; set; }
 
+            //- $DisabledCommentText -//
+            public String DisabledCommentText { get; set; }
+
             //- $ShowAuthorSeries -//
             private Boolean ShowAuthorSeries { get; set; }
 
@@ -109,8 +113,9 @@ namespace Minima.Web.Controls
                 this.PostFooterTypeInfo = (TypeInfo)parameterArray[0];
                 this.IsLink = ((AccessType)parameterArray[1]) == AccessType.Link;
                 this.SupportCommenting = (Boolean)parameterArray[2];
-                this.ShowAuthorSeries = (Boolean)parameterArray[3];
-                this.HidePostDateTime = (Boolean)parameterArray[4];
+                this.DisabledCommentText = (String)parameterArray[3];
+                this.ShowAuthorSeries = (Boolean)parameterArray[4];
+                this.HidePostDateTime = (Boolean)parameterArray[5];
             }
 
             //- @InstantiateIn -//
@@ -128,7 +133,7 @@ namespace Minima.Web.Controls
                     String labelSeries = DataBinder.Eval(item.DataItem, "LabelSeries") as String;
                     String dateTimeString = DataBinder.Eval(item.DataItem, "DateTimeString") as String;
                     String dateTimeDisplay = DataBinder.Eval(item.DataItem, "DateTimeDisplay") as String;
-                    String allowCommentStatus = DataBinder.Eval(item.DataItem, "AllowCommentStatus") as String;
+                    AllowCommentStatus allowCommentStatus = (AllowCommentStatus)(DataBinder.Eval(item.DataItem, "AllowCommentStatus") ?? 0);
                     Int32 viewableCommentCount = (DataBinder.Eval(item.DataItem, "ViewableCommentCount") as Int32?) ?? 0;
                     //+
                     HiddenField hBlogEntryGuid = new HiddenField
@@ -187,12 +192,15 @@ namespace Minima.Web.Controls
                     }
                     if (!this.IsLink && this.SupportCommenting)
                     {
-                        if (allowCommentStatus == "Disabled")
+                        if (allowCommentStatus == AllowCommentStatus.Disabled)
                         {
-                            ph.Controls.Add(new System.Web.UI.WebControls.Literal
+                            if (!String.IsNullOrEmpty(this.DisabledCommentText))
                             {
-                                Text = @"<p class=""comment-count""><i>Comments are disabled for this entry.</i> </p>"
-                            });
+                                ph.Controls.Add(new System.Web.UI.WebControls.Literal
+                                {
+                                    Text = @"<p class=""comment-count"">" + this.DisabledCommentText + @"</p>"
+                                });
+                            }
                         }
                         else
                         {

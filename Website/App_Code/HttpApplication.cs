@@ -7,12 +7,6 @@ namespace Minima.Web
 {
     public class HttpApplication : System.Web.HttpApplication
     {
-        //- @Ctor -//
-        public HttpApplication()
-        {
-            this.Error += new EventHandler(HttpApplication_Error);
-        }
-
         //- @GetVaryByCustomString -//
         public override string GetVaryByCustomString(HttpContext context, string custom)
         {
@@ -22,15 +16,6 @@ namespace Minima.Web
             }
             //+
             return base.GetVaryByCustomString(context, custom);
-        }
-
-        //+
-        //- $HttpApplication_Error -//
-        private void HttpApplication_Error(Object sender, EventArgs e)
-        {
-            HttpContext ctx = HttpContext.Current;
-            //+
-            ReportFacade.SendAsHtml("HttpContext", "Uncaught Exception", ctx);
         }
     }
 }

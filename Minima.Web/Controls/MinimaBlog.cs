@@ -53,6 +53,12 @@ namespace Minima.Web.Controls
         //- @CaptchaControl -//
         public CaptchaBase CaptchaControl { get; set; }
 
+        //- @ClosedCommentText -//
+        public String ClosedCommentText { get; set; }
+
+        //- @DisabledCommentText -//
+        public String DisabledCommentText { get; set; }
+
         //- @SupportCommenting -//
         public Boolean SupportCommenting { get; set; }
 
@@ -72,6 +78,8 @@ namespace Minima.Web.Controls
             //+ default
             this.CaptchaControl = new MathCaptcha();
             this.SupportCommenting = true;
+            this.ClosedCommentText = "Comments have been closed for this entry.";
+            this.DisabledCommentText = "Comments have been disabled for this entry.";
             this.ShowAuthorSeries = true;
             this.HidePostDateTime = false;
             //+ parser
@@ -306,10 +314,10 @@ namespace Minima.Web.Controls
         {
             if (this.CustomPostTemplateType == null)
             {
-                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries, this.HidePostDateTime);
+                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
             }
             //+
-            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.ShowAuthorSeries, this.HidePostDateTime);
+            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
         }
 
         //- $GetCommentTemplate -//
@@ -367,10 +375,13 @@ namespace Minima.Web.Controls
                 vCommentForm = __BuildCommentFormViewControl();
                 vCommentForm.ID = "vCommentForm";
                 vCommentClosed = new View() { ID = "vCommentClosed" };
-                vCommentClosed.Controls.Add(new System.Web.UI.WebControls.Literal
+                if (!String.IsNullOrEmpty(this.ClosedCommentText))
                 {
-                    Text = @"<p class=""comment-status"">Comments have been closed for this entry.</p>"
-                });
+                    vCommentClosed.Controls.Add(new System.Web.UI.WebControls.Literal
+                    {
+                        Text = @"<p class=""comment-status"">" + this.ClosedCommentText + "</p>"
+                    });
+                }
                 mvCommentInput.Controls.Add(vCommentForm);
                 mvCommentInput.Controls.Add(vCommentClosed);
                 div.Controls.Add(mvCommentInput);
@@ -393,10 +404,13 @@ namespace Minima.Web.Controls
             mv.Controls.Add(vShowComments);
             //+
             vCommentsDisabled = new View() { ID = "vCommentsDisabled" };
-            vCommentsDisabled.Controls.Add(new System.Web.UI.WebControls.Literal
+            if (!String.IsNullOrEmpty(this.DisabledCommentText))
             {
-                Text = @"<p class=""comment-status"">Comments have been disabled for this entry.</p>"
-            });
+                vCommentsDisabled.Controls.Add(new System.Web.UI.WebControls.Literal
+                {
+                    Text = @"<p class=""comment-status"">" + this.DisabledCommentText + "</p>"
+                });
+            }
             mv.Controls.Add(vCommentsDisabled);
             //+
             return mv;
