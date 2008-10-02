@@ -4,6 +4,7 @@ using System.Web;
 //+
 using Minima.Configuration;
 using Minima.Service.Agent;
+using Themelia.Web;
 //+
 namespace Minima.Web.Service
 {
@@ -17,7 +18,7 @@ namespace Minima.Web.Service
             Int32 a = r.Next(10);
             Int32 b = r.Next(10);
             //+
-            HttpContext.Current.Session["CaptchaExpectedValue"] = a + b;
+            HttpData.SetScopedSessionItem<Int32>("Captcha", "ExpectedValue", a + b);
             return new CaptchMathInformation
             {
                 A = a,
@@ -45,7 +46,7 @@ namespace Minima.Web.Service
         {
             Int32 returnStatus;
             //+
-            if (captchaValue == (Int32)(HttpContext.Current.Session["CaptchaExpectedValue"] ?? 0))
+            if (captchaValue == HttpData.GetScopedSessionItem<Int32>("Captcha", "ExpectedValue"))
             {
                 String emailBodyTemplate = @"                
 <h4>New Comment!</h4>
@@ -58,7 +59,8 @@ namespace Minima.Web.Service
 <p>Comment date/time: " + DateTime.Now.ToString() + @"</p>
 <p>Comment text: " + text + @"</p>
 <p><b>This link is moderated, <a href=\""" + WebConfiguration.Domain + @"services/comment/{1}\"">click here to unmoderate</a>.</b></p>";
-                String emailSubject = String.Format("{0} ({1})", MinimaConfiguration.CommentNotificationSubject, WebConfiguration.SiteName);
+                Themelia.Configuration.SystemSection systemSection = Themelia.Configuration.SystemSection.GetConfigSection();
+                String emailSubject = String.Format("{0} ({1})", MinimaConfiguration.CommentNotificationSubject, systemSection.AppInfo.Name);
                 //+
                 String commentGuid = String.Empty;
                 returnStatus = 0;

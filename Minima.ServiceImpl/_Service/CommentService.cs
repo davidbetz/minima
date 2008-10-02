@@ -8,10 +8,9 @@ using Minima.Service.Validation;
 //+
 using Themelia.Mail;
 //+
+using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;
-//+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
@@ -28,7 +27,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Update)]
         public void AuthorizeComment(String commentGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ validate
                 CommentLINQ commentLinq;
@@ -44,7 +43,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Delete)]
         public void DeleteComment(String commentGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ validate
                 CommentLINQ commentLinq;
@@ -61,7 +60,7 @@ namespace Minima.Service
         public List<Comment> GetCommentList(String blogEntryGuid, Boolean showEveryComment)
         {
             String commentGuid = String.Empty;
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ validate
                 BlogEntryLINQ blogEntryLinq;
@@ -95,7 +94,7 @@ namespace Minima.Service
         {
             String commentGuid = String.Empty;
             String blogEntryTitle = String.Empty;
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ validate
                 BlogEntryLINQ blogEntryLinq;
