@@ -26,15 +26,6 @@ namespace Minima.Web
             }
         }
 
-        //- @SiteName -//
-        public static String SiteName
-        {
-            get
-            {
-                return ConfigAccessor.ApplicationSettings("SiteName");
-            }
-        }
-
         //- @GenericErrorMessage -//
         public static String GenericErrorMessage
         {
