@@ -153,7 +153,7 @@
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
     <Compile Include="Routing\MinimaPostProcessor.cs" />
     <Compile Include="Routing\_HttpHandler\BlogDiscoveryHttpHandler.cs" />
-    <Compile Include="Routing\Component\MinimaComponent.cs" />
+    <Compile Include="Routing\MinimaComponent.cs" />
     <Compile Include="Routing\_HttpHandler\ImageHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\WindowsLiveWriterManifestHttpHandler.cs" />
     <Compile Include="Routing\MinimaInjectionProcessor.cs" />
