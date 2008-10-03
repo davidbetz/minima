@@ -1,4 +1,8 @@
-﻿/* based on the work by juval lowy in his book programming wcf from oreilly press*/
+﻿#region Copyright
+//+ Copyright © Jampad Technology, Inc. 2007-2008
+//++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
+#endregion
+/* based on the work by juval lowy in his book programming wcf from oreilly press*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
