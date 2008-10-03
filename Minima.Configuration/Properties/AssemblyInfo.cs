@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Minima.Configuration")]
-[assembly: AssemblyCopyright("Copyright (C) David Betz 2007-2008")]
+[assembly: AssemblyCopyright("Copyright © Jampad Technology, Inc. 2007-2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 //+
