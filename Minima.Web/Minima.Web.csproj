@@ -149,7 +149,6 @@
     <Compile Include="Helper\MediaHelper.cs" />
     <Compile Include="Controls\MinimaForm.cs" />
     <Compile Include="Module\FixDomainHttpModule.cs" />
-    <Compile Include="NonClosingMemoryStream.cs" />
     <Compile Include="Parsing\BlogEntryCodeParser.cs" />
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
     <Compile Include="Routing\MinimaPostProcessor.cs" />
