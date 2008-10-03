@@ -1,6 +1,9 @@
-﻿using BlogEntryActivityLINQ = Minima.Web.Data.Entity.BlogEntryActivity;
-//+
-using MinimaWebLINQDataContext = Minima.Web.Data.Context.MinimaWebLINQDataContext;
+﻿#region Copyright
+//+ Copyright © Jampad Technology, Inc. 2007-2008
+//++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
+#endregion
+using DataContext = Minima.Web.Data.Context.MinimaWebLINQDataContext;
+using BlogEntryActivityLINQ = Minima.Web.Data.Entity.BlogEntryActivity;
 //+
 namespace Minima.Web.Agent
 {
@@ -8,7 +11,7 @@ namespace Minima.Web.Agent
     {
         internal static void ReportActivity(BlogEntryActivityLINQ blogEntryActivityLinq)
         {
-            using (MinimaWebLINQDataContext db = new MinimaWebLINQDataContext(WebConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(WebConfiguration.ConnectionString))
             {
                 db.BlogEntryActivities.InsertOnSubmit(blogEntryActivityLinq);
                 try

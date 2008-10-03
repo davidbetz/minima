@@ -1,13 +1,16 @@
-﻿using System;
+﻿#region Copyright
+//+ Copyright © Jampad Technology, Inc. 2007-2008
+//++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
+#endregion
+using System;
 using System.Data.Linq;
 //+
 using Minima.Service.Behavior;
 using Minima.Service.Validation;
 using BlogImageLINQ = Minima.Service.Data.Entity.BlogImage;
 //+
+using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
-//+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
@@ -24,7 +27,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Create)]
         public String SaveImage(BlogImage blogImage, String blogGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -50,7 +53,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public BlogImage GetImage(String blogImageGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog  image exists
                 BlogImageLINQ blogImageLinq;

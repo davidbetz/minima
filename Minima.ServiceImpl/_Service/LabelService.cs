@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region Copyright
+//+ Copyright © Jampad Technology, Inc. 2007-2008
+//++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
+#endregion
+using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
@@ -7,12 +11,11 @@ using Minima.Service.Behavior;
 using Minima.Service.Helper;
 using Minima.Service.Validation;
 //+
+using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using LabelBlogEntryLINQ = Minima.Service.Data.Entity.LabelBlogEntry;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
-//+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
@@ -22,7 +25,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Update)]
         public void ApplyLabel(String blogEntryGuid, String labelGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogEntryLINQ blogEntryLinq;
@@ -46,7 +49,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Create)]
         public String CreateLabel(String blogGuid, String title)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -79,7 +82,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Update)]
         public void RemoveLabel(String labelGuid, String blogEntryGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ validate
                 BlogEntryLINQ blogEntryLinq;
@@ -100,7 +103,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Update)]
         public void UpdateLabel(String labelGuid, String title)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure label exists
                 LabelLINQ labelLinq;
@@ -116,7 +119,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public List<Label> GetBlogEntryLabelList(String blogEntryGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ validate
                 BlogEntryLINQ blogEntryLinq;
@@ -137,7 +140,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public List<Label> GetBlogLabelList(String blogGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -159,7 +162,7 @@ namespace Minima.Service
         //- @GetLabelByTitle-//
         public Label GetLabelByTitle(String title)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 DataLoadOptions options = new DataLoadOptions();
                 options.LoadWith<LabelLINQ>(p => p.Blog);
@@ -183,7 +186,7 @@ namespace Minima.Service
         //- @GetLabelByNetTitle-//
         public Label GetLabelByNetTitle(String netTitle)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 DataLoadOptions options = new DataLoadOptions();
                 options.LoadWith<LabelLINQ>(p => p.Blog);
@@ -206,7 +209,7 @@ namespace Minima.Service
 
         //+
         //- $GetEntryCount -//
-        private Int32 GetEntryCount(LabelLINQ labelLinq, MinimaServiceLINQDataContext db)
+        private Int32 GetEntryCount(LabelLINQ labelLinq, DataContext db)
         {
             return db.LabelBlogEntries.Where(p => p.LabelId == labelLinq.LabelId).Count();
         }

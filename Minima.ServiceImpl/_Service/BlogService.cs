@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region Copyright
+//+ Copyright © Jampad Technology, Inc. 2007-2008
+//++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
+#endregion
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
@@ -7,6 +11,7 @@ using Minima.Service.Behavior;
 using Minima.Service.Helper;
 using Minima.Service.Validation;
 //+
+using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
 using BlogEntryAuthorLINQ = Minima.Service.Data.Entity.BlogEntryAuthor;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
@@ -15,8 +20,6 @@ using BlogEntryUrlMappingLINQ = Minima.Service.Data.Entity.BlogEntryUrlMapping;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using LabelBlogEntryLINQ = Minima.Service.Data.Entity.LabelBlogEntry;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
-//+
-using MinimaServiceLINQDataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
@@ -27,7 +30,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Create)]
         public String PostBlogEntry(String blogGuid, List<Author> authorList, String title, String content, DateTime dateTime, String blogEntryTypeGuid, List<Label> labelList, Boolean publish)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ validate
                 BlogLINQ blogLinq;
@@ -116,7 +119,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Delete)]
         public void DisableBlogEntry(String blogEntryGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog entry exists
                 BlogEntryLINQ blogEntryLinq;
@@ -132,7 +135,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Update)]
         public void UpdateBlogEntry(String blogEntryGuid, String title, String content, String blogEntryTypeGuid, List<Label> labelList, DateTime dateTime, Boolean publish)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog entry exists
                 BlogEntryLINQ blogEntryLinq;
@@ -216,7 +219,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog entry exists
                 BlogEntryLINQ blogEntryLinq;
@@ -271,7 +274,7 @@ namespace Minima.Service
         public List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, Int32 maxBlogEntryCount)
         {
             IQueryable<BlogEntryLINQ> blogEntryLinqList = null;
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -363,7 +366,7 @@ namespace Minima.Service
         //- @GetBlogEntryListByDateRange -//
         public List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean metaDataOnly)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -425,7 +428,7 @@ namespace Minima.Service
         public List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 maxEntryCount, Boolean activeOnly, BlogEntryRetreivalType blogEntryRetreivalType)
         {
             List<BlogEntry> blogEntryList = null;
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -500,7 +503,7 @@ namespace Minima.Service
         [MinimaSystemSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public List<BlogMetaData> GetBlogListForAssociatedAuthor(String authorEmail)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 AuthorLINQ authorLinq;
@@ -541,7 +544,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public List<ArchiveCount> GetArchivedEntryList(String blogGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -559,7 +562,7 @@ namespace Minima.Service
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public BlogMetaData GetBlogMetaData(String blogGuid)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 //+ ensure blog exists
                 BlogLINQ blogLinq;
@@ -589,7 +592,7 @@ namespace Minima.Service
         //- @GetBlogEntryTypeList -//
         public List<BlogEntryType> GetBlogEntryTypeList(String blogGuid, List<String> guidList)
         {
-            using (MinimaServiceLINQDataContext db = new MinimaServiceLINQDataContext(ServiceConfiguration.ConnectionString))
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
                 List<BlogEntryType> blogEntryTypeList = new List<BlogEntryType>();
                 var blogEntryData = db.BlogEntryTypes.Select(p => p);
@@ -651,7 +654,7 @@ namespace Minima.Service
         }
 
         //- $GetBlogEntryByUrlMapping -//
-        private BlogEntryLINQ GetBlogEntryByUrlMapping(Int32 blogId, String link, MinimaServiceLINQDataContext db)
+        private BlogEntryLINQ GetBlogEntryByUrlMapping(Int32 blogId, String link, DataContext db)
         {
             return (from be in db.BlogEntries
                     join beum in db.BlogEntryUrlMappings on be.BlogEntryId equals beum.BlogEntryId
