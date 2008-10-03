@@ -3,12 +3,11 @@
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 //+
-using Themelia.Web.Routing.Component;
 using Themelia.Web.Routing.Data;
 //+
 namespace Minima.Web.Routing.Component
 {
-    public class MinimaComponent : ComponentBase
+    public class MinimaComponent : Themelia.Web.Routing.ComponentBase
     {
         //- @Register -//
         public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, AliasedHandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
