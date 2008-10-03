@@ -1,5 +1,5 @@
 /** Excerpt from Prominax ASP.NET Framework  **/
-/**   Copyright (c) 2008 David Betz (http://www.netfxharmonics.com/) **/
+/**   Copyright (c) 2008 David Betz [MVP] (http://www.netfxharmonics.com/) **/
 Namespace.create('Prominax');
 //+
 Prominax.Trace = {

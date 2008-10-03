@@ -1,9 +1,9 @@
 <%@ Page Language="C#" CodeFile="Root.aspx.cs" AutoEventWireup="false" Inherits="WebSite.Blog.Root" %>
 <%@ OutputCache Duration="30" VaryByParam="None" VaryByCustom="url" %>
-<%@ Register Src="~/Control/GoogleAnalytics.ascx" TagPrefix="web" TagName="GoogleAnalytics" %>
-<%@ Register Src="~/Control/GoogleAdsense.ascx" TagPrefix="web" TagName="GoogleAdsense" %>
-<%@ Register Src="~/Control/FirefoxGoogleAdsense.ascx" TagPrefix="web" TagName="FirefoxGoogleAdsense" %>
-<%@ Register Src="~/Control/LicenseInformation.ascx" TagPrefix="web" TagName="LicenseInformation" %>
+<%@ Register Src="~/Resource_/UserControl/GoogleAnalytics.ascx" TagPrefix="web" TagName="GoogleAnalytics" %>
+<%@ Register Src="~/Resource_/UserControl/GoogleAdsense.ascx" TagPrefix="web" TagName="GoogleAdsense" %>
+<%@ Register Src="~/Resource_/UserControl/FirefoxGoogleAdsense.ascx" TagPrefix="web" TagName="FirefoxGoogleAdsense" %>
+<%@ Register Src="~/Resource_/UserControl/LicenseInformation.ascx" TagPrefix="web" TagName="LicenseInformation" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head id="Head1" runat="server">
@@ -12,7 +12,7 @@
     <link runat="server" id="rssLink" rel="alternate" type="application/rss+xml" />
     <link rel="EditURI" type="application/rsd+xml" runat="server" id="rsd" />
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" runat="server" id="wlwmanifest" />
-    <script src="/Resource_/Lib/prototype-1.6.0.2.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/prototype-1.6.0.3.js" type="text/javascript"></script>
     <script src="/Resource_/Lib/PrototypeExtension.js" type="text/javascript"></script>
     <script src="/Resource_/Lib/Prominax/Trace.js" type="text/javascript"></script>
     <script src="/Resource_/Lib/Prominax/AspNet.js" type="text/javascript"></script>

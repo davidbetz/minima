@@ -1,4 +1,3 @@
-//+
 Namespace = window.Namespace || { }
 Namespace.create = function(ns, separator) {
   ns.split(separator || '.').inject(window, function(parent, child) {
