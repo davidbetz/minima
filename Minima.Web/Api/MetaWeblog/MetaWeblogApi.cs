@@ -8,11 +8,12 @@ using System.Linq;
 //+
 using CookComputing.XmlRpc;
 //+
+using Themelia.Tracing;
+using Themelia.Web.Routing.Data;
+//+
 using Minima.Service;
 using Minima.Service.Agent;
 using Minima.Web.Helper;
-using Minima.Web.Tracing;
-using Themelia.Web.Routing.Data;
 //+
 namespace Minima.Web.Api.MetaWeblog
 {
@@ -25,7 +26,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogEntryGuid = postid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::DeletePost", new Object[] { appKey, blogEntryGuid, emailAddress, password, publish });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { appKey, blogEntryGuid, emailAddress, password, publish }, "XmlRpcApi::DeletePost", false);
             //+
             BlogAgent.DisableBlogEntry(postid, emailAddress, password);
             //+
@@ -38,7 +39,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogEntryGuid = postid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::EditPost", new Object[] { blogEntryGuid, emailAddress, password, post.description, post.title, publish });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogEntryGuid, emailAddress, password, post.description, post.title, publish }, "XmlRpcApi::EditPost", false);
             //+
             List<Label> labelList = new List<Label>();
             foreach (String title in post.categories)
@@ -56,7 +57,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::GetCategories", new Object[] { blogGuid, emailAddress, password });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password }, "XmlRpcApi::GetCategories", false);
             //+
             List<Label> labelList = LabelAgent.GetBlogLabelList(blogGuid, emailAddress, password);
             //+
@@ -76,7 +77,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogEntryGuid = postid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::GetPost", new Object[] { blogEntryGuid, emailAddress, password });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogEntryGuid, emailAddress, password }, "XmlRpcApi::GetPost", false);
             //+
             BlogEntry blogEntry = BlogAgent.GetSingleBlogEntry(blogEntryGuid, emailAddress, password);
             //+
@@ -104,7 +105,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::GetRecentPosts", new Object[] { blogGuid, emailAddress, password, maxEntryCount });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password, maxEntryCount }, "XmlRpcApi::GetRecentPosts", false);
             //+
             List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, maxEntryCount, BlogEntryRetreivalType.Full, emailAddress, password);
             //+
@@ -131,7 +132,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::GetTemplate", new Object[] { appKey, blogGuid, emailAddress, password, templateType });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { appKey, blogGuid, emailAddress, password, templateType }, "XmlRpcApi::GetTemplate", false);
             //+
             return String.Empty;
         }
@@ -140,7 +141,7 @@ namespace Minima.Web.Api.MetaWeblog
         [XmlRpcMethod("blogger.getUsersBlogs")]
         public BlogInfo[] GetUsersBlogs(String key, String emailAddress, String password)
         {
-            TraceManager.RecordMethodCall("XmlRpcApi::GetUsersBlogs", new Object[] { key, emailAddress, password });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { key, emailAddress, password }, "XmlRpcApi::GetUsersBlogs", false);
             //+
             List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
             //+
@@ -174,7 +175,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::MetaWeblogNewPost", new Object[] { blogGuid, emailAddress, password, post.description, post.title, publish });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password, post.description, post.title, publish }, "XmlRpcApi::MetaWeblogNewPost", false);
             //+
             return BlogAgent.PostBlogEntry(blogGuid, new List<Author>(
                 new Author[] {
@@ -191,7 +192,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::NewMediaObject", new Object[] { blogGuid, emailAddress, password, enc.name, enc.type, enc.bits.Length });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password, enc.name, enc.type, enc.bits.Length }, "XmlRpcApi::NewMediaObject", false);
             //+
             Uri uri = new Uri(Themelia.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/image/blog/" + blogGuid);
             String blogImageGuid = Themelia.Net.HttpAbstractor.PostHttpRequest(uri, enc.bits, new Themelia.Map("ImageContentType=" + enc.type));
@@ -208,7 +209,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogId;
             //+
-            TraceManager.RecordMethodCall("XmlRpcApi::SetTemplate", new Object[] { key, blogGuid, emailAddress, password, template, templateType });
+            TraceController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { key, blogGuid, emailAddress, password, template, templateType }, "XmlRpcApi::SetTemplate", false);
             //+
             return true;
         }
