@@ -23,7 +23,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website", "{873A
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1957"
+		VWDPort = "7001"
+		VWDDynamicPort = "false"
+		VWDVirtualPath = "/"
 		StartServerOnDebug = "false"
 	EndProjectSection
 EndProject
@@ -66,7 +68,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Service", "Service", "{95D6
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1959"
+		VWDPort = "7003"
+		VWDDynamicPort = "false"
+		VWDVirtualPath = "/"
 	EndProjectSection
 EndProject
 Global
