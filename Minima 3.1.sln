@@ -30,6 +30,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website", "{873A
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6C2370B-3A80-4C30-8F41-C768E5944D52}"
+	ProjectSection(SolutionItems) = preProject
+		Setup\Setup.sql = Setup\Setup.sql
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minima.Service", "Minima.Service\Minima.Service.csproj", "{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}"
 EndProject
