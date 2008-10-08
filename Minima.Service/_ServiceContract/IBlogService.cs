@@ -8,7 +8,7 @@ using System.ServiceModel;
 //+
 namespace Minima.Service
 {
-    [ServiceContract(Namespace = Information.Minima.Namespace)]
+    [ServiceContract(Namespace = Information.Namespace.Minima)]
     public interface IBlogService
     {
         //- PostBlogEntry -//

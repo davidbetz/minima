@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 //+
 namespace Minima.Service
 {
-    [DataContract(Namespace = Information.Minima.Namespace)]
+    [DataContract(Namespace = Information.Namespace.Minima)]
     public class ArchiveCount : IMinimaEntity
     {
         //- @ArchiveDate -//
