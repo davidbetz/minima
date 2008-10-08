@@ -13,7 +13,7 @@ using Minima.Service.Agent;
 //+
 namespace Minima.Web.Routing
 {
-    public class SiteMapHttpHandler : Themelia.Web.Routing.ReusableNonSessionHttpHandler
+    public class SiteMapHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
     {
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)

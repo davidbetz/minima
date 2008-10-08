@@ -13,7 +13,7 @@ using Themelia.Web;
 //+
 namespace Minima.Web.Routing
 {
-    public class ImageHttpHandler : Themelia.Web.Routing.ReusableNonSessionHttpHandler
+    public class ImageHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
     {
         public class Data
         {
