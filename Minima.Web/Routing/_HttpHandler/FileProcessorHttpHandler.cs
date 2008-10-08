@@ -16,7 +16,7 @@ using Themelia.Web;
 //+
 namespace Minima.Web.Routing
 {
-    public class FileProcessorHttpHandler : Themelia.Web.Routing.ReusableNonSessionHttpHandler
+    public class FileProcessorHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
     {
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)

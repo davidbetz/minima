@@ -9,7 +9,7 @@ using System.Xml;
 //+
 namespace Minima.Web.Routing
 {
-    public class BlogDiscoveryHttpHandler : Themelia.Web.Routing.ReusableNonSessionHttpHandler
+    public class BlogDiscoveryHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
     {
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)
