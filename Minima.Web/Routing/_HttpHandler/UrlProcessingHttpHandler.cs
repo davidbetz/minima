@@ -7,7 +7,7 @@ using System.Web;
 //+
 namespace Minima.Web.Routing
 {
-    public class UrlProcessingHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
+    public class UrlProcessingHttpHandler : Themelia.Web.Routing.ReusableSessionHttpHandler
     {
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)
