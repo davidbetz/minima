@@ -9,7 +9,7 @@ using System.ServiceModel.Web;
 //+
 namespace Minima.Web.Service
 {
-    [ServiceContract(Namespace = Information.Minima.Namespace)]
+    [ServiceContract(Namespace = Information.Namespace.Minima)]
     public interface IFeedService
     {
         //- GetRssFeed -//

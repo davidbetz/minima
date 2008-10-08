@@ -13,10 +13,10 @@ namespace Minima.Web.Service
 
         //+
         //- @Minima -//
-        public class Minima
+        public class Namespace
         {
             //- @Namespace -//
-            public const String Namespace = Information.NamespaceRoot + "blog/web/2008/04/";
+            public const String Minima = Information.NamespaceRoot + "blog/web/2008/04/";
         }
     }
 }
