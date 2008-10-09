@@ -12,7 +12,7 @@ using Minima.Service.Agent;
 using Minima.Web.Agent;
 using Minima.Web.Data.Entity;
 //+
-using Themelia.Tracing;
+using Themelia.Reporting;
 using Themelia.Web;
 //+
 namespace Minima.Web.Controls

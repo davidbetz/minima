@@ -162,6 +162,7 @@
     <Compile Include="Routing\_HttpHandler\SiteMapHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\UrlProcessingHttpHandler.cs" />
     <Compile Include="Service\CommentService.cs" />
+    <Compile Include="Service\CommentReportCreator.cs" />
     <Compile Include="Service\Information.cs" />
     <Compile Include="Service\_DataContract\CaptchMathInformation.cs" />
     <Compile Include="Service\FeedService.cs" />
