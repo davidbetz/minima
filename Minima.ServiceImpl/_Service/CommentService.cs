@@ -125,7 +125,10 @@ namespace Minima.Service
                 blogEntryTitle = blogEntryLinq.BlogEntryTitle;
             }
             //+ email
-            String body = String.Format(emailBodyTemplate, blogEntryTitle, commentGuid);
+            Themelia.Map map = new Themelia.Map();
+            map.Add("BlogEntryTitle", blogEntryTitle);
+            map.Add("CommentGuid", commentGuid);
+            String body = new Themelia.Template(emailBodyTemplate).Interpolate(map);
             //+ this could be sent from the person, but those e-mails will more than likely be caught by a spam filter.
             NotificationFacade.Send(MailConfigurationFacade.GeneralFromEmailAddress, MailConfigurationFacade.GeneralToEmailAddress, emailSubject, body, true);
             //+

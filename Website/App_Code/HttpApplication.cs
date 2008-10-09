@@ -1,7 +1,7 @@
 using System;
 using System.Web;
 //+
-using Themelia.Tracing;
+using Themelia.Reporting;
 //+
 namespace Minima.Web
 {

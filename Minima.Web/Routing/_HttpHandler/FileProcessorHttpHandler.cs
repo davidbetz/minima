@@ -11,7 +11,7 @@ using Minima.Web.Data.Context;
 using Minima.Web.Data.Entity;
 using Minima.Web.Helper;
 //+
-using Themelia.Tracing;
+using Themelia.Reporting;
 using Themelia.Web;
 //+
 namespace Minima.Web.Routing

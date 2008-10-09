@@ -53,17 +53,18 @@ namespace Minima.Web.Service
             //+
             if (captchaValue == HttpData.GetScopedSessionItem<Int32>("Captcha", "ExpectedValue"))
             {
-                String emailBodyTemplate = @"                
-<h4>New Comment!</h4>
-<p>This comment has been moderated.</p>
-<p>Blog EntryTitle: {0}</p>
-<p>BlogEntry Guid: " + blogEntryGuid + @"</p>
-<p>Comment author: " + author + @"</p>
-<p>Comment email: " + email + @"</p>
-<p>Comment website: " + website + @"</p>
-<p>Comment date/time: " + DateTime.Now.ToString() + @"</p>
-<p>Comment text: " + text + @"</p>
-<p><b>This link is moderated, <a href=\""" + WebConfiguration.Domain + @"services/comment/{1}\"">click here to unmoderate</a>.</b></p>";
+                CommentReportCreator creator = new CommentReportCreator();
+                creator.Formatter = new Themelia.Reporting.HtmlFormatter();
+                Themelia.Map map = new Themelia.Map();
+                map.Add("BlogEntryTitle", "{BlogEntryTitle}");
+                map.Add("Guid", blogEntryGuid);
+                map.Add("Author", author);
+                map.Add("Email", email);
+                map.Add("WebSite", website);
+                map.Add("DateTime", DateTime.Now.ToString());
+                map.Add("Text", text);
+                map.Add("Link", WebConfiguration.Domain + @"services/comment/{CommentGuid}");
+                String emailBodyTemplate = creator.Create(map);
                 Themelia.Configuration.SystemSection systemSection = Themelia.Configuration.SystemSection.GetConfigSection();
                 String emailSubject = String.Format("{0} ({1})", MinimaConfiguration.CommentNotificationSubject, systemSection.AppInfo.Name);
                 //+
