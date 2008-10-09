@@ -139,17 +139,17 @@ namespace Minima.Web.Controls
                 Text = @"
 <script type=""text/javascript"">
 document.observe('dom:loaded', function( ) {
-    Prominax.AspNet.registerObject('hfBlogEntryGuid', '" + hfBlogEntryGuid.ClientID + @"');
-    Prominax.AspNet.registerObject('txtCommentAuthorName', '" + txtCommentAuthorName.ClientID + @"');
-    Prominax.AspNet.registerObject('txtCommentAuthorName', '" + txtCommentAuthorName.ClientID + @"');
-    Prominax.AspNet.registerObject('txtCommentAuthorEmail', '" + txtCommentAuthorEmail.ClientID + @"');
-    Prominax.AspNet.registerObject('txtCommentWebsite', '" + txtCommentWebsite.ClientID + @"');
-    Prominax.AspNet.registerObject('txtCommentText', '" + txtCommentText.ClientID + @"');
-    Prominax.AspNet.registerObject('rfvCommentAuthorName', '" + rfvCommentAuthorName.ClientID + @"');
-    Prominax.AspNet.registerObject('rfvCommentAuthorEmail', '" + rfvCommentAuthorEmail.ClientID + @"');
-    Prominax.AspNet.registerObject('rfvCommentText', '" + rfvCommentText.ClientID + @"');
+    Themelia.AspNet.registerObject('hfBlogEntryGuid', '" + hfBlogEntryGuid.ClientID + @"');
+    Themelia.AspNet.registerObject('txtCommentAuthorName', '" + txtCommentAuthorName.ClientID + @"');
+    Themelia.AspNet.registerObject('txtCommentAuthorName', '" + txtCommentAuthorName.ClientID + @"');
+    Themelia.AspNet.registerObject('txtCommentAuthorEmail', '" + txtCommentAuthorEmail.ClientID + @"');
+    Themelia.AspNet.registerObject('txtCommentWebsite', '" + txtCommentWebsite.ClientID + @"');
+    Themelia.AspNet.registerObject('txtCommentText', '" + txtCommentText.ClientID + @"');
+    Themelia.AspNet.registerObject('rfvCommentAuthorName', '" + rfvCommentAuthorName.ClientID + @"');
+    Themelia.AspNet.registerObject('rfvCommentAuthorEmail', '" + rfvCommentAuthorEmail.ClientID + @"');
+    Themelia.AspNet.registerObject('rfvCommentText', '" + rfvCommentText.ClientID + @"');
     //+
-    Prominax.AspNet.registerObject('lblStatusMessage');
+    Themelia.AspNet.registerObject('lblStatusMessage');
 });
 </script>"
             });

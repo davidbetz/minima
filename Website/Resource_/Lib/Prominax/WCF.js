@@ -1,8 +1,8 @@
-/** Excerpt from Prominax ASP.NET Framework  **/
+/** Excerpt from Themelia Client Services  **/
 /**   Copyright (c) 2008 David Betz [MVP] (http://www.netfxharmonics.com/) **/
-Namespace.create('Prominax');
+Namespace.create('Themelia');
 //+
-Prominax.WCF = {
+Themelia.WCF = {
     //- post -//
     post: function(params) {
         // params: {
@@ -10,10 +10,10 @@ Prominax.WCF = {
         //  operation,
         // }
         // + the rest of the prototype [Ajax Options] http://prototypejs.org/api/ajax/options
-        Prominax.WCF._validateGeneral(params);
+        Themelia.WCF._validateGeneral(params);
         if(!params.message) { throw 'message is required' }
         //+
-        Prominax.WCF._submit(Object.extend(params, {
+        Themelia.WCF._submit(Object.extend(params, {
             method: 'post',
             postBody: Object.toJSON(params.message)
         }));
@@ -21,18 +21,18 @@ Prominax.WCF = {
     
     //- get -//
     'get': function(params) {
-        Prominax.WCF._validateGeneral(params);
+        Themelia.WCF._validateGeneral(params);
         //+
-        Prominax.WCF._submit(Object.extend(params, {
+        Themelia.WCF._submit(Object.extend(params, {
             method: 'get'
         }));
     },
     
     //- delete -//
     'delete': function(params) {
-        Prominax.WCF._validateGeneral(params);
+        Themelia.WCF._validateGeneral(params);
         //+
-        Prominax.WCF._submit(Object.extend(params, {
+        Themelia.WCF._submit(Object.extend(params, {
             method: 'delete'
         }));
     },
@@ -65,8 +65,8 @@ Prominax.WCF = {
                     }
                 }
             },
-            onException: params.onException || Prominax.WCF.globalFaultHandler || Prototype.emptyFunction,
-            onFailure: params.onFailure || Prominax.WCF.globalFaultHandler || Prototype.emptyFunction
+            onException: params.onException || Themelia.WCF.globalFaultHandler || Prototype.emptyFunction,
+            onFailure: params.onFailure || Themelia.WCF.globalFaultHandler || Prototype.emptyFunction
         }));
     }
 };
