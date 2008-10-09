@@ -15,8 +15,8 @@ namespace Minima.Web.Controls
 <div><input id=""txtMath"" /></div>
 <script type=""text/javascript"">
 document.observe('dom:loaded', function(evt) {
-    Prominax.AspNet.registerObject('litMath');
-    Prominax.AspNet.registerObject('txtMath');
+    Themelia.AspNet.registerObject('litMath');
+    Themelia.AspNet.registerObject('txtMath');
     //+
     txtMath.value = '';
     //+

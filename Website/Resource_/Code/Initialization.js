@@ -1,7 +1,7 @@
 ﻿Namespace.create('WCFClient.ICommentService');
 //+
 WCFClient.ICommentService.initCaptchaMath = function(onSuccess){
-    Prominax.WCF.post({
+    Themelia.WCF.post({
         endpoint: '/Service_/Comment.svc/web',
         operation: 'InitCaptchaMath',
         message: { },
@@ -9,7 +9,7 @@ WCFClient.ICommentService.initCaptchaMath = function(onSuccess){
     });
 };
 WCFClient.ICommentService.postNewComment = function(captchaValue, blogEntryGuid, author, email, website, text, onSuccess){
-    Prominax.WCF.post({
+    Themelia.WCF.post({
         endpoint: '/Service_/Comment.svc/web',
         operation: 'PostNewComment',
         message: {captchaValue: captchaValue, blogEntryGuid: blogEntryGuid, author: author, email: email, website: website, text: text},

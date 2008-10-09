@@ -1,8 +1,8 @@
-/** Excerpt from Prominax ASP.NET Framework  **/
+/** Excerpt from Themelia Client Services  **/
 /**   Copyright (c) 2008 David Betz [MVP] (http://www.netfxharmonics.com/) **/
-Namespace.create('Prominax');
+Namespace.create('Themelia');
 //+
-Prominax.AspNet = {
+Themelia.AspNet = {
     _objects: new Object( ), 
 
     registerObject: function(clientId, aspNetId, encapsulated) {
@@ -11,7 +11,7 @@ Prominax.AspNet = {
         }
         
         if((!!encapsulated) == true) {
-            eval('Prominax.AspNet._objects.' + clientId + ' = $(aspNetId)');
+            eval('Themelia.AspNet._objects.' + clientId + ' = $(aspNetId)');
         }
         else {
             eval('window.' + clientId + ' = $(aspNetId)');

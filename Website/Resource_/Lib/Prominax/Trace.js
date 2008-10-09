@@ -1,8 +1,8 @@
-/** Excerpt from Prominax ASP.NET Framework  **/
+/** Excerpt from Themelia Client Services  **/
 /**   Copyright (c) 2008 David Betz [MVP] (http://www.netfxharmonics.com/) **/
-Namespace.create('Prominax');
+Namespace.create('Themelia');
 //+
-Prominax.Trace = {
+Themelia.Trace = {
   _enabled: false,
   // by default Firefox uses the Firefox Console and Safari and Opera uses their JavaScript Console
   alwaysUseFirebug: false,
@@ -13,60 +13,60 @@ Prominax.Trace = {
   _isOpera: !!window.opera
 };
 
-Prominax.Trace.isSupported = function( ) {
-    return typeof(Prominax.Trace._isMozilla || Prominax.Trace._isWebKit || Prominax.Trace._isOpera || window.debugService || window.console) != 'undefined'
+Themelia.Trace.isSupported = function( ) {
+    return typeof(Themelia.Trace._isMozilla || Themelia.Trace._isWebKit || Themelia.Trace._isOpera || window.debugService || window.console) != 'undefined'
 }
 
-Prominax.Trace.write = function(text) {
-  if(Prominax.Trace._enabled == true && Prominax.Trace.isSupported( ) == true) {
-    if(Prominax.Trace.alwaysUseFirebug == true) {
+Themelia.Trace.write = function(text) {
+  if(Themelia.Trace._enabled == true && Themelia.Trace.isSupported( ) == true) {
+    if(Themelia.Trace.alwaysUseFirebug == true) {
       console.log(text);
     }
     else if(window.debugService) {
       window.debugService.trace(text);
     }
-    else if(Prominax.Trace._isMozilla == true) {
+    else if(Themelia.Trace._isMozilla == true) {
       dump(text);
     }
-    else if(Prominax.Trace._isWebKit == true) {
+    else if(Themelia.Trace._isWebKit == true) {
       window.console.log(text);
     }
-    else if(Prominax.Trace._isOpera == true) {
+    else if(Themelia.Trace._isOpera == true) {
       opera.postError(text);
     }
   }
 }
 
-Prominax.Trace.enable = function( ) {
-  Prominax.Trace._enabled = true;
+Themelia.Trace.enable = function( ) {
+  Themelia.Trace._enabled = true;
 }
 
-Prominax.Trace.addNewLine = function( ) {
-  if(Prominax.Trace._enabled == true && Prominax.Trace.isSupported( ) == true) {
-    Prominax.Trace.write('\n');
+Themelia.Trace.addNewLine = function( ) {
+  if(Themelia.Trace._enabled == true && Themelia.Trace.isSupported( ) == true) {
+    Themelia.Trace.write('\n');
   }
 }
 
-Prominax.Trace.writeLine = function(text) {
+Themelia.Trace.writeLine = function(text) {
   text = text || '';
-  if(Prominax.Trace._enabled == true && Prominax.Trace.isSupported( ) == true) {
-    Prominax.Trace._counter++;
+  if(Themelia.Trace._enabled == true && Themelia.Trace.isSupported( ) == true) {
+    Themelia.Trace._counter++;
     if(!window.debugService) {
         text = text + '\n';
     }
-    Prominax.Trace.write(Prominax.Trace._counter + ':' + text + '\n');
+    Themelia.Trace.write(Themelia.Trace._counter + ':' + text + '\n');
   }
 }
 
-Prominax.Trace.writeLabeledLine = function(text, value) {
+Themelia.Trace.writeLabeledLine = function(text, value) {
   text = text || '';
-  if(Prominax.Trace._enabled == true && Prominax.Trace.isSupported( ) == true) {
-    Prominax.Trace._counter++;
-    Prominax.Trace.write(Prominax.Trace._counter + ':' + text + ' (' + value + ')\n');
+  if(Themelia.Trace._enabled == true && Themelia.Trace.isSupported( ) == true) {
+    Themelia.Trace._counter++;
+    Themelia.Trace.write(Themelia.Trace._counter + ':' + text + ' (' + value + ')\n');
   }
 }
 
-Prominax.Trace.Buffer = function(useAlert) {
+Themelia.Trace.Buffer = function(useAlert) {
   this._stringBuilder = [];
   this._useAlert = !!useAlert;
   this._depth = 0;
@@ -166,13 +166,13 @@ Prominax.Trace.Buffer = function(useAlert) {
         alert(data);
       }
       else {
-        Prominax.Trace.write(data);
+        Themelia.Trace.write(data);
       }
       that._stringBuilder = [];
     }
   }
 };
 
-Prominax.Trace.alwaysUseFirebug = false;
-Prominax.Trace.enable( );
-Prominax.Trace.addNewLine( );
+Themelia.Trace.alwaysUseFirebug = false;
+Themelia.Trace.enable( );
+Themelia.Trace.addNewLine( );

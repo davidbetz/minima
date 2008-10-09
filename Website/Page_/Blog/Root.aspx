@@ -14,9 +14,9 @@
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" runat="server" id="wlwmanifest" />
     <script src="/Resource_/Lib/prototype-1.6.0.3.js" type="text/javascript"></script>
     <script src="/Resource_/Lib/PrototypeExtension.js" type="text/javascript"></script>
-    <script src="/Resource_/Lib/Prominax/Trace.js" type="text/javascript"></script>
-    <script src="/Resource_/Lib/Prominax/AspNet.js" type="text/javascript"></script>
-    <script src="/Resource_/Lib/Prominax/WCF.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/Themelia/Trace.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/Themelia/AspNet.js" type="text/javascript"></script>
+    <script src="/Resource_/Lib/Themelia/WCF.js" type="text/javascript"></script>
     <script src="/Resource_/Code/Configuration.js" type="text/javascript"></script>
     <script src="/Resource_/Code/Initialization.js" type="text/javascript"></script>
 </head>
