@@ -12,26 +12,30 @@ namespace Minima.Web.Routing
         //- @Register -//
         public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, AliasedHandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
         {
-            preProcessorDataList.Add(new PreProcessorData
-            {
-                ProcessorType = "Minima.Web.Routing.MinimaPreProcessor, Minima.Web"
-            });
             aliasedHandlerDataList.Add(new AliasedHandlerFactoryData
             {
-                FactoryType = "Minima.Web.Routing.MappedHttpHandlerFactory, Minima.Web"
+                FactoryType = "Minima.Web.Routing.AliasedHandlerFactory, Minima.Web"
+            });
+            processorFactoryDataList.Add(new ProcessorFactoryData
+            {
+                FactoryType = "Minima.Web.Routing.ProcessorFactory, Minima.Web"
+            });
+            preProcessorDataList.Add(new PreProcessorData
+            {
+                ProcessorType = "PreProcessor"
             });
             injectionProcessorDataList.Add(new InjectionProcessorData
             {
-                ProcessorType = "Minima.Web.Routing.MinimaInjectionProcessor, Minima.Web"
+                ProcessorType = "InjectionProcessor"
             });
             postProcessorDataList.Add(new PostProcessorData
             {
-                ProcessorType = "Minima.Web.Routing.MinimaPostProcessor, Minima.Web"
+                ProcessorType = "PostProcessor"
             });
             fallThroughProcessorDataList.Add(new FallThroughProcessorData
             {
                 Priority = 1,
-                ProcessorType = "Minima.Web.Routing.BlogFallThroughProcessor, Minima.Web"
+                ProcessorType = "BlogFallThroughProcessor"
             });
         }
     }

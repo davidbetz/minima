@@ -15,25 +15,21 @@ namespace Minima.Web.Routing
 {
     public class ImageHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
     {
-        public class Data
+        public class Info : Minima.Web.Info
         {
-            public const String HeaderName = "ImageContentType";
+            public const String ImageContentType = "ImageContentType";
         }
 
         //+
         //- @ProcessRequest -//
         public override void ProcessRequest(HttpContext context)
         {
-            if (Themelia.Web.Http.GetHttpPart(Http.Position.Penultima) == "blog"
-                 && Themelia.Web.Http.GetHttpPart(Http.Position.Antepenultima) == "image")
+            if (Themelia.Web.Http.GetHttpPart(Http.Position.Penultima) == "imagestore")
             {
-                Stream inputStream = context.Request.InputStream;
-                if (inputStream != null && inputStream.Length > 0 && context.Request.Headers[Data.HeaderName] != null)
+                Byte[] buffer = HttpData.InputByteArray;
+                String contentType = HttpData.GetHeaderItem(Info.ImageContentType);
+                if (buffer != null && buffer.Length > 0 && !String.IsNullOrEmpty(contentType))
                 {
-                    String contentType = context.Request.Headers["ImageContentType"];
-                    Byte[] buffer = new Byte[inputStream.Length];
-                    inputStream.Read(buffer, 0, (Int32)inputStream.Length);
-                    //+
                     String blogGuid = Themelia.Web.Http.GetHttpPart(Http.Position.Ultima);
                     BlogImage blogImage = new BlogImage
                     {

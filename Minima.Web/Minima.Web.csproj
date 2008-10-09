@@ -110,7 +110,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccessType.cs" />
-    <Compile Include="Routing\MinimaInfo.cs" />
+    <Compile Include="Routing\InjectionProcessor.cs" />
+    <Compile Include="Routing\Info.cs" />
     <Compile Include="Parsing\AmazonAffiliateCodeParser.cs" />
     <Compile Include="Controls\BlogTemplateFactory.cs" />
     <Compile Include="Controls\ArchivedEntryList.cs">
@@ -151,13 +152,13 @@
     <Compile Include="Module\FixDomainHttpModule.cs" />
     <Compile Include="Parsing\BlogEntryCodeParser.cs" />
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
-    <Compile Include="Routing\MinimaPostProcessor.cs" />
+    <Compile Include="Routing\PostProcessor.cs" />
     <Compile Include="Routing\_HttpHandler\BlogDiscoveryHttpHandler.cs" />
     <Compile Include="Routing\MinimaComponent.cs" />
     <Compile Include="Routing\_HttpHandler\ImageHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\WindowsLiveWriterManifestHttpHandler.cs" />
-    <Compile Include="Routing\MinimaInjectionProcessor.cs" />
-    <Compile Include="Routing\MinimaPreProcessor.cs" />
+    <Compile Include="Routing\ProcessorFactory.cs" />
+    <Compile Include="Routing\PreProcessor.cs" />
     <Compile Include="Routing\_HttpHandler\FileProcessorHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\SiteMapHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\UrlProcessingHttpHandler.cs" />
@@ -175,7 +176,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Routing\MappedHttpHandlerFactory.cs" />
+    <Compile Include="Routing\AliasedHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
