@@ -20,13 +20,45 @@ namespace Minima.Web.Api.MetaWeblog
     [XmlRpcService(Name = "Minima API", AutoDocumentation = true)]
     public class MetaWeblogApi : XmlRpcService
     {
+        public Reporter _reporter;
+
+        //+
+        //- @Info -//
+        public class Info : Minima.Web.Info
+        {
+            public const string BlogReporter = "BlogReporter";
+        }
+
+        //+
+        //- @Reporter -//
+        public Reporter Reporter
+        {
+            get
+            {
+                if (_reporter == null)
+                {
+                    _reporter = ReportController.GetReporter(Info.BlogReporter);
+                    if (!_reporter.Initialized)
+                    {
+                        _reporter.ReportCreator = new ObjectArrayReportCreator();
+                    }
+                }
+                //+
+                return _reporter;
+            }
+        }
+
+        //+
         //- @DeletePost -//
         [XmlRpcMethod("blogger.deletePost")]
         public Boolean DeletePost(String appKey, String postid, String emailAddress, String password, Boolean publish)
         {
             String blogEntryGuid = postid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { appKey, blogEntryGuid, emailAddress, password, publish }, "XmlRpcApi::DeletePost", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { appKey, blogEntryGuid, emailAddress, password, publish }, "XmlRpcApi::DeletePost", false);
+            }
             //+
             BlogAgent.DisableBlogEntry(postid, emailAddress, password);
             //+
@@ -39,7 +71,10 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogEntryGuid = postid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogEntryGuid, emailAddress, password, post.description, post.title, publish }, "XmlRpcApi::EditPost", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { blogEntryGuid, emailAddress, password, post.description, post.title, publish }, "XmlRpcApi::EditPost", false);
+            }
             //+
             List<Label> labelList = new List<Label>();
             foreach (String title in post.categories)
@@ -57,7 +92,10 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password }, "XmlRpcApi::GetCategories", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { blogGuid, emailAddress, password }, "XmlRpcApi::GetCategories", false);
+            }
             //+
             List<Label> labelList = LabelAgent.GetBlogLabelList(blogGuid, emailAddress, password);
             //+
@@ -77,7 +115,10 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogEntryGuid = postid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogEntryGuid, emailAddress, password }, "XmlRpcApi::GetPost", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { blogEntryGuid, emailAddress, password }, "XmlRpcApi::GetPost", false);
+            }
             //+
             BlogEntry blogEntry = BlogAgent.GetSingleBlogEntry(blogEntryGuid, emailAddress, password);
             //+
@@ -105,7 +146,10 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password, maxEntryCount }, "XmlRpcApi::GetRecentPosts", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { blogGuid, emailAddress, password, maxEntryCount }, "XmlRpcApi::GetRecentPosts", false);
+            }
             //+
             List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, maxEntryCount, BlogEntryRetreivalType.Full, emailAddress, password);
             //+
@@ -132,7 +176,7 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { appKey, blogGuid, emailAddress, password, templateType }, "XmlRpcApi::GetTemplate", false);
+            this.Reporter.SendSingle(new Object[] { appKey, blogGuid, emailAddress, password, templateType }, "XmlRpcApi::GetTemplate", false);
             //+
             return String.Empty;
         }
@@ -141,7 +185,10 @@ namespace Minima.Web.Api.MetaWeblog
         [XmlRpcMethod("blogger.getUsersBlogs")]
         public BlogInfo[] GetUsersBlogs(String key, String emailAddress, String password)
         {
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { key, emailAddress, password }, "XmlRpcApi::GetUsersBlogs", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { key, emailAddress, password }, "XmlRpcApi::GetUsersBlogs", false);
+            }
             //+
             List<BlogMetaData> blogList = BlogAgent.GetBlogListForAssociatedAuthor(emailAddress, password);
             //+
@@ -158,13 +205,13 @@ namespace Minima.Web.Api.MetaWeblog
             List<String> registeredBlogGuidList = webDomainPathMap.GetKeyList();
             //+
             BlogInfo[] netBlogList = (from b in blogList
-                               where registeredBlogGuidList.Contains(b.Guid)
-                               select new BlogInfo
-                               {
-                                   blogid = b.Guid,
-                                   blogName = b.Title,
-                                   url = Themelia.Web.WebDomain.GetUrl(webDomainPathMap[b.Guid])
-                               }).ToArray();
+                                      where registeredBlogGuidList.Contains(b.Guid)
+                                      select new BlogInfo
+                                      {
+                                          blogid = b.Guid,
+                                          blogName = b.Title,
+                                          url = Themelia.Web.WebDomain.GetUrl(webDomainPathMap[b.Guid])
+                                      }).ToArray();
             //+
             return netBlogList;
         }
@@ -175,7 +222,10 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password, post.description, post.title, publish }, "XmlRpcApi::MetaWeblogNewPost", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { blogGuid, emailAddress, password, post.description, post.title, publish }, "XmlRpcApi::MetaWeblogNewPost", false);
+            }
             //+
             return BlogAgent.PostBlogEntry(blogGuid, new List<Author>(
                 new Author[] {
@@ -192,14 +242,17 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogid;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { blogGuid, emailAddress, password, enc.name, enc.type, enc.bits.Length }, "XmlRpcApi::NewMediaObject", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { blogGuid, emailAddress, password, enc.name, enc.type, enc.bits.Length }, "XmlRpcApi::NewMediaObject", false);
+            }
             //+
-            Uri uri = new Uri(Themelia.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/image/blog/" + blogGuid);
+            Uri uri = new Uri(Themelia.Web.Http.Root + "/imagestore/" + blogGuid);
             String blogImageGuid = Themelia.Net.HttpAbstractor.PostHttpRequest(uri, enc.bits, new Themelia.Map("ImageContentType=" + enc.type));
             //+
             return new UrlInfo
             {
-                url = Themelia.Web.UrlHelper.FixWebPath(WebConfiguration.Domain) + "/image/blog/" + blogImageGuid
+                url = Themelia.Web.Http.Root + "/imagestore/" + blogImageGuid
             };
         }
 
@@ -209,7 +262,10 @@ namespace Minima.Web.Api.MetaWeblog
         {
             String blogGuid = blogId;
             //+
-            ReportController.Create("ObjectArray", "EventLog", "Html").SendSingle(new Object[] { key, blogGuid, emailAddress, password, template, templateType }, "XmlRpcApi::SetTemplate", false);
+            if (this.Reporter.Initialized)
+            {
+                this.Reporter.SendSingle(new Object[] { key, blogGuid, emailAddress, password, template, templateType }, "XmlRpcApi::SetTemplate", false);
+            }
             //+
             return true;
         }
