@@ -27,6 +27,11 @@ namespace Minima.Service
         [FaultContract(typeof(ArgumentException))]
         void UpdateBlogEntry(String blogEntryGuid, String title, String content, String blogEntryTypeGuid, List<Label> labelList, DateTime dateTime, Boolean publish);
 
+        //- GetSingleBlogEntryByLink -//
+        [OperationContract]
+        [FaultContract(typeof(ArgumentException))]
+        BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly);
+
         //- GetSingleBlogEntry -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]

@@ -217,6 +217,66 @@ namespace Minima.Service
 
         //- @GetSingleBlogEntry -//
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
+        public BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly)
+        {
+            using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
+            {
+                //+ ensure blog entry exists
+                BlogLINQ blogLinq;
+                Validator.EnsureBlogExists(blogGuid, out blogLinq, db);
+                //+
+                BlogEntryLINQ blogEntryLinq = this.GetBlogEntryByUrlMapping(blogLinq.BlogId, link, db);
+                if (blogEntryLinq != null)
+                {
+                    return new BlogEntry
+                    {
+                        Title = blogEntryLinq.BlogEntryTitle,
+                        Content = metaDataOnly ? String.Empty : blogEntryLinq.BlogEntryText,
+                        Guid = blogEntryLinq.BlogEntryGuid,
+                        Status = blogEntryLinq.BlogEntryStatusId,
+                        BlogEntryTypeGuid = blogEntryLinq.BlogEntryType.BlogEntryTypeGuid,
+                        AllowCommentStatus = (AllowCommentStatus)blogEntryLinq.BlogEntryCommentAllowStatusId,
+                        PostDateTime = blogEntryLinq.BlogEntryPostDateTime,
+                        ModifyDateTime = blogEntryLinq.BlogEntryModifyDateTime,
+                        MappingNameList = new List<String>(
+                            blogEntryLinq.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
+                        ),
+                        LabelList = new List<Label>(
+                            blogEntryLinq.LabelBlogEntries.Select(p => new Label
+                            {
+                                Guid = p.Label.LabelGuid,
+                                FriendlyTitle = p.Label.LabelFriendlyTitle,
+                                Title = p.Label.LabelTitle
+                            })
+                        ),
+                        AuthorList = new List<Author>(
+                            blogEntryLinq.BlogEntryAuthors.Select(p => new Author
+                            {
+                                Name = p.Author.AuthorName,
+                                Email = p.Author.AuthorEmail
+                            })
+                        ),
+                        CommentList = metaDataOnly ? new List<Comment>() : new List<Comment>(
+                            blogEntryLinq.Comments.Where(p => p.CommentModerated == false)
+                            .Select(p => new Comment
+                            {
+                                Text = p.CommentText,
+                                DateTime = p.CommentPostDate,
+                                Website = p.CommentWebsite,
+                                Guid = p.CommentGuid,
+                                Email = p.CommentEmail,
+                                Name = p.CommentAuthor
+                            })
+                        )
+                    };
+                }
+                //+
+                return null;
+            }
+        }
+
+        //- @GetSingleBlogEntry -//
+        [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
         public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly)
         {
             using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))

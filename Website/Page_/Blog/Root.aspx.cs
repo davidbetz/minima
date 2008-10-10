@@ -26,7 +26,7 @@ namespace WebSite.Blog
             base.OnInit(e);
         }
 
-        //- $MasterPage_Load -//
+        //- $Page_Load -//
         private void Page_Load(Object sender, EventArgs e)
         {
             if (!IsPostBack)

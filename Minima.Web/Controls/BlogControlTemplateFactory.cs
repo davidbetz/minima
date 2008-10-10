@@ -109,6 +109,9 @@ namespace Minima.Web.Controls
             //- $HidePostTime -//
             private Boolean HidePostDateTime { get; set; }
 
+            //- $LinkHeader -//
+            private Boolean LinkHeader { get; set; }
+
             //- $PostFooterTypeInfo -//
             private TypeInfo PostFooterTypeInfo { get; set; }
 
@@ -116,11 +119,12 @@ namespace Minima.Web.Controls
             public PostTemplate(params Object[] parameterArray)
             {
                 this.PostFooterTypeInfo = (TypeInfo)parameterArray[0];
-                this.IsLink = ((AccessType)parameterArray[1]) == AccessType.Link;
-                this.SupportCommenting = (Boolean)parameterArray[2];
-                this.DisabledCommentText = (String)parameterArray[3];
-                this.ShowAuthorSeries = (Boolean)parameterArray[4];
-                this.HidePostDateTime = (Boolean)parameterArray[5];
+                this.LinkHeader = (Boolean)parameterArray[1];
+                this.IsLink = ((AccessType)parameterArray[2]) == AccessType.Link;
+                this.SupportCommenting = (Boolean)parameterArray[3];
+                this.DisabledCommentText = (String)parameterArray[4];
+                this.ShowAuthorSeries = (Boolean)parameterArray[5];
+                this.HidePostDateTime = (Boolean)parameterArray[6];
             }
 
             //- @InstantiateIn -//
@@ -163,7 +167,7 @@ namespace Minima.Web.Controls
                         }
                     }
                     //+
-                    Themelia.Template template = DataTemplateTemplateFactory.CreatePostTemplate(this.HidePostDateTime, this.ShowAuthorSeries, labelSeries, this.IsLink, this.SupportCommenting, allowCommentStatus, !String.IsNullOrEmpty(DisabledCommentText), postFooterData);
+                    Themelia.Template template = DataTemplateTemplateFactory.CreatePostTemplate(this.LinkHeader, this.HidePostDateTime, this.ShowAuthorSeries, labelSeries, this.IsLink, this.SupportCommenting, allowCommentStatus, !String.IsNullOrEmpty(DisabledCommentText), postFooterData);
                     //+
                     String output = template.Interpolate(new Map(
                             new MapEntry("$Url$", url),

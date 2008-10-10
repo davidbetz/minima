@@ -68,6 +68,30 @@ namespace Minima.Service.Agent
             }
         }
 
+        //- @GetSingleBlogEntryByLink -//
+        public static BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link)
+        {
+            return GetSingleBlogEntryByLink(blogGuid,link, false, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+        }
+        public static BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, String username, String password)
+        {
+            return GetSingleBlogEntryByLink(blogGuid, link, false, username, password);
+        }
+        public static BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly)
+        {
+            return GetSingleBlogEntryByLink(blogGuid, link, metaDataOnly, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+        }
+        public static BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly, String username, String password)
+        {
+            using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
+            {
+                blogClient.ClientCredentials.UserName.UserName = username;
+                blogClient.ClientCredentials.UserName.Password = password;
+                //+
+                return blogClient.GetSingleBlogEntryByLink(blogGuid, link, metaDataOnly);
+            }
+        }
+
         //- @GetSingleBlogEntry -//
         public static BlogEntry GetSingleBlogEntry(String blogEntryGuid)
         {

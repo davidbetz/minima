@@ -69,6 +69,16 @@ namespace Minima.Service.Client
             }
         }
 
+        public BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly)
+        {
+            using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
+            {
+                AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
+                //+
+                return base.Channel.GetSingleBlogEntryByLink(blogGuid, link, metaDataOnly);
+            }
+        }
+
         public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))

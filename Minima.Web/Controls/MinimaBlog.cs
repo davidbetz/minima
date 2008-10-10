@@ -72,6 +72,9 @@ namespace Minima.Web.Controls
         //- @HidePostDateTime -//
         public Boolean HidePostDateTime { get; set; }
 
+        //- @LinkHeader -//
+        public Boolean LinkHeader { get; set; }
+
         //- @CodeParserSeries -//
         public Themelia.CodeParsing.CodeParserSeries CodeParserSeries { get; set; }
 
@@ -81,6 +84,7 @@ namespace Minima.Web.Controls
         {
             //+ default
             this.CaptchaControl = new MathCaptcha();
+            this.LinkHeader = true;
             this.SupportCommenting = true;
             this.ClosedCommentText = "Comments have been closed for this entry.";
             this.DisabledCommentText = "Comments have been disabled for this entry.";
@@ -191,8 +195,8 @@ namespace Minima.Web.Controls
                         CommentList = p.CommentList,
                         Guid = p.Guid,
                         LabelList = p.LabelList,
-                        AuthorSeries = GetBlogEntryAuthorSeries(p),
-                        LabelSeries = GetBlogEntryLabelSeries(p),
+                        AuthorSeries = SeriesHelper.GetBlogEntryAuthorSeries(p),
+                        LabelSeries = SeriesHelper.GetBlogEntryLabelSeries(p),
                         ViewableCommentCount = p.CommentList != null ? p.CommentList.Count : 0,
                         DateTimeString = String.Format("{0}, {1} {2}, {3}", p.PostDateTime.DayOfWeek, p.PostDateTime.ToString("MMMM"), p.PostDateTime.Day, p.PostDateTime.Year),
                         DateTimeDisplay = String.Format("{0}/{1}/{2} {3}", p.PostDateTime.Month, p.PostDateTime.Day, p.PostDateTime.Year, p.PostDateTime.ToShortTimeString())
@@ -318,10 +322,10 @@ namespace Minima.Web.Controls
         {
             if (this.CustomPostTemplateType == null)
             {
-                return BlogControlTemplateFactory.CreateTemplate(BlogControlTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
+                return BlogControlTemplateFactory.CreateTemplate(BlogControlTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.LinkHeader, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
             }
             //+
-            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
+            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.LinkHeader, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
         }
 
         //- $GetCommentTemplate -//
@@ -437,79 +441,6 @@ namespace Minima.Web.Controls
             ph.Controls.Add(litNoEntriesMessage);
             //+
             return ph;
-        }
-
-        #endregion
-
-        #region Support
-
-        //+
-        //- $GetBlogEntryLabelSeries -//
-        private String GetBlogEntryLabelSeries(BlogEntry blogEntry)
-        {
-            StringBuilder labelSeries = new StringBuilder();
-            if (blogEntry.LabelList != null)
-            {
-                Boolean first = true;
-                labelSeries.Append("{");
-                if (blogEntry.LabelList.Count < 1)
-                {
-                    return String.Empty;
-                }
-                foreach (Minima.Service.Label label in blogEntry.LabelList)
-                {
-                    if (blogEntry.LabelList.Count > 1 && !first)
-                    {
-                        labelSeries.Append(", ");
-                    }
-
-                    labelSeries.Append(String.Format("<a href=\"{1}\">{0}</a>", label.Title, LabelHelper.GetLabelUrl(label)));
-                    first = false;
-                }
-                labelSeries.Append("}");
-            }
-            //+
-            return labelSeries.ToString();
-        }
-
-        //- $GetBlogEntryAuthorSeries -//
-        private String GetBlogEntryAuthorSeries(BlogEntry blogEntry)
-        {
-            StringBuilder authorSeries = new StringBuilder();
-            if (blogEntry.AuthorList != null)
-            {
-                Boolean first = true;
-                if (blogEntry.AuthorList.Count < 1)
-                {
-                    return String.Empty;
-                }
-                else if (blogEntry.AuthorList.Count > 1)
-                {
-                    authorSeries.Append("{");
-                }
-                foreach (Author author in blogEntry.AuthorList)
-                {
-                    if (blogEntry.AuthorList.Count > 1 && !first)
-                    {
-                        authorSeries.Append(", ");
-                    }
-                    if (MinimaConfiguration.LinkAuthorToEmail)
-                    {
-                        authorSeries.Append(String.Format("<a href=\"mailto:{1}\">{0}</a>", author.Name, author.Email));
-                    }
-                    else
-                    {
-                        authorSeries.Append(author.Name);
-                    }
-                    first = false;
-                }
-                if (blogEntry.AuthorList.Count > 1)
-                {
-                    authorSeries.Append("}");
-                }
-            }
-            //+
-            return authorSeries.ToString();
         }
 
         #endregion

@@ -20,7 +20,7 @@ namespace Minima.Service
         //- ~Message -//
         private class Message
         {
-            internal const String Invalid = "Username or password is invalid";
+            internal const String Invalid = "Insufficient rights.";
         }
 
         //- ~ValidateBlogPermission -//

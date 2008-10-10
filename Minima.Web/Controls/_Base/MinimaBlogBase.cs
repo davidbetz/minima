@@ -19,6 +19,16 @@ namespace Minima.Web.Controls
 {
     public abstract class MinimaBlogBase : System.Web.UI.Control
     {
+        //- ~Info -//
+        internal class Info : Minima.Web.Info
+        {
+            public const String Link = "Link";
+            public const String Archive = "Archive";
+            public const String Index = "Index";
+            public const String Label = "Label";
+        }
+
+        //+
         private List<BlogEntry> dataSource;
 
         //+
@@ -39,7 +49,7 @@ namespace Minima.Web.Controls
         {
             get
             {
-                return HttpData.GetScopedItem<String>(Info.Scope, "Label");
+                return HttpData.GetScopedItem<String>(Info.Scope, Info.Label);
             }
         }
 
@@ -48,7 +58,7 @@ namespace Minima.Web.Controls
         {
             get
             {
-                return HttpData.GetScopedItem<String>(Info.Scope, "Archive");
+                return HttpData.GetScopedItem<String>(Info.Scope, Info.Archive);
             }
         }
 
@@ -57,7 +67,7 @@ namespace Minima.Web.Controls
         {
             get
             {
-                return HttpData.GetScopedItem<String>(Info.Scope, "Link");
+                return HttpData.GetScopedItem<String>(Info.Scope, Info.Link);
             }
         }
 
@@ -66,7 +76,7 @@ namespace Minima.Web.Controls
         {
             get
             {
-                return HttpData.GetScopedItem<Int32>(Info.Scope, "Index");
+                return HttpData.GetScopedItem<Int32>(Info.Scope, Info.Index);
             }
         }
 
@@ -130,7 +140,7 @@ namespace Minima.Web.Controls
                 BlogEntryActivity blogEntryActivity = new BlogEntryActivity();
                 blogEntryActivity.BlogEntryActivityBrowser = request.UserAgent;
                 blogEntryActivity.BlogEntryActivityTime = DateTime.Now;
-                blogEntryActivity.BlogEntryActivityAddress = request.ServerVariables["REMOTE_HOST"];
+                blogEntryActivity.BlogEntryActivityAddress = Http.IpAddress;
                 blogEntryActivity.BlogEntryActivitySessionId = (String)context.Session["SessionId"];
                 blogEntryActivity.BlogEntryActivityTypeId = 0;
                 //+
