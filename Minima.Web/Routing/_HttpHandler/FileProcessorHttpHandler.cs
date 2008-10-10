@@ -23,7 +23,7 @@ namespace Minima.Web.Routing
         {
             String basePhysicalPath = MinimaConfiguration.DefaultMaterialsPhysicalPath;
             String baseVirtualPath = WebConfiguration.Domain + MinimaConfiguration.MaterialsRelativePath;
-            String path = Http.Url.AbsoluteUri.Substring(baseVirtualPath.Length, Http.Url.AbsoluteUri.Length - baseVirtualPath.Length);
+            String path = Http.AbsoluteUrl.Substring(baseVirtualPath.Length, Http.AbsoluteUrl.Length - baseVirtualPath.Length);
             //+
             using (MinimaWebLINQDataContext db = new MinimaWebLINQDataContext(WebConfiguration.ConnectionString))
             {

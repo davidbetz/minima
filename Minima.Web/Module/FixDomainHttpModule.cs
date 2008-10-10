@@ -22,12 +22,11 @@ namespace Minima.Web.Module
             context.BeginRequest += delegate(Object sender, EventArgs ea)
             {
                 HttpApplication ha = sender as HttpApplication;
-                String absoluteUrl = Http.Url.ToString().ToLower();
                 if (ha != null)
                 {
                     if (MinimaConfiguration.ForceSpecifiedPath)
                     {
-                        if (!absoluteUrl.StartsWith(WebConfiguration.Domain.ToLower()))
+                        if (!Http.AbsoluteUrl.StartsWith(WebConfiguration.Domain.ToLower()))
                         {
                             context.Response.Redirect(WebConfiguration.Domain);
                         }
