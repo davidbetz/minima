@@ -20,6 +20,9 @@ using Themelia.Activation;
 //+
 namespace Minima.Web.Controls
 {
+    /// <summary>
+    /// Used to provide full blog capabilities.  Requires the MinimaComponent to be installed.
+    /// </summary>
     public class MinimaBlog : MinimaBlogBase
     {
         protected PlaceHolder phNoEntries;

@@ -11,6 +11,9 @@ using Minima.Web.Helper;
 //+
 namespace Minima.Web.Controls
 {
+    /// <summary>
+    /// Allows a page to reference a blog entry by either blog guid and link or blog entry guid.  Requires the MinimaProxyComponent to be installed.
+    /// </summary>
     public class BlogEntryProxy : System.Web.UI.Control
     {
         //- @BlogGuid -//
