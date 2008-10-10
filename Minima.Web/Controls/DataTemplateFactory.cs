@@ -15,11 +15,21 @@ namespace Minima.Web.Controls
 {
     public static class DataTemplateTemplateFactory
     {
-        public static Template CreatePostTemplate(Boolean hidePostDateTime, Boolean showAuthorSeries, String labelSeries, Boolean isLink, Boolean supportCommenting, AllowCommentStatus allowCommentStatus, Boolean showDisabledText, String postFooterData)
+        public static Template CreatePostTemplate(Boolean linkHeader, Boolean hidePostDateTime, Boolean showAuthorSeries, String labelSeries, Boolean isLink, Boolean supportCommenting, AllowCommentStatus allowCommentStatus, Boolean showDisabledText, String postFooterData)
         {
-            Themelia.Template template = new Themelia.Template(@"
+            Themelia.Template template = new Themelia.Template();
+            if (linkHeader)
+            {
+                template.AppendText(@"
 <div class=""post"">
     <h3><a href=""{$Url$}"">{$Title$}</a></h3>");
+            }
+            else
+            {
+                template.AppendText(@"
+<div class=""post"">
+    <h3>{$Title$}</h3>");
+            }
             if (hidePostDateTime == false)
             {
                 template.AppendText(@"
@@ -58,14 +68,15 @@ namespace Minima.Web.Controls
                     template.AppendText(@"
         <p class=""comment-count"">
             <a href=""{$Url$}"">({$ViewableCommentCount$} Comment{$Plural$})</a>
-");
-                    template.AppendText(@"
         </p>");
                 }
             }
-            template.AppendText(@"
+            if (!String.IsNullOrEmpty(postFooterData))
+            {
+                template.AppendText(@"
 {$PostFooterData$}
 ");
+            }
             template.AppendText(@"
     </p>
 </div>");
