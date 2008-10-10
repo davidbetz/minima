@@ -124,8 +124,8 @@ namespace Minima.Web.Controls
                 DateTime startDateTime = new DateTime(this.Index, 1, 1, 0, 0, 0);
                 DateTime endDateTime = new DateTime(this.Index, 12, 31, 23, 59, 59);
                 //+
-                indexDataSource = BlogAgent.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime, true).Select(indexTransformation).ToList();
-                List<Int32> yearDataSource = BlogAgent.GetBlogEntryList(blogGuid, 0, BlogEntryRetreivalType.VeryBasic)
+                indexDataSource = BlogAgent.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime,false, true).Select(indexTransformation).ToList();
+                List<Int32> yearDataSource = BlogAgent.GetBlogEntryList(blogGuid, 0,false, BlogEntryRetreivalType.VeryBasic)
                     .Where(p => p.PostDateTime.Year != this.Index)
                     .Select(p => p.PostDateTime.Year)
                     .Distinct()

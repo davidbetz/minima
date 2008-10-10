@@ -34,13 +34,13 @@ namespace Minima.Service.Client
             }
         }
 
-        public List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, BlogEntryRetreivalType blogEntryRetreivalType)
+        public List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, Boolean ignoreFooter, BlogEntryRetreivalType blogEntryRetreivalType)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
                 //+
-                return base.Channel.GetBlogEntryList(blogGuid, count, activeOnly, blogEntryRetreivalType);
+                return base.Channel.GetBlogEntryList(blogGuid, count, activeOnly, ignoreFooter, blogEntryRetreivalType);
             }
         }
 
@@ -59,33 +59,33 @@ namespace Minima.Service.Client
             return base.Channel.GetBlogListForAssociatedAuthor(authorEmail);
         }
 
-        public List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, int maxBlogEntryCount)
+        public List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, int maxBlogEntryCount, Boolean ignoreFooter)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
                 //+
-                return base.Channel.GetNetBlogEntryList(blogGuid, label, archive, link, maxBlogEntryCount);
+                return base.Channel.GetNetBlogEntryList(blogGuid, label, archive, link, maxBlogEntryCount, ignoreFooter);
             }
         }
 
-        public BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly)
+        public BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean ignoreFooter, Boolean metaDataOnly)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
                 //+
-                return base.Channel.GetSingleBlogEntryByLink(blogGuid, link, metaDataOnly);
+                return base.Channel.GetSingleBlogEntryByLink(blogGuid, link, ignoreFooter, metaDataOnly);
             }
         }
 
-        public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly)
+        public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean ignoreFooter, Boolean metaDataOnly)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogEntryGuid, blogEntryGuid);
                 //+
-                return base.Channel.GetSingleBlogEntry(blogEntryGuid, metaDataOnly);
+                return base.Channel.GetSingleBlogEntry(blogEntryGuid, ignoreFooter, metaDataOnly);
             }
         }
 
@@ -119,13 +119,13 @@ namespace Minima.Service.Client
             }
         }
 
-        public List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean metaDataOnly)
+        public List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean ignoreFooter, Boolean metaDataOnly)
         {
             using (OperationContextScope scope = new OperationContextScope(this.InnerChannel))
             {
                 AddGuidToMessageHeader(MinimaMessageHeaderType.BlogGuid, blogGuid);
                 //+
-                return base.Channel.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime, metaDataOnly);
+                return base.Channel.GetBlogEntryListByDateRange(blogGuid, startDateTime, endDateTime, ignoreFooter, metaDataOnly);
             }
         }
     }

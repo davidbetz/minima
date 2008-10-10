@@ -133,7 +133,7 @@ namespace Minima.Web.Controls
             List<BlogEntry> blogEntryList = new List<BlogEntry>();
             if (this.AccessType != AccessType.Index)
             {
-                blogEntryList = BlogAgent.GetNetBlogEntryList(blogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow);
+                blogEntryList = BlogAgent.GetNetBlogEntryList(blogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow, false);
                 //+
                 HttpContext context = HttpContext.Current;
                 HttpRequest request = context.Request;

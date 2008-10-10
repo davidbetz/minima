@@ -70,7 +70,7 @@ namespace Minima.Web.Controls
             {
                 maxEntryCount = this.MaxEntryCount;
             }
-            List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(this.BlogGuid, maxEntryCount, BlogEntryRetreivalType.Full);
+            List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(this.BlogGuid, maxEntryCount, false, BlogEntryRetreivalType.Full);
             //+
             return blogEntryList.Select(p => new
             {

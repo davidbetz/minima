@@ -118,7 +118,7 @@
     <Compile Include="Routing\MinimaViewerComponent.cs" />
     <Compile Include="Routing\MinimaProxyComponent.cs" />
     <Compile Include="Routing\InjectionProcessor.cs" />
-    <Compile Include="Routing\Info.cs" />
+    <Compile Include="Info.cs" />
     <Compile Include="Parsing\AmazonAffiliateCodeParser.cs" />
     <Compile Include="Controls\BlogControlTemplateFactory.cs" />
     <Compile Include="Controls\ArchivedEntryList.cs">
@@ -176,7 +176,6 @@
     <Compile Include="Service\FeedService.cs" />
     <Compile Include="Service\_ServiceContract\ICommentService.cs" />
     <Compile Include="Service\_ServiceContract\IFeedService.cs" />
-    <Compile Include="Helper\BlogEntryHelper.cs" />
     <Compile Include="WebConfiguration.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

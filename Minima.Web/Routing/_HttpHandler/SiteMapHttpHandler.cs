@@ -22,7 +22,7 @@ namespace Minima.Web.Routing
             String key = "SiteMap_" + blogGuid;
             if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
             {
-                List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, 0, BlogEntryRetreivalType.Full);
+                List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, 0, false, BlogEntryRetreivalType.Full);
                 StringBuilder xml = new StringBuilder();
                 XmlWriter xmlWriter = XmlWriter.Create(xml);
                 xmlWriter.WriteProcessingInstruction("xml", @"version=""1.0"" encoding=""UTF-8""");

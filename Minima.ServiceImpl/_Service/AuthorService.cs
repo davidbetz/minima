@@ -54,7 +54,7 @@ namespace Minima.Service
                     AuthorLINQ authorLinq = new AuthorLINQ();
                     authorLinq.AuthorEmail = authorEmail;
                     authorLinq.AuthorName = authorName;
-                    authorLinq.AuthorGuid = GuidCreator.NewDatabaseGuid;
+                    authorLinq.AuthorGuid = Themelia.GuidCreator.NewDatabaseGuid;
                     authorLinq.AuthorCreateDate = DateTime.Now;
                     //+
                     db.Authors.InsertOnSubmit(authorLinq);

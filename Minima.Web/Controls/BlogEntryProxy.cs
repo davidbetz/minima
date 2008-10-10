@@ -31,6 +31,9 @@ namespace Minima.Web.Controls
         //- @HidePostDateTime -//
         public Boolean HidePostDateTime { get; set; }
 
+        //- @IgnoreBlogEntryFooter -//
+        public Boolean IgnoreBlogEntryFooter { get; set; }
+
         //- @CodeParserSeries -//
         public Themelia.CodeParsing.CodeParserSeries CodeParserSeries { get; set; }
 
@@ -57,7 +60,7 @@ namespace Minima.Web.Controls
             Minima.Service.BlogEntry blogEntry = null;
             if (!String.IsNullOrEmpty(this.BlogEntryGuid))
             {
-                blogEntry = BlogAgent.GetSingleBlogEntry(this.BlogEntryGuid);
+                blogEntry = BlogAgent.GetSingleBlogEntry(this.BlogEntryGuid, this.IgnoreBlogEntryFooter);
 
             }
             else
@@ -70,7 +73,7 @@ namespace Minima.Web.Controls
                 //+
                 if (!String.IsNullOrEmpty(this.Link))
                 {
-                    blogEntry = BlogAgent.GetSingleBlogEntryByLink(blogGuid, this.Link);
+                    blogEntry = BlogAgent.GetSingleBlogEntryByLink(blogGuid, this.Link, this.IgnoreBlogEntryFooter);
                 }
             }
             if (blogEntry != null)

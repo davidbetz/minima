@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\BlogEntryHelper.cs" />
     <Compile Include="_Fault\Behavior\ErrorHandler.cs" />
     <Compile Include="_Fault\Behavior\FaultHandlingBehavior.cs" />
     <Compile Include="Behavior\MinimaSystemSecurityBehavior.cs" />
@@ -101,7 +102,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="_Security\PermissionLevel.cs" />
-    <Compile Include="Helper\GuidCreator.cs" />
     <Compile Include="MinimaMessageHeaderHelper.cs" />
     <Compile Include="_Security\SecurityValidator.cs" />
     <Compile Include="Validation\MinimaUserNamePasswordValidator.cs" />
