@@ -112,8 +112,8 @@ namespace Minima.Web.Controls
         }
 
         //+
-        //- #OnPreRender -//
-        protected override void OnPreRender(EventArgs e)
+        //- #OnLoad -//
+        protected override void OnLoad(EventArgs e)
         {
             String link = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.CustomLink);
             //+
@@ -139,6 +139,8 @@ namespace Minima.Web.Controls
                     {
                         Text = output
                     });
+                    //+
+                    HttpData.SetScopedItem("MinimaBlogEntry", "Title", blogEntry.Title);
                 }
             }
             //+

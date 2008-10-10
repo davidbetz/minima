@@ -5,6 +5,7 @@
 using System;
 //+
 using Themelia;
+using Themelia.Web;
 //+
 using Minima.Service.Agent;
 using Minima.Web.Helper;
@@ -98,6 +99,8 @@ namespace Minima.Web.Controls
                 {
                     Text = output
                 });
+                //+
+                HttpData.SetScopedItem("MinimaBlogEntry", "Title", blogEntry.Title);
             }
             //+
             base.OnPreRender(e);
