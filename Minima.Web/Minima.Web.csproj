@@ -84,7 +84,7 @@
     <Compile Include="Api\MetaWeblog\Post.cs" />
     <Compile Include="Api\MetaWeblog\UrlInfo.cs" />
     <Compile Include="Controls\BlogEntryProxy.cs" />
-    <Compile Include="Controls\BlogEntryViewer.cs" />
+    <Compile Include="Controls\BlogViewer.cs" />
     <Compile Include="Controls\TestPostFooter.cs" />
     <Compile Include="Controls\DataTemplateFactory.cs" />
     <Compile Include="Controls\_Base\CommentInputBase.cs">
