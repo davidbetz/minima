@@ -67,7 +67,7 @@ namespace Minima.Service
                     labelLinq = new LabelLINQ();
                     labelLinq.LabelTitle = title;
                     labelLinq.BlogId = blogLinq.BlogId;
-                    labelLinq.LabelGuid = GuidCreator.NewDatabaseGuid;
+                    labelLinq.LabelGuid = Themelia.GuidCreator.NewDatabaseGuid;
                     db.Labels.InsertOnSubmit(labelLinq);
                     //+
                     db.SubmitChanges();

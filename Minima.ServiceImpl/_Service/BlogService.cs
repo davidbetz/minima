@@ -20,6 +20,7 @@ using BlogEntryUrlMappingLINQ = Minima.Service.Data.Entity.BlogEntryUrlMapping;
 using BlogLINQ = Minima.Service.Data.Entity.Blog;
 using LabelBlogEntryLINQ = Minima.Service.Data.Entity.LabelBlogEntry;
 using LabelLINQ = Minima.Service.Data.Entity.Label;
+using System.Text.RegularExpressions;
 //+
 namespace Minima.Service
 {
@@ -67,7 +68,7 @@ namespace Minima.Service
                     }
                     blogEntryLinq.BlogEntryStatus = db.BlogEntryStatus.SingleOrDefault(p => p.BlogEntryStatusId == (publish ? 1 : 3));
                     blogEntryLinq.BlogEntryCommentAllowStatus = db.BlogEntryCommentAllowStatus.SingleOrDefault(p => p.BlogEntryCommentAllowStatusId == 1);
-                    blogEntryLinq.BlogEntryGuid = GuidCreator.NewDatabaseGuid;
+                    blogEntryLinq.BlogEntryGuid = Themelia.GuidCreator.NewDatabaseGuid;
                     if (dateTime.Year >= 1950)
                     {
                         blogEntryLinq.BlogEntryPostDateTime = dateTime;
@@ -83,7 +84,7 @@ namespace Minima.Service
                     //+
                     BlogEntryUrlMappingLINQ blogEntryUrlMappingLinq = new BlogEntryUrlMappingLINQ();
                     blogEntryUrlMappingLinq.BlogEntryId = blogEntryLinq.BlogEntryId;
-                    blogEntryUrlMappingLinq.BlogEntryUrlMappingName = CreateBlogEntryPostUrlMapping(title);
+                    blogEntryUrlMappingLinq.BlogEntryUrlMappingName = BlogEntryHelper.BuildBlogEntryLink(blogEntryLinq.BlogEntryPostDateTime, CreateBlogEntryPostUrlMapping(title));
                     blogEntryUrlMappingLinq.BlogEntryUrlMappingPrimary = true;
                     db.BlogEntryUrlMappings.InsertOnSubmit(blogEntryUrlMappingLinq);
                     //+
@@ -154,10 +155,14 @@ namespace Minima.Service
                 Validator.EnsureEachLabelExists(labelList, out labelLinqList, db);
                 using (TransactionScope scope = new TransactionScope())
                 {
+                    if (dateTime.Year >= 1950)
+                    {
+                        blogEntryLinq.BlogEntryPostDateTime = dateTime;
+                    }
                     //+ has this title's mapping been used by a different blog entry?
                     if (!String.IsNullOrEmpty(title))
                     {
-                        String mapping = CreateBlogEntryPostUrlMapping(title);
+                        String mapping = BlogEntryHelper.BuildBlogEntryLink(blogEntryLinq.BlogEntryPostDateTime, CreateBlogEntryPostUrlMapping(title));
                         BlogEntryUrlMappingLINQ blogEntryUrlMappingLINQ = db.BlogEntryUrlMappings.Where(p => p.BlogEntryUrlMappingName == mapping && p.BlogEntryId != blogEntryLinq.BlogEntryId).FirstOrDefault();
                         if (blogEntryUrlMappingLINQ != null)
                         {
@@ -168,7 +173,7 @@ namespace Minima.Service
                         //+ the old and the new links
                         if (blogEntryUrlMappingLINQ == null)
                         {
-                            foreach (BlogEntryUrlMappingLINQ beum in db.BlogEntryUrlMappings.Where(p=>p.BlogEntryId==blogEntryLinq.BlogEntryId))
+                            foreach (BlogEntryUrlMappingLINQ beum in db.BlogEntryUrlMappings.Where(p => p.BlogEntryId == blogEntryLinq.BlogEntryId))
                             {
                                 beum.BlogEntryUrlMappingPrimary = false;
                                 db.SubmitChanges();
@@ -190,10 +195,6 @@ namespace Minima.Service
                     if (!String.IsNullOrEmpty(content))
                     {
                         blogEntryLinq.BlogEntryText = content;
-                    }
-                    if (dateTime.Year >= 1950)
-                    {
-                        blogEntryLinq.BlogEntryPostDateTime = dateTime;
                     }
                     blogEntryLinq.BlogEntryStatusId = publish ? 1 : 3;
                     //+ label
@@ -224,7 +225,7 @@ namespace Minima.Service
 
         //- @GetSingleBlogEntry -//
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
-        public BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly)
+        public BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean ignoreFooter, Boolean metaDataOnly)
         {
             using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
@@ -238,7 +239,7 @@ namespace Minima.Service
                     return new BlogEntry
                     {
                         Title = blogEntryLinq.BlogEntryTitle,
-                        Content = metaDataOnly ? String.Empty : blogEntryLinq.BlogEntryText,
+                        Content = metaDataOnly ? String.Empty : CheckFooter(ignoreFooter, blogEntryLinq.BlogEntryText),
                         Guid = blogEntryLinq.BlogEntryGuid,
                         Status = blogEntryLinq.BlogEntryStatusId,
                         BlogEntryTypeGuid = blogEntryLinq.BlogEntryType.BlogEntryTypeGuid,
@@ -284,7 +285,7 @@ namespace Minima.Service
 
         //- @GetSingleBlogEntry -//
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
-        public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly)
+        public BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean ignoreFooter, Boolean metaDataOnly)
         {
             using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
@@ -295,7 +296,7 @@ namespace Minima.Service
                 return new BlogEntry
                 {
                     Title = blogEntryLinq.BlogEntryTitle,
-                    Content = metaDataOnly ? String.Empty : blogEntryLinq.BlogEntryText,
+                    Content = metaDataOnly ? String.Empty : CheckFooter(ignoreFooter, blogEntryLinq.BlogEntryText),
                     Guid = blogEntryLinq.BlogEntryGuid,
                     Status = blogEntryLinq.BlogEntryStatusId,
                     BlogEntryTypeGuid = blogEntryLinq.BlogEntryType.BlogEntryTypeGuid,
@@ -338,7 +339,7 @@ namespace Minima.Service
 
         //- @GetNetBlogEntryList -//
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
-        public List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, Int32 maxBlogEntryCount)
+        public List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, Int32 maxBlogEntryCount, Boolean ignoreFooter)
         {
             IQueryable<BlogEntryLINQ> blogEntryLinqList = null;
             using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
@@ -350,7 +351,7 @@ namespace Minima.Service
                 Func<BlogEntryLINQ, BlogEntry> blogEntryTransformation = be => new BlogEntry
                 {
                     Title = be.BlogEntryTitle,
-                    Content = be.BlogEntryText,
+                    Content = CheckFooter(ignoreFooter, be.BlogEntryText),
                     Guid = be.BlogEntryGuid,
                     Status = be.BlogEntryStatusId,
                     BlogEntryTypeGuid = be.BlogEntryType.BlogEntryTypeGuid,
@@ -358,7 +359,7 @@ namespace Minima.Service
                     PostDateTime = be.BlogEntryPostDateTime,
                     ModifyDateTime = be.BlogEntryModifyDateTime,
                     MappingNameList = new List<String>(
-                        be.BlogEntryUrlMappings.OrderBy(p=>p.BlogEntryUrlMappingPrimary).Select(p => p.BlogEntryUrlMappingName)
+                        be.BlogEntryUrlMappings.OrderBy(p => p.BlogEntryUrlMappingPrimary).Select(p => p.BlogEntryUrlMappingName)
                     ),
                     LabelList = new List<Label>(
                         be.LabelBlogEntries.Select(p => new Label
@@ -431,7 +432,7 @@ namespace Minima.Service
         }
 
         //- @GetBlogEntryListByDateRange -//
-        public List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean metaDataOnly)
+        public List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean ignoreFooter, Boolean metaDataOnly)
         {
             using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
             {
@@ -442,7 +443,7 @@ namespace Minima.Service
                 Func<BlogEntryLINQ, BlogEntry> blogEntryTransformation = be => new BlogEntry
                 {
                     Title = be.BlogEntryTitle,
-                    Content = metaDataOnly ? String.Empty : be.BlogEntryText,
+                    Content = metaDataOnly ? String.Empty : CheckFooter(ignoreFooter, be.BlogEntryText),
                     Guid = be.BlogEntryGuid,
                     Status = be.BlogEntryStatusId,
                     BlogEntryTypeGuid = be.BlogEntryType.BlogEntryTypeGuid,
@@ -492,7 +493,7 @@ namespace Minima.Service
 
         //- @GetBlogEntryList -//
         [MinimaBlogSecurityBehavior(PermissionRequired = BlogPermission.Retrieve)]
-        public List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 maxEntryCount, Boolean activeOnly, BlogEntryRetreivalType blogEntryRetreivalType)
+        public List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 maxEntryCount, Boolean activeOnly, Boolean ignoreFooter, BlogEntryRetreivalType blogEntryRetreivalType)
         {
             List<BlogEntry> blogEntryList = null;
             using (DataContext db = new DataContext(ServiceConfiguration.ConnectionString))
@@ -520,7 +521,7 @@ namespace Minima.Service
                     .Select(be => new BlogEntry
                     {
                         Title = be.BlogEntryTitle,
-                        Content = (blogEntryRetreivalType == BlogEntryRetreivalType.Full) ? String.Empty : be.BlogEntryText,
+                        Content = (blogEntryRetreivalType == BlogEntryRetreivalType.Full) ? String.Empty : CheckFooter(ignoreFooter, be.BlogEntryText),
                         Guid = be.BlogEntryGuid,
                         Status = be.BlogEntryStatusId,
                         BlogEntryTypeGuid = be.BlogEntryType.BlogEntryTypeGuid,
@@ -681,28 +682,50 @@ namespace Minima.Service
         }
 
         //+
+        //- $CheckFooter -//
+        /// <summary>
+        /// Checks the footer.
+        /// </summary>
+        /// <param name="ignoreFooter">if set to <c>true</c> [ignore footer].</param>
+        /// <param name="content">The content.</param>
+        /// <returns></returns>
+        private String CheckFooter(Boolean ignoreFooter, String content)
+        {
+            String pattern = @"(<p>)?(\s*){{\$Footer\$}}(\s*)(<p>)?";
+            if (ignoreFooter)
+            {
+                Regex ex = new Regex(pattern);
+                Match match = ex.Match(content);
+                if (match.Success)
+                {
+                    content = content.Substring(0, match.Index);
+                }
+            }
+            return content;
+        }
+
         //- $TransformBlogEntryList -//
         private IQueryable<BlogEntry> TransformBlogEntryList(IQueryable<BlogEntryLINQ> blogEntryLinqList, BlogLINQ blogLinq, Boolean metaDataOnly)
         {
             Func<BlogEntryLINQ, BlogEntry> blogEntryTransformation = be => new BlogEntry
             {
-               Title = be.BlogEntryTitle,
-               Content = metaDataOnly ? String.Empty : be.BlogEntryText,
-               Guid = be.BlogEntryGuid,
-               Status = be.BlogEntryStatusId,
-               PostDateTime = be.BlogEntryPostDateTime,
-               ModifyDateTime = be.BlogEntryModifyDateTime,
-               MappingNameList = new List<String>(
-                   be.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
-               ),
-               LabelList = new List<Label>(
-                   be.LabelBlogEntries.Select(p => new Label
-                   {
-                       Guid = p.Label.LabelGuid,
-                       FriendlyTitle = p.Label.LabelFriendlyTitle,
-                       Title = p.Label.LabelTitle
-                   })
-               )
+                Title = be.BlogEntryTitle,
+                Content = metaDataOnly ? String.Empty : be.BlogEntryText,
+                Guid = be.BlogEntryGuid,
+                Status = be.BlogEntryStatusId,
+                PostDateTime = be.BlogEntryPostDateTime,
+                ModifyDateTime = be.BlogEntryModifyDateTime,
+                MappingNameList = new List<String>(
+                    be.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
+                ),
+                LabelList = new List<Label>(
+                    be.LabelBlogEntries.Select(p => new Label
+                    {
+                        Guid = p.Label.LabelGuid,
+                        FriendlyTitle = p.Label.LabelFriendlyTitle,
+                        Title = p.Label.LabelTitle
+                    })
+                )
             };
             //+
             return (IQueryable<BlogEntry>)blogEntryLinqList.Select(blogEntryTransformation);

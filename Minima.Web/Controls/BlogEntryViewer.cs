@@ -64,6 +64,9 @@ namespace Minima.Web.Controls
         //- @HidePostDateTime -//
         public Boolean HidePostDateTime { get; set; }
 
+        //- @IgnoreBlogEntryFooter -//
+        public Boolean IgnoreBlogEntryFooter { get; set; }
+
         //- @CodeParserSeries -//
         public Themelia.CodeParsing.CodeParserSeries CodeParserSeries { get; set; }
 
@@ -113,7 +116,7 @@ namespace Minima.Web.Controls
             //+
             if (!String.IsNullOrEmpty(link))
             {
-                Minima.Service.BlogEntry blogEntry = BlogAgent.GetSingleBlogEntryByLink(this.BlogGuid, link);
+                Minima.Service.BlogEntry blogEntry = BlogAgent.GetSingleBlogEntryByLink(this.BlogGuid, link, this.IgnoreBlogEntryFooter);
                 if (blogEntry != null)
                 {
                     String labelSeries = SeriesHelper.GetBlogEntryLabelSeries(blogEntry);

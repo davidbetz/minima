@@ -115,7 +115,7 @@ namespace Minima.Service
                 commentLinq.CommentPostDate = dateTime;
                 commentLinq.CommentModerated = true;
                 commentLinq.BlogEntryId = blogEntryLinq.BlogEntryId;
-                commentLinq.CommentGuid = GuidCreator.NewDatabaseGuid;
+                commentLinq.CommentGuid = Themelia.GuidCreator.NewDatabaseGuid;
                 //+
                 db.Comments.InsertOnSubmit(commentLinq);
                 db.SubmitChanges();

@@ -30,22 +30,22 @@ namespace Minima.Service
         //- GetSingleBlogEntryByLink -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean metaDataOnly);
+        BlogEntry GetSingleBlogEntryByLink(String blogGuid, String link, Boolean ignoreFooter, Boolean metaDataOnly);
 
         //- GetSingleBlogEntry -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean metaDataOnly);
+        BlogEntry GetSingleBlogEntry(String blogEntryGuid, Boolean ignoreFooter, Boolean metaDataOnly);
 
         //- GetNetBlogEntryList -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, Int32 maxBlogEntryCount);
+        List<BlogEntry> GetNetBlogEntryList(String blogGuid, String label, String archive, String link, Int32 maxBlogEntryCount, Boolean ignoreFooter);
 
         //- GetBlogEntryList -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, BlogEntryRetreivalType blogEntryRetreivalType);
+        List<BlogEntry> GetBlogEntryList(String blogGuid, Int32 count, Boolean activeOnly, Boolean ignoreFooter, BlogEntryRetreivalType blogEntryRetreivalType);
 
         //- GetArchivedEntryList -//
         [OperationContract]
@@ -70,7 +70,7 @@ namespace Minima.Service
         //- GetBlogEntryListByDateRange -//
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean metaDataOnly);
+        List<BlogEntry> GetBlogEntryListByDateRange(String blogGuid, DateTime startDateTime, DateTime endDateTime, Boolean ignoreFooter, Boolean metaDataOnly);
 
     }
 }

@@ -120,7 +120,7 @@ namespace Minima.Web.Api.MetaWeblog
                 this.Reporter.SendSingle(new Object[] { blogEntryGuid, emailAddress, password }, "XmlRpcApi::GetPost", false);
             }
             //+
-            BlogEntry blogEntry = BlogAgent.GetSingleBlogEntry(blogEntryGuid, emailAddress, password);
+            BlogEntry blogEntry = BlogAgent.GetSingleBlogEntry(blogEntryGuid, false, emailAddress, password);
             //+
             return new FullPost
             {
@@ -151,7 +151,7 @@ namespace Minima.Web.Api.MetaWeblog
                 this.Reporter.SendSingle(new Object[] { blogGuid, emailAddress, password, maxEntryCount }, "XmlRpcApi::GetRecentPosts", false);
             }
             //+
-            List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, maxEntryCount, BlogEntryRetreivalType.Full, emailAddress, password);
+            List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, maxEntryCount, false, BlogEntryRetreivalType.Full, emailAddress, password);
             //+
             return blogEntryList.Select(p => new FullPost
                 {
@@ -195,11 +195,22 @@ namespace Minima.Web.Api.MetaWeblog
             Themelia.Map webDomainPathMap = new Themelia.Map();
             foreach (WebDomainData webDomainData in WebDomainDataList.AllWebDomainData)
             {
-                ComponentData data = webDomainData.ComponentDataList[Info.Scope];
+                ComponentData data = webDomainData.ComponentDataList[Info.Key];
                 if (data != null)
                 {
-                    String blogGuid = data.ParameterDataList[Info.BlogGuid].Value;
-                    webDomainPathMap.Add(blogGuid, webDomainData.Path);
+                    ParameterData parameterData = data.ParameterDataList[Info.BlogGuid];
+                    if (parameterData != null)
+                    {
+                        String blogGuid = parameterData.Value;
+                        if (!webDomainPathMap.ContainsKey(blogGuid))
+                        {
+                            webDomainPathMap.Add(blogGuid, webDomainData.Path);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("Only one MinimaComponent may use a particular blog guid on a web site.  Minima web controls in other web domains may reference the web domain for a particular blog guid in order to access that blog.  Also, make sure that only the MinimaComponent component is using the \"Minima\" Key.");
+                        }
+                    }
                 }
             }
             List<String> registeredBlogGuidList = webDomainPathMap.GetKeyList();
