@@ -73,15 +73,15 @@ namespace Minima.Web.Controls
             String heading = String.Empty;
             if (accessType == AccessType.Archive)
             {
-                Int32 year = HttpData.GetScopedItem<Int32>("Minima", "ArchiveYear");
-                Int32 month = HttpData.GetScopedItem<Int32>("Minima", "ArchiveMonth");
+                Int32 year = HttpData.GetScopedItem<Int32>(Info.Scope, "ArchiveYear");
+                Int32 month = HttpData.GetScopedItem<Int32>(Info.Scope, "ArchiveMonth");
                 String monthName = Themelia.Data.Common.Date.GetMonthData()[month];
                 //+
                 heading = String.Format("{0} {1}", monthName, year);
             }
             else if (accessType == AccessType.Label)
             {
-                heading = HttpData.GetScopedItem<String>("Minima", "LabelTitle");
+                heading = HttpData.GetScopedItem<String>(Info.Scope, "LabelTitle");
             }
             //+
             return heading;
