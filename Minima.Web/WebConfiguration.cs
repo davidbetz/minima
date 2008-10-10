@@ -26,7 +26,7 @@ namespace Minima.Web
         {
             get
             {
-                return Themelia.Web.UrlHelper.FixWebPath(ConfigAccessor.ApplicationSettings("Domain"));
+                return Themelia.Web.UrlCleaner.FixWebPath(ConfigAccessor.ApplicationSettings("Domain"));
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="Minima" EntityNamespace="Minima.Service.Data.Entity" ContextNamespace="Minima.Service.Data.Context" Class="MinimaServiceLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=IO\SQLEXPRESS01;Initial Catalog=Minima;Persist Security Info=True;User ID=MinimaSvcDbUser" SettingsObjectName="Minima.Service.Properties.Settings" SettingsPropertyName="MinimaConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=io\sqlexpress01;Initial Catalog=Minima;Persist Security Info=True;User ID=MinimaSvcDbUser" SettingsObjectName="Minima.Service.Properties.Settings" SettingsPropertyName="MinimaConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="svc.Author" Member="Authors">
     <Type Name="Author">
       <Column Name="AuthorId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -9,9 +9,9 @@
       <Column Name="AuthorEmail" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="AuthorPassword" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
       <Column Name="AuthorCreateDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Author_UserRight" Member="UserRights" OtherKey="AuthorId" Type="UserRight" />
-      <Association Name="Author_AuthorBlogAssociation" Member="AuthorBlogAssociations" OtherKey="AuthorId" Type="AuthorBlogAssociation" />
-      <Association Name="Author_BlogEntryAuthor" Member="BlogEntryAuthors" OtherKey="AuthorId" Type="BlogEntryAuthor" />
+      <Association Name="Author_UserRight" Member="UserRights" ThisKey="AuthorId" OtherKey="AuthorId" Type="UserRight" />
+      <Association Name="Author_AuthorBlogAssociation" Member="AuthorBlogAssociations" ThisKey="AuthorId" OtherKey="AuthorId" Type="AuthorBlogAssociation" />
+      <Association Name="Author_BlogEntryAuthor" Member="BlogEntryAuthors" ThisKey="AuthorId" OtherKey="AuthorId" Type="BlogEntryAuthor" />
     </Type>
   </Table>
   <Table Name="svc.UserRight" Member="UserRights">
@@ -21,16 +21,16 @@
       <Column Name="BlogId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UserRightLevel" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
       <Column Name="UserRightType" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
-      <Association Name="Author_UserRight" Member="Author" ThisKey="AuthorId" Type="Author" IsForeignKey="true" />
-      <Association Name="Blog_UserRight" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
+      <Association Name="Author_UserRight" Member="Author" ThisKey="AuthorId" OtherKey="AuthorId" Type="Author" IsForeignKey="true" />
+      <Association Name="Blog_UserRight" Member="Blog" ThisKey="BlogId" OtherKey="BlogId" Type="Blog" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.AuthorBlogAssociation" Member="AuthorBlogAssociations">
     <Type Name="AuthorBlogAssociation">
       <Column Name="AuthorId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="BlogId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Author_AuthorBlogAssociation" Member="Author" ThisKey="AuthorId" Type="Author" IsForeignKey="true" />
-      <Association Name="Blog_AuthorBlogAssociation" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
+      <Association Name="Author_AuthorBlogAssociation" Member="Author" ThisKey="AuthorId" OtherKey="AuthorId" Type="Author" IsForeignKey="true" />
+      <Association Name="Blog_AuthorBlogAssociation" Member="Blog" ThisKey="BlogId" OtherKey="BlogId" Type="Blog" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.Blog" Member="Blogs">
@@ -43,11 +43,11 @@
       <Column Name="BlogFeedUrl" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
       <Column Name="BlogFeedTitle" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="BlogCreateDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Blog_UserRight" Member="UserRights" OtherKey="BlogId" Type="UserRight" />
-      <Association Name="Blog_AuthorBlogAssociation" Member="AuthorBlogAssociations" OtherKey="BlogId" Type="AuthorBlogAssociation" />
-      <Association Name="Blog_BlogEntry" Member="BlogEntries" OtherKey="BlogId" Type="BlogEntry" />
-      <Association Name="Blog_Label" Member="Labels" OtherKey="BlogId" Type="Label" />
-      <Association Name="Blog_BlogImage" Member="BlogImages" OtherKey="BlogId" Type="BlogImage" />
+      <Association Name="Blog_UserRight" Member="UserRights" ThisKey="BlogId" OtherKey="BlogId" Type="UserRight" />
+      <Association Name="Blog_AuthorBlogAssociation" Member="AuthorBlogAssociations" ThisKey="BlogId" OtherKey="BlogId" Type="AuthorBlogAssociation" />
+      <Association Name="Blog_BlogEntry" Member="BlogEntries" ThisKey="BlogId" OtherKey="BlogId" Type="BlogEntry" />
+      <Association Name="Blog_Label" Member="Labels" ThisKey="BlogId" OtherKey="BlogId" Type="Label" />
+      <Association Name="Blog_BlogImage" Member="BlogImages" ThisKey="BlogId" OtherKey="BlogId" Type="BlogImage" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntry" Member="BlogEntries">
@@ -66,36 +66,36 @@
       <Column Name="BlogEntryModifyDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="BlogEntryPostDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="BlogEntryTypeId" Type="System.Int32" DbType="Int" CanBeNull="false" />
-      <Association Name="BlogEntry_BlogEntryAuthor" Member="BlogEntryAuthors" OtherKey="BlogEntryId" Type="BlogEntryAuthor" />
-      <Association Name="BlogEntry_BlogEntryUrlMapping" Member="BlogEntryUrlMappings" OtherKey="BlogEntryId" Type="BlogEntryUrlMapping" />
-      <Association Name="BlogEntry_Comment" Member="Comments" OtherKey="BlogEntryId" Type="Comment" />
-      <Association Name="BlogEntry_LabelBlogEntry" Member="LabelBlogEntries" OtherKey="BlogEntryId" Type="LabelBlogEntry" />
-      <Association Name="Blog_BlogEntry" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
-      <Association Name="BlogEntryCommentAllowStatus_BlogEntry" Member="BlogEntryCommentAllowStatus" ThisKey="BlogEntryCommentAllowStatusId" Type="BlogEntryCommentAllowStatus" IsForeignKey="true" />
-      <Association Name="BlogEntryStatus_BlogEntry" Member="BlogEntryStatus" ThisKey="BlogEntryStatusId" Type="BlogEntryStatus" IsForeignKey="true" />
-      <Association Name="BlogEntryType_BlogEntry" Member="BlogEntryType" ThisKey="BlogEntryTypeId" Type="BlogEntryType" IsForeignKey="true" />
+      <Association Name="BlogEntry_BlogEntryAuthor" Member="BlogEntryAuthors" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="BlogEntryAuthor" />
+      <Association Name="BlogEntry_BlogEntryUrlMapping" Member="BlogEntryUrlMappings" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="BlogEntryUrlMapping" />
+      <Association Name="BlogEntry_Comment" Member="Comments" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="Comment" />
+      <Association Name="BlogEntry_LabelBlogEntry" Member="LabelBlogEntries" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="LabelBlogEntry" />
+      <Association Name="Blog_BlogEntry" Member="Blog" ThisKey="BlogId" OtherKey="BlogId" Type="Blog" IsForeignKey="true" />
+      <Association Name="BlogEntryCommentAllowStatus_BlogEntry" Member="BlogEntryCommentAllowStatus" ThisKey="BlogEntryCommentAllowStatusId" OtherKey="BlogEntryCommentAllowStatusId" Type="BlogEntryCommentAllowStatus" IsForeignKey="true" />
+      <Association Name="BlogEntryStatus_BlogEntry" Member="BlogEntryStatus" ThisKey="BlogEntryStatusId" OtherKey="BlogEntryStatusId" Type="BlogEntryStatus" IsForeignKey="true" />
+      <Association Name="BlogEntryType_BlogEntry" Member="BlogEntryType" ThisKey="BlogEntryTypeId" OtherKey="BlogEntryTypeId" Type="BlogEntryType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntryAuthor" Member="BlogEntryAuthors">
     <Type Name="BlogEntryAuthor">
       <Column Name="AuthorId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="BlogEntryId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Author_BlogEntryAuthor" Member="Author" ThisKey="AuthorId" Type="Author" IsForeignKey="true" />
-      <Association Name="BlogEntry_BlogEntryAuthor" Member="BlogEntry" ThisKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
+      <Association Name="Author_BlogEntryAuthor" Member="Author" ThisKey="AuthorId" OtherKey="AuthorId" Type="Author" IsForeignKey="true" />
+      <Association Name="BlogEntry_BlogEntryAuthor" Member="BlogEntry" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntryCommentAllowStatus" Member="BlogEntryCommentAllowStatus">
     <Type Name="BlogEntryCommentAllowStatus">
       <Column Name="BlogEntryCommentAllowStatusId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BlogEntryCommentAllowStatusText" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="BlogEntryCommentAllowStatus_BlogEntry" Member="BlogEntries" OtherKey="BlogEntryCommentAllowStatusId" Type="BlogEntry" />
+      <Association Name="BlogEntryCommentAllowStatus_BlogEntry" Member="BlogEntries" ThisKey="BlogEntryCommentAllowStatusId" OtherKey="BlogEntryCommentAllowStatusId" Type="BlogEntry" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntryStatus" Member="BlogEntryStatus">
     <Type Name="BlogEntryStatus">
       <Column Name="BlogEntryStatusId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BlogEntryStatusName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Association Name="BlogEntryStatus_BlogEntry" Member="BlogEntries" OtherKey="BlogEntryStatusId" Type="BlogEntry" />
+      <Association Name="BlogEntryStatus_BlogEntry" Member="BlogEntries" ThisKey="BlogEntryStatusId" OtherKey="BlogEntryStatusId" Type="BlogEntry" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntryUrlMapping" Member="BlogEntryUrlMappings">
@@ -103,7 +103,8 @@
       <Column Name="BlogEntryUrlMappingId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BlogEntryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="BlogEntryUrlMappingName" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
-      <Association Name="BlogEntry_BlogEntryUrlMapping" Member="BlogEntry" ThisKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
+      <Column Name="BlogEntryUrlMappingPrimary" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Association Name="BlogEntry_BlogEntryUrlMapping" Member="BlogEntry" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.Comment" Member="Comments">
@@ -117,7 +118,7 @@
       <Column Name="CommentPostDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="CommentModerated" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="CommentWebsite" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
-      <Association Name="BlogEntry_Comment" Member="BlogEntry" ThisKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
+      <Association Name="BlogEntry_Comment" Member="BlogEntry" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.Label" Member="Labels">
@@ -128,16 +129,16 @@
       <Column Name="LabelTitle" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="LabelFriendlyTitle" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="LabelNetTitle" Type="System.String" DbType="VarChar(200)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Label_LabelBlogEntry" Member="LabelBlogEntries" OtherKey="LabelId" Type="LabelBlogEntry" />
-      <Association Name="Blog_Label" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
+      <Association Name="Label_LabelBlogEntry" Member="LabelBlogEntries" ThisKey="LabelId" OtherKey="LabelId" Type="LabelBlogEntry" />
+      <Association Name="Blog_Label" Member="Blog" ThisKey="BlogId" OtherKey="BlogId" Type="Blog" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.LabelBlogEntry" Member="LabelBlogEntries">
     <Type Name="LabelBlogEntry">
       <Column Name="LabelId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="BlogEntryId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="BlogEntry_LabelBlogEntry" Member="BlogEntry" ThisKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
-      <Association Name="Label_LabelBlogEntry" Member="Label" ThisKey="LabelId" Type="Label" IsForeignKey="true" />
+      <Association Name="BlogEntry_LabelBlogEntry" Member="BlogEntry" ThisKey="BlogEntryId" OtherKey="BlogEntryId" Type="BlogEntry" IsForeignKey="true" />
+      <Association Name="Label_LabelBlogEntry" Member="Label" ThisKey="LabelId" OtherKey="LabelId" Type="Label" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.BlogImage" Member="BlogImages">
@@ -150,7 +151,7 @@
       <Column Name="BlogImageCreateDateTime" AutoSync="Never" Type="System.DateTime" DbType="datetime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BlogImageModifyDateTime" AutoSync="Never" Type="System.DateTime" DbType="datetime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BlogImageName" Type="System.String" DbType="nvarchar(2000) NLL" CanBeNull="true" />
-      <Association Name="Blog_BlogImage" Member="Blog" ThisKey="BlogId" Type="Blog" IsForeignKey="true" />
+      <Association Name="Blog_BlogImage" Member="Blog" ThisKey="BlogId" OtherKey="BlogId" Type="Blog" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="svc.BlogEntryType" Member="BlogEntryTypes">
@@ -159,7 +160,7 @@
       <Column Name="BlogEntryTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="BlogEntryTypeExtra" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="BlogEntryTypeGuid" Type="System.String" DbType="Char(36)" CanBeNull="false" />
-      <Association Name="BlogEntryType_BlogEntry" Member="BlogEntries" OtherKey="BlogEntryTypeId" Type="BlogEntry" />
+      <Association Name="BlogEntryType_BlogEntry" Member="BlogEntries" ThisKey="BlogEntryTypeId" OtherKey="BlogEntryTypeId" Type="BlogEntry" />
     </Type>
   </Table>
   <Function Name="svc.GetArchivedEntryList" Method="GetArchivedEntryList">

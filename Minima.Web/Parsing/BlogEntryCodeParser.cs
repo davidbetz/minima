@@ -33,8 +33,7 @@ namespace Minima.Parsing
                 BlogEntry blogEntry = BlogAgent.GetSingleBlogEntry(partArray[0], false);
                 if (blogEntry != null && blogEntry.MappingNameList != null)
                 {
-                    String link = BlogEntryHelper.BuildBlogEntry(blogEntry.PostDateTime, blogEntry.MappingNameList.First(), Themelia.Web.WebDomain.Current);
-                    map.Add("Link", link);
+                    map.Add("Link", "/" + Themelia.Web.UrlCleaner.FixWebPathHead(blogEntry.MappingNameList.First()));
                 }
                 if (partArray.Length > 1)
                 {
