@@ -7,7 +7,7 @@
 <body>
     <p>Here is the document you requested:</p>
     <h4>Begin</h4>
-    <minima:BlogEntryViewer id="bev01" runat="server" />
+    <minima:BlogViewer id="bev01" runat="server" />
     <h4>End</h4>
 </body>
 </html>

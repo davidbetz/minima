@@ -69,6 +69,9 @@ namespace Minima.Web.Controls
         //- @ShowAuthorSeries -//
         public Boolean ShowAuthorSeries { get; set; }
 
+        //- @ShowLabelSeries -//
+        public Boolean ShowLabelSeries { get; set; }
+
         //- @HidePostDateTime -//
         public Boolean HidePostDateTime { get; set; }
 
@@ -322,10 +325,10 @@ namespace Minima.Web.Controls
         {
             if (this.CustomPostTemplateType == null)
             {
-                return BlogControlTemplateFactory.CreateTemplate(BlogControlTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.LinkHeader, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
+                return BlogControlTemplateFactory.CreateTemplate(BlogControlTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.LinkHeader, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.ShowLabelSeries, this.HidePostDateTime);
             }
             //+
-            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.LinkHeader, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
+            return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.LinkHeader, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.ShowLabelSeries, this.HidePostDateTime);
         }
 
         //- $GetCommentTemplate -//

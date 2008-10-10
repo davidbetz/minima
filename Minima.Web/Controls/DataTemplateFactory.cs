@@ -15,7 +15,7 @@ namespace Minima.Web.Controls
 {
     public static class DataTemplateTemplateFactory
     {
-        public static Template CreatePostTemplate(Boolean linkHeader, Boolean hidePostDateTime, Boolean showAuthorSeries, String labelSeries, Boolean isLink, Boolean supportCommenting, AllowCommentStatus allowCommentStatus, Boolean showDisabledText, String postFooterData)
+        public static Template CreatePostTemplate(Boolean linkHeader, Boolean hidePostDateTime, Boolean showAuthorSeries, Boolean showLabelSeries, String labelSeries, Boolean isLink, Boolean supportCommenting, AllowCommentStatus allowCommentStatus, Boolean showDisabledText, String postFooterData)
         {
             Themelia.Template template = new Themelia.Template();
             if (linkHeader)
@@ -49,7 +49,7 @@ namespace Minima.Web.Controls
                     template.AppendText(" at {$DateTimeDisplay$}</em>");
                 }
             }
-            if (!String.IsNullOrEmpty(labelSeries))
+            if (showLabelSeries && !String.IsNullOrEmpty(labelSeries))
             {
                 template.AppendText(@"
     <p class=""post-labels"">{$LabelSeries$}</p>");

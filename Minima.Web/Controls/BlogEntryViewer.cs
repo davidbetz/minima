@@ -8,19 +8,46 @@ using Themelia;
 //+
 using Minima.Service.Agent;
 using Minima.Web.Helper;
+using Themelia.Web.Routing.Data;
+using Themelia.Web;
 //+
 namespace Minima.Web.Controls
 {
-    public class BlogEntryViewer : System.Web.UI.Control
+    public class BlogViewer : System.Web.UI.Control
     {
         //- ~Info -//
         internal class Info : Minima.Web.Info
         {
-            public const String Link = "Link";
+            public const String CustomLink = "CustomLink";
         }
 
+        //+
+        private String webDomain;
+        private String blogGuid;
+
+        //+
         //- @BlogGuid -//
-        public String BlogGuid { get; set; }
+        public String BlogGuid
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(blogGuid))
+                {
+                    return blogGuid;
+                }
+                WebDomainData webDomain = WebDomain.CurrentData;
+                if (webDomain != null && this.WebDomainName != webDomain.Name)
+                {
+                    return WebDomainDataList.AllWebDomainData[this.WebDomainName].ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
+                }
+                //+
+                return HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
+            }
+            set
+            {
+                blogGuid = value;
+            }
+        }
 
         //- @Link -//
         public String Link { get; set; }
@@ -31,15 +58,40 @@ namespace Minima.Web.Controls
         //- @ShowAuthorSeries -//
         public Boolean ShowAuthorSeries { get; set; }
 
+        //- @ShowLabelSeries -//
+        public Boolean ShowLabelSeries { get; set; }
+
         //- @HidePostDateTime -//
         public Boolean HidePostDateTime { get; set; }
 
         //- @CodeParserSeries -//
         public Themelia.CodeParsing.CodeParserSeries CodeParserSeries { get; set; }
 
+        //- @WebDomain -//
+        public String WebDomainName
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(webDomain))
+                {
+                    return webDomain;
+                }
+                if (Themelia.Web.WebDomain.CurrentData != null)
+                {
+                    return Themelia.Web.WebDomain.CurrentData.Name;
+                }
+                //+
+                return String.Empty;
+            }
+            set
+            {
+                webDomain = value;
+            }
+        }
+
         //+
         //- @Ctor -//
-        public BlogEntryViewer()
+        public BlogViewer()
         {
             //+ default
             this.ShowAuthorSeries = true;
@@ -57,38 +109,31 @@ namespace Minima.Web.Controls
         //- #OnPreRender -//
         protected override void OnPreRender(EventArgs e)
         {
-            Minima.Service.BlogEntry blogEntry = null;
-            if (!String.IsNullOrEmpty(this.BlogEntryGuid))
+            String link = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.CustomLink);
+            //+
+            if (!String.IsNullOrEmpty(link))
             {
-                blogEntry = BlogAgent.GetSingleBlogEntry(this.BlogEntryGuid);
-
-            }
-            else
-            {
-                String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
-                String link = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.Link);
-                //+
-                    blogEntry = BlogAgent.GetSingleBlogEntryByLink(blogGuid, link);
-            }
-            if (blogEntry != null)
-            {
-                String labelSeries = SeriesHelper.GetBlogEntryLabelSeries(blogEntry);
-                Template template = DataTemplateTemplateFactory.CreatePostTemplate(false, this.HidePostDateTime, this.ShowAuthorSeries, labelSeries, true, false, Minima.Service.AllowCommentStatus.Disabled, false, String.Empty);
-                String output = template.Interpolate(new Map(
-                        new MapEntry("$Title$", blogEntry.Title),
-                        new MapEntry("$DateTimeString$", String.Format("{0}, {1} {2}, {3}", blogEntry.PostDateTime.DayOfWeek, blogEntry.PostDateTime.ToString("MMMM"), blogEntry.PostDateTime.Day, blogEntry.PostDateTime.Year)),
-                        new MapEntry("$Content$", blogEntry.Content),
-                        new MapEntry("$AuthorSeries$", SeriesHelper.GetBlogEntryAuthorSeries(blogEntry)),
-                        new MapEntry("$DateTimeDisplay$", String.Format("{0}/{1}/{2} {3}", blogEntry.PostDateTime.Month, blogEntry.PostDateTime.Day, blogEntry.PostDateTime.Year, blogEntry.PostDateTime.ToShortTimeString())),
-                        new MapEntry("$LabelSeries$", labelSeries)
-                    )
-                );
-                output = this.CodeParserSeries.ParseCode(output);
-                //+
-                this.Controls.Add(new System.Web.UI.WebControls.Literal
+                Minima.Service.BlogEntry blogEntry = BlogAgent.GetSingleBlogEntryByLink(this.BlogGuid, link);
+                if (blogEntry != null)
                 {
-                    Text = output
-                });
+                    String labelSeries = SeriesHelper.GetBlogEntryLabelSeries(blogEntry);
+                    Template template = DataTemplateTemplateFactory.CreatePostTemplate(false, this.HidePostDateTime, this.ShowAuthorSeries, this.ShowLabelSeries, labelSeries, true, false, Minima.Service.AllowCommentStatus.Disabled, false, String.Empty);
+                    String output = template.Interpolate(new Map(
+                            new MapEntry("$Title$", blogEntry.Title),
+                            new MapEntry("$DateTimeString$", String.Format("{0}, {1} {2}, {3}", blogEntry.PostDateTime.DayOfWeek, blogEntry.PostDateTime.ToString("MMMM"), blogEntry.PostDateTime.Day, blogEntry.PostDateTime.Year)),
+                            new MapEntry("$Content$", blogEntry.Content),
+                            new MapEntry("$AuthorSeries$", SeriesHelper.GetBlogEntryAuthorSeries(blogEntry)),
+                            new MapEntry("$DateTimeDisplay$", String.Format("{0}/{1}/{2} {3}", blogEntry.PostDateTime.Month, blogEntry.PostDateTime.Day, blogEntry.PostDateTime.Year, blogEntry.PostDateTime.ToShortTimeString())),
+                            new MapEntry("$LabelSeries$", labelSeries)
+                        )
+                    );
+                    output = this.CodeParserSeries.ParseCode(output);
+                    //+
+                    this.Controls.Add(new System.Web.UI.WebControls.Literal
+                    {
+                        Text = output
+                    });
+                }
             }
             //+
             base.OnPreRender(e);
