@@ -25,6 +25,9 @@ namespace Minima.Web.Controls
         //- @ShowAuthorSeries -//
         public Boolean ShowAuthorSeries { get; set; }
 
+        //- @ShowLabelSeries -//
+        public Boolean ShowLabelSeries { get; set; }
+
         //- @HidePostDateTime -//
         public Boolean HidePostDateTime { get; set; }
 
@@ -73,7 +76,7 @@ namespace Minima.Web.Controls
             if (blogEntry != null)
             {
                 String labelSeries = SeriesHelper.GetBlogEntryLabelSeries(blogEntry);
-                Template template = DataTemplateTemplateFactory.CreatePostTemplate(false, this.HidePostDateTime, this.ShowAuthorSeries, labelSeries, true, false, Minima.Service.AllowCommentStatus.Disabled, false, String.Empty);
+                Template template = DataTemplateTemplateFactory.CreatePostTemplate(false, this.HidePostDateTime, this.ShowAuthorSeries, this.ShowLabelSeries, labelSeries, true, false, Minima.Service.AllowCommentStatus.Disabled, false, String.Empty);
                 String output = template.Interpolate(new Map(
                         new MapEntry("$Title$", blogEntry.Title),
                         new MapEntry("$DateTimeString$", String.Format("{0}, {1} {2}, {3}", blogEntry.PostDateTime.DayOfWeek, blogEntry.PostDateTime.ToString("MMMM"), blogEntry.PostDateTime.Day, blogEntry.PostDateTime.Year)),

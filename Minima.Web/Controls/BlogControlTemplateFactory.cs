@@ -106,6 +106,9 @@ namespace Minima.Web.Controls
             //- $ShowAuthorSeries -//
             private Boolean ShowAuthorSeries { get; set; }
 
+            //- $ShowAuthorSeries -//
+            private Boolean ShowLabelSeries { get; set; }
+
             //- $HidePostTime -//
             private Boolean HidePostDateTime { get; set; }
 
@@ -124,7 +127,8 @@ namespace Minima.Web.Controls
                 this.SupportCommenting = (Boolean)parameterArray[3];
                 this.DisabledCommentText = (String)parameterArray[4];
                 this.ShowAuthorSeries = (Boolean)parameterArray[5];
-                this.HidePostDateTime = (Boolean)parameterArray[6];
+                this.ShowLabelSeries = (Boolean)parameterArray[6];
+                this.HidePostDateTime = (Boolean)parameterArray[7];
             }
 
             //- @InstantiateIn -//
@@ -167,7 +171,7 @@ namespace Minima.Web.Controls
                         }
                     }
                     //+
-                    Themelia.Template template = DataTemplateTemplateFactory.CreatePostTemplate(this.LinkHeader, this.HidePostDateTime, this.ShowAuthorSeries, labelSeries, this.IsLink, this.SupportCommenting, allowCommentStatus, !String.IsNullOrEmpty(DisabledCommentText), postFooterData);
+                    Themelia.Template template = DataTemplateTemplateFactory.CreatePostTemplate(this.LinkHeader, this.HidePostDateTime, this.ShowAuthorSeries, this.ShowLabelSeries, labelSeries, this.IsLink, this.SupportCommenting, allowCommentStatus, !String.IsNullOrEmpty(DisabledCommentText), postFooterData);
                     //+
                     String output = template.Interpolate(new Map(
                             new MapEntry("$Url$", url),

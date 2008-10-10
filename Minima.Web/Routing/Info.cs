@@ -8,7 +8,7 @@ namespace Minima.Web
 {
     public class Info
     {
-        public const String Scope = "Minima";
+        public const String Scope = "__$Minima";
         //+
         public const String Key = "Minima";
         //+

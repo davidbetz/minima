@@ -3,7 +3,7 @@
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 
-namespace Minima
+namespace Minima.Web.Controls
 {
     public enum IndexType
     {
