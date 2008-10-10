@@ -84,6 +84,7 @@ namespace Minima.Service
                     BlogEntryUrlMappingLINQ blogEntryUrlMappingLinq = new BlogEntryUrlMappingLINQ();
                     blogEntryUrlMappingLinq.BlogEntryId = blogEntryLinq.BlogEntryId;
                     blogEntryUrlMappingLinq.BlogEntryUrlMappingName = CreateBlogEntryPostUrlMapping(title);
+                    blogEntryUrlMappingLinq.BlogEntryUrlMappingPrimary = true;
                     db.BlogEntryUrlMappings.InsertOnSubmit(blogEntryUrlMappingLinq);
                     //+
                     db.SubmitChanges();
@@ -160,16 +161,22 @@ namespace Minima.Service
                         BlogEntryUrlMappingLINQ blogEntryUrlMappingLINQ = db.BlogEntryUrlMappings.Where(p => p.BlogEntryUrlMappingName == mapping && p.BlogEntryId != blogEntryLinq.BlogEntryId).FirstOrDefault();
                         if (blogEntryUrlMappingLINQ != null)
                         {
-                            throw new ArgumentException("This title's mapping has already been used, please change the title");
+                            throw new ArgumentException("This title's mapping has already been used and, therefore, would create a conflicting link.  Please change the title");
                         }
                         blogEntryUrlMappingLINQ = db.BlogEntryUrlMappings.Where(p => p.BlogEntryUrlMappingName == mapping && p.BlogEntryId == blogEntryLinq.BlogEntryId).FirstOrDefault();
                         //+ if this is a new title completely, create a new mapping to allow access by
                         //+ the old and the new links
                         if (blogEntryUrlMappingLINQ == null)
                         {
+                            foreach (BlogEntryUrlMappingLINQ beum in db.BlogEntryUrlMappings.Where(p=>p.BlogEntryId==blogEntryLinq.BlogEntryId))
+                            {
+                                beum.BlogEntryUrlMappingPrimary = false;
+                                db.SubmitChanges();
+                            }
                             BlogEntryUrlMappingLINQ blogEntryUrlMappingLinq = new BlogEntryUrlMappingLINQ();
                             blogEntryUrlMappingLinq.BlogEntryId = blogEntryLinq.BlogEntryId;
                             blogEntryUrlMappingLinq.BlogEntryUrlMappingName = CreateBlogEntryPostUrlMapping(title);
+                            blogEntryUrlMappingLinq.BlogEntryUrlMappingPrimary = true;
                             db.BlogEntryUrlMappings.InsertOnSubmit(blogEntryUrlMappingLinq);
                             db.SubmitChanges();
                         }
@@ -351,7 +358,7 @@ namespace Minima.Service
                     PostDateTime = be.BlogEntryPostDateTime,
                     ModifyDateTime = be.BlogEntryModifyDateTime,
                     MappingNameList = new List<String>(
-                        be.BlogEntryUrlMappings.Select(p => p.BlogEntryUrlMappingName)
+                        be.BlogEntryUrlMappings.OrderBy(p=>p.BlogEntryUrlMappingPrimary).Select(p => p.BlogEntryUrlMappingName)
                     ),
                     LabelList = new List<Label>(
                         be.LabelBlogEntries.Select(p => new Label

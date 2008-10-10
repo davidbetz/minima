@@ -123,7 +123,7 @@ namespace Minima.Web.Routing
                 }
                 //+ link
                 String linkCapturePattern = "[\\-a-z0-9]+$";
-                String linkMatchPattern = "\\/200\\d\\/\\d{2}\\/[\\-a-z0-9]+$";
+                String linkMatchPattern = "\\/2\\d\\d\\d\\/\\d{2}\\/[\\-a-z0-9]+$";
                 String linkMatchUri = String.Empty;
                 if (uri[uri.Length - 1] == '/')
                 {
@@ -140,10 +140,11 @@ namespace Minima.Web.Routing
                     String link = m.Captures[0].Value;
                     if (!String.IsNullOrEmpty(link))
                     {
-                        HttpData.SetScopedItem<String>(Info.Scope, "Link", link);
+                        HttpData.SetScopedItem<String>(Info.Scope, "Link", WebDomain.RelativeUrl);
                         return;
                     }
                 }
+                //++ due to how IIS6 works, this is only compatible with IIS7 integrated mode
                 linkCapturePattern = "[\\-a-z0-9]+\\.aspx";
                 linkMatchPattern = "\\/200\\d\\/\\d{2}\\/[\\-a-z0-9]+\\.aspx";
                 if (new Regex(linkMatchPattern).IsMatch(uri))
@@ -154,7 +155,7 @@ namespace Minima.Web.Routing
                     link = link.Substring(0, link.Length - 5);
                     if (!String.IsNullOrEmpty(link))
                     {
-                        HttpData.SetScopedItem<String>(Info.Scope, "Link", link);
+                        HttpData.SetScopedItem<String>(Info.Scope, "Link", WebDomain.RelativeUrl.Substring(0, WebDomain.RelativeUrl.Length - 5));
                         return;
                     }
                 }

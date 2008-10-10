@@ -74,7 +74,7 @@ namespace Minima.Web.Controls
             //+
             return blogEntryList.Select(p => new
             {
-                Url = BlogEntryHelper.BuildBlogEntry(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebDomain.CleanWebDomain(this.WebDomainName)),
+                Url = "/" + Themelia.Web.UrlCleaner.FixWebPathHead(p.MappingNameList.First()),
                 Title = p.Title
             });
         }
