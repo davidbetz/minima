@@ -83,6 +83,8 @@
     <Compile Include="Api\MetaWeblog\MetaWeblogApi.cs" />
     <Compile Include="Api\MetaWeblog\Post.cs" />
     <Compile Include="Api\MetaWeblog\UrlInfo.cs" />
+    <Compile Include="Controls\TestPostFooter.cs" />
+    <Compile Include="Controls\DataTemplateFactory.cs" />
     <Compile Include="Controls\_Base\CommentInputBase.cs">
     </Compile>
     <Compile Include="Controls\_Base\PostFooterBase.cs" />
@@ -90,7 +92,7 @@
     </Compile>
     <Compile Include="Controls\_Base\CaptchaBase.cs" />
     <Compile Include="Controls\FeedBurnerPostFooter.cs" />
-    <Compile Include="Controls\LabelListTemplateFactory.cs" />
+    <Compile Include="Controls\LabelListControlTemplateFactory.cs" />
     <Compile Include="Controls\_Index\IndexListSeriesYearTemplate.cs" />
     <Compile Include="Controls\_Index\IndexLabelListTemplate.cs" />
     <Compile Include="Controls\_Index\IndexEntry.cs">
@@ -110,10 +112,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccessType.cs" />
+    <Compile Include="Routing\MinimaProxyComponent.cs" />
     <Compile Include="Routing\InjectionProcessor.cs" />
     <Compile Include="Routing\Info.cs" />
     <Compile Include="Parsing\AmazonAffiliateCodeParser.cs" />
-    <Compile Include="Controls\BlogTemplateFactory.cs" />
+    <Compile Include="Controls\BlogControlTemplateFactory.cs" />
     <Compile Include="Controls\ArchivedEntryList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

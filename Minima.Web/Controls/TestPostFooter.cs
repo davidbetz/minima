@@ -7,18 +7,18 @@ using System.Web.UI;
 //+
 namespace Minima.Web.Controls
 {
-    public class FeedBurnerPostFooter : PostFooterBase
+    public class TestPostFooter : PostFooterBase
     {
-        public static Type Type = typeof(FeedBurnerPostFooter);
+        public static Type Type = typeof(TestPostFooter);
 
         //+
-        //- @FeedBurnerUrl -//
-        public String FeedBurnerUrl { get; set; }
+        //- @Data -//
+        public String TestProperty { get; set; }
 
         //- @Ctor -//
-        public FeedBurnerPostFooter(params Object[] parameterArray)
+        public TestPostFooter(params Object[] parameterArray)
         {
-            FeedBurnerUrl = (String)parameterArray[0];
+            TestProperty = (String)parameterArray[0];
         }
 
         //+
@@ -28,9 +28,8 @@ namespace Minima.Web.Controls
             String url = (DataBinder.Eval(this.Data, "Url") as String) ?? String.Empty;
             //+
             writer.Write(@"
-<div class=""feedburner-tracker"">
-<script src=""" + this.FeedBurnerUrl + @"?i=" + url + @""" type=""text/javascript"" charset=""utf-8"">
-</script>
+<div>
+This is the test footer.  The TestData propery contains '" + this.TestProperty + @"'. The current post URL is '" + url + @"'
 </div>
 ");
         }

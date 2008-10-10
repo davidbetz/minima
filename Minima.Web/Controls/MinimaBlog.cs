@@ -318,7 +318,7 @@ namespace Minima.Web.Controls
         {
             if (this.CustomPostTemplateType == null)
             {
-                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
+                return BlogControlTemplateFactory.CreateTemplate(BlogControlTemplateFactory.TemplateType.Post, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
             }
             //+
             return (ITemplate)ObjectCreator.Create(this.CustomPostTemplateType, this.PostFooterTypeInfo, this.AccessType, this.SupportCommenting, this.DisabledCommentText, this.ShowAuthorSeries, this.HidePostDateTime);
@@ -329,7 +329,7 @@ namespace Minima.Web.Controls
         {
             if (this.CustomCommentTemplateType == null)
             {
-                return BlogTemplateFactory.CreateTemplate(BlogTemplateFactory.TemplateType.Comment);
+                return BlogControlTemplateFactory.CreateTemplate(BlogControlTemplateFactory.TemplateType.Comment);
             }
             //+
             return (ITemplate)ObjectCreator.CreateAs<ITemplate>(this.CustomCommentTemplateType);

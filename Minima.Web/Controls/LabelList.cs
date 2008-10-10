@@ -73,7 +73,7 @@ namespace Minima.Web.Controls
             }
             if (this.TemplateType == null)
             {
-                return LabelListTemplateFactory.CreateTemplate(LabelListTemplateFactory.TemplateType.Linear, type, listCssClass, this.RawDataSource);
+                return LabelListControlTemplateFactory.CreateTemplate(LabelListControlTemplateFactory.TemplateType.Linear, type, listCssClass, this.RawDataSource);
             }
             //+
             return (ITemplate)Themelia.Activation.ObjectCreator.Create(this.TemplateType, type, listCssClass, this.RawDataSource);

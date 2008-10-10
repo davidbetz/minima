@@ -63,9 +63,9 @@ namespace Minima.Web.Routing
         private void DetectDestination()
         {
                 String finderLabel = "/label/";
-                String uri = Http.Url.ToString().ToLower();
+                String uri = Http.AbsoluteUrl;
                 //+ label
-                if (Http.Url.ToString().ToLower().Contains(finderLabel))
+                if (uri.Contains(finderLabel))
                 {
                     String label = uri.Substring(uri.IndexOf(finderLabel) + finderLabel.Length, uri.Length - (uri.IndexOf(finderLabel) + finderLabel.Length));
                     if (!String.IsNullOrEmpty(label))
