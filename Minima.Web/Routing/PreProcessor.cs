@@ -146,7 +146,7 @@ namespace Minima.Web.Routing
             }
             //++ due to how IIS6 works, this is only compatible with IIS7 integrated mode
             linkCapturePattern = "[\\-a-z0-9]+\\.aspx";
-            linkMatchPattern = "\\/200\\d\\/\\d{2}\\/[\\-a-z0-9]+\\.aspx";
+            linkMatchPattern = "\\/2\\d\\d\\d\\/\\d{2}\\/[\\-a-z0-9]+\\.aspx";
             if (new Regex(linkMatchPattern).IsMatch(uri))
             {
                 Regex a = new Regex(linkCapturePattern);
@@ -160,7 +160,7 @@ namespace Minima.Web.Routing
                 }
             }
             //+ archive
-            String archiveCapturePattern = "200(\\d)\\/(\\d{2})";
+            String archiveCapturePattern = "2(\\d\\d\\d)\\/(\\d{2})";
             String archiveMatchPattern = "\\/" + archiveCapturePattern;
             if (new Regex(archiveMatchPattern).IsMatch(uri))
             {

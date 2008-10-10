@@ -171,7 +171,7 @@ namespace Minima.Web.Controls
                 {
                     if (blogEntryList != null)
                     {
-                        HttpData.SetScopedItem<String>("Minima", "BlogEntryTitle", blogEntryList[0].Title);
+                        HttpData.SetScopedItem<String>(Info.Scope, "BlogEntryTitle", blogEntryList[0].Title);
                         //+
                         this.BlogEntryGuid = blogEntryList[0].Guid;
                         //+
