@@ -41,7 +41,7 @@ namespace Minima.Web.Controls
                 WebDomainData webDomain = WebDomain.CurrentData;
                 if (webDomain != null && this.WebDomainName != webDomain.Name)
                 {
-                    return WebDomainDataList.AllWebDomainData[this.WebDomainName].ComponentDataList[Info.Scope].ParameterDataList[Info.BlogGuid].Value;
+                    return WebDomainDataList.AllWebDomainData[this.WebDomainName].ComponentDataList["MinimaViewer"].ParameterDataList[Info.BlogGuid].Value;
                 }
                 //+
                 return HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
