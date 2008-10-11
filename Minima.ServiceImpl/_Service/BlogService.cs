@@ -692,16 +692,17 @@ namespace Minima.Service
         private String CheckFooter(Boolean ignoreFooter, String content)
         {
             String pattern = @"(<p>)?(\s*){{\$Footer\$}}(\s*)(<p>)?";
+            Regex ex = new Regex(pattern);
             if (ignoreFooter)
             {
-                Regex ex = new Regex(pattern);
                 Match match = ex.Match(content);
                 if (match.Success)
                 {
-                    content = content.Substring(0, match.Index);
+                    return content.Substring(0, match.Index);
                 }
             }
-            return content;
+            //+
+            return ex.Replace(content, String.Empty);
         }
 
         //- $TransformBlogEntryList -//
