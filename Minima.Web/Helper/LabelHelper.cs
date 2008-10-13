@@ -11,7 +11,7 @@ namespace Minima.Web
         //- @GetLabelUrl -//
         public static String GetLabelUrl(Minima.Service.Label label)
         {
-            String webDomain = Themelia.Web.WebDomain.Current ?? String.Empty;
+            String webDomain = Themelia.Web.WebDomain.Path ?? String.Empty;
             if (webDomain.ToLower() == "root")
             {
                 webDomain = String.Empty;
@@ -20,7 +20,7 @@ namespace Minima.Web
             {
                 webDomain = "/" + webDomain;
             }
-            return webDomain + "/label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
+            return Themelia.Web.Http.Root + webDomain + "label/" + (!String.IsNullOrEmpty(label.FriendlyTitle) ? label.FriendlyTitle : label.Title).ToLower();
         }
     }
 }
