@@ -49,14 +49,14 @@ namespace Minima.Web.Controls
                         RepeaterItem item = (RepeaterItem)literal.NamingContainer;
                         Int32 year = Themelia.Parser.ParseInt32(item.DataItem);
                         String yearPath = String.Empty;
-                        String webDomain = Themelia.Web.WebDomain.Current ?? String.Empty;
+                        String webDomain = Themelia.Web.WebDomain.Name ?? String.Empty;
                         if (webDomain.ToLower() == "root")
                         {
                             webDomain = String.Empty;
                         }
                         else
                         {
-                            webDomain = "/" + webDomain;
+                            webDomain = "/" + Themelia.Web.WebDomain.Path;
                         }
                         yearPath = webDomain + "/index/" + year.ToString();
                         //+
