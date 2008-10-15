@@ -10,7 +10,7 @@ namespace Minima.Web.Routing
     public class MinimaViewerComponent : MinimaProxyComponent
     {
         //- @Register -//
-        public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, AliasedHandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
+        public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, HandlerFactoryDataList handlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
         {
             fallThroughProcessorDataList.Add(new FallThroughProcessorData
             {
@@ -18,7 +18,7 @@ namespace Minima.Web.Routing
                 ProcessorType = "BlogFallThroughProcessor"
             });
             //+
-            base.Register(preProcessorDataList, processorFactoryDataList, aliasedHandlerDataList, injectionProcessorDataList, midProcessorDataList, fallThroughProcessorDataList, postProcessorDataList, postStateProcessorDataList, errorProcessorDataList);
+            base.Register(preProcessorDataList, processorFactoryDataList, handlerDataList, injectionProcessorDataList, midProcessorDataList, fallThroughProcessorDataList, postProcessorDataList, postStateProcessorDataList, errorProcessorDataList);
         }
     }
 }

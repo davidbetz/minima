@@ -10,11 +10,11 @@ namespace Minima.Web.Routing
     public class MinimaComponent : Themelia.Web.Routing.ComponentBase
     {
         //- @Register -//
-        public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, AliasedHandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
+        public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, HandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
         {
-            aliasedHandlerDataList.Add(new AliasedHandlerFactoryData
+            aliasedHandlerDataList.Add(new HandlerFactoryData
             {
-                FactoryType = "Minima.Web.Routing.AliasedHandlerFactory, Minima.Web"
+                FactoryType = "Minima.Web.Routing.HandlerFactory, Minima.Web"
             });
             processorFactoryDataList.Add(new ProcessorFactoryData
             {
