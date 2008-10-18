@@ -12,11 +12,7 @@ namespace Minima.Web.Routing
         //- @Register -//
         public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, HandlerFactoryDataList handlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
         {
-            fallThroughProcessorDataList.Add(new FallThroughProcessorData
-            {
-                Priority = 1,
-                ProcessorType = "BlogFallThroughProcessor"
-            });
+            fallThroughProcessorDataList.Add(ProcessorData.Create<ProcessorData>("BlogFallThroughProcessor"));
             //+
             base.Register(preProcessorDataList, processorFactoryDataList, handlerDataList, injectionProcessorDataList, midProcessorDataList, fallThroughProcessorDataList, postProcessorDataList, postStateProcessorDataList, errorProcessorDataList);
         }
