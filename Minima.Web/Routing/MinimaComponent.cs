@@ -12,31 +12,12 @@ namespace Minima.Web.Routing
         //- @Register -//
         public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, HandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
         {
-            aliasedHandlerDataList.Add(new HandlerFactoryData
-            {
-                FactoryType = "Minima.Web.Routing.HandlerFactory, Minima.Web"
-            });
-            processorFactoryDataList.Add(new ProcessorFactoryData
-            {
-                FactoryType = "Minima.Web.Routing.ProcessorFactory, Minima.Web"
-            });
-            preProcessorDataList.Add(new PreProcessorData
-            {
-                ProcessorType = "PreProcessor"
-            });
-            injectionProcessorDataList.Add(new InjectionProcessorData
-            {
-                ProcessorType = "InjectionProcessor"
-            });
-            postProcessorDataList.Add(new PostProcessorData
-            {
-                ProcessorType = "PostProcessor"
-            });
-            fallThroughProcessorDataList.Add(new FallThroughProcessorData
-            {
-                Priority = 1,
-                ProcessorType = "BlogFallThroughProcessor"
-            });
+            aliasedHandlerDataList.Add(FactoryData.Create("Minima.Web.Routing.HandlerFactory, Minima.Web"));
+            processorFactoryDataList.Add(FactoryData.Create("Minima.Web.Routing.ProcessorFactory, Minima.Web"));
+            preProcessorDataList.Add(ProcessorData.Create<ProcessorData>("PreProcessor"));
+            injectionProcessorDataList.Add(ProcessorData.Create<ProcessorData>("InjectionProcessor"));
+            postProcessorDataList.Add(ProcessorData.Create<ProcessorData>("PostProcessor"));
+            fallThroughProcessorDataList.Add(ProcessorData.Create<ProcessorData>("BlogFallThroughProcessor"));
         }
     }
 }

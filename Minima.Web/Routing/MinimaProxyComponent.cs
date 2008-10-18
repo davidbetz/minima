@@ -12,14 +12,8 @@ namespace Minima.Web.Routing
         //- @Register -//
         public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, HandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
         {
-            processorFactoryDataList.Add(new ProcessorFactoryData
-            {
-                FactoryType = "Minima.Web.Routing.ProcessorFactory, Minima.Web"
-            });
-            preProcessorDataList.Add(new PreProcessorData
-            {
-                ProcessorType = "PreProcessor"
-            });
+            processorFactoryDataList.Add(FactoryData.Create("Minima.Web.Routing.ProcessorFactory, Minima.Web"));
+            preProcessorDataList.Add(ProcessorData.Create<ProcessorData>("PreProcessor"));
         }
     }
 }
