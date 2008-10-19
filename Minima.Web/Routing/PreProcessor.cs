@@ -30,7 +30,7 @@ namespace Minima.Web.Routing
         //- @OnPreProcessorExecute -//
         public override void OnPreProcessorExecute(HttpContext context, params Object[] parameterArray)
         {
-            WebDomainData webDomainData = WebDomain.CurrentData;
+            WebDomainData webDomainData = WebDomain.Current;
             ComponentData componentData = webDomainData.ComponentDataList[Info.Key];
             if (componentData != null)
             {
