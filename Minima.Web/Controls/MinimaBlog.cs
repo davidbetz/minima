@@ -111,7 +111,7 @@ namespace Minima.Web.Controls
         {
             Func<BlogEntry, IndexEntry> indexTransformation = p => new IndexEntry
             {
-                Url = "/" + Themelia.Web.UrlCleaner.FixWebPathHead(p.MappingNameList.FirstOrDefault()), //BlogEntryHelper.BuildBlogEntryLink(p.PostDateTime, p.MappingNameList.FirstOrDefault(), Themelia.Web.WebDomain.Current),
+                Url = Themelia.Web.WebDomain.GetUrl() + Themelia.Web.UrlCleaner.FixWebPathHead(p.MappingNameList.FirstOrDefault()),
                 Title = p.Title,
                 TypeGuid = p.BlogEntryTypeGuid,
                 PostDateTime = p.PostDateTime,
@@ -193,7 +193,7 @@ namespace Minima.Web.Controls
                 {
                     rptPosts.DataSource = blogEntryList.Select(p => new
                     {
-                        Url = "/" + Themelia.Web.UrlCleaner.FixWebPathHead(p.MappingNameList.First()), // BlogEntryHelper.BuildBlogEntryLink(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebDomain.Current),
+                        Url = Themelia.Web.WebDomain.GetUrl() + Themelia.Web.UrlCleaner.FixWebPathHead(p.MappingNameList.First()), // BlogEntryHelper.BuildBlogEntryLink(p.PostDateTime, p.MappingNameList.First(), Themelia.Web.WebDomain.Current),
                         Content = this.CodeParserSeries.ParseCode(p.Content),
                         Title = p.Title,
                         AuthorList = p.AuthorList,

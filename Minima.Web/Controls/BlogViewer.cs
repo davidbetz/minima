@@ -38,7 +38,7 @@ namespace Minima.Web.Controls
                 {
                     return blogGuid;
                 }
-                WebDomainData webDomain = WebDomain.CurrentData;
+                WebDomainData webDomain = WebDomain.Current;
                 if (webDomain != null && this.WebDomainName != webDomain.Name)
                 {
                     return WebDomainDataList.AllWebDomainData[this.WebDomainName].ComponentDataList["MinimaViewer"].ParameterDataList[Info.BlogGuid].Value;
@@ -82,9 +82,9 @@ namespace Minima.Web.Controls
                 {
                     return webDomain;
                 }
-                if (Themelia.Web.WebDomain.CurrentData != null)
+                if (Themelia.Web.WebDomain.Current != null)
                 {
-                    return Themelia.Web.WebDomain.CurrentData.Name;
+                    return Themelia.Web.WebDomain.Current.Name;
                 }
                 //+
                 return String.Empty;

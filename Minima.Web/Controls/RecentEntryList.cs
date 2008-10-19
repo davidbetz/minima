@@ -21,6 +21,11 @@ namespace Minima.Web.Controls
         //- $ArchiveEntryTemplate -//
         private class RecentEntryTemplate : ITemplate
         {
+            //- @WebDomainName -//
+            public String WebDomainName { get; set; }
+
+            //+
+            //- @InstantiateIn -//
             public void InstantiateIn(System.Web.UI.Control container)
             {
                 System.Web.UI.WebControls.Literal literal = new System.Web.UI.WebControls.Literal();
@@ -30,6 +35,10 @@ namespace Minima.Web.Controls
                     String url = DataBinder.Eval(item.DataItem, "Url").ToString();
                     String title = DataBinder.Eval(item.DataItem, "Title").ToString();
                     //+
+                    if (!String.IsNullOrEmpty(this.WebDomainName))
+                    {
+                        url = Themelia.Web.WebDomain.GetUrl(this.WebDomainName) + Themelia.Web.UrlCleaner.FixWebPathHead(url);
+                    }
                     literal.Text = @"<li><a href=""{Url}"">{Title}</a></li>"
                         .Replace("{Url}", url)
                         .Replace("{Title}", title);
@@ -84,7 +93,7 @@ namespace Minima.Web.Controls
         {
             System.Web.UI.WebControls.Repeater rpt = new System.Web.UI.WebControls.Repeater();
             this.repeater = rpt;
-            rpt.ItemTemplate = new RecentEntryTemplate();
+            rpt.ItemTemplate = new RecentEntryTemplate { WebDomainName = this.WebDomainName };
             rpt.ID = "rptRecentEntryList";
             return rpt;
         }
@@ -102,7 +111,7 @@ namespace Minima.Web.Controls
                 }
                 if (this.HeadingIsLink)
                 {
-                    heading = String.Format(@"<a href=""{0}"">{1}</a>", Themelia.Web.WebDomain.GetUrl(Themelia.Web.WebDomain.CleanWebDomain(this.WebDomainName)), heading);
+                    heading = String.Format(@"<a href=""{0}"">{1}</a>", Themelia.Web.WebDomain.GetUrl(Themelia.Web.WebDomain.GetCleanWebDomain(this.WebDomainName)), heading);
                 }
                 __parser.AddParsedSubObject(new LiteralControl("<h2>" + heading + "</h2>"));
             }
