@@ -139,7 +139,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Data\MinimaServiceLINQ.dbml.layout">
       <DependentUpon>MinimaServiceLINQ.dbml</DependentUpon>
     </None>
