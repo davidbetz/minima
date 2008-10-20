@@ -9,8 +9,6 @@ using System.Web;
 using Minima.Configuration;
 using Minima.Service;
 using Minima.Service.Agent;
-using Minima.Web.Agent;
-using Minima.Web.Data.Entity;
 //+
 using Themelia.Reporting;
 using Themelia.Web;
@@ -135,38 +133,6 @@ namespace Minima.Web.Controls
             {
                 blogEntryList = BlogAgent.GetNetBlogEntryList(blogGuid, this.Label, this.Archive, this.Link, MinimaConfiguration.RecentEntriesToShow, false);
                 //+
-                HttpContext context = HttpContext.Current;
-                HttpRequest request = context.Request;
-                BlogEntryActivity blogEntryActivity = new BlogEntryActivity();
-                blogEntryActivity.BlogEntryActivityBrowser = request.UserAgent;
-                blogEntryActivity.BlogEntryActivityTime = DateTime.Now;
-                blogEntryActivity.BlogEntryActivityAddress = Http.IpAddress;
-                blogEntryActivity.BlogEntryActivitySessionId = (String)context.Session["SessionId"];
-                blogEntryActivity.BlogEntryActivityTypeId = 0;
-                //+
-                if (this.AccessType == AccessType.Label)
-                {
-                    blogEntryActivity.BlogEntryActivityTypeId = 6;
-                    if (blogEntryList == null)
-                    {
-                        blogEntryActivity.BlogEntryActivityExtra = "Invalid label accessed";
-                    }
-                    blogEntryActivity.BlogEntryActivityExtra = this.Label;
-                    blogEntryActivity.BlogEntryActivityTypeId = 2;
-                }
-                if (this.AccessType == AccessType.Archive)
-                {
-                    String[] parts = this.Archive.Split("/".ToCharArray());
-                    Int32 year = Int32.Parse(parts[0]);
-                    Int32 month = Int32.Parse(parts[1]);
-                    blogEntryActivity.BlogEntryActivityTypeId = 6;
-                    if (blogEntryList == null)
-                    {
-                        blogEntryActivity.BlogEntryActivityExtra = "Invalid year/month accessed";
-                    }
-                    blogEntryActivity.BlogEntryActivityExtra = this.Archive;
-                    blogEntryActivity.BlogEntryActivityTypeId = 4;
-                }
                 if (this.AccessType == AccessType.Link)
                 {
                     if (blogEntryList != null)
@@ -174,25 +140,7 @@ namespace Minima.Web.Controls
                         HttpData.SetScopedItem<String>(Info.Scope, "BlogEntryTitle", blogEntryList[0].Title);
                         //+
                         this.BlogEntryGuid = blogEntryList[0].Guid;
-                        //+
-                        blogEntryActivity.BlogEntryActivityTypeId = 3;
-                        blogEntryActivity.BlogEntryActivityExtra = this.Link;
                     }
-                    else
-                    {
-                        blogEntryActivity.BlogEntryActivityExtra = "Invalid URL accessed";
-                        blogEntryActivity.BlogEntryActivityTypeId = 6;
-                    }
-                }
-                //+
-                if (blogEntryActivity.BlogEntryActivityTypeId == 0)
-                {
-                    blogEntryActivity.BlogEntryActivityTypeId = 1;
-                }
-                //+
-                if (MinimaConfiguration.EnableActivityLogging)
-                {
-                    BlogEntryActivityAgent.ReportActivity(blogEntryActivity);
                 }
             }
             //+

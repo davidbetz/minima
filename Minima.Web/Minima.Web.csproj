@@ -75,7 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agent\BlogEntryActivityAgent.cs" />
     <Compile Include="Api\MetaWeblog\BlogInfo.cs" />
     <Compile Include="Api\MetaWeblog\CategoryInfo.cs" />
     <Compile Include="Api\MetaWeblog\FullPost.cs" />
@@ -149,14 +148,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Helper\LabelHelper.cs" />
-    <Compile Include="Data\MinimaWebLINQ.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MinimaWebLINQ.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Helper\MediaHelper.cs" />
     <Compile Include="Controls\MinimaForm.cs" />
-    <Compile Include="Module\FixDomainHttpModule.cs" />
     <Compile Include="Parsing\BlogEntryCodeParser.cs" />
     <Compile Include="Routing\BlogFallThroughProcessor.cs" />
     <Compile Include="Routing\PostProcessor.cs" />
@@ -166,7 +159,6 @@
     <Compile Include="Routing\_HttpHandler\WindowsLiveWriterManifestHttpHandler.cs" />
     <Compile Include="Routing\ProcessorFactory.cs" />
     <Compile Include="Routing\PreProcessor.cs" />
-    <Compile Include="Routing\_HttpHandler\FileProcessorHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\SiteMapHttpHandler.cs" />
     <Compile Include="Routing\_HttpHandler\UrlProcessingHttpHandler.cs" />
     <Compile Include="Service\CommentService.cs" />
@@ -182,18 +174,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Routing\AliasedHandlerFactory.cs" />
+    <Compile Include="Routing\HandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\MinimaWebLINQ.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>MinimaWebLINQ.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -208,11 +195,6 @@
       <Project>{E10C6BC9-9BC7-4BB7-BCB7-4C858CD2F8F0}</Project>
       <Name>Minima.Service</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\MinimaWebLINQ.dbml.layout">
-      <DependentUpon>MinimaWebLINQ.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,49 +15,49 @@ namespace Minima.Web.Routing
         {
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "UrlProcessing",
+                Name = "__$Minima$UrlProcessing",
                 MatchType = "contains",
                 MatchText = "/"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "FileProcessor",
+                Name = "__$Minima$FileProcessor",
                 MatchType = "contains",
                 MatchText = "/Materials/"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "BlogDiscovery",
+                Name = "__$Minima$BlogDiscovery",
                 MatchType = "endswith",
                 MatchText = "/rsd.xml"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "WindowsLiveWriterManifest",
+                Name = "__$Minima$WindowsLiveWriterManifest",
                 MatchType = "endswith",
                 MatchText = "/wlwmanifest.xml"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "SiteMap",
+                Name = "__$Minima$SiteMap",
                 MatchType = "endswith",
                 MatchText = "/blogmap.xml"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "MetaWeblogApi",
+                Name = "__$Minima$MetaWeblogApi",
                 MatchType = "contains",
                 MatchText = "/xml-rpc"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "MetaWeblogApi",
+                Name = "__$Minima$MetaWeblogApi",
                 MatchType = "contains",
                 MatchText = "/xml-rpc/"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "Image",
+                Name = "__$Minima$Image",
                 MatchType = "contains",
                 MatchText = "/imagestore/"
             });
