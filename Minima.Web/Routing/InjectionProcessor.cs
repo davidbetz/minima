@@ -17,56 +17,48 @@ namespace Minima.Web.Routing
             {
                 Name = "UrlProcessing",
                 MatchType = "contains",
-                Priority = 5,
                 MatchText = "/"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
                 Name = "FileProcessor",
                 MatchType = "contains",
-                Priority = 5,
                 MatchText = "/Materials/"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
                 Name = "BlogDiscovery",
                 MatchType = "endswith",
-                Priority = 2,
                 MatchText = "/rsd.xml"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
                 Name = "WindowsLiveWriterManifest",
                 MatchType = "endswith",
-                Priority = 2,
                 MatchText = "/wlwmanifest.xml"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
                 Name = "SiteMap",
                 MatchType = "endswith",
-                Priority = 2,
                 MatchText = "/blogmap.xml"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
                 Name = "MetaWeblogApi",
                 MatchType = "contains",
-                Priority = 3,
                 MatchText = "/xml-rpc"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
                 Name = "MetaWeblogApi",
                 MatchType = "contains",
-                Priority = 3,
                 MatchText = "/xml-rpc/"
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
                 Name = "Image",
                 MatchType = "contains",
-                Priority = 2,
                 MatchText = "/imagestore/"
             });
         }
