@@ -31,7 +31,7 @@ namespace Minima.Web.Routing
         public override void OnPreProcessorExecute(HttpContext context, params Object[] parameterArray)
         {
             String key = String.Empty;
-            if (parameterArray.Length > 0)
+            if (parameterArray != null && parameterArray.Length > 0)
             {
                 key = parameterArray[0] as String;
             }
