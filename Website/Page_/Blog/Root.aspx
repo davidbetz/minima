@@ -56,8 +56,9 @@
                 <asp:PlaceHolder id="phRecentEntryList" runat="server" />
                 <asp:PlaceHolder id="phRecentEntryListSecondary" runat="server" />
                 <p id="firefoxIcon">
-                <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=72158&amp;t=218"><img border="0" alt="Firefox 3" title="Firefox 3" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox2/ff2o80x15.gif"/></a>
+                    <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=72158&amp;t=218"><img border="0" alt="Firefox 3" title="Firefox 3" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox2/ff2o80x15.gif"/></a>
                 </p>
+                <a href="http://themelia.netfxharmonics.com/"><img src="/Resource_/Image/GetThemeliaBadge.png" alt="get themelia" /></a>
                 <p id="feeds">
                     <asp:HyperLink ID="hlFeedUrl" runat="server">
                         <img src="http://www.feedburner.com/fb/images/pub/feed-icon32x32.png" alt="" style="border: 0" />

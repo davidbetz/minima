@@ -8,7 +8,7 @@ namespace WebSite.Information
         protected override void OnInit(EventArgs e)
         {
             bep01.BlogGuid = "19277C41-7E4D-4AE0-A196-25F45AC48762";
-            bep01.Link = "The-Future-Movies-via-RSS";
+            bep01.Link = "2006/12/Magazines-via-RSS";
             //+
             base.OnInit(e);
         }
