@@ -66,7 +66,7 @@ namespace Minima.Web.Service
                 map.Add("Link", WebConfiguration.Domain + @"services/comment/{CommentGuid}");
                 String emailBodyTemplate = creator.Create(map);
                 Themelia.Configuration.SystemSection systemSection = Themelia.Configuration.SystemSection.GetConfigSection();
-                String emailSubject = String.Format("{0} ({1})", MinimaConfiguration.CommentNotificationSubject, systemSection.AppInfo.Name);
+                String emailSubject = String.Format("{0} ({1})", BlogSection.GetConfigSection().Comment.Subject, systemSection.AppInfo.Name);
                 //+
                 String commentGuid = String.Empty;
                 returnStatus = 0;

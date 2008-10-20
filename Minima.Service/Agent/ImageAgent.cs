@@ -14,10 +14,10 @@ namespace Minima.Service.Agent
         //- @SaveImage -//
         public static String SaveImage(BlogImage blogImage, String blogGuid)
         {
-            using (ImageClient imageClient = new ImageClient(MinimaConfiguration.ActiveImageServiceEndpoint))
+            using (ImageClient imageClient = new ImageClient(BlogSection.GetConfigSection().Service.Endpoint.Image))
             {
-                imageClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
-                imageClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                imageClient.ClientCredentials.UserName.UserName = BlogSection.GetConfigSection().Service.Authentication.DefaultUserName;
+                imageClient.ClientCredentials.UserName.Password = BlogSection.GetConfigSection().Service.Authentication.DefaultPassword;
                 //+
                 return imageClient.SaveImage(blogImage, blogGuid);
             }
@@ -26,10 +26,10 @@ namespace Minima.Service.Agent
         //- @SaveImage -//
         public static BlogImage GetImage(String blogImageGuid)
         {
-            using (ImageClient imageClient = new ImageClient(MinimaConfiguration.ActiveImageServiceEndpoint))
+            using (ImageClient imageClient = new ImageClient(BlogSection.GetConfigSection().Service.Endpoint.Image))
             {
-                imageClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
-                imageClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                imageClient.ClientCredentials.UserName.UserName = BlogSection.GetConfigSection().Service.Authentication.DefaultUserName;
+                imageClient.ClientCredentials.UserName.Password = BlogSection.GetConfigSection().Service.Authentication.DefaultPassword;
                 //+
                 return imageClient.GetImage(blogImageGuid);
             }

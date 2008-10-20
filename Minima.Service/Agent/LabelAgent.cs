@@ -15,11 +15,11 @@ namespace Minima.Service.Agent
         //- @ApplyLabel -//
         public static void ApplyLabel(String blogEntryGuid, String labelGuid)
         {
-            ApplyLabel(blogEntryGuid, labelGuid, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            ApplyLabel(blogEntryGuid, labelGuid, BlogSection.GetConfigSection().Service.Authentication.DefaultUserName, BlogSection.GetConfigSection().Service.Authentication.DefaultPassword);
         }
         public static void ApplyLabel(String blogEntryGuid, String labelGuid, String username, String password)
         {
-            using (LabelClient labelClient = new LabelClient(MinimaConfiguration.ActiveLabelServiceEndpoint))
+            using (LabelClient labelClient = new LabelClient(BlogSection.GetConfigSection().Service.Endpoint.Label))
             {
                 labelClient.ClientCredentials.UserName.UserName = username;
                 labelClient.ClientCredentials.UserName.Password = password;
@@ -31,11 +31,11 @@ namespace Minima.Service.Agent
         //- @GetBlogLabelList -//
         public static List<Label> GetBlogLabelList(String blogGuid)
         {
-            return GetBlogLabelList(blogGuid, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            return GetBlogLabelList(blogGuid, BlogSection.GetConfigSection().Service.Authentication.DefaultUserName, BlogSection.GetConfigSection().Service.Authentication.DefaultPassword);
         }
         public static List<Label> GetBlogLabelList(String blogGuid, String username, String password)
         {
-            using (LabelClient labelClient = new LabelClient(MinimaConfiguration.ActiveLabelServiceEndpoint))
+            using (LabelClient labelClient = new LabelClient(BlogSection.GetConfigSection().Service.Endpoint.Label))
             {
                 labelClient.ClientCredentials.UserName.UserName = username;
                 labelClient.ClientCredentials.UserName.Password = password;
@@ -47,11 +47,11 @@ namespace Minima.Service.Agent
         //- @GetLabelByTitle -//
         public static Label GetLabelByTitle(String title)
         {
-            return GetLabelByTitle(title, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            return GetLabelByTitle(title, BlogSection.GetConfigSection().Service.Authentication.DefaultUserName, BlogSection.GetConfigSection().Service.Authentication.DefaultPassword);
         }
         public static Label GetLabelByTitle(String title, String username, String password)
         {
-            using (LabelClient labelClient = new LabelClient(MinimaConfiguration.ActiveLabelServiceEndpoint))
+            using (LabelClient labelClient = new LabelClient(BlogSection.GetConfigSection().Service.Endpoint.Label))
             {
                 labelClient.ClientCredentials.UserName.UserName = username;
                 labelClient.ClientCredentials.UserName.Password = password;
@@ -63,11 +63,11 @@ namespace Minima.Service.Agent
         //- @GetLabelByNetTitle -//
         public static Label GetLabelByNetTitle(String friendlyTitle)
         {
-            return GetLabelByNetTitle(friendlyTitle, MinimaConfiguration.DefaultServiceUserName, MinimaConfiguration.DefaultServicePassword);
+            return GetLabelByNetTitle(friendlyTitle, BlogSection.GetConfigSection().Service.Authentication.DefaultUserName, BlogSection.GetConfigSection().Service.Authentication.DefaultPassword);
         }
         public static Label GetLabelByNetTitle(String friendlyTitle, String username, String password)
         {
-            using (LabelClient labelClient = new LabelClient(MinimaConfiguration.ActiveLabelServiceEndpoint))
+            using (LabelClient labelClient = new LabelClient(BlogSection.GetConfigSection().Service.Endpoint.Label))
             {
                 labelClient.ClientCredentials.UserName.UserName = username;
                 labelClient.ClientCredentials.UserName.Password = password;
