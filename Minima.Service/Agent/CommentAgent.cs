@@ -15,10 +15,10 @@ namespace Minima.Service.Agent
         //- @AuthorizeComment -//
         public static void AuthorizeComment(String commentGuid)
         {
-            using (CommentClient commentClient = new CommentClient(MinimaConfiguration.ActiveCommentServiceEndpoint))
+            using (CommentClient commentClient = new CommentClient(BlogSection.GetConfigSection().Service.Endpoint.Comment))
             {
-                commentClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
-                commentClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                commentClient.ClientCredentials.UserName.UserName = BlogSection.GetConfigSection().Service.Authentication.DefaultUserName;
+                commentClient.ClientCredentials.UserName.Password = BlogSection.GetConfigSection().Service.Authentication.DefaultPassword;
                 //+
                 commentClient.AuthorizeComment(commentGuid);
             }
@@ -27,10 +27,10 @@ namespace Minima.Service.Agent
         //- @GetCommentList -//
         public static List<Comment> GetCommentList(String blogEntryGuid, Boolean showEveryComment)
         {
-            using (CommentClient commentClient = new CommentClient(MinimaConfiguration.ActiveCommentServiceEndpoint))
+            using (CommentClient commentClient = new CommentClient(BlogSection.GetConfigSection().Service.Endpoint.Comment))
             {
-                commentClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
-                commentClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                commentClient.ClientCredentials.UserName.UserName = BlogSection.GetConfigSection().Service.Authentication.DefaultUserName;
+                commentClient.ClientCredentials.UserName.Password = BlogSection.GetConfigSection().Service.Authentication.DefaultPassword;
                 //+
                 return commentClient.GetCommentList(blogEntryGuid, showEveryComment);
             }
@@ -39,10 +39,10 @@ namespace Minima.Service.Agent
         //- @PostNewComment -//
         public static String PostNewComment(String blogEntryGuid, String text, String author, String email, String website, DateTime dateTime, String emailBodyTemplate, String emailSubject)
         {
-            using (CommentClient commentClient = new CommentClient(MinimaConfiguration.ActiveCommentServiceEndpoint))
+            using (CommentClient commentClient = new CommentClient(BlogSection.GetConfigSection().Service.Endpoint.Comment))
             {
-                commentClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
-                commentClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                commentClient.ClientCredentials.UserName.UserName = BlogSection.GetConfigSection().Service.Authentication.DefaultUserName;
+                commentClient.ClientCredentials.UserName.Password = BlogSection.GetConfigSection().Service.Authentication.DefaultPassword;
                 //+
                 return commentClient.PostNewComment(blogEntryGuid, text, author, email, website, dateTime, emailBodyTemplate, emailSubject);
             }

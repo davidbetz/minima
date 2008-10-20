@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,14 +48,22 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Themelia, Version=0.8.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
+    <Reference Include="Themelia, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\_REFERENCE\Debug\Themelia.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MinimaConfiguration.cs" />
+    <Compile Include="CommentElement.cs" />
+    <Compile Include="DisplayElement.cs" />
+    <Compile Include="PathElement.cs" />
+    <Compile Include="SuffixElement.cs" />
+    <Compile Include="_CodeParser\CodeParserCollection.cs" />
+    <Compile Include="_Service\_Endpoint\EndpointElement.cs" />
+    <Compile Include="_Service\_Authentication\AuthenticationElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BlogSection.cs" />
+    <Compile Include="_Service\ServiceElement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

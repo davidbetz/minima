@@ -136,7 +136,7 @@ namespace Minima.Web.Controls
                     .ToList();
                 indexListSeries = new IndexListSeries()
                 {
-                    HeadingSuffix = MinimaConfiguration.IndexHeadingSuffix,
+                    HeadingSuffix = BlogSection.GetConfigSection().Suffix.Index,
                     BlogEntryDataSource = indexDataSource,
                     YearDataSource = yearDataSource,
                     Year = this.Index
@@ -187,7 +187,7 @@ namespace Minima.Web.Controls
                 {
                     rptPosts.Visible = false;
                     phNoEntries.Visible = true;
-                    litNoEntriesMessage.Text = MinimaConfiguration.BlankLabelMessage;
+                    litNoEntriesMessage.Text = BlogSection.GetConfigSection().Display.BlankMessage;
                 }
                 else
                 {
@@ -264,7 +264,7 @@ namespace Minima.Web.Controls
             switch (this.AccessType)
             {
                 case AccessType.Index:
-                    pageTitle = String.Format("{0} {1}", this.Index, MinimaConfiguration.IndexHeadingSuffix);
+                    pageTitle = String.Format("{0} {1}", this.Index, BlogSection.GetConfigSection().Suffix.Index);
                     break;
                 case AccessType.Link:
                     if (this.DataSource != null && this.DataSource.Count == 1)
@@ -279,12 +279,12 @@ namespace Minima.Web.Controls
                     break;
                 case AccessType.Label:
                     String labelName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.LabelTitle);
-                    pageTitle = String.Format("{0} {1}", labelName, MinimaConfiguration.LabelHeadingSuffix);
+                    pageTitle = String.Format("{0} {1}", labelName, BlogSection.GetConfigSection().Suffix.Label);
                     break;
                 case AccessType.Archive:
                     String monthName = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.ArchiveMonth);
                     Int32 year = Themelia.Web.HttpData.GetScopedItem<Int32>(Info.Scope, Info.ArchiveYear);
-                    pageTitle = String.Format("{0} {1} {2}", monthName, year, MinimaConfiguration.ArchiveHeadingSuffix);
+                    pageTitle = String.Format("{0} {1} {2}", monthName, year, BlogSection.GetConfigSection().Suffix.Archive);
                     break;
                 default:
                     pageTitle = GetDefaultHeader();

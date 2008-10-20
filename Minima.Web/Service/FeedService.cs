@@ -28,10 +28,10 @@ namespace Minima.Web.Service
             {
                 return null;
             }
-            using (BlogClient blogClient = new BlogClient(MinimaConfiguration.ActiveBlogServiceEndpoint))
+            using (BlogClient blogClient = new BlogClient(BlogSection.GetConfigSection().Service.Endpoint.Blog))
             {
-                blogClient.ClientCredentials.UserName.UserName = MinimaConfiguration.DefaultServiceUserName;
-                blogClient.ClientCredentials.UserName.Password = MinimaConfiguration.DefaultServicePassword;
+                blogClient.ClientCredentials.UserName.UserName = BlogSection.GetConfigSection().Service.Authentication.DefaultUserName;
+                blogClient.ClientCredentials.UserName.Password = BlogSection.GetConfigSection().Service.Authentication.DefaultPassword;
                 List<BlogEntry> blogEntryList = null;
                 try
                 {

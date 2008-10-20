@@ -74,7 +74,7 @@ namespace Minima.Web.Controls
         //- #GetDataSource -//
         protected override Object GetDataSource()
         {
-            Int32 maxEntryCount = MinimaConfiguration.RecentEntriesToShow;
+            Int32 maxEntryCount = BlogSection.GetConfigSection().EntriesToShow;
             if (this.MaxEntryCount > 0)
             {
                 maxEntryCount = this.MaxEntryCount;

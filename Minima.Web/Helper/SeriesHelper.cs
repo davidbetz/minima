@@ -59,7 +59,7 @@ namespace Minima.Web.Helper
                     {
                         authorSeries.Append(", ");
                     }
-                    if (MinimaConfiguration.LinkAuthorToEmail)
+                    if (BlogSection.GetConfigSection().Display.LinkAuthorsToEmail)
                     {
                         authorSeries.Append(String.Format("<a href=\"mailto:{1}\">{0}</a>", author.Name, author.Email));
                     }

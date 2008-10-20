@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="CookComputing.XmlRpcV2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Assembly\CookComputing.XmlRpcV2.dll</HintPath>
+      <HintPath>..\..\..\_REFERENCE\3rdParty\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
