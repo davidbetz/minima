@@ -55,8 +55,10 @@ namespace Minima.Web.Routing
                     return;
                 }
             }
-            //+ blog page fallback
-            HttpData.SetScopedItem<String>(Info.Scope, Info.BlogPage, "~/default.aspx");
+            else
+            {
+                throw new System.Configuration.ConfigurationErrorsException("blogPage parameter is required for the Minima component.");
+            }
         }
 
         //- $DetectDestination -//

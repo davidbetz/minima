@@ -26,7 +26,7 @@ namespace Minima.Web.Routing
                 xmlWriter.WriteStartElement("service");
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteStartElement("engineName");
-                xmlWriter.WriteValue("Minima Blog Engine 3.0");
+                xmlWriter.WriteValue("Minima Blog Engine 3.1");
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteStartElement("engineLink");
                 xmlWriter.WriteValue(Themelia.Web.WebDomain.Url);

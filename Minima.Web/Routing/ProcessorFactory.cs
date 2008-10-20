@@ -15,13 +15,13 @@ namespace Minima.Web.Routing
         {
             switch (text)
             {
-                case "blogfallthroughprocessor":
+                case "__$minima$blogfallthroughprocessor":
                     return new BlogFallThroughProcessor();
-                case "injectionprocessor":
+                case "__$minima$injectionprocessor":
                     return new InjectionProcessor();
-                case "postprocessor":
+                case "__$minima$postprocessor":
                     return new PostProcessor();
-                case "preprocessor":
+                case "__$minima$preprocessor":
                     return new PreProcessor();
             }
             //+

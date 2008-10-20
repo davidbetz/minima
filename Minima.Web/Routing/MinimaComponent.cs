@@ -14,10 +14,10 @@ namespace Minima.Web.Routing
         {
             aliasedHandlerDataList.Add(FactoryData.Create("Minima.Web.Routing.HandlerFactory, Minima.Web"));
             processorFactoryDataList.Add(FactoryData.Create("Minima.Web.Routing.ProcessorFactory, Minima.Web"));
-            preProcessorDataList.Add(ProcessorData.Create<ProcessorData>("PreProcessor"));
-            injectionProcessorDataList.Add(ProcessorData.Create<ProcessorData>("InjectionProcessor"));
-            postProcessorDataList.Add(ProcessorData.Create<ProcessorData>("PostProcessor"));
-            fallThroughProcessorDataList.Add(ProcessorData.Create<ProcessorData>("BlogFallThroughProcessor"));
+            preProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PreProcessor"));
+            injectionProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$InjectionProcessor"));
+            postProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PostProcessor"));
+            fallThroughProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$BlogFallThroughProcessor"));
         }
     }
 }
