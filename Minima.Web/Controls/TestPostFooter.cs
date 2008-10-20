@@ -7,16 +7,16 @@ using System.Web.UI;
 //+
 namespace Minima.Web.Controls
 {
-    public class TestPostFooter : PostFooterBase
+    public class SamplePostFooter : PostFooterBase
     {
-        public static Type Type = typeof(TestPostFooter);
+        public static Type Type = typeof(SamplePostFooter);
 
         //+
         //- @Data -//
         public String TestProperty { get; set; }
 
         //- @Ctor -//
-        public TestPostFooter(params Object[] parameterArray)
+        public SamplePostFooter(params Object[] parameterArray)
         {
             TestProperty = (String)parameterArray[0];
         }
@@ -29,7 +29,7 @@ namespace Minima.Web.Controls
             //+
             writer.Write(@"
 <div>
-This is the test footer.  The TestData propery contains '" + this.TestProperty + @"'. The current post URL is '" + url + @"'
+This is the sample footer.  The TestData propery contains '" + this.TestProperty + @"'. The current post URL is '" + url + @"'
 </div>
 ");
         }
