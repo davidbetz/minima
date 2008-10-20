@@ -21,30 +21,6 @@ namespace Minima.Web
             }
         }
 
-        //- @Domain -//
-        public static String Domain
-        {
-            get
-            {
-                return Themelia.Web.UrlCleaner.FixWebPath(ConfigAccessor.ApplicationSettings("Domain"));
-            }
-        }
-
-        //- @GenericErrorMessage -//
-        public static String GenericErrorMessage
-        {
-            get
-            {
-                String value = ConfigAccessor.ApplicationSettings("GenericErrorMessage");
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ConfigurationErrorsException("GenericErrorMessage is required.");
-                }
-                //+
-                return value;
-            }
-        }
-
         //- @GlobalTraceSwitch -//
         public static TraceSwitch GlobalTraceSwitch
         {

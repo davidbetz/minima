@@ -73,7 +73,7 @@ namespace Minima.Web.Helper
         {
             if (!SendFileIfExists(filename))
             {
-                HttpContext.Current.Response.Redirect(WebConfiguration.Domain);
+                HttpContext.Current.Response.Redirect(Minima.Configuration.BlogSection.GetConfigSection().Domain);
             }
         }
     }

@@ -63,7 +63,7 @@ namespace Minima.Web.Service
                 map.Add("WebSite", website);
                 map.Add("DateTime", DateTime.Now.ToString());
                 map.Add("Text", text);
-                map.Add("Link", WebConfiguration.Domain + @"services/comment/{CommentGuid}");
+                map.Add("Link", UrlCleaner.FixWebPathTail(Minima.Configuration.BlogSection.GetConfigSection().Domain) + @"/services/comment/{CommentGuid}");
                 String emailBodyTemplate = creator.Create(map);
                 Themelia.Configuration.SystemSection systemSection = Themelia.Configuration.SystemSection.GetConfigSection();
                 String emailSubject = String.Format("{0} ({1})", BlogSection.GetConfigSection().Comment.Subject, systemSection.AppInfo.Name);

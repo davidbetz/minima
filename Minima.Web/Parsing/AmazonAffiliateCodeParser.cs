@@ -27,7 +27,7 @@ namespace Minima.Parsing
         {
             Template linkTemplate = new Template(@"<a href=""http://www.amazon.com/gp/product/{ASIN}/{AffiliateCode}"">{ItemTitle}</a>");
             Map map = new Map();
-            map.Add("AffiliateCode", Themelia.Configuration.ConfigAccessor.ApplicationSettings(Info.AmazonAffiliate));
+            map.Add("AffiliateCode", Minima.Configuration.BlogSection.GetConfigSection().CodeParsers.GetParameterMap().PeekSafely(Info.AmazonAffiliate));
             if (!String.IsNullOrEmpty(code))
             {
                 String[] partArray = code.Split('|');
