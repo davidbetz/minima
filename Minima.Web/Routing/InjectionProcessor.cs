@@ -21,12 +21,6 @@ namespace Minima.Web.Routing
             });
             SafelyAddHandler(injectedHandlerList, new HandlerData
             {
-                Name = "__$Minima$FileProcessor",
-                MatchType = "contains",
-                MatchText = "/Materials/"
-            });
-            SafelyAddHandler(injectedHandlerList, new HandlerData
-            {
                 Name = "__$Minima$BlogDiscovery",
                 MatchType = "endswith",
                 MatchText = "/rsd.xml"
