@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="CommentElement.cs" />
     <Compile Include="DisplayElement.cs" />
-    <Compile Include="PathElement.cs" />
     <Compile Include="SuffixElement.cs" />
     <Compile Include="_CodeParser\CodeParserCollection.cs" />
     <Compile Include="_Service\_Endpoint\EndpointElement.cs" />

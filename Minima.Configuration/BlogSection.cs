@@ -24,6 +24,17 @@ namespace Minima.Configuration
             }
         }
 
+        //- @Domain -//
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [ConfigurationProperty("domain")]
+        public String Domain
+        {
+            get
+            {
+                return (String)this["domain"];
+            }
+        }
+
         //- @Service -//
         [EditorBrowsable(EditorBrowsableState.Never)]
         [ConfigurationProperty("service")]
@@ -43,17 +54,6 @@ namespace Minima.Configuration
             get
             {
                 return (SuffixElement)this["suffix"];
-            }
-        }
-
-        //- @Path -//
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [ConfigurationProperty("path")]
-        public PathElement Path
-        {
-            get
-            {
-                return (PathElement)this["path"];
             }
         }
 

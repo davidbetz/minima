@@ -31,16 +31,17 @@ namespace WebSite.Blog
         {
             if (!IsPostBack)
             {
+                String domain = Minima.Configuration.BlogSection.GetConfigSection().Domain;
                 String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
                 BlogMetaData blogMetaData = BlogAgent.GetBlogMetaData(blogGuid);
                 //+
-                rsd.Attributes.Add("href", WebConfiguration.Domain + "rsd.xml");
-                wlwmanifest.Attributes.Add("href", WebConfiguration.Domain + "wlwmanifest.xml");
+                rsd.Attributes.Add("href", Themelia.Web.UrlCleaner.FixWebPathTail(domain) + "/rsd.xml");
+                wlwmanifest.Attributes.Add("href", Themelia.Web.UrlCleaner.FixWebPathTail(domain) + "/wlwmanifest.xml");
                 //+
                 hlBlogUrl.NavigateUrl = blogMetaData.Uri.AbsoluteUri;
                 hlBlogUrl.Text = blogMetaData.Title;
                 //+
-                image.Attributes.Add("onclick", "window.location='" + WebConfiguration.Domain + "'");
+                image.Attributes.Add("onclick", "window.location='" + domain + "'");
                 //+
                 rssLink.Attributes.Add("title", blogMetaData.FeedTitle);
                 rssLink.Attributes.Add("href", blogMetaData.FeedUri.AbsoluteUri);
