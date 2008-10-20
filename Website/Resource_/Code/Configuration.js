@@ -2,5 +2,5 @@
 //+
 //- Configuration -//
 Minima.Configuration = {
-    commentService = '/Service_/Comment.svc/web'
+    commentService: '/Service_/Comment.svc/web'
 };
