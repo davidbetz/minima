@@ -2,7 +2,7 @@
 //+
 WCFClient.ICommentService.initCaptchaMath = function(onSuccess){
     Themelia.WCF.post({
-        endpoint: '/service/comment',
+        endpoint: Minima.Configuration.commentService,
         operation: 'InitCaptchaMath',
         message: { },
         onSuccess: onSuccess || (function( ){throw 'onSuccess is required for initCaptchaMath';})()
@@ -10,7 +10,7 @@ WCFClient.ICommentService.initCaptchaMath = function(onSuccess){
 };
 WCFClient.ICommentService.postNewComment = function(captchaValue, blogEntryGuid, author, email, website, text, onSuccess){
     Themelia.WCF.post({
-        endpoint: '/service/comment',
+        endpoint: Minima.Configuration.commentService,
         operation: 'PostNewComment',
         message: {captchaValue: captchaValue, blogEntryGuid: blogEntryGuid, author: author, email: email, website: website, text: text},
         onSuccess: onSuccess || Prototype.emptyFunction
