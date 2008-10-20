@@ -195,7 +195,7 @@ namespace Minima.Web.Api.MetaWeblog
             Themelia.Map webDomainPathMap = new Themelia.Map();
             foreach (WebDomainData webDomainData in WebDomainDataList.AllWebDomainData)
             {
-                ComponentData data = webDomainData.ComponentDataList[Info.Key];
+                ComponentData data = webDomainData.ComponentDataList[Info.MinimaKey];
                 if (data != null)
                 {
                     ParameterData parameterData = data.ParameterDataList[Info.BlogGuid];

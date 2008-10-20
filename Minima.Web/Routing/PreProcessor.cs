@@ -30,8 +30,17 @@ namespace Minima.Web.Routing
         //- @OnPreProcessorExecute -//
         public override void OnPreProcessorExecute(HttpContext context, params Object[] parameterArray)
         {
+            String key = String.Empty;
+            if (parameterArray.Length > 0)
+            {
+                key = parameterArray[0] as String;
+            }
+            if (String.IsNullOrEmpty(key))
+            {
+                key = Info.MinimaKey;
+            }
             WebDomainData webDomainData = WebDomain.Current;
-            ComponentData componentData = webDomainData.ComponentDataList[Info.Key];
+            ComponentData componentData = webDomainData.ComponentDataList[key];
             if (componentData != null)
             {
                 ParameterData blogGuidParameter = componentData.ParameterDataList[Info.BlogGuid];
