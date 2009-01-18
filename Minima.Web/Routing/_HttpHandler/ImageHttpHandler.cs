@@ -26,7 +26,7 @@ namespace Minima.Web.Routing
         {
             if (Themelia.Web.Http.GetUrlPart(Http.Position.Penultima) == "imagestore")
             {
-                Byte[] buffer = HttpData.InputHttpByteArray;
+                Byte[] buffer = HttpData.GetInputHttpByteArray();
                 String contentType = HttpData.GetHeaderItem(Info.ImageContentType);
                 if (buffer != null && buffer.Length > 0 && !String.IsNullOrEmpty(contentType))
                 {

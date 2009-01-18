@@ -12,11 +12,15 @@ namespace Minima.Web.Routing
     public class MinimaViewerComponent : Themelia.Web.Routing.ComponentBase
     {
         //- @Register -//
-        public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, HandlerFactoryDataList handlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
+        public override void Register(FactoryDataList factoryDataList, ProcessorDataList processorDataList, HandlerDataList handlerDataList, AliasDataList aliasDataList, RedirectDataList redirectDataList)
         {
-            processorFactoryDataList.Add(FactoryData.Create("Minima.Web.Routing.ProcessorFactory, Minima.Web"));
-            preProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PreProcessor", new Object[] { "MinimaViewer" }));
-            fallThroughProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$BlogFallThroughProcessor"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$UrlProcessing", "contains", "/"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$SiteMap", "endswith", "/blogmap.xml"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$Image", "contains", "/imagestore/"));
+            //+
+            factoryDataList.Add(FactoryData.Create("Minima.Web.Routing.ProcessorFactory, Minima.Web"));
+            processorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PreProcessor", new Object[] { "MinimaViewer" }));
+            processorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$BlogFallThroughProcessor"));
         }
     }
 }

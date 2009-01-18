@@ -10,14 +10,22 @@ namespace Minima.Web.Routing
     public class MinimaComponent : Themelia.Web.Routing.ComponentBase
     {
         //- @Register -//
-        public override void Register(PreProcessorDataList preProcessorDataList, ProcessorFactoryDataList processorFactoryDataList, HandlerFactoryDataList aliasedHandlerDataList, InjectionProcessorDataList injectionProcessorDataList, MidProcessorDataList midProcessorDataList, FallThroughProcessorDataList fallThroughProcessorDataList, PostProcessorDataList postProcessorDataList, PostStateProcessorDataList postStateProcessorDataList, ErrorProcessorDataList errorProcessorDataList)
+        public override void Register(FactoryDataList factoryDataList, ProcessorDataList processorDataList, HandlerDataList handlerDataList, AliasDataList aliasDataList, RedirectDataList redirectDataList)
         {
-            aliasedHandlerDataList.Add(FactoryData.Create("Minima.Web.Routing.HandlerFactory, Minima.Web"));
-            processorFactoryDataList.Add(FactoryData.Create("Minima.Web.Routing.ProcessorFactory, Minima.Web"));
-            preProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PreProcessor"));
-            injectionProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$InjectionProcessor"));
-            postProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PostProcessor"));
-            fallThroughProcessorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$BlogFallThroughProcessor"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$UrlProcessing", "contains", "/"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$BlogDiscovery", "endswith", "/rsd.xml"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$WindowsLiveWriterManifest", "endswith", "/wlwmanifest.xml"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$SiteMap", "endswith", "/blogmap.xml"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$MetaWeblogApi", "contains", "/xml-rpc"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$MetaWeblogApi", "contains", "/xml-rpc/"));
+            handlerDataList.Add(HandlerData.Create("__$Minima$Image", "contains", "/imagestore/"));
+            //+
+            factoryDataList.Add(FactoryData.Create("Minima.Web.Routing.HandlerFactory, Minima.Web"));
+            factoryDataList.Add(FactoryData.Create("Minima.Web.Routing.ProcessorFactory, Minima.Web"));
+            processorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PreProcessor"));
+            processorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$InjectionProcessor"));
+            processorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$PostProcessor"));
+            processorDataList.Add(ProcessorData.Create<ProcessorData>("__$Minima$BlogFallThroughProcessor"));
         }
     }
 }
