@@ -92,10 +92,10 @@ namespace Minima.Web.Routing
                         label = label.Substring(0, questionMark);
                     }
                     String labelTitle = String.Empty;
-                    ReaderWriterLock readerWriterLock = new ReaderWriterLock();
+                    ReaderWriterLockSlim readerWriterLockSlim = new ReaderWriterLockSlim();
                     try
                     {
-                        readerWriterLock.AcquireReaderLock(Timeout.Infinite);
+                        readerWriterLockSlim.EnterUpgradeableReadLock();
                         //+
                         labelTitle = LabelMap.Pull(label);
                         if (String.IsNullOrEmpty(labelTitle))
@@ -104,7 +104,7 @@ namespace Minima.Web.Routing
                             if (labelEntity != null)
                             {
                                 labelTitle = labelEntity.Title;
-                                LockCookie lockCookie = readerWriterLock.UpgradeToWriterLock(Timeout.Infinite);
+                                readerWriterLockSlim.EnterWriteLock();
                                 try
                                 {
                                     if (!LabelMap.ContainsKey(label))
@@ -118,14 +118,14 @@ namespace Minima.Web.Routing
                                 }
                                 finally
                                 {
-                                    readerWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                                    readerWriterLockSlim.ExitWriteLock();
                                 }
                             }
                         }
                     }
                     finally
                     {
-                        readerWriterLock.ReleaseReaderLock();
+                        readerWriterLockSlim.ExitUpgradeableReadLock();
                     }
                     HttpData.SetScopedItem<String>(Info.Scope, "Label", label);
                     HttpData.SetScopedItem<String>(Info.Scope, "LabelTitle", labelTitle);

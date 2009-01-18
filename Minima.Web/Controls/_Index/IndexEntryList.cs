@@ -75,7 +75,7 @@ namespace Minima.Web.Controls
             {
                 Int32 year = HttpData.GetScopedItem<Int32>(Info.Scope, "ArchiveYear");
                 Int32 month = HttpData.GetScopedItem<Int32>(Info.Scope, "ArchiveMonth");
-                String monthName = Themelia.Data.Common.Date.GetMonthData()[month];
+                String monthName = Themelia.Data.Cached.Date.GetMonthData()[month];
                 //+
                 heading = String.Format("{0} {1}", monthName, year);
             }
