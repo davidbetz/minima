@@ -68,7 +68,7 @@ namespace Minima.Service
                     }
                     blogEntryLinq.BlogEntryStatus = db.BlogEntryStatus.SingleOrDefault(p => p.BlogEntryStatusId == (publish ? 1 : 3));
                     blogEntryLinq.BlogEntryCommentAllowStatus = db.BlogEntryCommentAllowStatus.SingleOrDefault(p => p.BlogEntryCommentAllowStatusId == 1);
-                    blogEntryLinq.BlogEntryGuid = Themelia.GuidCreator.NewDatabaseGuid;
+                    blogEntryLinq.BlogEntryGuid = Themelia.GuidCreator.GetNewGuid();
                     if (dateTime.Year >= 1950)
                     {
                         blogEntryLinq.BlogEntryPostDateTime = dateTime;

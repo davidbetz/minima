@@ -17,8 +17,6 @@ namespace Minima.Web.Routing
             {
                 case "__$minima$blogfallthroughprocessor":
                     return new BlogFallThroughProcessor();
-                case "__$minima$injectionprocessor":
-                    return new InjectionProcessor();
                 case "__$minima$postprocessor":
                     return new PostProcessor();
                 case "__$minima$preprocessor":

@@ -40,7 +40,7 @@ namespace Minima.Service
                 blogImageLinq.BlogId = blogLinq.BlogId;
                 blogImageLinq.BlogImageContentType = blogImage.ContentType;
                 blogImageLinq.BlogImageData = imageBinary;
-                blogImageLinq.BlogImageGuid = Themelia.GuidCreator.NewDatabaseGuid;
+                blogImageLinq.BlogImageGuid = Themelia.GuidCreator.GetNewGuid();
                 //+
                 db.BlogImages.InsertOnSubmit(blogImageLinq);
                 db.SubmitChanges();
