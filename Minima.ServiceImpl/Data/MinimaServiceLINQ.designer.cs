@@ -13,14 +13,10 @@ namespace Minima.Service.Data.Context
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
-	using System.Data;
-	using System.Collections.Generic;
-	using System.Reflection;
-	using System.Linq;
-	using System.Linq.Expressions;
-	
-	
-	[System.Data.Linq.Mapping.DatabaseAttribute(Name="Minima")]
+    using System.Reflection;
+
+
+    [System.Data.Linq.Mapping.DatabaseAttribute(Name = "Minima")]
 	public partial class MinimaServiceLINQDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -221,10 +217,10 @@ namespace Minima.Service.Data.Context
 }
 namespace Minima.Service.Data.Entity
 {
-	using System.Data.Linq;
-	using System.Data.Linq.Mapping;
-	using System.ComponentModel;
-	using System;
+    using System;
+    using System.ComponentModel;
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
 	
 	
 	[Table(Name="svc.Author")]

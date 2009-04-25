@@ -75,16 +75,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\_REFERENCE\Debug\Themelia.Service.dll</HintPath>
     </Reference>
+    <Reference Include="Themelia.ServiceModel, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\_REFERENCE\Debug\Themelia.ServiceModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\BlogEntryHelper.cs" />
-    <Compile Include="_Fault\Behavior\ErrorHandler.cs" />
-    <Compile Include="_Fault\Behavior\FaultHandlingBehavior.cs" />
     <Compile Include="Behavior\MinimaSystemSecurityBehavior.cs" />
     <Compile Include="Behavior\MinimaSecureOperationInvoker.cs" />
-    <Compile Include="_Fault\FaultCreator.cs" />
-    <Compile Include="_Fault\FaultThower.cs" />
-    <Compile Include="_Fault\UnhandledException.cs" />
     <Compile Include="_Security\BlogPermission.cs" />
     <Compile Include="Behavior\MinimaBlogSecurityBehavior.cs" />
     <Compile Include="_Service\BlogService.cs" />

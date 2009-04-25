@@ -1,5 +1,5 @@
 #region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
@@ -10,7 +10,6 @@ using System.Web.UI;
 using Minima.Configuration;
 using Minima.Service;
 using Minima.Service.Agent;
-using Minima.Web.Helper;
 //+
 namespace Minima.Web.Controls
 {

@@ -74,6 +74,7 @@
     <Compile Include="Client\MinimaClientBase.cs" />
     <Compile Include="Client\TechnoratiClient.cs" />
     <Compile Include="Client\LabelClient.cs" />
+    <Compile Include="ServerCertificateValidator.cs" />
     <Compile Include="MinimaMessageHeaderType.cs" />
     <Compile Include="MinimaMessageHeader.cs" />
     <Compile Include="MessageHeaderHelper.cs" />

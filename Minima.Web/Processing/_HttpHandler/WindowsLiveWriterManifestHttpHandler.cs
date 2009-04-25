@@ -1,5 +1,5 @@
 #region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
@@ -7,15 +7,15 @@ using System.Text;
 using System.Web;
 using System.Xml;
 //+
-namespace Minima.Web.Routing
+namespace Minima.Web.Processing
 {
-    public class WindowsLiveWriterManifestHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
+    public class WindowsLiveWriterManifestHttpHandler : Themelia.Web.ReusableHttpHandler
     {
         //- @ProcessRequest -//
-        public override void ProcessRequest(HttpContext context)
+        public override void Process()
         {
             String key = "WindowsLiveWriterManifest_" + Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
-            if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
+            if (String.IsNullOrEmpty(Themelia.Web.Http.Cache[key] as String))
             {
                 StringBuilder xml = new StringBuilder();
                 XmlWriter xmlWriter = XmlWriter.Create(xml);
@@ -26,10 +26,10 @@ namespace Minima.Web.Routing
                 xmlWriter.WriteEndElement();
                 xmlWriter.Close();
                 //+
-                HttpContext.Current.Cache.Insert(key, xml.ToString());
+                Themelia.Web.Http.Cache.Insert(key, xml.ToString());
             }
-            context.Response.ContentType = "text/xml";
-            context.Response.Write(HttpContext.Current.Cache[key] as String);
+            ContentType = "text/xml";
+            Output.Append(Themelia.Web.Http.Cache[key] as String);
         }
     }
 }
