@@ -1,5 +1,5 @@
 ﻿#region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
@@ -24,7 +24,7 @@ namespace Minima.Service.Activation
         {
             ServiceHost host = new ServiceHost(serviceType, baseAddresses);
             //+ add fault handler
-            host.Description.Behaviors.Add(new FaultHandlingBehavior());
+            host.Description.Behaviors.Add(new Themelia.ServiceModel.Behavior.FaultHandlingBehavior());
             //+ add metadata exchange
             ServiceMetadataBehavior serviceMetadataBehavior = host.Description.Behaviors.Find<ServiceMetadataBehavior>();
             if (serviceMetadataBehavior == null)

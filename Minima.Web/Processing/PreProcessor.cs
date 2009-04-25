@@ -1,5 +1,5 @@
 ﻿#region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
@@ -11,11 +11,11 @@ using Minima.Service.Agent;
 //+
 using Themelia;
 using Themelia.Web;
-using Themelia.Web.Routing.Data;
+using Themelia.Web.Processing;
 //+
-namespace Minima.Web.Routing
+namespace Minima.Web.Processing
 {
-    public class PreProcessor : Themelia.Web.Routing.PreProcessorBase
+    public class PreProcessor : Themelia.Web.Processing.PreProcessorBase
     {
         //- @LabelMap -//
         public static Map LabelMap { get; set; }
@@ -28,46 +28,15 @@ namespace Minima.Web.Routing
 
         //+
         //- @OnPreProcessorExecute -//
-        public override void OnPreProcessorExecute(HttpContext context, params Object[] parameterArray)
+        public override PreProcessorBase OnPreProcessorExecute(HttpContext context, params Object[] parameterArray)
         {
-            String key = String.Empty;
-            if (parameterArray != null && parameterArray.Length > 0)
+            if (!Themelia.Web.Processing.PassThroughHttpHandler.ForceUse || !Themelia.Collection.IsNullOrEmpty(parameterArray))
             {
-                key = parameterArray[0] as String;
-            }
-            if (String.IsNullOrEmpty(key))
-            {
-                key = Info.MinimaKey;
-            }
-            WebDomainData webDomainData = WebDomain.Current;
-            ComponentData componentData = webDomainData.ComponentDataList[key];
-            if (componentData != null)
-            {
-                ParameterData blogGuidParameter = componentData.ParameterDataList[Info.BlogGuid];
-                if (blogGuidParameter != null)
-                {
-                    HttpData.SetScopedItem<String>(Info.Scope, Info.BlogGuid, blogGuidParameter.Value);
-                }
-            }
-            //+ url
-            if (!Themelia.Web.Routing.PassThroughHttpHandler.ForceUse)
-            {
+                HttpData.SetScopedItem<String>(Info.Scope, Info.BlogGuid, parameterArray[0] as String);
                 DetectDestination();
             }
-            //+ blog page
-            if (componentData != null)
-            {
-                ParameterData blogPageParameter = componentData.ParameterDataList[Info.BlogPage];
-                if (blogPageParameter != null)
-                {
-                    HttpData.SetScopedItem<String>(Info.Scope, Info.BlogPage, blogPageParameter.Value);
-                    return;
-                }
-            }
-            else
-            {
-                throw new System.Configuration.ConfigurationErrorsException("blogPage parameter is required for the Minima component.");
-            }
+            //+
+            return null;
         }
 
         //- $DetectDestination -//

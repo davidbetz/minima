@@ -1,18 +1,17 @@
 ﻿#region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
 using System.Linq;
 //+
 using Minima.Service.Behavior;
-using Minima.Service.Helper;
 using Minima.Service.Validation;
-//+
-using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using AuthorLINQ = Minima.Service.Data.Entity.Author;
 using BlogEntryAuthorLINQ = Minima.Service.Data.Entity.BlogEntryAuthor;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
+//+
+using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {

@@ -1,5 +1,5 @@
 #region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
@@ -11,16 +11,16 @@ using System.Xml;
 using Minima.Service;
 using Minima.Service.Agent;
 //+
-namespace Minima.Web.Routing
+namespace Minima.Web.Processing
 {
-    public class SiteMapHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
+    public class SiteMapHttpHandler : Themelia.Web.ReusableHttpHandler
     {
         //- @ProcessRequest -//
-        public override void ProcessRequest(HttpContext context)
+        public override void Process()
         {
             String blogGuid = Themelia.Web.HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             String key = "SiteMap_" + blogGuid;
-            if (String.IsNullOrEmpty(HttpContext.Current.Cache[key] as String))
+            if (String.IsNullOrEmpty(Themelia.Web.Http.Cache[key] as String))
             {
                 List<BlogEntry> blogEntryList = BlogAgent.GetBlogEntryList(blogGuid, 0, false, BlogEntryRetreivalType.Full);
                 StringBuilder xml = new StringBuilder();
@@ -46,10 +46,10 @@ namespace Minima.Web.Routing
                 xmlWriter.WriteEndElement();
                 xmlWriter.Close();
                 //+
-                HttpContext.Current.Cache.Insert(key, xml.ToString());
+                Themelia.Web.Http.Cache.Insert(key, xml.ToString());
             }
-            context.Response.ContentType = "text/xml";
-            context.Response.Write(HttpContext.Current.Cache[key] as String);
+            ContentType = "text/xml";
+            Output.Append(Themelia.Web.Http.Cache[key] as String);
         }
     }
 }

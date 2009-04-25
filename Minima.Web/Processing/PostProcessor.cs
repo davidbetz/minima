@@ -1,5 +1,5 @@
 ﻿#region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
@@ -8,9 +8,9 @@ using Minima.Service;
 //+
 using Themelia.Web;
 //+
-namespace Minima.Web.Routing
+namespace Minima.Web.Processing
 {
-    public class PostProcessor : Themelia.Web.Routing.PostProcessorBase
+    public class PostProcessor : Themelia.Web.Processing.PostProcessorBase
     {
         //- @OnPostProcessorExecute -//
         public override System.Web.IHttpHandler OnPostProcessorExecute(System.Web.HttpContext context, System.Web.IHttpHandler activeHttpHandler, params Object[] parameterArray)

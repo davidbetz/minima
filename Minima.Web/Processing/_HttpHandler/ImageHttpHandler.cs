@@ -1,19 +1,17 @@
 ﻿#region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
-using System.IO;
-using System.Web;
 using Minima.Service;
 //+
 using Minima.Service.Agent;
 //+
 using Themelia.Web;
 //+
-namespace Minima.Web.Routing
+namespace Minima.Web.Processing
 {
-    public class ImageHttpHandler : Themelia.Web.Routing.ReusableHttpHandler
+    public class ImageHttpHandler : Themelia.Web.ReusableHttpHandler
     {
         public class Info : Minima.Web.Info
         {
@@ -22,7 +20,7 @@ namespace Minima.Web.Routing
 
         //+
         //- @ProcessRequest -//
-        public override void ProcessRequest(HttpContext context)
+        public override void Process()
         {
             if (Themelia.Web.Http.GetUrlPart(Http.Position.Penultima) == "imagestore")
             {
@@ -39,7 +37,7 @@ namespace Minima.Web.Routing
                     //+
                     try
                     {
-                        context.Response.Write(ImageAgent.SaveImage(blogImage, blogGuid));
+                        Response.Write(ImageAgent.SaveImage(blogImage, blogGuid));
                     }
                     catch
                     {
@@ -53,8 +51,8 @@ namespace Minima.Web.Routing
                         BlogImage blogImage = ImageAgent.GetImage(blogImageGuid);
                         if (blogImage.Data != null && blogImage.Data.Length > 0)
                         {
-                            context.Response.ContentType = blogImage.ContentType;
-                            context.Response.BinaryWrite(blogImage.Data);
+                            ContentType = blogImage.ContentType;
+                            Response.BinaryWrite(blogImage.Data);
                         }
                     }
                 }

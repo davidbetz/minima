@@ -5,7 +5,7 @@ using Themelia.Reporting;
 //+
 namespace Minima.Web
 {
-    public class HttpApplication : System.Web.HttpApplication
+    public class HttpApplication : Themelia.Web.Application
     {
         //- @GetVaryByCustomString -//
         public override string GetVaryByCustomString(HttpContext context, string custom)

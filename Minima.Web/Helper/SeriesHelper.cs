@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using Minima.Configuration;
 //+
 using Minima.Service;
-using Minima.Configuration;
 //+
 namespace Minima.Web.Helper
 {

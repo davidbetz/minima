@@ -69,7 +69,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\_REFERENCE\Debug\Themelia.dll</HintPath>
     </Reference>
-    <Reference Include="Themelia.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
+    <Reference Include="Themelia.Data.Common, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\_REFERENCE\Debug\Themelia.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Themelia.Web, Version=2.0.7.0, Culture=neutral, PublicKeyToken=a2ec3eef601fa96e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\_REFERENCE\Debug\Themelia.Web.dll</HintPath>
     </Reference>
@@ -114,9 +118,7 @@
     </Compile>
     <Compile Include="AccessType.cs" />
     <Compile Include="Helper\SeriesHelper.cs" />
-    <Compile Include="Routing\MinimaViewerComponent.cs" />
-    <Compile Include="Routing\MinimaProxyComponent.cs" />
-    <Compile Include="Routing\InjectionProcessor.cs" />
+    <Compile Include="Processing\MinimaProxyComponent.cs" />
     <Compile Include="Info.cs" />
     <Compile Include="Parsing\AmazonAffiliateCodeParser.cs" />
     <Compile Include="Controls\BlogControlTemplateFactory.cs" />
@@ -151,16 +153,14 @@
     <Compile Include="Helper\MediaHelper.cs" />
     <Compile Include="Controls\MinimaForm.cs" />
     <Compile Include="Parsing\BlogEntryCodeParser.cs" />
-    <Compile Include="Routing\BlogFallThroughProcessor.cs" />
-    <Compile Include="Routing\PostProcessor.cs" />
-    <Compile Include="Routing\_HttpHandler\BlogDiscoveryHttpHandler.cs" />
-    <Compile Include="Routing\MinimaComponent.cs" />
-    <Compile Include="Routing\_HttpHandler\ImageHttpHandler.cs" />
-    <Compile Include="Routing\_HttpHandler\WindowsLiveWriterManifestHttpHandler.cs" />
-    <Compile Include="Routing\ProcessorFactory.cs" />
-    <Compile Include="Routing\PreProcessor.cs" />
-    <Compile Include="Routing\_HttpHandler\SiteMapHttpHandler.cs" />
-    <Compile Include="Routing\_HttpHandler\UrlProcessingHttpHandler.cs" />
+    <Compile Include="Processing\PostProcessor.cs" />
+    <Compile Include="Processing\_HttpHandler\BlogDiscoveryHttpHandler.cs" />
+    <Compile Include="Processing\MinimaComponent.cs" />
+    <Compile Include="Processing\_HttpHandler\ImageHttpHandler.cs" />
+    <Compile Include="Processing\_HttpHandler\WindowsLiveWriterManifestHttpHandler.cs" />
+    <Compile Include="Processing\ProcessorFactory.cs" />
+    <Compile Include="Processing\PreProcessor.cs" />
+    <Compile Include="Processing\_HttpHandler\SiteMapHttpHandler.cs" />
     <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\CommentReportCreator.cs" />
     <Compile Include="Service\Information.cs" />
@@ -174,7 +174,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Routing\HandlerFactory.cs" />
+    <Compile Include="Processing\HandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

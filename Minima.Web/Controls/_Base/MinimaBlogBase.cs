@@ -1,16 +1,14 @@
 #region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
 using System.Collections.Generic;
-using System.Web;
 //+
 using Minima.Configuration;
 using Minima.Service;
 using Minima.Service.Agent;
 //+
-using Themelia.Reporting;
 using Themelia.Web;
 //+
 namespace Minima.Web.Controls

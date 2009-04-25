@@ -1,5 +1,5 @@
 ﻿#region Copyright
-//+ Copyright © Jampad Technology, Inc. 2007-2008
+//+ Copyright © Jampad Technology, Inc. 2007-2009
 //++ Lead Architect: David Betz [MVP] <dfb/davidbetz/net>
 #endregion
 using System;
@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 //+
 using Minima.Service.Behavior;
-using Minima.Service.Helper;
 using Minima.Service.Validation;
 //+
 using Themelia.Mail;
-//+
-using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 using BlogEntryLINQ = Minima.Service.Data.Entity.BlogEntry;
 using CommentLINQ = Minima.Service.Data.Entity.Comment;
+//+
+using DataContext = Minima.Service.Data.Context.MinimaServiceLINQDataContext;
 //+
 namespace Minima.Service
 {
