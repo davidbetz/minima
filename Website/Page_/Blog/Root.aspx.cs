@@ -20,7 +20,7 @@ namespace WebSite.Blog
             phRecentEntryListSecondary.Controls.Add(new Minima.Web.Controls.RecentEntryList { WebDomainName = "second", Heading = "Second Blog", HeadingIsLink = true });
             phMinimaBlog.Controls.Add(new Minima.Web.Controls.MinimaBlog
             {
-                PostFooterTypeInfo = Themelia.Activation.TypeInfo.GetInfo(Minima.Web.Controls.SamplePostFooter.Type, "Data Here")
+                PostFooterTypeInfo = Themelia.Activation.TypeActivationInfo.GetInfo(Minima.Web.Controls.SamplePostFooter.Type, "Data Here")
             });
             //+
             base.OnInit(e);

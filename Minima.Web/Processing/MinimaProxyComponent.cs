@@ -24,9 +24,9 @@ namespace Minima.Web.Processing
             //+
             AddProcessor(ProcessorData.Create<ProcessorData>("__$Minima$PreProcessor", new Object[] { blogGuid }));
             //+
-            AddHandler(HandlerData.Create("__$Minima$UrlProcessing", "contains", "/"));
-            AddHandler(HandlerData.Create("__$Minima$SiteMap", "endswith", "/blogmap.xml"));
-            AddHandler(HandlerData.Create("__$Minima$Image", "contains", "/imagestore/"));
+            AddEndpoint(EndpointData.Create("__$Minima$UrlProcessing", "contains", "/"));
+            AddEndpoint(EndpointData.Create("__$Minima$SiteMap", "endswith", "/blogmap.xml"));
+            AddEndpoint(EndpointData.Create("__$Minima$Image", "contains", "/imagestore/"));
         }
     }
 }

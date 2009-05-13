@@ -14,10 +14,8 @@ namespace Minima.Web.Processing
         {
             switch (text)
             {
-                //case "__$minima$blogfallthroughprocessor":
-                //    return new BlogFallThroughProcessor();
-                case "__$minima$postprocessor":
-                    return new PostProcessor();
+                case "__$minima$overrideprocessor":
+                    return new OverrideProcessor();
                 case "__$minima$preprocessor":
                     return new PreProcessor();
             }

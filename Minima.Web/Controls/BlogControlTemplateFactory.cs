@@ -116,12 +116,12 @@ namespace Minima.Web.Controls
             private Boolean LinkHeader { get; set; }
 
             //- $PostFooterTypeInfo -//
-            private TypeInfo PostFooterTypeInfo { get; set; }
+            private TypeActivationInfo PostFooterTypeInfo { get; set; }
 
             //- @Ctor -//
             public PostTemplate(params Object[] parameterArray)
             {
-                this.PostFooterTypeInfo = (TypeInfo)parameterArray[0];
+                this.PostFooterTypeInfo = (TypeActivationInfo)parameterArray[0];
                 this.LinkHeader = (Boolean)parameterArray[1];
                 this.IsLink = ((AccessType)parameterArray[2]) == AccessType.Link;
                 this.SupportCommenting = (Boolean)parameterArray[3];

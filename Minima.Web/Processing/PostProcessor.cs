@@ -10,10 +10,10 @@ using Themelia.Web;
 //+
 namespace Minima.Web.Processing
 {
-    public class PostProcessor : Themelia.Web.Processing.PostProcessorBase
+    public class OverrideProcessor : Themelia.Web.Processing.OverrideProcessorBase
     {
         //- @OnPostProcessorExecute -//
-        public override System.Web.IHttpHandler OnPostProcessorExecute(System.Web.HttpContext context, System.Web.IHttpHandler activeHttpHandler, params Object[] parameterArray)
+        public override System.Web.IHttpHandler Execute(System.Web.HttpContext context, System.Web.IHttpHandler activeHttpHandler, params Object[] parameterArray)
         {
             String blogGuid = HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             BlogMetaData blogMetaData = HttpData.GetScopedCacheItem<BlogMetaData>(Info.Scope, Info.BlogMetaData);
