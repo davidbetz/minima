@@ -23,15 +23,15 @@ namespace Minima.Web.Processing
             AddFactory(FactoryData.Create("Minima.Web.Processing.ProcessorFactory, Minima.Web"));
             //+
             AddProcessor(ProcessorData.Create<ProcessorData>("__$Minima$PreProcessor", new Object[] { blogGuid }));
-            AddProcessor(ProcessorData.Create<ProcessorData>("__$Minima$PostProcessor"));
+            AddProcessor(ProcessorData.Create<ProcessorData>("__$Minima$OverrideProcessor"));
             //+
-            AddHandler(HandlerData.Create("__$Minima$UrlProcessing", "contains", "/"));
-            AddHandler(HandlerData.Create("__$Minima$BlogDiscovery", "endswith", "/rsd.xml"));
-            AddHandler(HandlerData.Create("__$Minima$WindowsLiveWriterManifest", "endswith", "/wlwmanifest.xml"));
-            AddHandler(HandlerData.Create("__$Minima$SiteMap", "endswith", "/blogmap.xml"));
-            AddHandler(HandlerData.Create("__$Minima$MetaWeblogApi", "contains", "/xml-rpc"));
-            AddHandler(HandlerData.Create("__$Minima$MetaWeblogApi", "contains", "/xml-rpc/"));
-            AddHandler(HandlerData.Create("__$Minima$Image", "contains", "/imagestore/"));
+            AddEndpoint(EndpointData.Create("__$Minima$UrlProcessing", "contains", "/"));
+            AddEndpoint(EndpointData.Create("__$Minima$BlogDiscovery", "endswith", "/rsd.xml"));
+            AddEndpoint(EndpointData.Create("__$Minima$WindowsLiveWriterManifest", "endswith", "/wlwmanifest.xml"));
+            AddEndpoint(EndpointData.Create("__$Minima$SiteMap", "endswith", "/blogmap.xml"));
+            AddEndpoint(EndpointData.Create("__$Minima$MetaWeblogApi", "contains", "/xml-rpc"));
+            AddEndpoint(EndpointData.Create("__$Minima$MetaWeblogApi", "contains", "/xml-rpc/"));
+            AddEndpoint(EndpointData.Create("__$Minima$Image", "contains", "/imagestore/"));
         }
     }
 }

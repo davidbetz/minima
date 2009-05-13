@@ -54,7 +54,7 @@ namespace Minima.Web.Controls
         public Type CustomCommentTemplateType { get; set; }
 
         //- @PostFooterTypeInfo -//
-        public TypeInfo PostFooterTypeInfo { get; set; }
+        public TypeActivationInfo PostFooterTypeInfo { get; set; }
 
         //- @CaptchaControl -//
         public CaptchaBase CaptchaControl { get; set; }
