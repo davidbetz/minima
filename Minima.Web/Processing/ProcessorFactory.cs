@@ -16,8 +16,8 @@ namespace Minima.Web.Processing
             {
                 case "__$minima$overrideprocessor":
                     return new OverrideProcessor();
-                case "__$minima$preprocessor":
-                    return new PreProcessor();
+                case "__$minima$initprocessor":
+                    return new InitProcessor();
             }
             //+
             return null;

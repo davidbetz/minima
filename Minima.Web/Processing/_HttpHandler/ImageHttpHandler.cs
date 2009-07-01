@@ -22,13 +22,13 @@ namespace Minima.Web.Processing
         //- @ProcessRequest -//
         public override void Process()
         {
-            if (Themelia.Web.Http.GetUrlPart(Http.Position.Penultima) == "imagestore")
+            if (Themelia.Web.Http.GetUrlPart(Themelia.Position.Penultima) == "imagestore")
             {
                 Byte[] buffer = HttpData.GetInputHttpByteArray();
                 String contentType = HttpData.GetHeaderItem(Info.ImageContentType);
                 if (buffer != null && buffer.Length > 0 && !String.IsNullOrEmpty(contentType))
                 {
-                    String blogGuid = Themelia.Web.Http.GetUrlPart(Http.Position.Ultima);
+                    String blogGuid = Themelia.Web.Http.GetUrlPart(Themelia.Position.Ultima);
                     BlogImage blogImage = new BlogImage
                     {
                         ContentType = contentType,
@@ -45,7 +45,7 @@ namespace Minima.Web.Processing
                 }
                 else
                 {
-                    String blogImageGuid = Themelia.Web.Http.GetUrlPart(Http.Position.Ultima);
+                    String blogImageGuid = Themelia.Web.Http.GetUrlPart(Themelia.Position.Ultima);
                     if (!String.IsNullOrEmpty(blogImageGuid))
                     {
                         BlogImage blogImage = ImageAgent.GetImage(blogImageGuid);

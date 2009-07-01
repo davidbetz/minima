@@ -129,7 +129,7 @@ namespace Minima.Service
             map.Add("CommentGuid", commentGuid);
             String body = new Themelia.Template(emailBodyTemplate).Interpolate(map);
             //+ this could be sent from the person, but those e-mails will more than likely be caught by a spam filter.
-            NotificationFacade.Send(MailConfigurationFacade.GeneralFromEmailAddress, MailConfigurationFacade.GeneralToEmailAddress, emailSubject, body, true);
+            Emailer.Send(MailConfiguration.GeneralFromEmailAddress, MailConfiguration.GeneralToEmailAddress, emailSubject, body, MailOptions.IsHtml);
             //+
             return commentGuid;
         }
