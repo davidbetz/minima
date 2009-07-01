@@ -153,13 +153,13 @@
     <Compile Include="Helper\MediaHelper.cs" />
     <Compile Include="Controls\MinimaForm.cs" />
     <Compile Include="Parsing\BlogEntryCodeParser.cs" />
-    <Compile Include="Processing\PostProcessor.cs" />
+    <Compile Include="Processing\OverrideProcessor.cs" />
     <Compile Include="Processing\_HttpHandler\BlogDiscoveryHttpHandler.cs" />
     <Compile Include="Processing\MinimaComponent.cs" />
     <Compile Include="Processing\_HttpHandler\ImageHttpHandler.cs" />
     <Compile Include="Processing\_HttpHandler\WindowsLiveWriterManifestHttpHandler.cs" />
     <Compile Include="Processing\ProcessorFactory.cs" />
-    <Compile Include="Processing\PreProcessor.cs" />
+    <Compile Include="Processing\InitProcessor.cs" />
     <Compile Include="Processing\_HttpHandler\SiteMapHttpHandler.cs" />
     <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\CommentReportCreator.cs" />
