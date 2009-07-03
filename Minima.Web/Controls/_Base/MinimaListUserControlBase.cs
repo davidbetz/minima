@@ -9,7 +9,7 @@ using Themelia.Web.Processing.Data;
 //+
 namespace Minima.Web.Controls
 {
-    public abstract class MinimaListUserControlBase : Themelia.Web.Controls.DataUserControlBase
+    public abstract class MinimaListUserControlBase : Themelia.Web.Controls.DataUserControl
     {
         protected System.Web.UI.WebControls.Repeater repeater;
         private String webDomain;

@@ -15,7 +15,7 @@ using Themelia.Web.Processing;
 //+
 namespace Minima.Web.Processing
 {
-    public class InitProcessor : Themelia.Web.Processing.InitProcessorBase
+    public class InitProcessor : Themelia.Web.Processing.InitProcessor
     {
         //- @LabelMap -//
         public static Map LabelMap { get; set; }
@@ -28,7 +28,7 @@ namespace Minima.Web.Processing
 
         //+
         //- @Execute -//
-        public override InitProcessorBase Execute(HttpContext context, params Object[] parameterArray)
+        public override Themelia.Web.Processing.InitProcessor Execute(HttpContext context, params Object[] parameterArray)
         {
             if (!Themelia.Web.Processing.PassThroughHttpHandler.ForceUse || !Themelia.Collection.IsNullOrEmpty(parameterArray))
             {

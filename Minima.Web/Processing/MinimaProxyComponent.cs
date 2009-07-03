@@ -9,7 +9,7 @@ using Themelia.Web.Processing.Data;
 //+
 namespace Minima.Web.Processing
 {
-    public class MinimaProxyComponent : Themelia.Web.Processing.ComponentBase
+    public class MinimaProxyComponent : Themelia.Web.Processing.Component
     {
         //- @Register -//
         public override void Register()

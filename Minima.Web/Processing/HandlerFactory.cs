@@ -8,7 +8,7 @@ using Minima.Web.Api.MetaWeblog;
 //+
 namespace Minima.Web.Processing
 {
-    public class HandlerFactory : Themelia.Web.Processing.HandlerFactoryBase
+    public class HandlerFactory : Themelia.Web.Processing.HandlerFactory
     {
         //- @CreateHttpHandler -//
         public override System.Web.IHttpHandler CreateHttpHandler(String text)
