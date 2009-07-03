@@ -10,7 +10,7 @@ using Themelia.Web;
 //+
 namespace Minima.Web.Processing
 {
-    public class OverrideProcessor : Themelia.Web.Processing.OverrideProcessorBase
+    public class OverrideProcessor : Themelia.Web.Processing.OverrideProcessor
     {
         //- @OnPostProcessorExecute -//
         public override System.Web.IHttpHandler Execute(System.Web.HttpContext context, System.Web.IHttpHandler activeHttpHandler, params Object[] parameterArray)

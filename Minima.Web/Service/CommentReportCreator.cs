@@ -9,7 +9,7 @@ using Themelia.Reporting;
 //+
 namespace Minima.Web.Service
 {
-    public class CommentReportCreator : Themelia.Reporting.ReportCreatorBase
+    public class CommentReportCreator : Themelia.Reporting.ReportCreator
     {
         //- #CreateCore -//
         protected override String CreateCore(Object content)

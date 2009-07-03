@@ -12,7 +12,7 @@ using Themelia;
 //+
 namespace Minima.Parsing
 {
-    public class BlogEntryCodeParser : Themelia.CodeParsing.CodeParserBase
+    public class BlogEntryCodeParser : Themelia.CodeParsing.CodeParser
     {
         //- @Id -//
         public override String Id

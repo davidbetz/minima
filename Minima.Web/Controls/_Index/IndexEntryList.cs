@@ -106,7 +106,7 @@ namespace Minima.Web.Controls
         }
 
         //- $__BuildControlTree -//
-        protected override void __BuildControlTree(Themelia.Web.Controls.DataUserControlBase __ctrl)
+        protected override void __BuildControlTree(Themelia.Web.Controls.DataUserControl __ctrl)
         {
             IParserAccessor __parser = ((IParserAccessor)(__ctrl));
             if (String.IsNullOrEmpty(this.Heading))

@@ -8,7 +8,7 @@ using Themelia;
 //+
 namespace Minima.Parsing
 {
-    public class AmazonAffiliateCodeParser : Themelia.CodeParsing.CodeParserBase
+    public class AmazonAffiliateCodeParser : Themelia.CodeParsing.CodeParser
     {
         public class Info
         {

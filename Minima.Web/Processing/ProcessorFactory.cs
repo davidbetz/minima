@@ -7,7 +7,7 @@ using System;
 //+
 namespace Minima.Web.Processing
 {
-    public class ProcessorFactory : Themelia.Web.Processing.ProcessorFactoryBase
+    public class ProcessorFactory : Themelia.Web.Processing.ProcessorFactory
     {
         //- @CreateProcessor -//
         public override Themelia.Web.Processing.IProcessor CreateProcessor(String text)
