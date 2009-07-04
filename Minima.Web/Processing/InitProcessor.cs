@@ -28,11 +28,11 @@ namespace Minima.Web.Processing
 
         //+
         //- @Execute -//
-        public override Themelia.Web.Processing.InitProcessor Execute(HttpContext context, params Object[] parameterArray)
+        public override Themelia.Web.Processing.InitProcessor Execute()
         {
-            if (!Themelia.Web.Processing.PassThroughHttpHandler.ForceUse || !Themelia.Collection.IsNullOrEmpty(parameterArray))
+            if (!Themelia.Web.Processing.PassThroughHttpHandler.ForceUse || !Themelia.Collection.IsNullOrEmpty(ParameterArray))
             {
-                HttpData.SetScopedItem<String>(Info.Scope, Info.BlogGuid, parameterArray[0] as String);
+                HttpData.SetScopedItem<String>(Info.Scope, Info.BlogGuid, ParameterArray[0] as String);
                 DetectDestination();
             }
             //+
