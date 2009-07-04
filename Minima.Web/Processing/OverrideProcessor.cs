@@ -13,7 +13,7 @@ namespace Minima.Web.Processing
     public class OverrideProcessor : Themelia.Web.Processing.OverrideProcessor
     {
         //- @OnPostProcessorExecute -//
-        public override System.Web.IHttpHandler Execute(System.Web.HttpContext context, System.Web.IHttpHandler activeHttpHandler, params Object[] parameterArray)
+        public override System.Web.IHttpHandler Execute(System.Web.IHttpHandler activeHttpHandler)
         {
             String blogGuid = HttpData.GetScopedItem<String>(Info.Scope, Info.BlogGuid);
             BlogMetaData blogMetaData = HttpData.GetScopedCacheItem<BlogMetaData>(Info.Scope, Info.BlogMetaData);
